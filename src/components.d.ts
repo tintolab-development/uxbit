@@ -5,57 +5,690 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { AnimationRotate, AsKind, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
+import { AlignItems, FlexDirection, FlexWrap, HeightMode, Justify } from "./components/section/section.types";
+import { Align, Color, FontFamily, FontSize, HighlightColor, Variant } from "./components/typography/typography.types";
+import { AlignItems as AlignItems1, BgAttachment, BgBlend, BgRepeat, BgSize, FlexDirection as FlexDirection1, FlexWrap as FlexWrap1, Justify as Justify1 } from "./components/wrapper/wrapper.types";
+export { AnimationRotate, AsKind, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
+export { AlignItems, FlexDirection, FlexWrap, HeightMode, Justify } from "./components/section/section.types";
+export { Align, Color, FontFamily, FontSize, HighlightColor, Variant } from "./components/typography/typography.types";
+export { AlignItems as AlignItems1, BgAttachment, BgBlend, BgRepeat, BgSize, FlexDirection as FlexDirection1, FlexWrap as FlexWrap1, Justify as Justify1 } from "./components/wrapper/wrapper.types";
 export namespace Components {
-    interface MyComponent {
+    /**
+     * <tinto-image>
+     * - Image/media props + simple animations (spin/float/wobble/pulse)
+     * - If placeholder exists, main image loads eagerly by default (fast swap)
+     * - rounded="oval" => rounds TOP corners only (bottom corners are square)
+     */
+    interface TintoImage {
+        "alt"?: string;
         /**
-          * The first name
+          * @default ''
          */
-        "first": string;
+        "animation"?: ImageAnimation;
         /**
-          * The last name
+          * as="button" support
          */
-        "last": string;
+        "as"?: AsKind;
+        "background"?: string;
+        "border"?: string;
+        "crossorigin"?: string;
         /**
-          * The middle name
+          * @default 'async'
          */
-        "middle": string;
+        "decoding"?: 'async' | 'sync' | 'auto';
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "download"?: string;
+        /**
+          * seconds (e.g., 20)
+          * @default 20
+         */
+        "duration"?: number;
+        /**
+          * @default 'cover'
+         */
+        "fit": ImageFit;
+        "height"?: string;
+        /**
+          * Wrap with anchor when href provided
+         */
+        "href"?: string;
+        /**
+          * Loading policy
+         */
+        "loading"?: 'lazy' | 'eager';
+        /**
+          * pause on hover
+          * @default false
+         */
+        "pauseOnHover"?: boolean;
+        /**
+          * Blurred/low-res placeholder URL
+         */
+        "placeholder"?: string;
+        /**
+          * @default true
+         */
+        "play"?: boolean;
+        /**
+          * @default '50% 50%'
+         */
+        "position": string;
+        /**
+          * Priority: eager + inject <link rel="preload" as="image">
+          * @default false
+         */
+        "priority"?: boolean;
+        /**
+          * If radius exists, it overrides rounded preset
+         */
+        "radius"?: string;
+        /**
+          * "w:h", e.g. "16:9", "1:1"
+          * @default '16:9'
+         */
+        "ratio": string;
+        "referrerpolicy"?: string;
+        "rel"?: string;
+        /**
+          * 'infinite' or finite count (string/number)
+          * @default 'infinite'
+         */
+        "repeat"?: RepeatValue;
+        /**
+          * @default 'right'
+         */
+        "rotate"?: AnimationRotate;
+        "rounded"?: RoundedPreset;
+        "shadow"?: string;
+        "sizes"?: string;
+        "src"?: string;
+        /**
+          * Responsive images
+         */
+        "srcset"?: string;
+        /**
+          * play/pause on viewport
+          * @default false
+         */
+        "startOnViewport"?: boolean;
+        "target"?: LinkTarget;
+        /**
+          * Host box size (CSS inline/block size)
+         */
+        "width"?: string;
+    }
+    interface TintoSection {
+        /**
+          * @default 'stretch'
+         */
+        "align": AlignItems;
+        "alignDesktop"?: AlignItems;
+        "background"?: string;
+        /**
+          * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
+          * @default false
+         */
+        "center": boolean;
+        "color"?: string;
+        /**
+          * Flex 레이아웃 기본값(모바일 우선)
+          * @default 'column'
+         */
+        "direction": FlexDirection;
+        /**
+          * 데스크탑(>=1920px) 오버라이드 (지정 없으면 모바일 설정 유지)
+         */
+        "directionDesktop"?: FlexDirection;
+        "gap"?: string;
+        "gapDesktop"?: string;
+        /**
+          * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
+          * @default 'auto'
+         */
+        "heightMode": HeightMode;
+        /**
+          * @default 'flex-start'
+         */
+        "justify": Justify;
+        "justifyDesktop"?: Justify;
+        "margin"?: string;
+        /**
+          * 크기/여백/배경 등 토큰
+         */
+        "maxWidth"?: string;
+        "padding"?: string;
+        "radius"?: string;
+        /**
+          * heightMode가 dvh/screen일 때 내부 스크롤 허용
+          * @default false
+         */
+        "scrollable": boolean;
+        "shadow"?: string;
+        /**
+          * @default 'nowrap'
+         */
+        "wrap": FlexWrap;
+        "wrapDesktop"?: FlexWrap;
+    }
+    interface TintoTypography {
+        /**
+          * 정렬
+          * @default 'left'
+         */
+        "align": Align;
+        /**
+          * 시맨틱 태그 강제 (예: variant="h1" + as="h2")
+         */
+        "as"?: 'h1' | 'h2' | 'h3' | 'p' | 'span';
+        /**
+          * 텍스트 색상 (기본 상속)
+          * @default 'inherit'
+         */
+        "color": Color;
+        /**
+          * 폰트 패밀리 preset
+          * @default 'system' as FontFamily
+         */
+        "font": FontFamily;
+        /**
+          * 폰트 크기 토큰 (지정 시 variant 프리셋 override)
+         */
+        "fontSize"?: FontSize;
+        /**
+          * 하이라이트 배경색
+         */
+        "highlight"?: HighlightColor;
+        /**
+          * 하이퍼링크 URL (설정 시 <a>로 감쌈)
+         */
+        "href"?: string;
+        /**
+          * 인라인 여부 (기본 block)
+          * @default false
+         */
+        "inline": boolean;
+        /**
+          * 링크 rel (target이 _blank면 보안 위해 자동 보정됨)
+         */
+        "rel"?: string;
+        /**
+          * 링크 타겟 (_blank, _self, 등)
+         */
+        "target"?: '_blank' | '_self' | '_parent' | '_top';
+        /**
+          * 밑줄 여부
+          * @default false
+         */
+        "underline": boolean;
+        /**
+          * 출력할 HTML 태그 스타일 (시맨틱은 as로 지정 가능)
+          * @default 'p'
+         */
+        "variant": Variant;
+        /**
+          * 텍스트 가시성 (false → hidden)
+          * @default true
+         */
+        "visible": boolean;
+        /**
+          * 두께 (예: 400, 500, 700, 'bold')
+         */
+        "weight"?: number | string;
+    }
+    interface TintoWrapper {
+        /**
+          * @default 'stretch'
+         */
+        "align": AlignItems1;
+        "alignDesktop"?: AlignItems1;
+        /**
+          * 배경(색/그라디언트) + 배경 이미지
+         */
+        "background"?: string;
+        /**
+          * @default 'scroll'
+         */
+        "bgAttachment"?: BgAttachment;
+        /**
+          * @default 'normal'
+         */
+        "bgBlend"?: BgBlend;
+        /**
+          * @default '50% 50%'
+         */
+        "bgPosition"?: string;
+        /**
+          * @default 'no-repeat'
+         */
+        "bgRepeat"?: BgRepeat;
+        /**
+          * @default 'cover'
+         */
+        "bgSize"?: BgSize;
+        "border"?: string;
+        "color"?: string;
+        /**
+          * Flex (모바일 기본)
+          * @default 'row'
+         */
+        "direction": FlexDirection1;
+        /**
+          * Flex (데스크탑 오버라이드, >=1920px)
+         */
+        "directionDesktop"?: FlexDirection1;
+        /**
+          * 부모를 덮는 모드 (absolute; inset:0)
+          * @default false
+         */
+        "fill": boolean;
+        "gap"?: string;
+        "gapDesktop"?: string;
+        /**
+          * @default 'flex-start'
+         */
+        "justify": Justify1;
+        "justifyDesktop"?: Justify1;
+        "margin"?: string;
+        /**
+          * 오버레이
+         */
+        "overlay"?: string;
+        "overlayOpacity"?: number;
+        /**
+          * Box / Visual
+         */
+        "padding"?: string;
+        "radius"?: string;
+        "shadow"?: string;
+        "src"?: string;
+        /**
+          * @default 'nowrap'
+         */
+        "wrap": FlexWrap1;
+        "wrapDesktop"?: FlexWrap1;
     }
 }
+export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLTintoImageElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLTintoImageElementEventMap {
+        "tinto:loaded": TintoImageLoadedDetail;
+        "tinto:error": TintoImageErrorDetail;
+        "tinto:press": TintoImagePressDetail;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    /**
+     * <tinto-image>
+     * - Image/media props + simple animations (spin/float/wobble/pulse)
+     * - If placeholder exists, main image loads eagerly by default (fast swap)
+     * - rounded="oval" => rounds TOP corners only (bottom corners are square)
+     */
+    interface HTMLTintoImageElement extends Components.TintoImage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLTintoImageElementEventMap>(type: K, listener: (this: HTMLTintoImageElement, ev: TintoImageCustomEvent<HTMLTintoImageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLTintoImageElementEventMap>(type: K, listener: (this: HTMLTintoImageElement, ev: TintoImageCustomEvent<HTMLTintoImageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLTintoImageElement: {
+        prototype: HTMLTintoImageElement;
+        new (): HTMLTintoImageElement;
+    };
+    interface HTMLTintoSectionElement extends Components.TintoSection, HTMLStencilElement {
+    }
+    var HTMLTintoSectionElement: {
+        prototype: HTMLTintoSectionElement;
+        new (): HTMLTintoSectionElement;
+    };
+    interface HTMLTintoTypographyElement extends Components.TintoTypography, HTMLStencilElement {
+    }
+    var HTMLTintoTypographyElement: {
+        prototype: HTMLTintoTypographyElement;
+        new (): HTMLTintoTypographyElement;
+    };
+    interface HTMLTintoWrapperElement extends Components.TintoWrapper, HTMLStencilElement {
+    }
+    var HTMLTintoWrapperElement: {
+        prototype: HTMLTintoWrapperElement;
+        new (): HTMLTintoWrapperElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "tinto-image": HTMLTintoImageElement;
+        "tinto-section": HTMLTintoSectionElement;
+        "tinto-typography": HTMLTintoTypographyElement;
+        "tinto-wrapper": HTMLTintoWrapperElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    /**
+     * <tinto-image>
+     * - Image/media props + simple animations (spin/float/wobble/pulse)
+     * - If placeholder exists, main image loads eagerly by default (fast swap)
+     * - rounded="oval" => rounds TOP corners only (bottom corners are square)
+     */
+    interface TintoImage {
+        "alt"?: string;
         /**
-          * The first name
+          * @default ''
          */
-        "first"?: string;
+        "animation"?: ImageAnimation;
         /**
-          * The last name
+          * as="button" support
          */
-        "last"?: string;
+        "as"?: AsKind;
+        "background"?: string;
+        "border"?: string;
+        "crossorigin"?: string;
         /**
-          * The middle name
+          * @default 'async'
          */
-        "middle"?: string;
+        "decoding"?: 'async' | 'sync' | 'auto';
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "download"?: string;
+        /**
+          * seconds (e.g., 20)
+          * @default 20
+         */
+        "duration"?: number;
+        /**
+          * @default 'cover'
+         */
+        "fit"?: ImageFit;
+        "height"?: string;
+        /**
+          * Wrap with anchor when href provided
+         */
+        "href"?: string;
+        /**
+          * Loading policy
+         */
+        "loading"?: 'lazy' | 'eager';
+        "onTinto:error"?: (event: TintoImageCustomEvent<TintoImageErrorDetail>) => void;
+        "onTinto:loaded"?: (event: TintoImageCustomEvent<TintoImageLoadedDetail>) => void;
+        "onTinto:press"?: (event: TintoImageCustomEvent<TintoImagePressDetail>) => void;
+        /**
+          * pause on hover
+          * @default false
+         */
+        "pauseOnHover"?: boolean;
+        /**
+          * Blurred/low-res placeholder URL
+         */
+        "placeholder"?: string;
+        /**
+          * @default true
+         */
+        "play"?: boolean;
+        /**
+          * @default '50% 50%'
+         */
+        "position"?: string;
+        /**
+          * Priority: eager + inject <link rel="preload" as="image">
+          * @default false
+         */
+        "priority"?: boolean;
+        /**
+          * If radius exists, it overrides rounded preset
+         */
+        "radius"?: string;
+        /**
+          * "w:h", e.g. "16:9", "1:1"
+          * @default '16:9'
+         */
+        "ratio"?: string;
+        "referrerpolicy"?: string;
+        "rel"?: string;
+        /**
+          * 'infinite' or finite count (string/number)
+          * @default 'infinite'
+         */
+        "repeat"?: RepeatValue;
+        /**
+          * @default 'right'
+         */
+        "rotate"?: AnimationRotate;
+        "rounded"?: RoundedPreset;
+        "shadow"?: string;
+        "sizes"?: string;
+        "src"?: string;
+        /**
+          * Responsive images
+         */
+        "srcset"?: string;
+        /**
+          * play/pause on viewport
+          * @default false
+         */
+        "startOnViewport"?: boolean;
+        "target"?: LinkTarget;
+        /**
+          * Host box size (CSS inline/block size)
+         */
+        "width"?: string;
+    }
+    interface TintoSection {
+        /**
+          * @default 'stretch'
+         */
+        "align"?: AlignItems;
+        "alignDesktop"?: AlignItems;
+        "background"?: string;
+        /**
+          * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
+          * @default false
+         */
+        "center"?: boolean;
+        "color"?: string;
+        /**
+          * Flex 레이아웃 기본값(모바일 우선)
+          * @default 'column'
+         */
+        "direction"?: FlexDirection;
+        /**
+          * 데스크탑(>=1920px) 오버라이드 (지정 없으면 모바일 설정 유지)
+         */
+        "directionDesktop"?: FlexDirection;
+        "gap"?: string;
+        "gapDesktop"?: string;
+        /**
+          * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
+          * @default 'auto'
+         */
+        "heightMode"?: HeightMode;
+        /**
+          * @default 'flex-start'
+         */
+        "justify"?: Justify;
+        "justifyDesktop"?: Justify;
+        "margin"?: string;
+        /**
+          * 크기/여백/배경 등 토큰
+         */
+        "maxWidth"?: string;
+        "padding"?: string;
+        "radius"?: string;
+        /**
+          * heightMode가 dvh/screen일 때 내부 스크롤 허용
+          * @default false
+         */
+        "scrollable"?: boolean;
+        "shadow"?: string;
+        /**
+          * @default 'nowrap'
+         */
+        "wrap"?: FlexWrap;
+        "wrapDesktop"?: FlexWrap;
+    }
+    interface TintoTypography {
+        /**
+          * 정렬
+          * @default 'left'
+         */
+        "align"?: Align;
+        /**
+          * 시맨틱 태그 강제 (예: variant="h1" + as="h2")
+         */
+        "as"?: 'h1' | 'h2' | 'h3' | 'p' | 'span';
+        /**
+          * 텍스트 색상 (기본 상속)
+          * @default 'inherit'
+         */
+        "color"?: Color;
+        /**
+          * 폰트 패밀리 preset
+          * @default 'system' as FontFamily
+         */
+        "font"?: FontFamily;
+        /**
+          * 폰트 크기 토큰 (지정 시 variant 프리셋 override)
+         */
+        "fontSize"?: FontSize;
+        /**
+          * 하이라이트 배경색
+         */
+        "highlight"?: HighlightColor;
+        /**
+          * 하이퍼링크 URL (설정 시 <a>로 감쌈)
+         */
+        "href"?: string;
+        /**
+          * 인라인 여부 (기본 block)
+          * @default false
+         */
+        "inline"?: boolean;
+        /**
+          * 링크 rel (target이 _blank면 보안 위해 자동 보정됨)
+         */
+        "rel"?: string;
+        /**
+          * 링크 타겟 (_blank, _self, 등)
+         */
+        "target"?: '_blank' | '_self' | '_parent' | '_top';
+        /**
+          * 밑줄 여부
+          * @default false
+         */
+        "underline"?: boolean;
+        /**
+          * 출력할 HTML 태그 스타일 (시맨틱은 as로 지정 가능)
+          * @default 'p'
+         */
+        "variant"?: Variant;
+        /**
+          * 텍스트 가시성 (false → hidden)
+          * @default true
+         */
+        "visible"?: boolean;
+        /**
+          * 두께 (예: 400, 500, 700, 'bold')
+         */
+        "weight"?: number | string;
+    }
+    interface TintoWrapper {
+        /**
+          * @default 'stretch'
+         */
+        "align"?: AlignItems1;
+        "alignDesktop"?: AlignItems1;
+        /**
+          * 배경(색/그라디언트) + 배경 이미지
+         */
+        "background"?: string;
+        /**
+          * @default 'scroll'
+         */
+        "bgAttachment"?: BgAttachment;
+        /**
+          * @default 'normal'
+         */
+        "bgBlend"?: BgBlend;
+        /**
+          * @default '50% 50%'
+         */
+        "bgPosition"?: string;
+        /**
+          * @default 'no-repeat'
+         */
+        "bgRepeat"?: BgRepeat;
+        /**
+          * @default 'cover'
+         */
+        "bgSize"?: BgSize;
+        "border"?: string;
+        "color"?: string;
+        /**
+          * Flex (모바일 기본)
+          * @default 'row'
+         */
+        "direction"?: FlexDirection1;
+        /**
+          * Flex (데스크탑 오버라이드, >=1920px)
+         */
+        "directionDesktop"?: FlexDirection1;
+        /**
+          * 부모를 덮는 모드 (absolute; inset:0)
+          * @default false
+         */
+        "fill"?: boolean;
+        "gap"?: string;
+        "gapDesktop"?: string;
+        /**
+          * @default 'flex-start'
+         */
+        "justify"?: Justify1;
+        "justifyDesktop"?: Justify1;
+        "margin"?: string;
+        /**
+          * 오버레이
+         */
+        "overlay"?: string;
+        "overlayOpacity"?: number;
+        /**
+          * Box / Visual
+         */
+        "padding"?: string;
+        "radius"?: string;
+        "shadow"?: string;
+        "src"?: string;
+        /**
+          * @default 'nowrap'
+         */
+        "wrap"?: FlexWrap1;
+        "wrapDesktop"?: FlexWrap1;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "tinto-image": TintoImage;
+        "tinto-section": TintoSection;
+        "tinto-typography": TintoTypography;
+        "tinto-wrapper": TintoWrapper;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            /**
+             * <tinto-image>
+             * - Image/media props + simple animations (spin/float/wobble/pulse)
+             * - If placeholder exists, main image loads eagerly by default (fast swap)
+             * - rounded="oval" => rounds TOP corners only (bottom corners are square)
+             */
+            "tinto-image": LocalJSX.TintoImage & JSXBase.HTMLAttributes<HTMLTintoImageElement>;
+            "tinto-section": LocalJSX.TintoSection & JSXBase.HTMLAttributes<HTMLTintoSectionElement>;
+            "tinto-typography": LocalJSX.TintoTypography & JSXBase.HTMLAttributes<HTMLTintoTypographyElement>;
+            "tinto-wrapper": LocalJSX.TintoWrapper & JSXBase.HTMLAttributes<HTMLTintoWrapperElement>;
         }
     }
 }

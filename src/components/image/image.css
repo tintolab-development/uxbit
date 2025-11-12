@@ -1,0 +1,185 @@
+/* image.css */
+:host {
+  display: block;
+  inline-size: var(--ti-width, 100%);
+}
+
+/* allow standard hidden */
+:host([hidden]) {
+  display: none;
+}
+
+/* radius token presets */
+:host {
+  --ti-r-soft: 8px;
+  --ti-r-oval: max(800px, 213vw); /* big top-only */
+  --ti-r-top: max(400px, 106vw);
+  --ti-r-diag: max(200px, 53vw);
+
+  /* focus ring token */
+  --ti-focus: #005fcc;
+}
+
+/* outer roots */
+[part='link'],
+[part='button'],
+[part='plain'] {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+[part='button'] {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-align: inherit;
+}
+
+[data-clickable] {
+  cursor: pointer;
+}
+
+:host(:focus-within) [part='frame'] {
+  outline: 2px solid var(--ti-focus, #005fcc);
+  outline-offset: 2px;
+}
+
+/* keyboard-only focus */
+@supports selector(:focus-visible) {
+  :host(:focus-within) [part='frame'] {
+    outline: none;
+  }
+  :host(:focus-within) [part='frame']:focus-visible {
+    outline: 2px solid var(--ti-focus, #005fcc);
+    outline-offset: 2px;
+  }
+}
+
+:host([disabled]) [data-clickable] {
+  cursor: not-allowed;
+  filter: grayscale(30%) opacity(0.85);
+}
+
+/* anchor 변형에서 disabled일 때 실차단 */
+:host([disabled]) [part='link'] {
+  pointer-events: none;
+}
+
+/* frame */
+.ti-frame[part='frame'] {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ratio-w, 16) / var(--ratio-h, 9);
+  overflow: hidden;
+  border-radius: var(--ti-radius, 0);
+  background: var(--ti-bg, transparent);
+  box-shadow: var(--ti-shadow, none);
+  border: var(--ti-border, none);
+}
+
+/* host에 height가 있을 때: aspect-ratio 비활성 + 높이 채움 */
+:host([height]) .ti-frame[part='frame'] {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+/* spacer: used only when height is not set on host */
+[part='spacer'] {
+  display: block;
+  width: 100%;
+  padding-top: calc(var(--ratio-h, 9) / var(--ratio-w, 16) * 100%);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 0;
+}
+
+:host([height]) [part='spacer'] {
+  display: none;
+}
+
+/* layers */
+[part='layer'] {
+  position: absolute;
+  inset: 0;
+}
+
+/* media elements; explicit layering */
+[part='img'],
+[part='placeholder'] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: var(--ti-fit, cover);
+  object-position: var(--ti-pos, 50% 50%);
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+[part='img'] {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.32s ease;
+}
+
+[part='placeholder'] {
+  z-index: 0;
+  filter: blur(12px);
+  transform: scale(1.02);
+  opacity: 1;
+  transition: opacity 0.32s ease;
+}
+
+/* states */
+.ti-frame[data-state='loaded'] [part='img'] {
+  opacity: 1;
+}
+.ti-frame[data-state='loaded'] [part='placeholder'] {
+  opacity: 0;
+}
+
+/* keep placeholder visible on error */
+.ti-frame[data-state='error'] [part='img'] {
+  opacity: 0;
+}
+.ti-frame[data-state='error'] [part='placeholder'] {
+  opacity: 1;
+}
+
+/* optional skeleton shimmer when no placeholder */
+.ti-frame[data-skeleton]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.04) 100%);
+  animation: ti-skel 1.3s infinite;
+}
+
+@keyframes ti-skel {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* reduce motion: skeleton 정지 */
+@media (prefers-reduced-motion: reduce) {
+  .ti-frame[data-skeleton]::before {
+    animation: none;
+  }
+}
+
+/* slot overlay content fills frame area by default */
+::slotted([slot='overlay']) {
+  position: absolute;
+  inset: 0;
+}

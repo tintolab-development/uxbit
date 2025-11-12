@@ -1,0 +1,73 @@
+/* section.css */
+:host {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* ===== Root Flex Box ===== */
+[part='root'] {
+  /* Sizing */
+  width: 100%;
+  max-width: var(--t-max-w, none);
+  padding: var(--t-pad, 0);
+  margin: var(--t-mar, 0);
+
+  /* Visual */
+  background: var(--t-bg, transparent);
+  color: var(--t-color, inherit);
+  border-radius: var(--t-radius, 0);
+  box-shadow: var(--t-shadow, none);
+
+  /* Flex layout (모바일 우선) */
+  display: flex;
+  flex-direction: var(--t-dir, column);
+  flex-wrap: var(--t-wrap, nowrap);
+  justify-content: var(--t-justify, flex-start);
+  align-items: var(--t-align, stretch);
+  gap: var(--t-gap, 0);
+
+  box-sizing: border-box;
+}
+
+/* 가운데 정렬(컨테이너) */
+:host([center]) [part='root'] {
+  margin-inline: auto;
+}
+
+/* ===== Height Modes ===== */
+/* auto: 기본(콘텐츠 높이) → 선언 필요 없음 */
+
+:host([height-mode='dvh']) [part='root'] {
+  /* 구형 환경 fallback: --t-vh(= innerHeight*0.01px) 사용 */
+  min-height: calc(var(--t-vh, 1vh) * 100);
+  /* 신형 브라우저: 동적뷰포트 */
+  min-height: 100dvh;
+}
+
+:host([height-mode='screen']) [part='root'] {
+  height: calc(var(--t-vh, 1vh) * 100);
+  height: 100dvh;
+}
+
+/* 뷰 내부 스크롤 허용 */
+:host([scrollable]) [part='root'] {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== Desktop overrides (>=1920px) ===== */
+@media (min-width: 1920px) {
+  [part='root'] {
+    flex-direction: var(--t-dir-desktop, var(--t-dir, column));
+    flex-wrap: var(--t-wrap-desktop, var(--t-wrap, nowrap));
+    justify-content: var(--t-justify-desktop, var(--t-justify, flex-start));
+    align-items: var(--t-align-desktop, var(--t-align, stretch));
+    gap: var(--t-gap-desktop, var(--t-gap, 0));
+  }
+}
+
+/* 기본 슬롯 마진 리셋 */
+::slotted(*) {
+  margin: 0;
+}

@@ -4,23 +4,12 @@ export const config: Config = {
   namespace: 'uxbit',
   outputTargets: [
     {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-    },
-    {
-      type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
-      externalRuntime: false,
-    },
-    {
-      type: 'docs-readme',
-    },
-    {
       type: 'www',
-      serviceWorker: null, // disable service workers
+      dir: 'www', // ⭐ 이게 핵심! src가 아님
+      serviceWorker: null,
     },
   ],
-  testing: {
-    browserHeadless: "shell",
+  devServer: {
+    root: 'www', // ⭐ 이 줄이 없으면 index.html 못 찾음
   },
 };
