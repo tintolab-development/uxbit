@@ -126,7 +126,6 @@ export namespace Components {
           * @default 'stretch'
          */
         "align": AlignItems;
-        "alignDesktop"?: AlignItems;
         "background"?: string;
         /**
           * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
@@ -135,16 +134,11 @@ export namespace Components {
         "center": boolean;
         "color"?: string;
         /**
-          * Flex 레이아웃 기본값(모바일 우선)
+          * Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용)
           * @default 'column'
          */
         "direction": FlexDirection;
-        /**
-          * 데스크탑(>=1920px) 오버라이드 (지정 없으면 모바일 설정 유지)
-         */
-        "directionDesktop"?: FlexDirection;
         "gap"?: string;
-        "gapDesktop"?: string;
         /**
           * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
           * @default 'auto'
@@ -154,7 +148,6 @@ export namespace Components {
           * @default 'flex-start'
          */
         "justify": Justify;
-        "justifyDesktop"?: Justify;
         "margin"?: string;
         /**
           * 크기/여백/배경 등 토큰
@@ -172,7 +165,6 @@ export namespace Components {
           * @default 'nowrap'
          */
         "wrap": FlexWrap;
-        "wrapDesktop"?: FlexWrap;
     }
     interface TintoTypography {
         /**
@@ -483,7 +475,6 @@ declare namespace LocalJSX {
           * @default 'stretch'
          */
         "align"?: AlignItems;
-        "alignDesktop"?: AlignItems;
         "background"?: string;
         /**
           * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
@@ -492,16 +483,11 @@ declare namespace LocalJSX {
         "center"?: boolean;
         "color"?: string;
         /**
-          * Flex 레이아웃 기본값(모바일 우선)
+          * Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용)
           * @default 'column'
          */
         "direction"?: FlexDirection;
-        /**
-          * 데스크탑(>=1920px) 오버라이드 (지정 없으면 모바일 설정 유지)
-         */
-        "directionDesktop"?: FlexDirection;
         "gap"?: string;
-        "gapDesktop"?: string;
         /**
           * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
           * @default 'auto'
@@ -511,7 +497,6 @@ declare namespace LocalJSX {
           * @default 'flex-start'
          */
         "justify"?: Justify;
-        "justifyDesktop"?: Justify;
         "margin"?: string;
         /**
           * 크기/여백/배경 등 토큰
@@ -529,7 +514,6 @@ declare namespace LocalJSX {
           * @default 'nowrap'
          */
         "wrap"?: FlexWrap;
-        "wrapDesktop"?: FlexWrap;
     }
     interface TintoTypography {
         /**

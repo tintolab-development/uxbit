@@ -1,0 +1,40 @@
+.img-viewer-wrap {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  height: calc(var(--vh) * 100);
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+.img-viewer-wrap.active {
+  display: flex;
+}
+.img-viewer-wrap .img-viewer {
+  width: calc(100vw - 40px);
+  max-height: calc(calc(var(--vh) * 100) - 214px);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+}
+.img-viewer-wrap .img-viewer img {
+  object-fit: contain;
+}
+.img-viewer-wrap .btn-close {
+  position: absolute;
+  bottom: min(5.3333vw, 20px);
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-image: url("/assets/icon/viewer-close-icon.svg");
+  background-repeat: no-repeat;
+  transform: translateX(-50%);
+  border-width: 0px;
+  background-color: transparent;
+}

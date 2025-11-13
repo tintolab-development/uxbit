@@ -3,12 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TintoLab UXbit – Demo (All Web Components)</title>
     <link rel="stylesheet" href="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/test/global/global.css" />
-    <script type="module" src="/build/uxbit.esm.js"></script>
+    <title>TintoLab UXbit – Demo (All Web Components)</title>
+
+    <script
+      type="module"
+      src="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/uxbit.esm.js"
+      data-stencil
+      data-resources-url="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/"
+    ></script>
+    <script nomodule src="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/uxbit.js" data-stencil></script>
   </head>
+
   <body>
-    <tinto-section padding="20px" gap="16px" direction="column" max-width="1040px" center>
+    <!-- 데스크톱(>=1920px)에서도 모바일과 동일하게 유지 -->
+    <tinto-section
+      padding="20px"
+      gap="16px"
+      direction="column"
+      center
+      direction-desktop="column"
+      wrap-desktop="nowrap"
+      justify-desktop="flex-start"
+      align-desktop="stretch"
+      gap-desktop="16px"
+    >
       <!-- 타이틀 -->
       <tinto-typography variant="h1" font="pretendard" font-size="xl" color="#111827" weight="700"> UXBIT Demo Section </tinto-typography>
 
@@ -17,9 +36,9 @@
         아래 이미지는
         <tinto-typography variant="span" inline weight="600" color="#111827">tinto-image</tinto-typography>
         컴포넌트를 사용해
-        <tinto-typography variant="span" inline color="#0ea5e9" weight="600" underline>lazy-loading</tinto-typography>, 비율(<tinto-typography variant="span" inline weight="600"
-          >16:9</tinto-typography
-        >), 상단 라운드( <tinto-typography variant="span" inline weight="600">rounded="oval"</tinto-typography>), 오버레이 슬롯, 간단한 애니메이션(
+        <tinto-typography variant="span" inline color="#0ea5e9" weight="600" underline>lazy-loading</tinto-typography>, 비율(
+        <tinto-typography variant="span" inline weight="600">16:9</tinto-typography>), 상단 라운드(
+        <tinto-typography variant="span" inline weight="600">rounded="oval"</tinto-typography>), 오버레이 슬롯, 간단한 애니메이션(
         <tinto-typography variant="span" inline weight="600">float</tinto-typography>)을 보여줍니다.
       </tinto-typography>
 
@@ -47,7 +66,7 @@
         <tinto-typography variant="span" inline weight="600">rel="noopener noreferrer"</tinto-typography>가 자동 보정됩니다.
       </tinto-typography>
 
-      <!-- 두 번째 래퍼: 고정 높이 대신 패딩으로 히어로 높이 연출 + 배경 이미지 적용 -->
+      <!-- 두 번째 래퍼: 패딩으로 히어로 높이 연출 + 배경 이미지 -->
       <tinto-wrapper
         direction="row"
         gap="100px"
@@ -65,7 +84,7 @@
         <tinto-typography variant="p" color="#111">src 이미지</tinto-typography>
       </tinto-wrapper>
 
-      <!-- 썸네일 2장 -->
+      <!-- 썸네일 2장 (비율 고정) -->
       <tinto-image
         src="https://picsum.photos/id/1025/1200/800"
         ratio="1:1"
@@ -89,7 +108,5 @@
       <!-- 푸터 라인 -->
       <tinto-typography variant="p" color="#6b7280" font-size="sm"> © 2025 TintoLab / UXBIT — All rights reserved. </tinto-typography>
     </tinto-section>
-
-    <script nomodule src="/build/uxbit.js"></script>
   </body>
 </html>

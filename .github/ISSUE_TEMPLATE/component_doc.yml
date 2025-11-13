@@ -1,0 +1,72 @@
+name: '📘 Component Doc / 가이드'
+description: '웹 컴포넌트 문서화/가이드'
+title: '[Docs] <component>: <short summary>'
+labels: ['type:docs', 'area:components', 'priority:normal']
+assignees:
+  - your-github-id
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Component Name
+      placeholder: e.g., tinto-[element]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Component Version
+      placeholder: e.g., 1.-.-
+    validations:
+      required: true
+  - type: textarea
+    id: overview
+    attributes:
+      label: Overview (KOR/EN)
+      description: 간략 개요 + 목적(사용 상황), Shadow DOM/parts/slots 등
+      placeholder: TL;DR + key features...
+    validations:
+      required: true
+  - type: textarea
+    id: props
+    attributes:
+      label: Props (표/리스트)
+      description: 타입, reflect, default, 설명
+      placeholder: direction, wrap, justify, align, gap, ... (+ *Desktop variants*)
+  - type: textarea
+    id: cssvars
+    attributes:
+      label: CSS Vars (Theming)
+      description: --t-* 목록, 기본값, desktop 오버라이드 규칙
+  - type: textarea
+    id: a11y
+    attributes:
+      label: A11y
+      description: role/aria 패스스루, scrollable tabIndex, focus behavior
+  - type: textarea
+    id: examples
+    attributes:
+      label: Usage Examples
+      description: 모바일=데스크톱 동일, 데스크톱 전용 오버라이드, heightMode, center 등
+  - type: textarea
+    id: troubleshooting
+    attributes:
+      label: Troubleshooting
+      description: 1920px에서 레이아웃 변동, 전역 ::part/root/변수 충돌 등
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: 완료 조건(체크리스트)
+      placeholder: |
+        - [ ] README/Wiki에 문서 반영
+        - [ ] 컴포넌트별 테스트 코드 검증
+        - [ ] CI 링크/배포 링크 업데이트
+  - type: checkboxes
+    id: check
+    attributes:
+      label: Pre-flight
+      options:
+        - label: 내용에 민감정보 없음
+          required: true
+        - label: 스크린샷/코드 스니펫 포함 (선택)

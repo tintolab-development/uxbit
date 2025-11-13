@@ -1,0 +1,112 @@
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2050.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2050.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2050.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2050.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2040.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2040.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2040.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2040.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2030.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2030.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2030.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2030.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2019.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2019.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2019.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2019.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2010.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2010.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2010.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2010.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2000.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2000.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2000.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-2000.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1990.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1990.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1990.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1990.ttf")
+      format("truetype");
+}
+@font-face {
+  font-family: "Climate Crisis";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1979.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1979.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1979.otf")
+      format("opentype"),
+    url("https://cdn.jsdelivr.net/gh/fonts-archive/ClimateCrisisKR/ClimateCrisisKR-1979.ttf")
+      format("truetype");
+}

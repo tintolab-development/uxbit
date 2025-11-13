@@ -1,4 +1,3 @@
-// section.tsx
 import { Component, h, Prop, Element } from '@stencil/core';
 import { AlignItems, FlexDirection, FlexWrap, Justify, HeightMode } from './section.types';
 
@@ -10,24 +9,17 @@ import { AlignItems, FlexDirection, FlexWrap, Justify, HeightMode } from './sect
 export class TintoSection {
   @Element() el!: HTMLElement;
 
-  /** Flex 레이아웃 기본값(모바일 우선) */
+  /** Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용) */
   @Prop({ reflect: true }) direction: FlexDirection = 'column';
   @Prop({ reflect: true }) wrap: FlexWrap = 'nowrap';
   @Prop({ reflect: true }) justify: Justify = 'flex-start';
   @Prop({ reflect: true }) align: AlignItems = 'stretch';
-  @Prop({ reflect: true }) gap?: string; // e.g. 12px, 1rem
-
-  /** 데스크탑(>=1920px) 오버라이드 (지정 없으면 모바일 설정 유지) */
-  @Prop({ reflect: true }) directionDesktop?: FlexDirection;
-  @Prop({ reflect: true }) wrapDesktop?: FlexWrap;
-  @Prop({ reflect: true }) justifyDesktop?: Justify;
-  @Prop({ reflect: true }) alignDesktop?: AlignItems;
-  @Prop({ reflect: true }) gapDesktop?: string;
+  @Prop({ reflect: true }) gap?: string; // e.g. "12px", "1rem"
 
   /** 크기/여백/배경 등 토큰 */
-  @Prop({ reflect: true }) maxWidth?: string; // 1200px, 100%, 80ch...
-  @Prop({ reflect: true }) padding?: string; // 16px, 24px 12px...
-  @Prop({ reflect: true }) margin?: string; // 0 auto...
+  @Prop({ reflect: true }) maxWidth?: string; // "1200px", "100%", "80ch"...
+  @Prop({ reflect: true }) padding?: string; // "16px", "24px 12px"...
+  @Prop({ reflect: true }) margin?: string; // "0 auto"...
 
   @Prop({ reflect: true }) background?: string; // color/gradient
   @Prop({ reflect: true }) color?: string;
@@ -67,32 +59,37 @@ export class TintoSection {
     window.removeEventListener('resize', this.updateVhVar);
   }
 
+  /** undefined/null/빈 문자열은 style에 넣지 않도록 클린업 */
+  private buildStyleVars(): Record<string, string> {
+    const entries: Array<[string, string | undefined]> = [
+      ['--t-max-w', this.maxWidth],
+      ['--t-pad', this.padding],
+      ['--t-mar', this.margin],
+
+      ['--t-bg', this.background],
+      ['--t-color', this.color],
+      ['--t-radius', this.radius],
+      ['--t-shadow', this.shadow],
+
+      // Flex (모든 해상도 동일)
+      ['--t-dir', this.direction],
+      ['--t-wrap', this.wrap],
+      ['--t-justify', this.justify],
+      ['--t-align', this.align],
+      ['--t-gap', this.gap],
+    ];
+
+    const vars: Record<string, string> = {};
+    for (const [k, v] of entries) {
+      if (v !== undefined && v !== null && String(v).trim() !== '') {
+        vars[k] = String(v);
+      }
+    }
+    return vars;
+  }
+
   render() {
-    // CSS 변수로 주입해서 미디어쿼리에서 오버라이드
-    const styleVars: Record<string, string | undefined> = {
-      '--t-max-w': this.maxWidth,
-      '--t-pad': this.padding,
-      '--t-mar': this.margin,
-
-      '--t-bg': this.background,
-      '--t-color': this.color,
-      '--t-radius': this.radius,
-      '--t-shadow': this.shadow,
-
-      // Flex (모바일)
-      '--t-dir': this.direction,
-      '--t-wrap': this.wrap,
-      '--t-justify': this.justify,
-      '--t-align': this.align,
-      '--t-gap': this.gap,
-
-      // Flex (데스크탑 오버라이드, 1920+)
-      '--t-dir-desktop': this.directionDesktop,
-      '--t-wrap-desktop': this.wrapDesktop,
-      '--t-justify-desktop': this.justifyDesktop,
-      '--t-align-desktop': this.alignDesktop,
-      '--t-gap-desktop': this.gapDesktop,
-    };
+    const styleVars = this.buildStyleVars();
 
     // host의 role/aria-* 패스스루
     const ariaLabel = this.el.getAttribute('aria-label') ?? undefined;

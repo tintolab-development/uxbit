@@ -1,4 +1,3 @@
-/* section.css */
 :host {
   display: block;
   box-sizing: border-box;
@@ -19,7 +18,7 @@
   border-radius: var(--t-radius, 0);
   box-shadow: var(--t-shadow, none);
 
-  /* Flex layout (모바일 우선) */
+  /* Flex layout (모든 해상도 동일 적용) */
   display: flex;
   flex-direction: var(--t-dir, column);
   flex-wrap: var(--t-wrap, nowrap);
@@ -54,17 +53,6 @@
 :host([scrollable]) [part='root'] {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-/* ===== Desktop overrides (>=1920px) ===== */
-@media (min-width: 1920px) {
-  [part='root'] {
-    flex-direction: var(--t-dir-desktop, var(--t-dir, column));
-    flex-wrap: var(--t-wrap-desktop, var(--t-wrap, nowrap));
-    justify-content: var(--t-justify-desktop, var(--t-justify, flex-start));
-    align-items: var(--t-align-desktop, var(--t-align, stretch));
-    gap: var(--t-gap-desktop, var(--t-gap, 0));
-  }
 }
 
 /* 기본 슬롯 마진 리셋 */
