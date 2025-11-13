@@ -1,0 +1,133 @@
+{
+  "version": "1.0.0",
+  "tags": [
+    {
+      "name": "tinto-wrapper",
+      "description": "Generic flexbox-based wrapper with background, overlay and desktop overrides (>=1920px).",
+      "attributes": [
+        {
+          "name": "direction",
+          "description": "Flex direction (mobile base)",
+          "values": [{ "name": "row" }, { "name": "row-reverse" }, { "name": "column" }, { "name": "column-reverse" }]
+        },
+        {
+          "name": "wrap",
+          "description": "Flex wrap (mobile base)",
+          "values": [{ "name": "nowrap" }, { "name": "wrap" }, { "name": "wrap-reverse" }]
+        },
+        {
+          "name": "justify",
+          "description": "Flex justify-content (mobile base)",
+          "values": [{ "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "space-between" }, { "name": "space-around" }, { "name": "space-evenly" }]
+        },
+        {
+          "name": "align",
+          "description": "Flex align-items (mobile base)",
+          "values": [{ "name": "stretch" }, { "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "baseline" }]
+        },
+        {
+          "name": "gap",
+          "description": "Flex gap (e.g. 24px, 1rem)"
+        },
+        {
+          "name": "directionDesktop",
+          "description": "Flex direction override for desktop (>=1920px)",
+          "values": [{ "name": "row" }, { "name": "row-reverse" }, { "name": "column" }, { "name": "column-reverse" }]
+        },
+        {
+          "name": "wrapDesktop",
+          "description": "Flex wrap override for desktop (>=1920px)",
+          "values": [{ "name": "nowrap" }, { "name": "wrap" }, { "name": "wrap-reverse" }]
+        },
+        {
+          "name": "justifyDesktop",
+          "description": "Flex justify-content override for desktop (>=1920px)",
+          "values": [{ "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "space-between" }, { "name": "space-around" }, { "name": "space-evenly" }]
+        },
+        {
+          "name": "alignDesktop",
+          "description": "Flex align-items override for desktop (>=1920px)",
+          "values": [{ "name": "stretch" }, { "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "baseline" }]
+        },
+        {
+          "name": "gapDesktop",
+          "description": "Flex gap override for desktop (>=1920px)"
+        },
+        {
+          "name": "padding",
+          "description": "Padding of the wrapper (CSS shorthand supported)"
+        },
+        {
+          "name": "margin",
+          "description": "Margin of the wrapper (CSS shorthand supported)"
+        },
+        {
+          "name": "radius",
+          "description": "Border radius of the wrapper"
+        },
+        {
+          "name": "shadow",
+          "description": "Box shadow of the wrapper"
+        },
+        {
+          "name": "border",
+          "description": "Border of the wrapper (e.g. 1px solid rgba(...))"
+        },
+        {
+          "name": "color",
+          "description": "Text color inside the wrapper"
+        },
+        {
+          "name": "background",
+          "description": "Background color or gradient (mapped to background-color)"
+        },
+        {
+          "name": "src",
+          "description": "Background image URL (mapped to background-image)"
+        },
+        {
+          "name": "bgSize",
+          "description": "background-size for the background image",
+          "values": [{ "name": "auto" }, { "name": "cover" }, { "name": "contain" }]
+        },
+        {
+          "name": "bgPosition",
+          "description": "background-position for the background image (e.g. 50% 50%, center top)"
+        },
+        {
+          "name": "bgRepeat",
+          "description": "background-repeat for the background image",
+          "values": [{ "name": "no-repeat" }, { "name": "repeat" }, { "name": "repeat-x" }, { "name": "repeat-y" }]
+        },
+        {
+          "name": "bgAttachment",
+          "description": "background-attachment for the background image",
+          "values": [{ "name": "scroll" }, { "name": "fixed" }, { "name": "local" }]
+        },
+        {
+          "name": "bgBlend",
+          "description": "background-blend-mode between background color and image",
+          "values": [{ "name": "normal" }, { "name": "multiply" }, { "name": "screen" }, { "name": "overlay" }, { "name": "darken" }, { "name": "lighten" }]
+        },
+        {
+          "name": "overlay",
+          "description": "Overlay color on top of background (e.g. rgba(0,0,0,0.4))"
+        },
+        {
+          "name": "overlayOpacity",
+          "description": "Overlay opacity (used when overlay is set, default 1.0)"
+        },
+        {
+          "name": "fill",
+          "description": "Fill mode: make the wrapper absolutely positioned and cover its parent (position:absolute; inset:0)",
+          "values": [{ "name": "true" }]
+        }
+      ]
+    }
+  ],
+  "globalAttributes": [],
+  "valueSets": [],
+  "cssProperties": [],
+  "cssPseudoClasses": [],
+  "cssPseudoElements": []
+}

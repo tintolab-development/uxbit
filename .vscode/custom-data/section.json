@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+  "tags": [
+    {
+      "name": "tinto-section",
+      "description": "Flexible layout container section component.",
+      "attributes": [
+        {
+          "name": "direction",
+          "description": "Flex direction",
+          "values": [{ "name": "row" }, { "name": "row-reverse" }, { "name": "column" }, { "name": "column-reverse" }]
+        },
+        {
+          "name": "wrap",
+          "description": "Flex wrap",
+          "values": [{ "name": "nowrap" }, { "name": "wrap" }, { "name": "wrap-reverse" }]
+        },
+        {
+          "name": "justify",
+          "description": "Flex justify-content",
+          "values": [{ "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "space-between" }, { "name": "space-around" }, { "name": "space-evenly" }]
+        },
+        {
+          "name": "align",
+          "description": "Flex align-items",
+          "values": [{ "name": "stretch" }, { "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "baseline" }]
+        },
+        {
+          "name": "gap",
+          "description": "Flex gap (e.g. 12px, 1rem)"
+        },
+        {
+          "name": "maxWidth",
+          "description": "Max width of the section container"
+        },
+        {
+          "name": "padding",
+          "description": "Padding (CSS shorthand supported)"
+        },
+        {
+          "name": "margin",
+          "description": "Margin (CSS shorthand supported)"
+        },
+        {
+          "name": "background",
+          "description": "Background color or gradient"
+        },
+        {
+          "name": "color",
+          "description": "Text color"
+        },
+        {
+          "name": "radius",
+          "description": "Border radius"
+        },
+        {
+          "name": "shadow",
+          "description": "Box shadow"
+        },
+        {
+          "name": "center",
+          "description": "Center the container using margin-inline:auto",
+          "values": [{ "name": "true" }]
+        },
+        {
+          "name": "heightMode",
+          "description": "Height mode of the section",
+          "values": [{ "name": "auto" }, { "name": "dvh" }, { "name": "screen" }]
+        },
+        {
+          "name": "scrollable",
+          "description": "Enable internal scrolling when heightMode is dvh or screen",
+          "values": [{ "name": "true" }]
+        }
+      ]
+    }
+  ],
+  "globalAttributes": [],
+  "valueSets": [],
+  "cssProperties": [],
+  "cssPseudoClasses": [],
+  "cssPseudoElements": []
+}

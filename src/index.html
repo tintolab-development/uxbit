@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/test/global/global.css" />
-    <title>TintoLab UXbit – Demo (All Web Components)</title>
-
     <script
       type="module"
       src="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/uxbit.esm.js"
@@ -13,100 +11,8 @@
       data-resources-url="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/"
     ></script>
     <script nomodule src="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/uxbit.js" data-stencil></script>
+    <title>TintoLab UXbit</title>
   </head>
 
-  <body>
-    <!-- 데스크톱(>=1920px)에서도 모바일과 동일하게 유지 -->
-    <tinto-section
-      padding="20px"
-      gap="16px"
-      direction="column"
-      center
-      direction-desktop="column"
-      wrap-desktop="nowrap"
-      justify-desktop="flex-start"
-      align-desktop="stretch"
-      gap-desktop="16px"
-    >
-      <!-- 타이틀 -->
-      <tinto-typography variant="h1" font="pretendard" font-size="xl" color="#111827" weight="700"> UXBIT Demo Section </tinto-typography>
-
-      <!-- 서브 카피 (전부 컴포넌트 중첩으로 처리) -->
-      <tinto-typography variant="p" color="#4b5563" align="justify">
-        아래 이미지는
-        <tinto-typography variant="span" inline weight="600" color="#111827">tinto-image</tinto-typography>
-        컴포넌트를 사용해
-        <tinto-typography variant="span" inline color="#0ea5e9" weight="600" underline>lazy-loading</tinto-typography>, 비율(
-        <tinto-typography variant="span" inline weight="600">16:9</tinto-typography>), 상단 라운드(
-        <tinto-typography variant="span" inline weight="600">rounded="oval"</tinto-typography>), 오버레이 슬롯, 간단한 애니메이션(
-        <tinto-typography variant="span" inline weight="600">float</tinto-typography>)을 보여줍니다.
-      </tinto-typography>
-
-      <!-- 배경 이미지가 적용된 래퍼 (src + overlay) -->
-      <tinto-wrapper
-        direction="column"
-        gap="100px"
-        padding="24px"
-        radius="16px"
-        shadow="0 8px 24px rgba(0,0,0,.12)"
-        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"
-        bg-size="cover"
-        bg-position="center center"
-        bg-blend="overlay"
-        overlay="rgba(0,0,0,.35)"
-        color="#ffffff"
-      >
-        <tinto-typography variant="h2" color="#ffffff" weight="700">배경 이미지 Wrapper</tinto-typography>
-        <tinto-typography variant="p" color="#e5e7eb"> src로 배경 이미지를 넣고, overlay로 가독성을 확보합니다. </tinto-typography>
-      </tinto-wrapper>
-
-      <!-- 보조 설명 -->
-      <tinto-typography variant="p" color="#374151" highlight="#fff7cc">
-        오버레이는 <tinto-typography variant="span" inline weight="600">slot="overlay"</tinto-typography>로 삽입합니다. 링크가 있으면 보안상
-        <tinto-typography variant="span" inline weight="600">rel="noopener noreferrer"</tinto-typography>가 자동 보정됩니다.
-      </tinto-typography>
-
-      <!-- 두 번째 래퍼: 패딩으로 히어로 높이 연출 + 배경 이미지 -->
-      <tinto-wrapper
-        direction="row"
-        gap="100px"
-        padding="48px"
-        radius="100px"
-        shadow="0 8px 24px rgba(0,0,0,.12)"
-        src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=1400&auto=format&fit=crop"
-        bg-size="cover"
-        bg-position="center center"
-        bg-blend="overlay"
-        overlay="rgba(0,0,0,.20)"
-        color="#111111"
-      >
-        <tinto-typography variant="h2" color="#111" weight="700">배경이미지</tinto-typography>
-        <tinto-typography variant="p" color="#111">src 이미지</tinto-typography>
-      </tinto-wrapper>
-
-      <!-- 썸네일 2장 (비율 고정) -->
-      <tinto-image
-        src="https://picsum.photos/id/1025/1200/800"
-        ratio="1:1"
-        rounded="soft"
-        background="#f2f4f7"
-        shadow="0 6px 16px rgba(0,0,0,.08)"
-        loading="lazy"
-        width="100%"
-      ></tinto-image>
-
-      <tinto-image
-        src="https://picsum.photos/id/1003/1200/800"
-        ratio="16:9"
-        rounded="diagonal"
-        background="#eef2ff"
-        shadow="0 6px 16px rgba(0,0,0,.08)"
-        loading="lazy"
-        width="100%"
-      ></tinto-image>
-
-      <!-- 푸터 라인 -->
-      <tinto-typography variant="p" color="#6b7280" font-size="sm"> © 2025 TintoLab / UXBIT — All rights reserved. </tinto-typography>
-    </tinto-section>
-  </body>
+  <body></body>
 </html>
