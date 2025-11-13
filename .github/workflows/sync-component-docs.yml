@@ -34,7 +34,7 @@ jobs:
 
           # 공용 라벨/담당자 (원하면 수정)
           LABELS=( "type:docs" "area:components" "priority:normal" )
-          ASSIGNEES=("your-github-id")
+          ASSIGNEES=("leezer94")
 
           for FILE in ${{ steps.changed.outputs.all_changed_files }}; do
             BASENAME="$(basename "$FILE")"                 # tinto-section.md
