@@ -16,6 +16,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 🔥 필요한 라벨이 없으면 자동 생성
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Ensuring labels exist..."
+          gh label create "type:docs" --color "1D76DB" --repo "$REPO" --description "Documentation" || true
+          gh label create "area:components" --color "0E8A16" --repo "$REPO" --description "Components area" || true
+          gh label create "priority:normal" --color "FBCA04" --repo "$REPO" --description "Normal priority" || true
+
       # 변경된 파일 목록 뽑기
       - name: Get changed files
         id: changed
@@ -32,19 +43,18 @@ jobs:
         run: |
           set -euo pipefail
 
-          # 공용 라벨/담당자 (원하면 수정)
+          # 공용 라벨/담당자
           LABELS=( "type:docs" "area:components" "priority:normal" )
           ASSIGNEES=("leezer94")
 
           for FILE in ${{ steps.changed.outputs.all_changed_files }}; do
-            BASENAME="$(basename "$FILE")"                 # tinto-section.md
-            COMPONENT="${BASENAME%.md}"                    # tinto-section
+            BASENAME="$(basename "$FILE")"
+            COMPONENT="${BASENAME%.md}"
             TITLE="[Docs] ${COMPONENT}: Guide"
 
             echo "Processing $FILE -> Title: $TITLE"
 
-            # 이미 열린 이슈가 있는지 검색 (제목 정확 매칭)
-            # state:all 로 닫힌 이슈까지 찾고, 있으면 번호만 추출
+            # 기존 이슈 검색 (정확한 제목 매칭)
             ISSUE_NUMBER="$(gh issue list \
               --repo "$REPO" \
               --search "in:title \"$TITLE\"" \
@@ -56,17 +66,23 @@ jobs:
               echo "Updating existing issue #$ISSUE_NUMBER"
               gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --title "$TITLE" --body-file "$FILE"
 
-              # 라벨/담당자 보강(중복 추가 허용)
-              for L in "${LABELS[@]}"; do gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "$L"; done
-              for A in "${ASSIGNEES[@]}"; do gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-assignee "$A"; done
+              # 라벨/담당자 보강
+              for L in "${LABELS[@]}"; do
+                gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "$L" || true
+              done
+              for A in "${ASSIGNEES[@]}"; do
+                gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-assignee "$A" || true
+              done
 
-              # 닫힌 이슈였다면 자동 재오픈 (선택)
+              # 닫힌 이슈면 자동 재오픈
               gh issue reopen "$ISSUE_NUMBER" --repo "$REPO" || true
+
             else
               echo "Creating new issue"
-              # 라벨/담당자 플래그 만들기
+
               LABEL_FLAGS=()
               for L in "${LABELS[@]}"; do LABEL_FLAGS+=( --label "$L" ); done
+
               ASSIGNEE_FLAGS=()
               for A in "${ASSIGNEES[@]}"; do ASSIGNEE_FLAGS+=( --assignee "$A" ); done
 
@@ -77,4 +93,5 @@ jobs:
                 "${ASSIGNEE_FLAGS[@]}" \
                 --body-file "$FILE"
             fi
+
           done
