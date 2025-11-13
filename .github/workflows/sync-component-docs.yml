@@ -10,7 +10,7 @@ permissions:
   issues: write
 
 jobs:
-  sync:
+  writing-component-guidelines:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

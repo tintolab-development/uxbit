@@ -1,4 +1,4 @@
-# tinto-section 엘리먼트 가이드
+# tinto-section 엘리먼트 가이드라인
 
 ## 1. 개요
 
