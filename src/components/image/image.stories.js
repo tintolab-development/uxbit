@@ -1,7 +1,5 @@
-import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
 import { TintoImage } from './image';
-
 const meta = {
   title: 'Media/TintoImage',
   component: TintoImage,
@@ -49,19 +47,14 @@ const meta = {
     play: true,
     duration: 3,
   },
-} satisfies Meta<TintoImage>;
-
+};
 export default meta;
-
-type Story = StoryObj<TintoImage>;
-
 /**
  * 기본 이미지 스토리
  */
-export const Primary: Story = {
-  render: (props) => <tinto-image {...props} />,
+export const Primary = {
+  render: (props) => h('tinto-image', { ...props }),
 };
-
 // /**
 //  * Placeholder 있는 버전
 //  */
@@ -70,7 +63,6 @@ export const Primary: Story = {
 //     placeholder: 'https://picsum.photos/16/9?blur=10',
 //   },
 // };
-
 // /**
 //  * 링크로 동작하는 버전 (href / target)
 //  */
@@ -80,7 +72,6 @@ export const Primary: Story = {
 //     target: '_blank',
 //   },
 // };
-
 // /**
 //  * overlay 슬롯 사용 예시
 //  * (tinto-image 안의 <slot name="overlay">에 들어감)

@@ -1,21 +1,26 @@
+var __decorate =
+  (this && this.__decorate) ||
+  function (decorators, target, key, desc) {
+    var c = arguments.length,
+      r =
+        c < 3
+          ? target
+          : desc === null
+            ? (desc = Object.getOwnPropertyDescriptor(target, key))
+            : desc,
+      d;
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if ((d = decorators[i]))
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return (c > 3 && r && Object.defineProperty(target, key, r), r);
+  };
 // image.tsx
-import { Component, h, Prop, Element, Watch, Event, EventEmitter } from '@stencil/core';
-import {
-  AsKind,
-  ImageAnimation,
-  ImageFit,
-  LinkTarget,
-  RoundedPreset,
-  AnimationRotate,
-  RepeatValue,
-  TintoImageLoadedDetail,
-  TintoImageErrorDetail,
-  TintoImagePressDetail,
-  AspectRatio,
-} from './image.types';
-
+import { Component, h, Prop, Element, Watch, Event } from '@stencil/core';
 /** Quick viewport check to avoid IO delay for initially visible elements */
-function isInViewport(el: HTMLElement) {
+function isInViewport(el) {
   try {
     const r = el.getBoundingClientRect();
     const vw = window.innerWidth || document.documentElement.clientWidth;
@@ -25,106 +30,84 @@ function isInViewport(el: HTMLElement) {
     return false;
   }
 }
-
 /**
  * <tinto-image>
  * - Image/media props + simple animations (spin/float/wobble/pulse)
  * - If placeholder exists, main image loads eagerly by default (fast swap)
  * - rounded="oval" => rounds TOP corners only (bottom corners are square)
  */
-@Component({
-  tag: 'tinto-image',
-  styleUrl: 'image.css',
-  shadow: true,
-})
-export class TintoImage {
-  @Element() el!: HTMLElement;
-
+let TintoImage = class TintoImage {
+  el;
   /* ============================ Image / media ============================ */
-  @Prop({ reflect: true }) src?: string;
-  @Prop({ reflect: true }) alt?: string;
+  src;
+  alt;
   /** "w:h", e.g. "16:9", "1:1" */
-  @Prop({ attribute: 'ratio', reflect: true }) ratio: AspectRatio = '16:9';
-  @Prop({ attribute: 'fit', reflect: true }) fit: ImageFit = 'cover';
-  @Prop({ attribute: 'position', reflect: true }) position: string = '50% 50%';
-
+  ratio = '16:9';
+  fit = 'cover';
+  position = '50% 50%';
   /** If radius exists, it overrides rounded preset */
-  @Prop({ reflect: true }) radius?: string;
-  @Prop({ reflect: true }) rounded?: RoundedPreset;
-
-  @Prop({ reflect: true }) border?: string;
-  @Prop({ reflect: true }) shadow?: string;
-  @Prop({ reflect: true }) background?: string;
-
+  radius;
+  rounded;
+  border;
+  shadow;
+  background;
   /** Host box size (CSS inline/block size) */
-  @Prop({ reflect: true }) width?: string;
-  @Prop({ reflect: true }) height?: string;
-
+  width;
+  height;
   /** Loading policy */
-  @Prop({ reflect: true }) loading?: 'lazy' | 'eager';
+  loading;
   /** Priority: eager + inject <link rel="preload" as="image"> */
-  @Prop({ reflect: true }) priority?: boolean = false;
+  priority = false;
   /** Blurred/low-res placeholder URL */
-  @Prop({ reflect: true }) placeholder?: string;
-
+  placeholder;
   /** Responsive images */
-  @Prop({ reflect: true }) srcset?: string;
-  @Prop({ reflect: true }) sizes?: string;
-
-  @Prop({ reflect: true }) decoding?: 'async' | 'sync' | 'auto' = 'async';
-  @Prop({ reflect: true, attribute: 'crossorigin' }) crossorigin?: string;
-  @Prop({ reflect: true, attribute: 'referrerpolicy' }) referrerpolicy?: string;
-
+  srcset;
+  sizes;
+  decoding = 'async';
+  crossorigin;
+  referrerpolicy;
   /* ============================ Interactivity ============================ */
   /** Wrap with anchor when href provided */
-  @Prop({ reflect: true }) href?: string;
-  @Prop({ reflect: true }) target?: LinkTarget;
-  @Prop({ reflect: true }) rel?: string;
-  @Prop({ reflect: true }) download?: string; // "" allowed
-
+  href;
+  target;
+  rel;
+  download; // "" allowed
   /** as="button" support */
-  @Prop({ reflect: true }) as?: AsKind;
-  @Prop({ reflect: true }) disabled?: boolean = false;
-
+  as;
+  disabled = false;
   /* ============================== Animation ============================== */
-  @Prop({ reflect: true }) animation?: ImageAnimation = '';
-  @Prop({ reflect: true }) play?: boolean = true;
-  @Prop({ reflect: true }) rotate?: AnimationRotate = 'right';
+  animation = '';
+  play = true;
+  rotate = 'right';
   /** seconds (e.g., 20) */
-  @Prop({ reflect: true }) duration?: number = 20;
+  duration = 20;
   /** 'infinite' or finite count (string/number) */
-  @Prop({ reflect: true }) repeat?: RepeatValue = 'infinite';
+  repeat = 'infinite';
   /** pause on hover */
-  @Prop({ attribute: 'pause-on-hover', reflect: true }) pauseOnHover?: boolean = false;
+  pauseOnHover = false;
   /** play/pause on viewport */
-  @Prop({ attribute: 'start-on-viewport', reflect: true }) startOnViewport?: boolean = false;
-
+  startOnViewport = false;
   /* ============================== Events ============================== */
-  @Event({ eventName: 'tinto:loaded' }) tintoLoaded!: EventEmitter<TintoImageLoadedDetail>;
-  @Event({ eventName: 'tinto:error' }) tintoError!: EventEmitter<TintoImageErrorDetail>;
-  @Event({ eventName: 'tinto:press' }) tintoPress!: EventEmitter<TintoImagePressDetail>;
-
+  tintoLoaded;
+  tintoError;
+  tintoPress;
   /* ============================== Internals ============================== */
-  private imgEl?: HTMLImageElement;
-  private phEl?: HTMLImageElement;
-  private frameEl?: HTMLDivElement;
-
-  private io?: IntersectionObserver; // for lazy fallback
-  private wasObserved = false;
-  private anim?: Animation; // Web Animations
-  private animIO?: IntersectionObserver; // play/pause on viewport
-  private effectiveLoading: 'lazy' | 'eager' = 'lazy';
-
-  private onHoverEnter = () => this.anim?.pause();
-  private onHoverLeave = () => {
+  imgEl;
+  phEl;
+  frameEl;
+  io; // for lazy fallback
+  wasObserved = false;
+  anim; // Web Animations
+  animIO; // play/pause on viewport
+  effectiveLoading = 'lazy';
+  onHoverEnter = () => this.anim?.pause();
+  onHoverLeave = () => {
     if (this.anim && this.play !== false) this.anim.play();
   };
-
   /* ============================== Lifecycle ============================== */
   componentWillLoad() {
     this.syncHostBoxSize();
   }
-
   componentDidLoad() {
     this.applyFrameStyles();
     this.updateImageAttrs();
@@ -135,35 +118,22 @@ export class TintoImage {
     // 로딩 시작 상태 표시
     this.el.setAttribute('aria-busy', 'true');
   }
-
   disconnectedCallback() {
     window.removeEventListener('resize', this.syncVhVar);
     this.teardownIO();
     this.teardownAnimation();
   }
-
   /* ============================== Watchers ============================== */
-  @Watch('ratio')
-  @Watch('fit')
-  @Watch('position')
-  @Watch('radius')
-  @Watch('rounded')
-  @Watch('border')
-  @Watch('shadow')
-  @Watch('background')
   applyFrameStyles() {
     const frame = this.frameEl;
     if (!frame) return;
-
     // ratio
     const [rw, rh] = this.parseRatio(this.ratio);
     frame.style.setProperty('--ratio-w', String(rw));
     frame.style.setProperty('--ratio-h', String(rh));
-
     // object-fit/position
     frame.style.setProperty('--ti-fit', this.fit || 'cover');
     frame.style.setProperty('--ti-pos', this.position || '50% 50%');
-
     // reset radius vars
     frame.style.removeProperty('--ti-radius');
     frame.style.removeProperty('border-radius');
@@ -171,14 +141,13 @@ export class TintoImage {
     frame.style.removeProperty('border-top-right-radius');
     frame.style.removeProperty('border-bottom-left-radius');
     frame.style.removeProperty('border-bottom-right-radius');
-
     if (this.radius != null && String(this.radius).trim() !== '') {
       const raw = String(this.radius).trim();
       const v = /^\d+(\.\d+)?$/.test(raw) ? `${raw}px` : raw;
       frame.style.setProperty('--ti-radius', v);
       frame.style.borderRadius = v;
     } else {
-      const map: Record<string, RoundedPreset> = {
+      const map = {
         base: 'soft',
         full: 'oval',
         t: 'top',
@@ -189,8 +158,7 @@ export class TintoImage {
           String(this.rounded || '')
             .toLowerCase()
             .trim()
-        ] || (this.rounded as any);
-
+        ] || this.rounded;
       if (key === 'soft') {
         frame.style.setProperty('--ti-radius', 'var(--ti-r-soft)');
         frame.style.borderRadius = 'var(--ti-r-soft)';
@@ -209,15 +177,11 @@ export class TintoImage {
         frame.style.borderRadius = '9999px';
       }
     }
-
     // visuals
     this.setCSSVar('--ti-border', this.border);
     this.setCSSVar('--ti-shadow', this.shadow);
     this.setCSSVar('--ti-bg', this.background);
   }
-
-  @Watch('width')
-  @Watch('height')
   syncHostBoxSize() {
     if (this.width) {
       this.el.style.setProperty('inline-size', this.width);
@@ -226,7 +190,6 @@ export class TintoImage {
       this.el.style.removeProperty('inline-size');
       this.el.style.removeProperty('width');
     }
-
     if (this.height) {
       this.el.style.setProperty('block-size', this.height);
       this.el.style.setProperty('height', this.height);
@@ -243,93 +206,66 @@ export class TintoImage {
       }
     }
   }
-
-  @Watch('src')
-  @Watch('alt')
-  @Watch('srcset')
-  @Watch('sizes')
-  @Watch('loading')
-  @Watch('priority')
-  @Watch('placeholder')
-  @Watch('decoding')
-  @Watch('crossorigin')
-  @Watch('referrerpolicy')
   updateImageAttrs() {
     const img = this.imgEl;
     const ph = this.phEl;
     if (!img || !this.frameEl) return;
-
     // placeholder handling
     const hasPh = !!this.placeholder;
     if (hasPh) {
-      if (ph!.src !== this.placeholder) ph!.src = this.placeholder!;
-      ph!.style.display = 'block';
+      if (ph.src !== this.placeholder) ph.src = this.placeholder;
+      ph.style.display = 'block';
       this.frameEl.removeAttribute('data-skeleton');
     } else {
-      if (ph!.hasAttribute('src')) ph!.removeAttribute('src');
-      ph!.style.display = 'none';
+      if (ph.hasAttribute('src')) ph.removeAttribute('src');
+      ph.style.display = 'none';
       this.frameEl.setAttribute('data-skeleton', '');
     }
-
     // core attrs (property + attribute for widest compat)
     const alt = this.alt || '';
     img.alt = alt;
-
     const decoding = this.decoding || 'async';
-    img.decoding = decoding as any;
+    img.decoding = decoding;
     img.setAttribute('decoding', decoding);
-
     if (this.referrerpolicy) {
-      img.referrerPolicy = this.referrerpolicy as any;
+      img.referrerPolicy = this.referrerpolicy;
       img.setAttribute('referrerpolicy', this.referrerpolicy);
     } else {
       img.removeAttribute('referrerpolicy');
     }
-
     if (this.crossorigin) {
-      img.crossOrigin = this.crossorigin as any;
+      img.crossOrigin = this.crossorigin;
       img.setAttribute('crossorigin', this.crossorigin);
     } else {
       img.removeAttribute('crossorigin');
     }
-
     if (this.srcset) img.srcset = this.srcset;
     else img.removeAttribute('srcset');
-
     if (this.sizes) img.sizes = this.sizes;
     else img.removeAttribute('sizes');
-
     // loading policy: placeholder or priority -> eager by default
     const priority = !!this.priority;
-    const loadingAttr = (this.loading || (priority || hasPh ? 'eager' : 'lazy')).toLowerCase() as
-      | 'eager'
-      | 'lazy';
+    const loadingAttr = (this.loading || (priority || hasPh ? 'eager' : 'lazy')).toLowerCase();
     this.effectiveLoading = loadingAttr;
-
-    img.loading = loadingAttr as any;
+    img.loading = loadingAttr;
     img.setAttribute('loading', loadingAttr);
-
     // fetch priority hint (when eager/placeholder/priority)
     const wantsHigh = priority || hasPh || loadingAttr === 'eager';
     try {
-      (img as any).fetchPriority = wantsHigh ? 'high' : 'auto';
+      img.fetchPriority = wantsHigh ? 'high' : 'auto';
     } catch {}
     if (wantsHigh) img.setAttribute('fetchpriority', 'high');
     else img.removeAttribute('fetchpriority');
-
     // CLS 완화: ratio 기반 width/height 설정
     const [rw, rh] = this.parseRatio(this.ratio);
     if (rw && rh) {
       img.width = rw;
       img.height = rh;
     }
-
     const nativeLazy = 'loading' in HTMLImageElement.prototype;
     const shouldDelayWithIO = loadingAttr === 'lazy' && !priority && !nativeLazy;
-
     // 로딩 시작 표시
     this.el.setAttribute('aria-busy', 'true');
-
     if (!shouldDelayWithIO) {
       if (this.src) img.src = this.src;
       else img.removeAttribute('src');
@@ -344,61 +280,37 @@ export class TintoImage {
         img.removeAttribute('src');
       }
     }
-
     // priority => inject preload
     if (priority && this.src)
       this.injectPreload(this.src, this.srcset, this.sizes, this.crossorigin, this.referrerpolicy);
-
     // when loading/priority/src changed → (re)setup IO
     this.setupIOIfNeeded();
   }
-
-  @Watch('href')
-  @Watch('as')
-  @Watch('target')
-  @Watch('rel')
-  @Watch('download')
-  @Watch('disabled')
   onStructureChanged() {
     // current render is enough; nothing special here
   }
-
-  @Watch('animation')
-  @Watch('play')
-  @Watch('rotate')
-  @Watch('duration')
-  @Watch('repeat')
-  @Watch('pauseOnHover')
-  @Watch('startOnViewport')
   applyAnimation() {
     this.teardownAnimation();
     if (!this.animation) return;
-
     const prefersReduce =
       typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduce) return;
-
-    const type = (this.animation || '').toLowerCase().trim() as ImageAnimation;
+    const type = (this.animation || '').toLowerCase().trim();
     if (!type) return;
-
     const isPlay = this.play !== false;
-    const rotateDir = (this.rotate || 'right').toLowerCase() as AnimationRotate;
+    const rotateDir = (this.rotate || 'right').toLowerCase();
     let durationSec = Number(this.duration ?? 20);
     if (!isFinite(durationSec) || durationSec <= 0) durationSec = 20;
-
     const repRaw = String(this.repeat ?? 'infinite').toLowerCase();
     const iterations = repRaw === 'infinite' ? Infinity : Math.max(1, parseInt(repRaw, 10) || 1);
-
     const keyframes = this.buildKeyframes(type, rotateDir);
-    const timing: KeyframeAnimationOptions = {
+    const timing = {
       duration: durationSec * 1000,
       iterations,
       easing: type === 'float' ? 'ease-in-out' : 'linear',
     };
-
-    this.anim = (this.el as any).animate(keyframes, timing);
+    this.anim = this.el.animate(keyframes, timing);
     if (!isPlay) this.anim.pause();
-
     if (this.startOnViewport) {
       this.anim.pause();
       if (typeof IntersectionObserver !== 'undefined') {
@@ -414,21 +326,19 @@ export class TintoImage {
         this.animIO.observe(this.el);
       }
     }
-
     if (this.pauseOnHover) {
       this.el.addEventListener('mouseenter', this.onHoverEnter);
       this.el.addEventListener('mouseleave', this.onHoverLeave);
     }
   }
-
   /* ============================== Helpers ============================== */
-  private parseRatio(raw: string): [number, number] {
+  parseRatio(raw) {
     const s = String(raw || '16:9').replace(/\s+/g, '');
     if (/^\d+:\d+$/.test(s)) {
       const [a, b] = s.split(':');
       return [parseInt(a, 10) || 16, parseInt(b, 10) || 9];
     }
-    const known: Record<string, [number, number]> = {
+    const known = {
       '1:1': [1, 1],
       '2:3': [2, 3],
       '3:4': [3, 4],
@@ -443,18 +353,16 @@ export class TintoImage {
     };
     return known[s] || [16, 9];
   }
-
-  private setCSSVar(name: string, value?: string) {
+  setCSSVar(name, value) {
     if (value) this.frameEl?.style.setProperty(name, value);
     else this.frameEl?.style.removeProperty(name);
   }
-
-  private injectPreload(src: string, srcset?: string, sizes?: string, co?: string, rp?: string) {
+  injectPreload(src, srcset, sizes, co, rp) {
     const head = document.head || document.getElementsByTagName('head')[0];
     const abs = new URL(src, document.baseURI).href;
-    const exists = Array.from(
-      head.querySelectorAll<HTMLLinkElement>('link[rel="preload"][as="image"]'),
-    ).some((l) => l.href === abs);
+    const exists = Array.from(head.querySelectorAll('link[rel="preload"][as="image"]')).some(
+      (l) => l.href === abs,
+    );
     if (exists) return;
     const l = document.createElement('link');
     l.rel = 'preload';
@@ -466,8 +374,7 @@ export class TintoImage {
     if (rp) l.setAttribute('referrerpolicy', rp);
     head.appendChild(l);
   }
-
-  private setupIOIfNeeded() {
+  setupIOIfNeeded() {
     const priority = !!this.priority;
     const nativeLazy = 'loading' in HTMLImageElement.prototype;
     if (priority || this.effectiveLoading !== 'lazy' || nativeLazy) {
@@ -489,15 +396,13 @@ export class TintoImage {
       this.io.observe(this.el);
     }
   }
-
-  private teardownIO() {
+  teardownIO() {
     if (this.io) {
       this.io.disconnect();
       this.io = undefined;
     }
   }
-
-  private buildKeyframes(type: ImageAnimation, rotate: AnimationRotate): Keyframe[] {
+  buildKeyframes(type, rotate) {
     const dir = rotate === 'left' ? -1 : 1;
     switch (type) {
       case 'float':
@@ -520,8 +425,7 @@ export class TintoImage {
         return [{ transform: 'rotate(0deg)' }, { transform: `rotate(${dir * 360}deg)` }];
     }
   }
-
-  private teardownAnimation() {
+  teardownAnimation() {
     try {
       this.anim?.cancel();
     } catch {}
@@ -533,17 +437,15 @@ export class TintoImage {
     this.el.removeEventListener('mouseenter', this.onHoverEnter);
     this.el.removeEventListener('mouseleave', this.onHoverLeave);
   }
-
   /** Fallback var for old iOS: --ti-vh = innerHeight * 0.01px */
-  private syncVhVar = () => {
+  syncVhVar = () => {
     try {
       const vh = window.innerHeight * 0.01;
       this.el.style.setProperty('--ti-vh', `${vh}px`);
     } catch {}
   };
-
   /* ============================== Render ============================== */
-  private onImgLoad = () => {
+  onImgLoad = () => {
     this.frameEl?.setAttribute('data-state', 'loaded');
     this.frameEl?.removeAttribute('data-skeleton');
     this.el.removeAttribute('aria-busy');
@@ -553,95 +455,83 @@ export class TintoImage {
       src: this.src,
     });
   };
-
-  private onImgError = () => {
+  onImgError = () => {
     const next = this.placeholder ? 'error' : 'loaded';
     this.frameEl?.setAttribute('data-state', next);
     this.el.removeAttribute('aria-busy');
     this.tintoError.emit({ src: this.src });
   };
-
-  private onButtonPress = (ev: Event) => {
+  onButtonPress = (ev) => {
     if (this.disabled) {
       ev.preventDefault();
       ev.stopPropagation();
       return;
     }
-    const kind: TintoImagePressDetail['kind'] = this.href
-      ? 'link'
-      : this.as === 'button'
-        ? 'button'
-        : 'plain';
+    const kind = this.href ? 'link' : this.as === 'button' ? 'button' : 'plain';
     this.tintoPress.emit({ kind });
   };
-
   render() {
     const computedRel = this.rel || (this.target === '_blank' ? 'noopener noreferrer' : undefined);
-
-    const frame = (
-      <div
-        part="frame"
-        class="ti-frame"
-        ref={(el) => (this.frameEl = el as HTMLDivElement)}
-        data-state="loading"
-      >
-        <span part="spacer"></span>
-        <div part="layer">
-          {/* Placeholder should not be read by SR → alt="" + aria-hidden */}
-          <img
-            part="placeholder"
-            alt=""
-            aria-hidden="true"
-            ref={(el) => (this.phEl = el as HTMLImageElement)}
-            draggable={false}
-            onDragStart={(e) => e.preventDefault()}
-          />
-          {/* Real image; alt is applied in updateImageAttrs */}
-          <img
-            part="img"
-            ref={(el) => (this.imgEl = el as HTMLImageElement)}
-            draggable={false}
-            alt=""
-            onDragStart={(e) => e.preventDefault()}
-            onLoad={this.onImgLoad}
-            onError={this.onImgError}
-          />
-        </div>
-        <slot name="overlay"></slot>
-      </div>
+    const frame = h(
+      'div',
+      {
+        part: 'frame',
+        class: 'ti-frame',
+        ref: (el) => (this.frameEl = el),
+        'data-state': 'loading',
+      },
+      h('span', { part: 'spacer' }),
+      h(
+        'div',
+        { part: 'layer' },
+        h('img', {
+          part: 'placeholder',
+          alt: '',
+          'aria-hidden': 'true',
+          ref: (el) => (this.phEl = el),
+          draggable: false,
+          onDragStart: (e) => e.preventDefault(),
+        }),
+        h('img', {
+          part: 'img',
+          ref: (el) => (this.imgEl = el),
+          draggable: false,
+          alt: '',
+          onDragStart: (e) => e.preventDefault(),
+          onLoad: this.onImgLoad,
+          onError: this.onImgError,
+        }),
+      ),
+      h('slot', { name: 'overlay' }),
     );
-
     // apply width/height at render too
     this.syncHostBoxSize();
-
     // pass through host aria-* to wrapper
     const ariaLabel = this.el.getAttribute('aria-label');
     const ariaDescribedby = this.el.getAttribute('aria-describedby');
     const ariaLabelledby = this.el.getAttribute('aria-labelledby');
-
-    const commonA11y: any = {};
+    const commonA11y = {};
     if (ariaLabel) commonA11y['aria-label'] = ariaLabel;
     if (ariaDescribedby) commonA11y['aria-describedby'] = ariaDescribedby;
     if (ariaLabelledby) commonA11y['aria-labelledby'] = ariaLabelledby;
-
     // href 변형
     const isDisabled = !!this.disabled;
     if (this.href) {
       if (isDisabled) {
-        return (
-          <span
-            part="link"
-            role="link"
-            aria-disabled="true"
-            tabIndex={-1}
-            {...commonA11y}
-            style={{ pointerEvents: 'none' }}
-          >
-            {frame}
-          </span>
+        return h(
+          'span',
+          {
+            part: 'link',
+            role: 'link',
+            'aria-disabled': 'true',
+            tabIndex: -1,
+            ...commonA11y,
+            style: { pointerEvents: 'none' },
+          },
+          frame,
         );
       }
-      const aProps: any = {
+      const aProps = {
         part: 'link',
         href: this.href,
         target: this.target,
@@ -651,30 +541,150 @@ export class TintoImage {
         onClick: () => this.tintoPress.emit({ kind: 'link' }),
       };
       if (this.download != null) aProps.download = this.download === '' ? '' : this.download;
-      return <a {...aProps}>{frame}</a>;
+      return h('a', { ...aProps }, frame);
     }
-
     // button 변형
     if (this.as === 'button') {
-      return (
-        <button
-          part="button"
-          type="button"
-          disabled={!!this.disabled}
-          {...commonA11y}
-          data-clickable
-          onClick={this.onButtonPress}
-        >
-          {frame}
-        </button>
+      return h(
+        'button',
+        {
+          part: 'button',
+          type: 'button',
+          disabled: !!this.disabled,
+          ...commonA11y,
+          'data-clickable': true,
+          onClick: this.onButtonPress,
+        },
+        frame,
       );
     }
-
     // plain
-    return (
-      <div part="plain" {...commonA11y}>
-        {frame}
-      </div>
-    );
+    return h('div', { part: 'plain', ...commonA11y }, frame);
   }
-}
+};
+__decorate([Element()], TintoImage.prototype, 'el', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'src', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'alt', void 0);
+__decorate([Prop({ attribute: 'ratio', reflect: true })], TintoImage.prototype, 'ratio', void 0);
+__decorate([Prop({ attribute: 'fit', reflect: true })], TintoImage.prototype, 'fit', void 0);
+__decorate(
+  [Prop({ attribute: 'position', reflect: true })],
+  TintoImage.prototype,
+  'position',
+  void 0,
+);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'radius', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'rounded', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'border', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'shadow', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'background', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'width', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'height', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'loading', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'priority', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'placeholder', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'srcset', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'sizes', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'decoding', void 0);
+__decorate(
+  [Prop({ reflect: true, attribute: 'crossorigin' })],
+  TintoImage.prototype,
+  'crossorigin',
+  void 0,
+);
+__decorate(
+  [Prop({ reflect: true, attribute: 'referrerpolicy' })],
+  TintoImage.prototype,
+  'referrerpolicy',
+  void 0,
+);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'href', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'target', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'rel', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'download', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'as', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'disabled', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'animation', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'play', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'rotate', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'duration', void 0);
+__decorate([Prop({ reflect: true })], TintoImage.prototype, 'repeat', void 0);
+__decorate(
+  [Prop({ attribute: 'pause-on-hover', reflect: true })],
+  TintoImage.prototype,
+  'pauseOnHover',
+  void 0,
+);
+__decorate(
+  [Prop({ attribute: 'start-on-viewport', reflect: true })],
+  TintoImage.prototype,
+  'startOnViewport',
+  void 0,
+);
+__decorate([Event({ eventName: 'tinto:loaded' })], TintoImage.prototype, 'tintoLoaded', void 0);
+__decorate([Event({ eventName: 'tinto:error' })], TintoImage.prototype, 'tintoError', void 0);
+__decorate([Event({ eventName: 'tinto:press' })], TintoImage.prototype, 'tintoPress', void 0);
+__decorate(
+  [
+    Watch('ratio'),
+    Watch('fit'),
+    Watch('position'),
+    Watch('radius'),
+    Watch('rounded'),
+    Watch('border'),
+    Watch('shadow'),
+    Watch('background'),
+  ],
+  TintoImage.prototype,
+  'applyFrameStyles',
+  null,
+);
+__decorate([Watch('width'), Watch('height')], TintoImage.prototype, 'syncHostBoxSize', null);
+__decorate(
+  [
+    Watch('src'),
+    Watch('alt'),
+    Watch('srcset'),
+    Watch('sizes'),
+    Watch('loading'),
+    Watch('priority'),
+    Watch('placeholder'),
+    Watch('decoding'),
+    Watch('crossorigin'),
+    Watch('referrerpolicy'),
+  ],
+  TintoImage.prototype,
+  'updateImageAttrs',
+  null,
+);
+__decorate(
+  [Watch('href'), Watch('as'), Watch('target'), Watch('rel'), Watch('download'), Watch('disabled')],
+  TintoImage.prototype,
+  'onStructureChanged',
+  null,
+);
+__decorate(
+  [
+    Watch('animation'),
+    Watch('play'),
+    Watch('rotate'),
+    Watch('duration'),
+    Watch('repeat'),
+    Watch('pauseOnHover'),
+    Watch('startOnViewport'),
+  ],
+  TintoImage.prototype,
+  'applyAnimation',
+  null,
+);
+TintoImage = __decorate(
+  [
+    Component({
+      tag: 'tinto-image',
+      styleUrl: 'image.css',
+      shadow: true,
+    }),
+  ],
+  TintoImage,
+);
+export { TintoImage };

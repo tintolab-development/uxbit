@@ -20,7 +20,13 @@
         {
           "name": "fit",
           "description": "CSS object-fit for the image.",
-          "values": [{ "name": "cover" }, { "name": "contain" }, { "name": "fill" }, { "name": "none" }, { "name": "scale-down" }]
+          "values": [
+            { "name": "cover" },
+            { "name": "contain" },
+            { "name": "fill" },
+            { "name": "none" },
+            { "name": "scale-down" }
+          ]
         },
         {
           "name": "position",
@@ -107,7 +113,12 @@
         {
           "name": "target",
           "description": "Link target when href is set.",
-          "values": [{ "name": "_blank" }, { "name": "_self" }, { "name": "_parent" }, { "name": "_top" }]
+          "values": [
+            { "name": "_blank" },
+            { "name": "_self" },
+            { "name": "_parent" },
+            { "name": "_top" }
+          ]
         },
         {
           "name": "rel",
@@ -130,7 +141,12 @@
         {
           "name": "animation",
           "description": "Built-in image animation preset.",
-          "values": [{ "name": "spin" }, { "name": "float" }, { "name": "wobble" }, { "name": "pulse" }]
+          "values": [
+            { "name": "spin" },
+            { "name": "float" },
+            { "name": "wobble" },
+            { "name": "pulse" }
+          ]
         },
         {
           "name": "play",

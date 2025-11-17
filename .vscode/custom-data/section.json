@@ -8,7 +8,12 @@
         {
           "name": "direction",
           "description": "Flex direction",
-          "values": [{ "name": "row" }, { "name": "row-reverse" }, { "name": "column" }, { "name": "column-reverse" }]
+          "values": [
+            { "name": "row" },
+            { "name": "row-reverse" },
+            { "name": "column" },
+            { "name": "column-reverse" }
+          ]
         },
         {
           "name": "wrap",
@@ -18,12 +23,25 @@
         {
           "name": "justify",
           "description": "Flex justify-content",
-          "values": [{ "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "space-between" }, { "name": "space-around" }, { "name": "space-evenly" }]
+          "values": [
+            { "name": "flex-start" },
+            { "name": "center" },
+            { "name": "flex-end" },
+            { "name": "space-between" },
+            { "name": "space-around" },
+            { "name": "space-evenly" }
+          ]
         },
         {
           "name": "align",
           "description": "Flex align-items",
-          "values": [{ "name": "stretch" }, { "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "baseline" }]
+          "values": [
+            { "name": "stretch" },
+            { "name": "flex-start" },
+            { "name": "center" },
+            { "name": "flex-end" },
+            { "name": "baseline" }
+          ]
         },
         {
           "name": "gap",

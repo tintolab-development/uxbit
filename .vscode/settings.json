@@ -1,5 +1,10 @@
 {
   "cSpell.words": ["uxbit"],
-  "html.customData": [".vscode/custom-data/image.json", ".vscode/custom-data/section.json", ".vscode/custom-data/typography.json", ".vscode/custom-data/wrapper.json"],
+  "html.customData": [
+    ".vscode/custom-data/image.json",
+    ".vscode/custom-data/section.json",
+    ".vscode/custom-data/typography.json",
+    ".vscode/custom-data/wrapper.json"
+  ],
   "css.customData": [".vscode/css-data.json"]
 }

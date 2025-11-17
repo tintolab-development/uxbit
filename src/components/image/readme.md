@@ -1,9 +1,6 @@
 # tinto-image
 
-
-
 <!-- Auto Generated Below -->
-
 
 ## Overview
 
@@ -50,7 +47,6 @@
 | `target`          | `target`            |                                                          | `string`                                                                                 | `undefined`  |
 | `width`           | `width`             | Host box size (CSS inline/block size)                    | `string`                                                                                 | `undefined`  |
 
-
 ## Events
 
 | Event          | Description | Type                                  |
@@ -58,7 +54,6 @@
 | `tinto:error`  |             | `CustomEvent<TintoImageErrorDetail>`  |
 | `tinto:loaded` |             | `CustomEvent<TintoImageLoadedDetail>` |
 | `tinto:press`  |             | `CustomEvent<TintoImagePressDetail>`  |
-
 
 ## Shadow Parts
 
@@ -73,7 +68,6 @@
 | `"plain"`       |             |
 | `"spacer"`      |             |
 
+---
 
-----------------------------------------------
-
-*Built with [StencilJS](https://stenciljs.com/)*
+_Built with [StencilJS](https://stenciljs.com/)_

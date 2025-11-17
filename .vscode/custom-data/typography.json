@@ -8,22 +8,47 @@
         {
           "name": "variant",
           "description": "Visual text style variant (controls default font-size/weight via CSS class).",
-          "values": [{ "name": "h1" }, { "name": "h2" }, { "name": "h3" }, { "name": "p" }, { "name": "span" }]
+          "values": [
+            { "name": "h1" },
+            { "name": "h2" },
+            { "name": "h3" },
+            { "name": "p" },
+            { "name": "span" }
+          ]
         },
         {
           "name": "as",
           "description": "Semantic HTML tag to render (overrides default from variant).",
-          "values": [{ "name": "h1" }, { "name": "h2" }, { "name": "h3" }, { "name": "p" }, { "name": "span" }]
+          "values": [
+            { "name": "h1" },
+            { "name": "h2" },
+            { "name": "h3" },
+            { "name": "p" },
+            { "name": "span" }
+          ]
         },
         {
           "name": "font",
           "description": "Font family preset (mapped via FAMILY_MAP).",
-          "values": [{ "name": "system" }, { "name": "serif" }, { "name": "sans" }, { "name": "mono" }, { "name": "display" }]
+          "values": [
+            { "name": "system" },
+            { "name": "serif" },
+            { "name": "sans" },
+            { "name": "mono" },
+            { "name": "display" }
+          ]
         },
         {
           "name": "font-size",
           "description": "Font size token (overrides variant preset when set).",
-          "values": [{ "name": "xs" }, { "name": "sm" }, { "name": "md" }, { "name": "lg" }, { "name": "xl" }, { "name": "xxl" }]
+          "values": [
+            { "name": "xs" },
+            { "name": "sm" },
+            { "name": "md" },
+            { "name": "lg" },
+            { "name": "xl" },
+            { "name": "xxl" }
+          ]
         },
         {
           "name": "color",
@@ -32,7 +57,12 @@
         {
           "name": "align",
           "description": "Text alignment.",
-          "values": [{ "name": "left" }, { "name": "center" }, { "name": "right" }, { "name": "justify" }]
+          "values": [
+            { "name": "left" },
+            { "name": "center" },
+            { "name": "right" },
+            { "name": "justify" }
+          ]
         },
         {
           "name": "weight",
@@ -64,7 +94,12 @@
         {
           "name": "target",
           "description": "Link target when href is set.",
-          "values": [{ "name": "_blank" }, { "name": "_self" }, { "name": "_parent" }, { "name": "_top" }]
+          "values": [
+            { "name": "_blank" },
+            { "name": "_self" },
+            { "name": "_parent" },
+            { "name": "_top" }
+          ]
         },
         {
           "name": "rel",

@@ -8,7 +8,12 @@
         {
           "name": "direction",
           "description": "Flex direction (mobile base)",
-          "values": [{ "name": "row" }, { "name": "row-reverse" }, { "name": "column" }, { "name": "column-reverse" }]
+          "values": [
+            { "name": "row" },
+            { "name": "row-reverse" },
+            { "name": "column" },
+            { "name": "column-reverse" }
+          ]
         },
         {
           "name": "wrap",
@@ -18,12 +23,25 @@
         {
           "name": "justify",
           "description": "Flex justify-content (mobile base)",
-          "values": [{ "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "space-between" }, { "name": "space-around" }, { "name": "space-evenly" }]
+          "values": [
+            { "name": "flex-start" },
+            { "name": "center" },
+            { "name": "flex-end" },
+            { "name": "space-between" },
+            { "name": "space-around" },
+            { "name": "space-evenly" }
+          ]
         },
         {
           "name": "align",
           "description": "Flex align-items (mobile base)",
-          "values": [{ "name": "stretch" }, { "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "baseline" }]
+          "values": [
+            { "name": "stretch" },
+            { "name": "flex-start" },
+            { "name": "center" },
+            { "name": "flex-end" },
+            { "name": "baseline" }
+          ]
         },
         {
           "name": "gap",
@@ -32,7 +50,12 @@
         {
           "name": "directionDesktop",
           "description": "Flex direction override for desktop (>=1920px)",
-          "values": [{ "name": "row" }, { "name": "row-reverse" }, { "name": "column" }, { "name": "column-reverse" }]
+          "values": [
+            { "name": "row" },
+            { "name": "row-reverse" },
+            { "name": "column" },
+            { "name": "column-reverse" }
+          ]
         },
         {
           "name": "wrapDesktop",
@@ -42,12 +65,25 @@
         {
           "name": "justifyDesktop",
           "description": "Flex justify-content override for desktop (>=1920px)",
-          "values": [{ "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "space-between" }, { "name": "space-around" }, { "name": "space-evenly" }]
+          "values": [
+            { "name": "flex-start" },
+            { "name": "center" },
+            { "name": "flex-end" },
+            { "name": "space-between" },
+            { "name": "space-around" },
+            { "name": "space-evenly" }
+          ]
         },
         {
           "name": "alignDesktop",
           "description": "Flex align-items override for desktop (>=1920px)",
-          "values": [{ "name": "stretch" }, { "name": "flex-start" }, { "name": "center" }, { "name": "flex-end" }, { "name": "baseline" }]
+          "values": [
+            { "name": "stretch" },
+            { "name": "flex-start" },
+            { "name": "center" },
+            { "name": "flex-end" },
+            { "name": "baseline" }
+          ]
         },
         {
           "name": "gapDesktop",
@@ -97,7 +133,12 @@
         {
           "name": "bgRepeat",
           "description": "background-repeat for the background image",
-          "values": [{ "name": "no-repeat" }, { "name": "repeat" }, { "name": "repeat-x" }, { "name": "repeat-y" }]
+          "values": [
+            { "name": "no-repeat" },
+            { "name": "repeat" },
+            { "name": "repeat-x" },
+            { "name": "repeat-y" }
+          ]
         },
         {
           "name": "bgAttachment",
@@ -107,7 +148,14 @@
         {
           "name": "bgBlend",
           "description": "background-blend-mode between background color and image",
-          "values": [{ "name": "normal" }, { "name": "multiply" }, { "name": "screen" }, { "name": "overlay" }, { "name": "darken" }, { "name": "lighten" }]
+          "values": [
+            { "name": "normal" },
+            { "name": "multiply" },
+            { "name": "screen" },
+            { "name": "overlay" },
+            { "name": "darken" },
+            { "name": "lighten" }
+          ]
         },
         {
           "name": "overlay",

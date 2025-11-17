@@ -1,50 +1,6 @@
-// typography.stories.tsx
-import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
-import type { Align, FontFamily, FontSize, Variant } from './typography.types';
 import { FONT_FAMILY, FONT_SIZE_KEYS, TYPING_UNIT } from './typography.types';
-
-type ExtraArgs = {
-  content: string;
-};
-
-// Storybook에서 사용할 Args 전체 타입
-type TypographyArgs = ExtraArgs & {
-  variant: Variant;
-  as?: Variant;
-  font: FontFamily;
-  fontSize?: FontSize;
-  align: Align;
-  color: string;
-  weight?: string | number;
-  inline: boolean;
-  underline: boolean;
-  highlight?: string;
-  visible: boolean;
-  href?: string;
-  target?: '_self' | '_blank' | '_parent' | '_top';
-  rel?: string;
-
-  // 애니메이션 (rolling) 관련
-  rolling: boolean;
-  rollSpeed: number;
-  rollAxis: 'x' | 'y';
-  rollClone: number;
-  rollGap: string;
-  rollPlay: boolean;
-  rollStartOnViewport: boolean;
-  pauseOnHover: boolean;
-
-  // Typing Effect 관련 props (dataset → props)
-  typingTexts?: string;
-  typingDuration?: number; // 1~10
-  typingEraseDuration?: number; // 1~10
-  typingLoop: boolean;
-  typingCursor: boolean;
-  typingUnit: (typeof TYPING_UNIT)[number];
-};
-
-const meta: Meta<TypographyArgs> = {
+const meta = {
   title: 'Foundation/TintoTypography',
   component: 'tinto-typography',
   parameters: {
@@ -60,7 +16,6 @@ const meta: Meta<TypographyArgs> = {
     inline: false,
     visible: true,
     content: '텍스트를 입력해 주세요.',
-
     // 기본 애니메이션 설정
     rolling: false,
     rollSpeed: 5, // 1~10 토큰 (typingDuration 없을 때 fallback)
@@ -70,7 +25,6 @@ const meta: Meta<TypographyArgs> = {
     rollPlay: true,
     rollStartOnViewport: false,
     pauseOnHover: false,
-
     // Typing 기본값 (토큰)
     typingTexts: '',
     typingDuration: 5, // 1~10 (중간 정도)
@@ -89,19 +43,16 @@ const meta: Meta<TypographyArgs> = {
       control: { type: 'select' },
       options: ['h1', 'h2', 'h3', 'p', 'span'],
     },
-
     // 폰트 토큰 (system / pretendard / paperlogy / clash-display / climate-crisis)
     font: {
       control: { type: 'select' },
       options: FONT_FAMILY,
     },
-
     // fontSize 토큰 (variant 기본 clamp 사용 시 비워두면 됨)
     fontSize: {
       control: { type: 'inline-radio' },
       options: [...FONT_SIZE_KEYS],
     },
-
     align: {
       control: { type: 'inline-radio' },
       options: ['left', 'center', 'right', 'justify'],
@@ -125,7 +76,6 @@ const meta: Meta<TypographyArgs> = {
     visible: {
       control: 'boolean',
     },
-
     // ===== 링크 관련 =====
     href: {
       control: 'text',
@@ -138,7 +88,6 @@ const meta: Meta<TypographyArgs> = {
       control: 'text',
       description: 'target="_blank"일 때 noopener noreferrer 자동 추가',
     },
-
     // ===== 애니메이션(rolling) 관련 =====
     rolling: {
       control: 'boolean',
@@ -179,7 +128,6 @@ const meta: Meta<TypographyArgs> = {
       control: 'boolean',
       description: '이전 롤링용 – 현재는 사용하지 않음',
     },
-
     // ===== Typing Effect 관련 =====
     typingTexts: {
       control: 'text',
@@ -223,7 +171,6 @@ const meta: Meta<TypographyArgs> = {
       description: 'char: 문자 단위, word: 단어 단위',
       table: { category: 'typing' },
     },
-
     // ===== 슬롯 컨텐츠 =====
     content: {
       control: 'text',
@@ -231,20 +178,15 @@ const meta: Meta<TypographyArgs> = {
     },
   },
 };
-
 export default meta;
-
-type Story = StoryObj<TypographyArgs>;
-
-export const Primary: Story = {
+export const Primary = {
   name: 'Primary',
   render: (args) => {
     const { content, ...rest } = args;
-    return <tinto-typography {...(rest as any)}>{content ?? ''}</tinto-typography>;
+    return h('tinto-typography', { ...rest }, content ?? '');
   },
 };
-
-export const Rolling: Story = {
+export const Rolling = {
   name: 'Rolling / Typing',
   args: {
     variant: 'p',
@@ -263,7 +205,6 @@ export const Rolling: Story = {
     inline: false,
     visible: true,
     content: '롤링 애니메이션 텍스트 – 사람들 사이에서 UXbit가 흐릅니다',
-
     typingTexts: '',
     typingDuration: 4,
     typingEraseDuration: 2,
@@ -273,6 +214,6 @@ export const Rolling: Story = {
   },
   render: (args) => {
     const { content, ...rest } = args;
-    return <tinto-typography {...(rest as any)}>{content}</tinto-typography>;
+    return h('tinto-typography', { ...rest }, content);
   },
 };
