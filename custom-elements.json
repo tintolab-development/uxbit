@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-17T06:00:00",
+  "timestamp": "2025-11-17T06:45:10",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -10,7 +10,7 @@
       "filePath": "src/components/image/image.tsx",
       "encapsulation": "shadow",
       "tag": "tinto-image",
-      "readme": "# tinto-image\n\n\n",
+      "readme": "# tinto-image\n",
       "docs": "<tinto-image>\n- Image/media props + simple animations (spin/float/wobble/pulse)\n- If placeholder exists, main image loads eagerly by default (fast swap)\n- rounded=\"oval\" => rounds TOP corners only (bottom corners are square)",
       "docsTags": [],
       "usage": {},
@@ -1650,7 +1650,7 @@
       "filePath": "src/components/typography/typography.tsx",
       "encapsulation": "shadow",
       "tag": "tinto-typography",
-      "readme": "# tinto-typography\n\n\n",
+      "readme": "# tinto-typography\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
@@ -2145,14 +2145,14 @@
           "mutable": false,
           "attr": "roll-speed",
           "reflectToAttr": true,
-          "docs": "(옵션) 타이핑 속도 – ms *아니라* 토큰 느낌 숫자 (기본 20, 별도로 typingSpeed가 있으면 그 값 우선)",
+          "docs": "(옵션) 타이핑 duration 토큰 (1~10) – 별도 typingDuration 없으면 fallback",
           "docsTags": [
             {
               "name": "default",
-              "text": "20"
+              "text": "5"
             }
           ],
-          "default": "20",
+          "default": "5",
           "values": [
             {
               "type": "number"
@@ -2287,7 +2287,7 @@
           "setter": false
         },
         {
-          "name": "typingEraseSpeed",
+          "name": "typingDuration",
           "type": "number",
           "complexType": {
             "original": "number",
@@ -2295,9 +2295,32 @@
             "references": {}
           },
           "mutable": false,
-          "attr": "typing-erase-speed",
+          "attr": "typing-duration",
           "reflectToAttr": true,
-          "docs": "삭제 속도",
+          "docs": "개별 문자를 찍는 duration 토큰 (1~10)",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingEraseDuration",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "typing-erase-duration",
+          "reflectToAttr": true,
+          "docs": "삭제 duration 토큰 (1~10, 비우면 typingDuration과 동일)",
           "docsTags": [],
           "values": [
             {
@@ -2334,29 +2357,6 @@
             }
           ],
           "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "typingSpeed",
-          "type": "number",
-          "complexType": {
-            "original": "number",
-            "resolved": "number",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "typing-speed",
-          "reflectToAttr": true,
-          "docs": "개별 문자를 찍는 속도",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "number"
-            }
-          ],
-          "optional": true,
           "required": false,
           "getter": false,
           "setter": false
@@ -3462,7 +3462,7 @@
   ],
   "typeLibrary": {
     "src/components/image/image.types.ts::AspectRatio": {
-      "declaration": "export type AspectRatio = '1:1' | '2:1' | '3:2' | '4:3' | '16:9' | '3:1' | '1:2' | '2:3' | '3:4' | '9:16' | '1:3';",
+      "declaration": "export type AspectRatio =\n  | '1:1'\n  | '2:1'\n  | '3:2'\n  | '4:3'\n  | '16:9'\n  | '3:1'\n  | '1:2'\n  | '2:3'\n  | '3:4'\n  | '9:16'\n  | '1:3';",
       "docstring": "",
       "path": "src/components/image/image.types.ts"
     },
@@ -3527,7 +3527,7 @@
       "path": "src/components/section/section.types.ts"
     },
     "src/components/section/section.types.ts::Justify": {
-      "declaration": "export type Justify = 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';",
+      "declaration": "export type Justify =\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around'\n  | 'space-evenly';",
       "docstring": "",
       "path": "src/components/section/section.types.ts"
     },
@@ -3587,7 +3587,7 @@
       "path": "src/components/wrapper/wrapper.types.ts"
     },
     "src/components/wrapper/wrapper.types.ts::Justify": {
-      "declaration": "export type Justify = 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';",
+      "declaration": "export type Justify =\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around'\n  | 'space-evenly';",
       "docstring": "",
       "path": "src/components/wrapper/wrapper.types.ts"
     },
