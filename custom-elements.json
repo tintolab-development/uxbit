@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-17T01:30:27",
+  "timestamp": "2025-11-17T06:00:00",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -1780,10 +1780,10 @@
         },
         {
           "name": "font",
-          "type": "\"display\" | \"mono\" | \"sans\" | \"serif\" | \"system\"",
+          "type": "\"clash-display\" | \"climate-crisis\" | \"paperlogy\" | \"pretendard\" | \"system\"",
           "complexType": {
             "original": "FontFamily",
-            "resolved": "\"display\" | \"mono\" | \"sans\" | \"serif\" | \"system\"",
+            "resolved": "\"clash-display\" | \"climate-crisis\" | \"paperlogy\" | \"pretendard\" | \"system\"",
             "references": {
               "FontFamily": {
                 "location": "import",
@@ -1799,25 +1799,25 @@
           "docsTags": [
             {
               "name": "default",
-              "text": "'system' as FontFamily"
+              "text": "'system'"
             }
           ],
-          "default": "'system' as FontFamily",
+          "default": "'system'",
           "values": [
             {
-              "value": "display",
+              "value": "clash-display",
               "type": "string"
             },
             {
-              "value": "mono",
+              "value": "climate-crisis",
               "type": "string"
             },
             {
-              "value": "sans",
+              "value": "paperlogy",
               "type": "string"
             },
             {
-              "value": "serif",
+              "value": "pretendard",
               "type": "string"
             },
             {
@@ -1962,6 +1962,35 @@
           "setter": false
         },
         {
+          "name": "pauseOnHover",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "pause-on-hover",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "rel",
           "type": "string",
           "complexType": {
@@ -1980,6 +2009,214 @@
             }
           ],
           "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rollAxis",
+          "type": "\"x\" | \"y\"",
+          "complexType": {
+            "original": "'x' | 'y'",
+            "resolved": "\"x\" | \"y\"",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "roll-axis",
+          "reflectToAttr": true,
+          "docs": "아래 props 들은 기존 롤링용 – API 호환용으로 유지",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'x'"
+            }
+          ],
+          "default": "'x'",
+          "values": [
+            {
+              "value": "x",
+              "type": "string"
+            },
+            {
+              "value": "y",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rollClone",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "roll-clone",
+          "reflectToAttr": true,
+          "docs": "기본 문장 개수 (슬롯 텍스트를 몇 개로 복제할지, 기본 3개)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "3"
+            }
+          ],
+          "default": "3",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rollGap",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "roll-gap",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'2rem'"
+            }
+          ],
+          "default": "'2rem'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rollPlay",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "roll-play",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rollSpeed",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "roll-speed",
+          "reflectToAttr": true,
+          "docs": "(옵션) 타이핑 속도 – ms *아니라* 토큰 느낌 숫자 (기본 20, 별도로 typingSpeed가 있으면 그 값 우선)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "20"
+            }
+          ],
+          "default": "20",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rollStartOnViewport",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "roll-start-on-viewport",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rolling",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "rolling",
+          "reflectToAttr": true,
+          "docs": "rolling=true 이면 타이핑 애니메이션 활성화",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
           "required": false,
           "getter": false,
           "setter": false
@@ -2016,6 +2253,173 @@
             }
           ],
           "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingCursor",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "typing-cursor",
+          "reflectToAttr": true,
+          "docs": "커서( | ) 표시 여부",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingEraseSpeed",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "typing-erase-speed",
+          "reflectToAttr": true,
+          "docs": "삭제 속도",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingLoop",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "typing-loop",
+          "reflectToAttr": true,
+          "docs": "마지막까지 끝나면 다시 처음부터 반복할지 여부",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingSpeed",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "typing-speed",
+          "reflectToAttr": true,
+          "docs": "개별 문자를 찍는 속도",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingTexts",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "typing-texts",
+          "reflectToAttr": true,
+          "docs": "타이핑에 사용할 문장 배열.\n- 문자열 JSON: '[\"문장1\",\"문장2\"]'\n- 또는 구분자 문자열: '문장1|문장2|문장3'\n비워두면 슬롯 텍스트를 rollClone(기본 3)만큼 복제해서 사용.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "typingUnit",
+          "type": "\"char\" | \"word\"",
+          "complexType": {
+            "original": "TypingUnit",
+            "resolved": "\"char\" | \"word\"",
+            "references": {
+              "TypingUnit": {
+                "location": "import",
+                "path": "./typography.types",
+                "id": "src/components/typography/typography.types.ts::TypingUnit"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "typing-unit",
+          "reflectToAttr": true,
+          "docs": "문자 단위 / 단어 단위",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'char'"
+            }
+          ],
+          "default": "'char'",
+          "values": [
+            {
+              "value": "char",
+              "type": "string"
+            },
+            {
+              "value": "word",
+              "type": "string"
+            }
+          ],
+          "optional": false,
           "required": false,
           "getter": false,
           "setter": false
@@ -3143,12 +3547,12 @@
       "path": "src/components/typography/typography.types.ts"
     },
     "src/components/typography/typography.types.ts::FontFamily": {
-      "declaration": "export type FontFamily = 'system' | 'serif' | 'sans' | 'mono' | 'display';",
+      "declaration": "\"system\" | \"pretendard\" | \"paperlogy\" | \"clash-display\" | \"climate-crisis\"",
       "docstring": "",
       "path": "src/components/typography/typography.types.ts"
     },
     "src/components/typography/typography.types.ts::FontSize": {
-      "declaration": "export type FontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';",
+      "declaration": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"xxl\"",
       "docstring": "",
       "path": "src/components/typography/typography.types.ts"
     },
@@ -3164,6 +3568,11 @@
     },
     "src/components/typography/typography.types.ts::HighlightColor": {
       "declaration": "string",
+      "docstring": "",
+      "path": "src/components/typography/typography.types.ts"
+    },
+    "src/components/typography/typography.types.ts::TypingUnit": {
+      "declaration": "\"char\" | \"word\"",
       "docstring": "",
       "path": "src/components/typography/typography.types.ts"
     },

@@ -7,11 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AnimationRotate, AsKind, AspectRatio, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
 import { AlignItems, FlexDirection, FlexWrap, HeightMode, Justify } from "./components/section/section.types";
-import { Align, Color, FontFamily, FontSize, HighlightColor, Variant } from "./components/typography/typography.types";
+import { Align, Color, FontFamily, FontSize, HighlightColor, TypingUnit, Variant } from "./components/typography/typography.types";
 import { AlignItems as AlignItems1, BgAttachment, BgBlend, BgRepeat, BgSize, FlexDirection as FlexDirection1, FlexWrap as FlexWrap1, Justify as Justify1 } from "./components/wrapper/wrapper.types";
 export { AnimationRotate, AsKind, AspectRatio, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
 export { AlignItems, FlexDirection, FlexWrap, HeightMode, Justify } from "./components/section/section.types";
-export { Align, Color, FontFamily, FontSize, HighlightColor, Variant } from "./components/typography/typography.types";
+export { Align, Color, FontFamily, FontSize, HighlightColor, TypingUnit, Variant } from "./components/typography/typography.types";
 export { AlignItems as AlignItems1, BgAttachment, BgBlend, BgRepeat, BgSize, FlexDirection as FlexDirection1, FlexWrap as FlexWrap1, Justify as Justify1 } from "./components/wrapper/wrapper.types";
 export namespace Components {
     /**
@@ -183,7 +183,7 @@ export namespace Components {
         "color": Color;
         /**
           * 폰트 패밀리 preset
-          * @default 'system' as FontFamily
+          * @default 'system'
          */
         "font": FontFamily;
         /**
@@ -204,13 +204,76 @@ export namespace Components {
          */
         "inline": boolean;
         /**
+          * @default false
+         */
+        "pauseOnHover": boolean;
+        /**
           * 링크 rel (target이 _blank면 보안 위해 자동 보정됨)
          */
         "rel"?: string;
         /**
+          * 아래 props 들은 기존 롤링용 – API 호환용으로 유지
+          * @default 'x'
+         */
+        "rollAxis": 'x' | 'y';
+        /**
+          * 기본 문장 개수 (슬롯 텍스트를 몇 개로 복제할지, 기본 3개)
+          * @default 3
+         */
+        "rollClone": number;
+        /**
+          * @default '2rem'
+         */
+        "rollGap": string;
+        /**
+          * @default true
+         */
+        "rollPlay": boolean;
+        /**
+          * (옵션) 타이핑 duration 토큰 (1~10) – 별도 typingDuration 없으면 fallback
+          * @default 5
+         */
+        "rollSpeed": number;
+        /**
+          * @default false
+         */
+        "rollStartOnViewport": boolean;
+        /**
+          * rolling=true 이면 타이핑 애니메이션 활성화
+          * @default false
+         */
+        "rolling": boolean;
+        /**
           * 링크 타겟 (_blank, _self, 등)
          */
         "target"?: '_blank' | '_self' | '_parent' | '_top';
+        /**
+          * 커서( | ) 표시 여부
+          * @default true
+         */
+        "typingCursor": boolean;
+        /**
+          * 개별 문자를 찍는 duration 토큰 (1~10)
+         */
+        "typingDuration"?: number;
+        /**
+          * 삭제 duration 토큰 (1~10, 비우면 typingDuration과 동일)
+         */
+        "typingEraseDuration"?: number;
+        /**
+          * 마지막까지 끝나면 다시 처음부터 반복할지 여부
+          * @default true
+         */
+        "typingLoop": boolean;
+        /**
+          * 타이핑에 사용할 문장 배열. - 문자열 JSON: '["문장1","문장2"]' - 또는 구분자 문자열: '문장1|문장2|문장3' 비워두면 슬롯 텍스트를 rollClone(기본 3)만큼 복제해서 사용.
+         */
+        "typingTexts"?: string;
+        /**
+          * 문자 단위 / 단어 단위
+          * @default 'char'
+         */
+        "typingUnit": TypingUnit;
         /**
           * 밑줄 여부
           * @default false
@@ -532,7 +595,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         /**
           * 폰트 패밀리 preset
-          * @default 'system' as FontFamily
+          * @default 'system'
          */
         "font"?: FontFamily;
         /**
@@ -553,13 +616,76 @@ declare namespace LocalJSX {
          */
         "inline"?: boolean;
         /**
+          * @default false
+         */
+        "pauseOnHover"?: boolean;
+        /**
           * 링크 rel (target이 _blank면 보안 위해 자동 보정됨)
          */
         "rel"?: string;
         /**
+          * 아래 props 들은 기존 롤링용 – API 호환용으로 유지
+          * @default 'x'
+         */
+        "rollAxis"?: 'x' | 'y';
+        /**
+          * 기본 문장 개수 (슬롯 텍스트를 몇 개로 복제할지, 기본 3개)
+          * @default 3
+         */
+        "rollClone"?: number;
+        /**
+          * @default '2rem'
+         */
+        "rollGap"?: string;
+        /**
+          * @default true
+         */
+        "rollPlay"?: boolean;
+        /**
+          * (옵션) 타이핑 duration 토큰 (1~10) – 별도 typingDuration 없으면 fallback
+          * @default 5
+         */
+        "rollSpeed"?: number;
+        /**
+          * @default false
+         */
+        "rollStartOnViewport"?: boolean;
+        /**
+          * rolling=true 이면 타이핑 애니메이션 활성화
+          * @default false
+         */
+        "rolling"?: boolean;
+        /**
           * 링크 타겟 (_blank, _self, 등)
          */
         "target"?: '_blank' | '_self' | '_parent' | '_top';
+        /**
+          * 커서( | ) 표시 여부
+          * @default true
+         */
+        "typingCursor"?: boolean;
+        /**
+          * 개별 문자를 찍는 duration 토큰 (1~10)
+         */
+        "typingDuration"?: number;
+        /**
+          * 삭제 duration 토큰 (1~10, 비우면 typingDuration과 동일)
+         */
+        "typingEraseDuration"?: number;
+        /**
+          * 마지막까지 끝나면 다시 처음부터 반복할지 여부
+          * @default true
+         */
+        "typingLoop"?: boolean;
+        /**
+          * 타이핑에 사용할 문장 배열. - 문자열 JSON: '["문장1","문장2"]' - 또는 구분자 문자열: '문장1|문장2|문장3' 비워두면 슬롯 텍스트를 rollClone(기본 3)만큼 복제해서 사용.
+         */
+        "typingTexts"?: string;
+        /**
+          * 문자 단위 / 단어 단위
+          * @default 'char'
+         */
+        "typingUnit"?: TypingUnit;
         /**
           * 밑줄 여부
           * @default false

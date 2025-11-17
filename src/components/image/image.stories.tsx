@@ -1,4 +1,3 @@
-// image.stories.tsx
 import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
 import { TintoImage } from './image';
@@ -22,7 +21,7 @@ const meta = {
     },
     rounded: {
       control: { type: 'select' },
-      options: ['soft', 'oval', 'top', 'diagonal', 'circle', 'base', 'full', 't', 'lr'],
+      options: ['soft', 'oval', 'top', 'diagonal', 'circle', 'base', 'full'],
     },
     width: { control: 'text' },
     height: { control: 'text' },

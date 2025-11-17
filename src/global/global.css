@@ -1,9 +1,7 @@
-@import url('../global/fonts/climate-crisis.css');
-@import url('../global/fonts/pretendard.css');
-@import url('../global/fonts/paperlogy.css');
-@import url('../global/fonts/clash-display.css');
-@import url('../global/edit/edit.css');
-@import url('../global/viewer/viewer.css');
+@import url('https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/fonts/climate-crisis.css');
+@import url('https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/fonts/pretendard.css');
+@import url('https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/fonts/paperlogy.css');
+@import url('https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/fonts/clash-display.css');
 
 :root {
   --font-sans: 'Pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
