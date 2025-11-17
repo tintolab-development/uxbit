@@ -1,0 +1,220 @@
+:host {
+  display: inline-block;
+}
+
+:host([block]) {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+/* Root button */
+.tinto-button {
+  all: unset;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+
+  border: var(--t-button-border, 1px solid #111827);
+  background: var(--t-button-bg, #111827);
+  color: var(--t-button-fg, #ffffff);
+
+  border-radius: var(--t-button-radius, var(--t-button-variant-radius, 10px));
+
+  padding: var(--t-button-py, 0.55rem) var(--t-button-px, 0.9rem);
+  line-height: 1;
+
+  width: var(--t-button-w, auto);
+  min-height: 2.25rem;
+
+  transition:
+    transform 0.03s ease,
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  /* 스피너 오버레이용 기준 */
+  position: relative;
+}
+
+.tinto-button:focus-visible {
+  outline: var(--t-button-ring, 2px solid #6366f1);
+  outline-offset: 2px;
+}
+
+:host([pill]) .tinto-button {
+  border-radius: 9999px;
+}
+
+:host([elevated]) .tinto-button {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+:host([block]) .tinto-button {
+  width: 100%;
+}
+
+.tinto-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.tinto-button:active:not([disabled]) {
+  transform: translateY(1px);
+}
+
+/* ===== Variants ===== */
+
+:host([variant='primary']) .tinto-button {
+  --t-button-variant-radius: 0px;
+  --t-button-bg: #111827;
+  --t-button-fg: #f9fafb;
+  --t-button-border: 1px solid transparent;
+}
+
+:host([variant='secondary']) .tinto-button {
+  --t-button-variant-radius: 12px;
+  --t-button-bg: #e5e7eb;
+  --t-button-fg: #111827;
+  --t-button-border: 1px solid transparent;
+}
+
+:host([variant='tertiary']) .tinto-button {
+  --t-button-variant-radius: 100px;
+  --t-button-bg: #f3f4f6;
+  --t-button-fg: var(--color-fg, #111827);
+  --t-button-border: 1px solid transparent;
+}
+
+/* Outline modifier */
+:host([outline]) .tinto-button {
+  --t-button-bg: #ffffff;
+  --t-button-border: 1px solid currentColor;
+}
+
+:host([variant='primary'][outline]) .tinto-button {
+  --t-button-fg: var(--color-primary, #111827);
+}
+
+:host([variant='secondary'][outline]),
+:host([variant='tertiary'][outline]) .tinto-button {
+  --t-button-fg: var(--color-fg, #111827);
+}
+
+/* ===== Size tokens ===== */
+
+:host([size='sm']) .tinto-button {
+  font-size: 0.875rem;
+  --t-button-py: 0.4rem;
+  --t-button-px: 0.7rem;
+  min-height: 2rem;
+}
+
+:host([size='md']) .tinto-button {
+  font-size: 1rem;
+}
+
+:host([size='lg']) .tinto-button {
+  font-size: 1.125rem;
+  --t-button-py: 0.7rem;
+  --t-button-px: 1.1rem;
+  min-height: 2.6rem;
+}
+
+/* ===== Slots / Label ===== */
+
+.prefix,
+.suffix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::slotted([slot='prefix']),
+::slotted([slot='suffix']) {
+  display: inline-flex;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  display: inline;
+  font-family: var(--t-button-label-ff, inherit);
+  font-size: var(--t-button-label-fs, inherit);
+  font-weight: var(--t-button-label-fw, inherit);
+  color: var(--t-button-label-color, currentColor);
+  line-height: 1.1;
+}
+
+/* ===== Loading ===== */
+
+:host([loading]) .tinto-button {
+  pointer-events: none;
+}
+
+/* 버튼 중앙 오버레이 스피너 */
+.spinner {
+  display: none;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: tinto-button-spin 0.8s linear infinite;
+
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  pointer-events: none;
+}
+
+:host([loading]) .spinner {
+  display: inline-block;
+}
+
+/* 내용은 레이아웃만 유지하고 시각적으로 숨김 */
+:host([loading]) .content {
+  opacity: 0;
+}
+
+:host([loading]) .prefix,
+:host([loading]) .suffix {
+  opacity: 0;
+}
+
+/* ===== Toggle ===== */
+
+:host([toggle][pressed]) .tinto-button {
+  background: var(--color-primary, #111827);
+  color: #ffffff;
+  --t-button-border: 1px solid transparent;
+}
+
+/* ===== Etc ===== */
+
+@keyframes tinto-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (forced-colors: active) {
+  .tinto-button {
+    border: 1px solid CanvasText;
+  }
+}
