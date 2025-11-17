@@ -1,6 +1,15 @@
 // wrapper.tsx
 import { Component, h, Prop, Element } from '@stencil/core';
-import { AlignItems, FlexDirection, FlexWrap, Justify, BgSize, BgRepeat, BgAttachment, BgBlend } from './wrapper.types';
+import {
+  AlignItems,
+  FlexDirection,
+  FlexWrap,
+  Justify,
+  BgSize,
+  BgRepeat,
+  BgAttachment,
+  BgBlend,
+} from './wrapper.types';
 
 @Component({
   tag: 'tinto-wrapper',

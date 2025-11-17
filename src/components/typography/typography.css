@@ -70,3 +70,25 @@
     line-height: 1.7;
   }
 }
+
+/* (예전 롤링용 CSS가 이미 있다면 그대로 둬도 무방 – 현재 구조에서는 사용되지 않아도 에러 없음) */
+
+/* ===== Typing Effect Cursor ===== */
+
+.typing-effect.cursor::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.1em;
+  animation: typing-cursor 0.7s steps(1) infinite;
+}
+
+@keyframes typing-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}

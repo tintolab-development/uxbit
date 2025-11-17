@@ -93,26 +93,51 @@
 
 ```html
 <tinto-section padding="20px" gap="16px" direction="column" center>
-  <tinto-typography variant="h1" font="pretendard" font-size="xl" color="#111827" weight="700"> UXBIT Demo Section </tinto-typography>
+  <tinto-typography variant="h1" font="pretendard" font-size="xl" color="#111827" weight="700">
+    UXBIT Demo Section
+  </tinto-typography>
 
-  <tinto-typography variant="p" color="#4b5563" align="justify"> 이 섹션은 tinto-section을 사용해 모바일/데스크톱에서 동일한 column 레이아웃을 유지합니다. </tinto-typography>
+  <tinto-typography variant="p" color="#4b5563" align="justify">
+    이 섹션은 tinto-section을 사용해 모바일/데스크톱에서 동일한 column 레이아웃을 유지합니다.
+  </tinto-typography>
 
-  <tinto-wrapper direction="row" gap="24px" padding="24px" radius="16px" shadow="0 8px 24px rgba(0,0,0,.12)">
+  <tinto-wrapper
+    direction="row"
+    gap="24px"
+    padding="24px"
+    radius="16px"
+    shadow="0 8px 24px rgba(0,0,0,.12)"
+  >
     <tinto-typography variant="h2" weight="700">카드 A</tinto-typography>
     <tinto-typography variant="p">간단한 설명 텍스트</tinto-typography>
   </tinto-wrapper>
 
-  <tinto-typography variant="p" color="#6b7280" font-size="sm"> © 2025 TintoLab / UXBIT — All rights reserved. </tinto-typography>
+  <tinto-typography variant="p" color="#6b7280" font-size="sm">
+    © 2025 TintoLab / UXBIT — All rights reserved.
+  </tinto-typography>
 </tinto-section>
 ```
 
 ### 4-2. 1920px 이상에서만 row 레이아웃으로 전환
 
 ```html
-<tinto-section padding="24px" gap="16px" direction="column" direction-desktop="row" gap-desktop="32px" center>
+<tinto-section
+  padding="24px"
+  gap="16px"
+  direction="column"
+  direction-desktop="row"
+  gap-desktop="32px"
+  center
+>
   <tinto-typography variant="h2" weight="700">Responsive Section</tinto-typography>
 
-  <tinto-image src="https://picsum.photos/id/1025/1200/800" ratio="16:9" rounded="soft" width="100%"> </tinto-image>
+  <tinto-image
+    src="https://picsum.photos/id/1025/1200/800"
+    ratio="16:9"
+    rounded="soft"
+    width="100%"
+  >
+  </tinto-image>
   >
 </tinto-section>
 ```

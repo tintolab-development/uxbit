@@ -11,6 +11,7 @@ import {
   TintoImageLoadedDetail,
   TintoImageErrorDetail,
   TintoImagePressDetail,
+  AspectRatio,
 } from './image.types';
 
 /** Quick viewport check to avoid IO delay for initially visible elements */
@@ -43,7 +44,7 @@ export class TintoImage {
   @Prop({ reflect: true }) src?: string;
   @Prop({ reflect: true }) alt?: string;
   /** "w:h", e.g. "16:9", "1:1" */
-  @Prop({ attribute: 'ratio', reflect: true }) ratio: string = '16:9';
+  @Prop({ attribute: 'ratio', reflect: true }) ratio: AspectRatio = '16:9';
   @Prop({ attribute: 'fit', reflect: true }) fit: ImageFit = 'cover';
   @Prop({ attribute: 'position', reflect: true }) position: string = '50% 50%';
 
@@ -177,7 +178,12 @@ export class TintoImage {
       frame.style.setProperty('--ti-radius', v);
       frame.style.borderRadius = v;
     } else {
-      const map: Record<string, RoundedPreset> = { base: 'soft', full: 'oval', t: 'top', lr: 'diagonal' };
+      const map: Record<string, RoundedPreset> = {
+        base: 'soft',
+        full: 'oval',
+        t: 'top',
+        lr: 'diagonal',
+      };
       const key =
         map[
           String(this.rounded || '')
@@ -295,7 +301,9 @@ export class TintoImage {
 
     // loading policy: placeholder or priority -> eager by default
     const priority = !!this.priority;
-    const loadingAttr = (this.loading || (priority || hasPh ? 'eager' : 'lazy')).toLowerCase() as 'eager' | 'lazy';
+    const loadingAttr = (this.loading || (priority || hasPh ? 'eager' : 'lazy')).toLowerCase() as
+      | 'eager'
+      | 'lazy';
     this.effectiveLoading = loadingAttr;
 
     img.loading = loadingAttr as any;
@@ -338,7 +346,8 @@ export class TintoImage {
     }
 
     // priority => inject preload
-    if (priority && this.src) this.injectPreload(this.src, this.srcset, this.sizes, this.crossorigin, this.referrerpolicy);
+    if (priority && this.src)
+      this.injectPreload(this.src, this.srcset, this.sizes, this.crossorigin, this.referrerpolicy);
 
     // when loading/priority/src changed → (re)setup IO
     this.setupIOIfNeeded();
@@ -365,7 +374,8 @@ export class TintoImage {
     this.teardownAnimation();
     if (!this.animation) return;
 
-    const prefersReduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduce =
+      typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduce) return;
 
     const type = (this.animation || '').toLowerCase().trim() as ImageAnimation;
@@ -393,7 +403,7 @@ export class TintoImage {
       this.anim.pause();
       if (typeof IntersectionObserver !== 'undefined') {
         this.animIO = new IntersectionObserver(
-          ents => {
+          (ents) => {
             const en = ents?.[0];
             if (!en || !this.anim) return;
             if (en.isIntersecting && isPlay) this.anim.play();
@@ -442,7 +452,9 @@ export class TintoImage {
   private injectPreload(src: string, srcset?: string, sizes?: string, co?: string, rp?: string) {
     const head = document.head || document.getElementsByTagName('head')[0];
     const abs = new URL(src, document.baseURI).href;
-    const exists = Array.from(head.querySelectorAll<HTMLLinkElement>('link[rel="preload"][as="image"]')).some(l => l.href === abs);
+    const exists = Array.from(
+      head.querySelectorAll<HTMLLinkElement>('link[rel="preload"][as="image"]'),
+    ).some((l) => l.href === abs);
     if (exists) return;
     const l = document.createElement('link');
     l.rel = 'preload';
@@ -464,7 +476,7 @@ export class TintoImage {
     }
     if (!this.io && typeof IntersectionObserver !== 'undefined') {
       this.io = new IntersectionObserver(
-        entries => {
+        (entries) => {
           const e = entries?.[0];
           if (e && (e.isIntersecting || e.intersectionRatio > 0)) {
             this.wasObserved = true;
@@ -489,9 +501,18 @@ export class TintoImage {
     const dir = rotate === 'left' ? -1 : 1;
     switch (type) {
       case 'float':
-        return [{ transform: 'translateY(0)' }, { transform: 'translateY(-10px)' }, { transform: 'translateY(0)' }];
+        return [
+          { transform: 'translateY(0)' },
+          { transform: 'translateY(-10px)' },
+          { transform: 'translateY(0)' },
+        ];
       case 'wobble':
-        return [{ transform: 'rotate(0deg)' }, { transform: 'rotate(3deg)' }, { transform: 'rotate(-3deg)' }, { transform: 'rotate(0deg)' }];
+        return [
+          { transform: 'rotate(0deg)' },
+          { transform: 'rotate(3deg)' },
+          { transform: 'rotate(-3deg)' },
+          { transform: 'rotate(0deg)' },
+        ];
       case 'pulse':
         return [{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }];
       case 'spin':
@@ -546,7 +567,11 @@ export class TintoImage {
       ev.stopPropagation();
       return;
     }
-    const kind: TintoImagePressDetail['kind'] = this.href ? 'link' : this.as === 'button' ? 'button' : 'plain';
+    const kind: TintoImagePressDetail['kind'] = this.href
+      ? 'link'
+      : this.as === 'button'
+        ? 'button'
+        : 'plain';
     this.tintoPress.emit({ kind });
   };
 
@@ -554,18 +579,30 @@ export class TintoImage {
     const computedRel = this.rel || (this.target === '_blank' ? 'noopener noreferrer' : undefined);
 
     const frame = (
-      <div part="frame" class="ti-frame" ref={el => (this.frameEl = el as HTMLDivElement)} data-state="loading">
+      <div
+        part="frame"
+        class="ti-frame"
+        ref={(el) => (this.frameEl = el as HTMLDivElement)}
+        data-state="loading"
+      >
         <span part="spacer"></span>
         <div part="layer">
           {/* Placeholder should not be read by SR → alt="" + aria-hidden */}
-          <img part="placeholder" alt="" aria-hidden="true" ref={el => (this.phEl = el as HTMLImageElement)} draggable={false} onDragStart={e => e.preventDefault()} />
+          <img
+            part="placeholder"
+            alt=""
+            aria-hidden="true"
+            ref={(el) => (this.phEl = el as HTMLImageElement)}
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
+          />
           {/* Real image; alt is applied in updateImageAttrs */}
           <img
             part="img"
-            ref={el => (this.imgEl = el as HTMLImageElement)}
+            ref={(el) => (this.imgEl = el as HTMLImageElement)}
             draggable={false}
             alt=""
-            onDragStart={e => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
             onLoad={this.onImgLoad}
             onError={this.onImgError}
           />
@@ -592,19 +629,26 @@ export class TintoImage {
     if (this.href) {
       if (isDisabled) {
         return (
-          <span part="link" role="link" aria-disabled="true" tabIndex={-1} {...commonA11y} style={{ pointerEvents: 'none' }}>
+          <span
+            part="link"
+            role="link"
+            aria-disabled="true"
+            tabIndex={-1}
+            {...commonA11y}
+            style={{ pointerEvents: 'none' }}
+          >
             {frame}
           </span>
         );
       }
       const aProps: any = {
-        'part': 'link',
-        'href': this.href,
-        'target': this.target,
-        'rel': computedRel,
+        part: 'link',
+        href: this.href,
+        target: this.target,
+        rel: computedRel,
         ...commonA11y,
         'data-clickable': true,
-        'onClick': () => this.tintoPress.emit({ kind: 'link' }),
+        onClick: () => this.tintoPress.emit({ kind: 'link' }),
       };
       if (this.download != null) aProps.download = this.download === '' ? '' : this.download;
       return <a {...aProps}>{frame}</a>;
@@ -613,7 +657,14 @@ export class TintoImage {
     // button 변형
     if (this.as === 'button') {
       return (
-        <button part="button" type="button" disabled={!!this.disabled} {...commonA11y} data-clickable onClick={this.onButtonPress}>
+        <button
+          part="button"
+          type="button"
+          disabled={!!this.disabled}
+          {...commonA11y}
+          data-clickable
+          onClick={this.onButtonPress}
+        >
           {frame}
         </button>
       );

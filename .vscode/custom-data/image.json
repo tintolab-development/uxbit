@@ -1,0 +1,188 @@
+{
+  "version": "1.0.0",
+  "tags": [
+    {
+      "name": "tinto-image",
+      "description": "Versatile image component with lazy-loading, placeholder, aspect-ratio box, rounded presets, animation, and interactive link/button modes.",
+      "attributes": [
+        {
+          "name": "src",
+          "description": "Image source URL."
+        },
+        {
+          "name": "alt",
+          "description": "Alternative text for the image."
+        },
+        {
+          "name": "ratio",
+          "description": "Aspect ratio in the form \"w:h\" (e.g. 16:9, 1:1, 4:3). Defaults to 16:9."
+        },
+        {
+          "name": "fit",
+          "description": "CSS object-fit for the image.",
+          "values": [
+            { "name": "cover" },
+            { "name": "contain" },
+            { "name": "fill" },
+            { "name": "none" },
+            { "name": "scale-down" }
+          ]
+        },
+        {
+          "name": "position",
+          "description": "CSS object-position for the image (e.g. 50% 50%, center top)."
+        },
+        {
+          "name": "radius",
+          "description": "Custom border-radius for the frame (overrides rounded preset)."
+        },
+        {
+          "name": "rounded",
+          "description": "Rounded corner preset. Aliases map internally to the main variants.",
+          "values": [
+            { "name": "soft" },
+            { "name": "oval" },
+            { "name": "top" },
+            { "name": "diagonal" },
+            { "name": "circle" },
+            { "name": "base" },
+            { "name": "full" },
+            { "name": "t" },
+            { "name": "lr" }
+          ]
+        },
+        {
+          "name": "border",
+          "description": "Border style for the frame (e.g. 1px solid rgba(...))."
+        },
+        {
+          "name": "shadow",
+          "description": "Box-shadow for the frame."
+        },
+        {
+          "name": "background",
+          "description": "Background color behind the image (used as frame background)."
+        },
+        {
+          "name": "width",
+          "description": "Host inline-size/width (e.g. 320px, 100%, 20rem)."
+        },
+        {
+          "name": "height",
+          "description": "Host block-size/height (enables height-fill mode instead of aspect-ratio)."
+        },
+        {
+          "name": "loading",
+          "description": "Native loading policy for the image.",
+          "values": [{ "name": "lazy" }, { "name": "eager" }]
+        },
+        {
+          "name": "priority",
+          "description": "If present/true, the image is treated as high priority (eager + preload link).",
+          "values": [{ "name": "true" }]
+        },
+        {
+          "name": "placeholder",
+          "description": "Low-res/blurred placeholder image URL shown before main image is loaded."
+        },
+        {
+          "name": "srcset",
+          "description": "Native srcset attribute for responsive images."
+        },
+        {
+          "name": "sizes",
+          "description": "Native sizes attribute for responsive images."
+        },
+        {
+          "name": "decoding",
+          "description": "Image decoding hint.",
+          "values": [{ "name": "async" }, { "name": "sync" }, { "name": "auto" }]
+        },
+        {
+          "name": "crossorigin",
+          "description": "CORS setting for the image request (mirrors HTMLImageElement.crossOrigin)."
+        },
+        {
+          "name": "referrerpolicy",
+          "description": "Referrer policy for the image request."
+        },
+        {
+          "name": "href",
+          "description": "When set, wraps the image in an anchor (<a>) pointing to this URL."
+        },
+        {
+          "name": "target",
+          "description": "Link target when href is set.",
+          "values": [
+            { "name": "_blank" },
+            { "name": "_self" },
+            { "name": "_parent" },
+            { "name": "_top" }
+          ]
+        },
+        {
+          "name": "rel",
+          "description": "Link rel attribute. When target=\"_blank\", noopener noreferrer are automatically added."
+        },
+        {
+          "name": "download",
+          "description": "If set on a link, enables download behavior (supports empty string or filename)."
+        },
+        {
+          "name": "as",
+          "description": "Render mode for interactivity. When set to \"button\", wraps the frame in a <button>.",
+          "values": [{ "name": "button" }]
+        },
+        {
+          "name": "disabled",
+          "description": "Disabled state. In link mode prevents clicks; in button mode disables the button.",
+          "values": [{ "name": "true" }]
+        },
+        {
+          "name": "animation",
+          "description": "Built-in image animation preset.",
+          "values": [
+            { "name": "spin" },
+            { "name": "float" },
+            { "name": "wobble" },
+            { "name": "pulse" }
+          ]
+        },
+        {
+          "name": "play",
+          "description": "Controls whether the animation is playing. false pauses the animation.",
+          "values": [{ "name": "true" }, { "name": "false" }]
+        },
+        {
+          "name": "rotate",
+          "description": "Spin direction for spin-like animations.",
+          "values": [{ "name": "left" }, { "name": "right" }]
+        },
+        {
+          "name": "duration",
+          "description": "Animation duration in seconds (e.g. 20)."
+        },
+        {
+          "name": "repeat",
+          "description": "Animation repeat count. Use \"infinite\" or a finite iteration count.",
+          "values": [{ "name": "infinite" }]
+        },
+        {
+          "name": "pause-on-hover",
+          "description": "If present/true, pauses the animation while the pointer hovers over the image.",
+          "values": [{ "name": "true" }]
+        },
+        {
+          "name": "start-on-viewport",
+          "description": "If present/true, the animation only plays when the component is in the viewport.",
+          "values": [{ "name": "true" }]
+        }
+      ]
+    }
+  ],
+  "globalAttributes": [],
+  "valueSets": [],
+  "cssProperties": [],
+  "cssPseudoClasses": [],
+  "cssPseudoElements": []
+}

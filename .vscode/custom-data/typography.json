@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "tags": [
+    {
+      "name": "tinto-typography",
+      "description": "Responsive typography component with variants, font presets, highlight, and optional link wrapping.",
+      "attributes": [
+        {
+          "name": "variant",
+          "description": "Visual text style variant (controls default font-size/weight via CSS class).",
+          "values": [
+            { "name": "h1" },
+            { "name": "h2" },
+            { "name": "h3" },
+            { "name": "p" },
+            { "name": "span" }
+          ]
+        },
+        {
+          "name": "as",
+          "description": "Semantic HTML tag to render (overrides default from variant).",
+          "values": [
+            { "name": "h1" },
+            { "name": "h2" },
+            { "name": "h3" },
+            { "name": "p" },
+            { "name": "span" }
+          ]
+        },
+        {
+          "name": "font",
+          "description": "Font family preset (mapped via FAMILY_MAP).",
+          "values": [
+            { "name": "system" },
+            { "name": "serif" },
+            { "name": "sans" },
+            { "name": "mono" },
+            { "name": "display" }
+          ]
+        },
+        {
+          "name": "font-size",
+          "description": "Font size token (overrides variant preset when set).",
+          "values": [
+            { "name": "xs" },
+            { "name": "sm" },
+            { "name": "md" },
+            { "name": "lg" },
+            { "name": "xl" },
+            { "name": "xxl" }
+          ]
+        },
+        {
+          "name": "color",
+          "description": "Text color (CSS color value, default inherit)."
+        },
+        {
+          "name": "align",
+          "description": "Text alignment.",
+          "values": [
+            { "name": "left" },
+            { "name": "center" },
+            { "name": "right" },
+            { "name": "justify" }
+          ]
+        },
+        {
+          "name": "weight",
+          "description": "Font weight (e.g. 400, 500, 700, bold). Accepts numeric or string CSS font-weight."
+        },
+        {
+          "name": "inline",
+          "description": "Render as inline element instead of block.",
+          "values": [{ "name": "true" }]
+        },
+        {
+          "name": "underline",
+          "description": "Underline the text (text-decoration: underline).",
+          "values": [{ "name": "true" }]
+        },
+        {
+          "name": "highlight",
+          "description": "Background highlight color behind the text (CSS color value)."
+        },
+        {
+          "name": "visible",
+          "description": "Controls visibility. When false, text is hidden but layout remains.",
+          "values": [{ "name": "true" }, { "name": "false" }]
+        },
+        {
+          "name": "href",
+          "description": "If set, wraps content in an <a> tag with this URL."
+        },
+        {
+          "name": "target",
+          "description": "Link target when href is set.",
+          "values": [
+            { "name": "_blank" },
+            { "name": "_self" },
+            { "name": "_parent" },
+            { "name": "_top" }
+          ]
+        },
+        {
+          "name": "rel",
+          "description": "Link rel attribute. When target=\"_blank\", noopener noreferrer are automatically added."
+        }
+      ]
+    }
+  ],
+  "globalAttributes": [],
+  "valueSets": [],
+  "cssProperties": [],
+  "cssPseudoClasses": [],
+  "cssPseudoElements": []
+}
