@@ -3,7 +3,7 @@ import { h } from '@stencil/core';
 import { TintoImage } from './image';
 
 const meta = {
-  title: 'Media/TintoImage',
+  title: 'Uxbit/Image',
   component: TintoImage,
   parameters: {
     layout: 'centered',

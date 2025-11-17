@@ -45,7 +45,7 @@ type TypographyArgs = ExtraArgs & {
 };
 
 const meta: Meta<TypographyArgs> = {
-  title: 'Foundation/TintoTypography',
+  title: 'Uxbit/Typography',
   component: 'tinto-typography',
   parameters: {
     layout: 'centered',
