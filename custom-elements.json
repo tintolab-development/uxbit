@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-14T06:38:33",
+  "timestamp": "2025-11-17T01:30:27",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -597,11 +597,17 @@
         },
         {
           "name": "ratio",
-          "type": "string",
+          "type": "\"16:9\" | \"1:1\" | \"1:2\" | \"1:3\" | \"2:1\" | \"2:3\" | \"3:1\" | \"3:2\" | \"3:4\" | \"4:3\" | \"9:16\"",
           "complexType": {
-            "original": "string",
-            "resolved": "string",
-            "references": {}
+            "original": "AspectRatio",
+            "resolved": "\"16:9\" | \"1:1\" | \"1:2\" | \"1:3\" | \"2:1\" | \"2:3\" | \"3:1\" | \"3:2\" | \"3:4\" | \"4:3\" | \"9:16\"",
+            "references": {
+              "AspectRatio": {
+                "location": "import",
+                "path": "./image.types",
+                "id": "src/components/image/image.types.ts::AspectRatio"
+              }
+            }
           },
           "mutable": false,
           "attr": "ratio",
@@ -616,6 +622,47 @@
           "default": "'16:9'",
           "values": [
             {
+              "value": "16:9",
+              "type": "string"
+            },
+            {
+              "value": "1:1",
+              "type": "string"
+            },
+            {
+              "value": "1:2",
+              "type": "string"
+            },
+            {
+              "value": "1:3",
+              "type": "string"
+            },
+            {
+              "value": "2:1",
+              "type": "string"
+            },
+            {
+              "value": "2:3",
+              "type": "string"
+            },
+            {
+              "value": "3:1",
+              "type": "string"
+            },
+            {
+              "value": "3:2",
+              "type": "string"
+            },
+            {
+              "value": "3:4",
+              "type": "string"
+            },
+            {
+              "value": "4:3",
+              "type": "string"
+            },
+            {
+              "value": "9:16",
               "type": "string"
             }
           ],
@@ -3010,6 +3057,11 @@
     }
   ],
   "typeLibrary": {
+    "src/components/image/image.types.ts::AspectRatio": {
+      "declaration": "export type AspectRatio = '1:1' | '2:1' | '3:2' | '4:3' | '16:9' | '3:1' | '1:2' | '2:3' | '3:4' | '9:16' | '1:3';",
+      "docstring": "",
+      "path": "src/components/image/image.types.ts"
+    },
     "src/components/image/image.types.ts::ImageFit": {
       "declaration": "export type ImageFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';",
       "docstring": "",

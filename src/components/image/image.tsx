@@ -11,6 +11,7 @@ import {
   TintoImageLoadedDetail,
   TintoImageErrorDetail,
   TintoImagePressDetail,
+  AspectRatio,
 } from './image.types';
 
 /** Quick viewport check to avoid IO delay for initially visible elements */
@@ -43,7 +44,7 @@ export class TintoImage {
   @Prop({ reflect: true }) src?: string;
   @Prop({ reflect: true }) alt?: string;
   /** "w:h", e.g. "16:9", "1:1" */
-  @Prop({ attribute: 'ratio', reflect: true }) ratio: string = '16:9';
+  @Prop({ attribute: 'ratio', reflect: true }) ratio: AspectRatio = '16:9';
   @Prop({ attribute: 'fit', reflect: true }) fit: ImageFit = 'cover';
   @Prop({ attribute: 'position', reflect: true }) position: string = '50% 50%';
 

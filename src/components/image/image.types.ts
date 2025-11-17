@@ -34,3 +34,5 @@ export type PressKind = 'link' | 'button' | 'plain';
 export interface TintoImagePressDetail {
   kind: PressKind;
 }
+
+export type AspectRatio = '1:1' | '2:1' | '3:2' | '4:3' | '16:9' | '3:1' | '1:2' | '2:3' | '3:4' | '9:16' | '1:3';

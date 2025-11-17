@@ -5,11 +5,11 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AnimationRotate, AsKind, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
+import { AnimationRotate, AsKind, AspectRatio, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
 import { AlignItems, FlexDirection, FlexWrap, HeightMode, Justify } from "./components/section/section.types";
 import { Align, Color, FontFamily, FontSize, HighlightColor, Variant } from "./components/typography/typography.types";
 import { AlignItems as AlignItems1, BgAttachment, BgBlend, BgRepeat, BgSize, FlexDirection as FlexDirection1, FlexWrap as FlexWrap1, Justify as Justify1 } from "./components/wrapper/wrapper.types";
-export { AnimationRotate, AsKind, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
+export { AnimationRotate, AsKind, AspectRatio, ImageAnimation, ImageFit, LinkTarget, RepeatValue, RoundedPreset, TintoImageErrorDetail, TintoImageLoadedDetail, TintoImagePressDetail } from "./components/image/image.types";
 export { AlignItems, FlexDirection, FlexWrap, HeightMode, Justify } from "./components/section/section.types";
 export { Align, Color, FontFamily, FontSize, HighlightColor, Variant } from "./components/typography/typography.types";
 export { AlignItems as AlignItems1, BgAttachment, BgBlend, BgRepeat, BgSize, FlexDirection as FlexDirection1, FlexWrap as FlexWrap1, Justify as Justify1 } from "./components/wrapper/wrapper.types";
@@ -90,7 +90,7 @@ export namespace Components {
           * "w:h", e.g. "16:9", "1:1"
           * @default '16:9'
          */
-        "ratio": string;
+        "ratio": AspectRatio;
         "referrerpolicy"?: string;
         "rel"?: string;
         /**
@@ -439,7 +439,7 @@ declare namespace LocalJSX {
           * "w:h", e.g. "16:9", "1:1"
           * @default '16:9'
          */
-        "ratio"?: string;
+        "ratio"?: AspectRatio;
         "referrerpolicy"?: string;
         "rel"?: string;
         /**
