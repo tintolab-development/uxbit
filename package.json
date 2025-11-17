@@ -43,7 +43,8 @@
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,css,scss,md,json,html}\"",
     "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate:component": "node scripts/generate-component.cjs"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
