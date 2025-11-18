@@ -5,272 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/global.css"
+      href="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/test/global/global.css"
     />
+    <title>TintoLab UXbit – Demo (All Web Components)</title>
+
     <script
       type="module"
-      src="https://d20gpxbcszdbc7.cloudfront.net/uxbit/build/uxbit.esm.js"
+      src="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/uxbit.esm.js"
       data-stencil
-      data-resources-url="https://d20gpxbcszdbc7.cloudfront.net/uxbit/build/"
+      data-resources-url="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/"
     ></script>
     <script
       nomodule
-      src="https://d20gpxbcszdbc7.cloudfront.net/uxbit/build/uxbit.js"
+      src="https://d20gpxbcszdbc7.cloudfront.net/roov/template-design-system/uxbit/build/uxbit.js"
       data-stencil
     ></script>
-    <title>TintoLab UXbit</title>
   </head>
 
   <body>
-    <!-- 1. HERO – FEELINGS DON'T FIT BOX -->
+    <!-- 데스크톱(>=1920px)에서도 모바일과 동일하게 유지 -->
     <tinto-section
-      max-width="420px"
-      padding="32px 20px 40px"
-      margin="0 auto 24px"
-      background="#000000"
-      color="#f9fafb"
-      height-mode="auto"
+      padding="20px"
+      gap="16px"
+      direction="column"
       center
+      direction-desktop="column"
+      wrap-desktop="nowrap"
+      justify-desktop="flex-start"
+      align-desktop="stretch"
+      gap-desktop="16px"
     >
-      <tinto-wrapper
-        direction="column"
-        direction-desktop="column"
-        justify="center"
-        align="center"
-        gap="1.75rem"
-        gap-desktop="2rem"
-        padding="32px 24px"
-        radius="24px"
-        shadow="0 24px 80px rgba(0,0,0,0.75)"
-        border="1px solid rgba(148,163,184,0.45)"
-        background="radial-gradient(circle at top, #111827 0%, #020617 55%, #000000 100%)"
-      >
-        <tinto-typography
-          variant="h1"
-          font="clash-display"
-          align="center"
-          color="#f9fafb"
-          weight="bold"
-          font-size="XXL"
+      <!-- 타이틀 -->
+      <tinto-typography variant="h1" font="pretendard" font-size="xl" color="#111827" weight="700">
+        UXBIT Demo Section
+      </tinto-typography>
+
+      <!-- 서브 카피 (전부 컴포넌트 중첩으로 처리) -->
+      <tinto-typography variant="p" color="#4b5563" align="justify">
+        아래 이미지는
+        <tinto-typography variant="span" inline weight="600" color="#111827"
+          >tinto-image</tinto-typography
         >
-          FEELINGS<br />
-          DON’T FIT<br />
-          --------BOX
-        </tinto-typography>
+        컴포넌트를 사용해
+        <tinto-typography variant="span" inline color="#0ea5e9" weight="600" underline
+          >lazy-loading</tinto-typography
+        >, 비율( <tinto-typography variant="span" inline weight="600">16:9</tinto-typography>), 상단
+        라운드(
+        <tinto-typography variant="span" inline weight="600">rounded="oval"</tinto-typography>),
+        오버레이 슬롯, 간단한 애니메이션(
+        <tinto-typography variant="span" inline weight="600">float</tinto-typography>)을 보여줍니다.
+      </tinto-typography>
 
-        <tinto-typography variant="p" font="system" font-size="sm" color="#9ca3af">
-          Feelings don’t sit in straight lines. Start a page that bends with every mood.
-        </tinto-typography>
-
-        <tinto-image
-          src="https://images.pexels.com/photos/2078266/pexels-photo-2078266.jpeg"
-          alt="Abstract cross"
-          ratio="3:2"
-          fit="cover"
-          rounded="soft"
-          shadow="0 22px 60px rgba(0,0,0,0.9)"
-        ></tinto-image>
-      </tinto-wrapper>
-    </tinto-section>
-
-    <!-- 2. Feel the shape of your story -->
-    <tinto-section
-      max-width="420px"
-      padding="24px 20px 40px"
-      margin="0 auto 24px"
-      background="#020617"
-      color="#f9fafb"
-      center
-    >
+      <!-- 배경 이미지가 적용된 래퍼 (src + overlay) -->
       <tinto-wrapper
         direction="column"
-        justify="flex-start"
-        align="flex-start"
-        gap="1.5rem"
-        padding="28px 24px 32px"
-        radius="24px"
-        shadow="0 20px 60px rgba(0,0,0,0.7)"
-        border="1px solid rgba(30,64,175,0.6)"
-        background="radial-gradient(circle at top, #111827 0%, #020617 55%, #020617 100%)"
-      >
-        <tinto-typography variant="h2" font="clash-display" align="left" color="#f9fafb">
-          Feel the shape<br />
-          of your story
-        </tinto-typography>
-
-        <tinto-typography variant="p" font="system" font-size="sm" color="#cbd5f5">
-          Every curve has a meaning. This is where your world begins. Drawn by you. Moved by you.
-          Not just a page — a feeling.
-        </tinto-typography>
-
-        <!-- 타이핑 효과 예시 -->
-        <tinto-typography
-          variant="p"
-          font="system"
-          font-size="sm"
-          color="#a5b4fc"
-          align="left"
-          rolling
-          roll-speed="4"
-          typing-texts='["Sketch your mood.","Fold your feelings into color.","Write the way you feel."]'
-          typing-duration="4"
-          typing-erase-duration="2"
-          typing-loop="true"
-          typing-cursor="true"
-          typing-unit="word"
-        >
-          Sketch your mood.
-        </tinto-typography>
-
-        <tinto-image
-          src="https://images.pexels.com/photos/2078266/pexels-photo-2078266.jpeg"
-          alt="Soft abstract flower"
-          ratio="4:3"
-          fit="cover"
-          rounded="oval"
-          shadow="0 24px 80px rgba(15,23,42,0.9)"
-          pause-on-hover="true"
-        ></tinto-image>
-      </tinto-wrapper>
-    </tinto-section>
-
-    <!-- 3. Identity / Pattern / Pulse -->
-    <tinto-section
-      max-width="420px"
-      padding="24px 20px 40px"
-      margin="0 auto 24px"
-      background="#020617"
-      color="#f9fafb"
-      center
-    >
-      <tinto-wrapper
-        direction="column"
-        justify="flex-start"
-        align="flex-start"
-        gap="1.25rem"
-        padding="24px 24px 28px"
-        radius="24px"
-        shadow="0 18px 52px rgba(0,0,0,0.7)"
-        border="1px solid rgba(148,163,184,0.4)"
-        background="linear-gradient(145deg, #020617 0%, #020617 40%, #111827 100%)"
-      >
-        <tinto-typography variant="p" font="system" font-size="sm" color="#e5e7eb">
-          More than <strong>visuals</strong><br />
-          This is <strong>identity</strong><br />
-          You are the <strong>pattern</strong><br />
-          You are the <strong>pulse</strong>
-        </tinto-typography>
-
-        <tinto-image
-          src="https://images.pexels.com/photos/3826674/pexels-photo-3826674.jpeg"
-          alt="Electric abstract form"
-          ratio="4:5"
-          fit="cover"
-          rounded="soft"
-          shadow="0 26px 80px rgba(15,23,42,0.95)"
-          repeat="infinite"
-          start-on-viewport="true"
-          pause-on-hover="true"
-        ></tinto-image>
-      </tinto-wrapper>
-    </tinto-section>
-
-    <!-- 4. Let your emotions take shape -->
-    <tinto-section
-      max-width="420px"
-      padding="24px 20px 40px"
-      margin="0 auto 24px"
-      background="#020617"
-      color="#f9fafb"
-      center
-    >
-      <tinto-wrapper
-        direction="column"
-        justify="flex-start"
-        align="flex-start"
-        gap="1.25rem"
-        padding="24px 0 0"
-        radius="24px"
-        shadow="0 18px 52px rgba(0,0,0,0.7)"
-        border="1px solid rgba(30,64,175,0.7)"
-        background="radial-gradient(circle at top, #111827 0%, #020617 50%, #000000 100%)"
-      >
-        <tinto-typography variant="p" font="system" font-size="sm" color="#e5e7eb" align="left">
-          Let your emotions <strong>take shape</strong>
-        </tinto-typography>
-
-        <tinto-image
-          src="https://images.pexels.com/photos/3826675/pexels-photo-3826675.jpeg"
-          alt="Flowing blue abstract form"
-          ratio="3:4"
-          fit="cover"
-          rounded="soft"
-          shadow="0 30px 90px rgba(15,23,42,1)"
-          animation="pulse"
-          duration="10"
-          repeat="infinite"
-          pause-on-hover="true"
-        ></tinto-image>
-      </tinto-wrapper>
-    </tinto-section>
-
-    <!-- 5. YOUR ABSTRACT + CTA -->
-    <tinto-section
-      max-width="420px"
-      padding="32px 20px 40px"
-      margin="0 auto 32px"
-      background="#000000"
-      color="#f9fafb"
-      center
-    >
-      <tinto-wrapper
-        direction="column"
-        justify="space-between"
-        align="center"
-        gap="1.75rem"
-        padding="32px 24px 28px"
-        radius="28px"
-        shadow="0 32px 100px rgba(0,0,0,0.9)"
-        border="1px solid rgba(148,163,184,0.45)"
-        background="radial-gradient(circle at top, #111827 0%, #020617 55%, #000000 100%)"
-        src="https://images.pexels.com/photos/3826553/pexels-photo-3826553.jpeg"
+        gap="100px"
+        padding="24px"
+        radius="16px"
+        shadow="0 8px 24px rgba(0,0,0,.12)"
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"
         bg-size="cover"
-        bg-position="50% 20%"
-        bg-repeat="no-repeat"
+        bg-position="center center"
         bg-blend="overlay"
-        overlay="rgba(15,23,42,0.8)"
-        overlay-opacity="0.9"
+        overlay="rgba(0,0,0,.35)"
+        color="#ffffff"
       >
-        <tinto-typography variant="h3" font="clash-display" align="center" color="#f9fafb">
-          YOUR<br />
-          ABSTRACT
+        <tinto-typography variant="h2" color="#ffffff" weight="700"
+          >배경 이미지 Wrapper</tinto-typography
+        >
+        <tinto-typography variant="p" color="#e5e7eb">
+          src로 배경 이미지를 넣고, overlay로 가독성을 확보합니다.
         </tinto-typography>
-
-        <tinto-image
-          src="https://images.pexels.com/photos/3826559/pexels-photo-3826559.jpeg"
-          alt="Soft flowing fabric"
-          ratio="4:5"
-          fit="cover"
-          rounded="soft"
-          shadow="0 28px 90px rgba(15,23,42,0.9)"
-          animation="float"
-          duration="22"
-          repeat="infinite"
-        ></tinto-image>
-
-        <tinto-button
-          variant="primary"
-          size="md"
-          pill
-          elevated
-          text-family="clash-display"
-          text-size="sm"
-          text-weight="bold"
-          text-color="#f9fafb"
-          radius="9999"
-          label="DON'T FIT BOX"
-        ></tinto-button>
       </tinto-wrapper>
+
+      <!-- 보조 설명 -->
+      <tinto-typography variant="p" color="#374151" highlight="#fff7cc">
+        오버레이는
+        <tinto-typography variant="span" inline weight="600">slot="overlay"</tinto-typography>로
+        삽입합니다. 링크가 있으면 보안상
+        <tinto-typography variant="span" inline weight="600"
+          >rel="noopener noreferrer"</tinto-typography
+        >가 자동 보정됩니다.
+      </tinto-typography>
+
+      <!-- 두 번째 래퍼: 패딩으로 히어로 높이 연출 + 배경 이미지 -->
+      <tinto-wrapper
+        direction="row"
+        gap="100px"
+        padding="48px"
+        radius="100px"
+        shadow="0 8px 24px rgba(0,0,0,.12)"
+        src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=1400&auto=format&fit=crop"
+        bg-size="cover"
+        bg-position="center center"
+        bg-blend="overlay"
+        overlay="rgba(0,0,0,.20)"
+        color="#111111"
+      >
+        <tinto-typography variant="h2" color="#111" weight="700">배경이미지</tinto-typography>
+        <tinto-typography variant="p" color="#111">src 이미지</tinto-typography>
+      </tinto-wrapper>
+
+      <!-- 썸네일 2장 (비율 고정) -->
+      <tinto-image
+        src="https://picsum.photos/id/1025/1200/800"
+        ratio="1:1"
+        rounded="soft"
+        background="#f2f4f7"
+        shadow="0 6px 16px rgba(0,0,0,.08)"
+        loading="lazy"
+        width="100%"
+      ></tinto-image>
+
+      <tinto-image
+        src="https://picsum.photos/id/1003/1200/800"
+        ratio="16:9"
+        rounded="diagonal"
+        background="#eef2ff"
+        shadow="0 6px 16px rgba(0,0,0,.08)"
+        loading="lazy"
+        width="100%"
+      ></tinto-image>
+
+      <!-- 푸터 라인 -->
+      <tinto-typography variant="p" color="#6b7280" font-size="sm">
+        © 2025 TintoLab / UXBIT — All rights reserved.
+      </tinto-typography>
     </tinto-section>
   </body>
 </html>
