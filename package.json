@@ -46,7 +46,6 @@
     "prepare": "husky",
     "generate:component": "node scripts/generate-component.cjs",
     "generate:image": "node server/section-to-image.mjs",
-    "des": "url +_#sectionId",
     "generate:mp4": "sh -c 'node ./server/section-to-mp4.mjs \"$1\" \"$2\" 60' --"
   },
   "lint-staged": {
