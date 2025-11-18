@@ -1,0 +1,379 @@
+{
+  "message": "1 page(s) found.",
+  "siteName": "default",
+  "pageCount": 1,
+  "template": "tinto",
+  "content": [
+    {
+      "_id": "2c6c38b3c8c74c0054d7e14f",
+      "Website": "421215cfc3569445c3943513",
+      "label": "Home",
+      "siteName": "default",
+      "scripts": [
+        "<script type=\"module\" src=\"https://d20gpxbcszdbc7.cloudfront.net/uxbit/build/uxbit.esm.js\" data-stencil data-resources-url=\"https://d20gpxbcszdbc7.cloudfront.net/uxbit/build/\"></script>",
+        "<script nomodule src=\"https://d20gpxbcszdbc7.cloudfront.net/uxbit/build/uxbit.js\" data-stencil></script>"
+      ],
+      "styleSheets": [
+        "<link rel=\"stylesheet\" href=\"https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/global.css\">"
+      ],
+      "selected": ["tinto", "default"],
+      "sectionCategories": ["tinto/default"],
+      "blocks": [
+        {
+          "WebsiteBlock": {
+            "_id": "sec_0_97a9d072cab6",
+            "description": "Tinto 섹션",
+            "type": "hero",
+            "name": "tinto-section",
+            "usage": 0,
+            "category": "tinto/default"
+          },
+          "frame": {
+            "maxWidth": "420px",
+            "padding": "32px 20px 40px",
+            "margin": "0 auto 24px",
+            "background": "#000000",
+            "color": "#f9fafb",
+            "heightMode": "auto",
+            "center": true,
+            "wrapper": {
+              "padding": "32px 24px",
+              "radius": "24px",
+              "shadow": "0 24px 80px rgba(0,0,0,0.75)",
+              "border": "1px solid rgba(148,163,184,0.45)",
+              "background": "radial-gradient(circle at top, #111827 0%, #020617 55%, #000000 100%)",
+              "layout": {
+                "direction": "column",
+                "directionDesktop": "column",
+                "justify": "center",
+                "align": "center",
+                "gap": "1.75rem",
+                "gapDesktop": "2rem"
+              }
+            }
+          },
+          "typo_60c5daf2358e": {
+            "_id": "typo_60c5daf2358e",
+            "component": "tinto-typography",
+            "content": "<br/>          FEELINGS<br/><br/>          DON’T FIT<br/><br/>          --------BOX<br/>",
+            "color": "#f9fafb",
+            "font": "clash-display",
+            "weight": "bold",
+            "align": "center",
+            "variant": "h1",
+            "fontSize": "XXL"
+          },
+          "typo_7383fcf8b944": {
+            "_id": "typo_7383fcf8b944",
+            "component": "tinto-typography",
+            "content": "<br/>          Feelings don’t sit in straight lines. Start a page that bends with every mood.<br/>",
+            "color": "#9ca3af",
+            "font": "system",
+            "variant": "p",
+            "fontSize": "sm"
+          },
+          "img_5307b7ab65f1": {
+            "_id": "img_5307b7ab65f1",
+            "component": "tinto-image",
+            "url": "https://images.pexels.com/photos/2078266/pexels-photo-2078266.jpeg",
+            "alt": "Abstract cross",
+            "ratio": "3:2",
+            "fit": "cover",
+            "rounded": "soft",
+            "shadow": "0 22px 60px rgba(0,0,0,0.9)"
+          }
+        },
+        {
+          "WebsiteBlock": {
+            "_id": "sec_1_55b965ce14b0",
+            "description": "Tinto 섹션",
+            "type": "tinto-section",
+            "name": "tinto-section",
+            "usage": 0,
+            "category": "tinto/default"
+          },
+          "frame": {
+            "maxWidth": "420px",
+            "padding": "24px 20px 40px",
+            "margin": "0 auto 24px",
+            "background": "#020617",
+            "color": "#f9fafb",
+            "center": true,
+            "wrapper": {
+              "padding": "28px 24px 32px",
+              "radius": "24px",
+              "shadow": "0 20px 60px rgba(0,0,0,0.7)",
+              "border": "1px solid rgba(30,64,175,0.6)",
+              "background": "radial-gradient(circle at top, #111827 0%, #020617 55%, #020617 100%)",
+              "layout": {
+                "direction": "column",
+                "justify": "flex-start",
+                "align": "flex-start",
+                "gap": "1.5rem"
+              }
+            }
+          },
+          "typo_605877dce73e": {
+            "_id": "typo_605877dce73e",
+            "component": "tinto-typography",
+            "content": "<br/>          Feel the shape<br/><br/>          of your story<br/>",
+            "color": "#f9fafb",
+            "font": "clash-display",
+            "align": "left",
+            "variant": "h2"
+          },
+          "typo_3238c8b17c34": {
+            "_id": "typo_3238c8b17c34",
+            "component": "tinto-typography",
+            "content": "<br/>          Every curve has a meaning. This is where your world begins. Drawn by you. Moved by you.<br/>          Not just a page — a feeling.<br/>",
+            "color": "#cbd5f5",
+            "font": "system",
+            "variant": "p",
+            "fontSize": "sm"
+          },
+          "typo_07b9cf44a300": {
+            "_id": "typo_07b9cf44a300",
+            "component": "tinto-typography",
+            "content": "<br/>          Sketch your mood.<br/>",
+            "color": "#a5b4fc",
+            "font": "system",
+            "align": "left",
+            "variant": "p",
+            "fontSize": "sm",
+            "effects": {
+              "rolling": true,
+              "rollSpeed": 4,
+              "typing": {
+                "texts": [
+                  "Sketch your mood.",
+                  "Fold your feelings into color.",
+                  "Write the way you feel."
+                ],
+                "duration": 4,
+                "eraseDuration": 2,
+                "loop": true,
+                "cursor": true,
+                "unit": "word"
+              }
+            }
+          },
+          "img_5f77917f1239": {
+            "_id": "img_5f77917f1239",
+            "component": "tinto-image",
+            "url": "https://images.pexels.com/photos/2078266/pexels-photo-2078266.jpeg",
+            "alt": "Soft abstract flower",
+            "ratio": "4:3",
+            "fit": "cover",
+            "rounded": "oval",
+            "shadow": "0 24px 80px rgba(15,23,42,0.9)",
+            "animation": {
+              "pauseOnHover": true
+            }
+          }
+        },
+        {
+          "WebsiteBlock": {
+            "_id": "sec_2_4ef2e9afd3a5",
+            "description": "Tinto 섹션",
+            "type": "tinto-section",
+            "name": "tinto-section",
+            "usage": 0,
+            "category": "tinto/default"
+          },
+          "frame": {
+            "maxWidth": "420px",
+            "padding": "24px 20px 40px",
+            "margin": "0 auto 24px",
+            "background": "#020617",
+            "color": "#f9fafb",
+            "center": true,
+            "wrapper": {
+              "padding": "24px 24px 28px",
+              "radius": "24px",
+              "shadow": "0 18px 52px rgba(0,0,0,0.7)",
+              "border": "1px solid rgba(148,163,184,0.4)",
+              "background": "linear-gradient(145deg, #020617 0%, #020617 40%, #111827 100%)",
+              "layout": {
+                "direction": "column",
+                "justify": "flex-start",
+                "align": "flex-start",
+                "gap": "1.25rem"
+              }
+            }
+          },
+          "typo_f25cfdd4b0db": {
+            "_id": "typo_f25cfdd4b0db",
+            "component": "tinto-typography",
+            "content": "<br/>          More than <strong>visuals</strong><br/><br/>          This is <strong>identity</strong><br/><br/>          You are the <strong>pattern</strong><br/><br/>          You are the <strong>pulse</strong><br/>",
+            "color": "#e5e7eb",
+            "font": "system",
+            "variant": "p",
+            "fontSize": "sm"
+          },
+          "img_84c9da6f00f4": {
+            "_id": "img_84c9da6f00f4",
+            "component": "tinto-image",
+            "url": "https://images.pexels.com/photos/3826674/pexels-photo-3826674.jpeg",
+            "alt": "Electric abstract form",
+            "ratio": "4:5",
+            "fit": "cover",
+            "rounded": "soft",
+            "shadow": "0 26px 80px rgba(15,23,42,0.95)",
+            "animation": {
+              "repeat": "infinite",
+              "startOnViewport": true,
+              "pauseOnHover": true
+            }
+          }
+        },
+        {
+          "WebsiteBlock": {
+            "_id": "sec_3_2805934c19fd",
+            "description": "Tinto 섹션",
+            "type": "tinto-section",
+            "name": "tinto-section",
+            "usage": 0,
+            "category": "tinto/default"
+          },
+          "frame": {
+            "maxWidth": "420px",
+            "padding": "24px 20px 40px",
+            "margin": "0 auto 24px",
+            "background": "#020617",
+            "color": "#f9fafb",
+            "center": true,
+            "wrapper": {
+              "padding": "24px 0 0",
+              "radius": "24px",
+              "shadow": "0 18px 52px rgba(0,0,0,0.7)",
+              "border": "1px solid rgba(30,64,175,0.7)",
+              "background": "radial-gradient(circle at top, #111827 0%, #020617 50%, #000000 100%)",
+              "layout": {
+                "direction": "column",
+                "justify": "flex-start",
+                "align": "flex-start",
+                "gap": "1.25rem"
+              }
+            }
+          },
+          "typo_bcabf0d1673c": {
+            "_id": "typo_bcabf0d1673c",
+            "component": "tinto-typography",
+            "content": "<br/>          Let your emotions <strong>take shape</strong><br/>",
+            "color": "#e5e7eb",
+            "font": "system",
+            "align": "left",
+            "variant": "p",
+            "fontSize": "sm"
+          },
+          "img_6c8bc0588b21": {
+            "_id": "img_6c8bc0588b21",
+            "component": "tinto-image",
+            "url": "https://images.pexels.com/photos/3826675/pexels-photo-3826675.jpeg",
+            "alt": "Flowing blue abstract form",
+            "ratio": "3:4",
+            "fit": "cover",
+            "rounded": "soft",
+            "shadow": "0 30px 90px rgba(15,23,42,1)",
+            "animation": {
+              "name": "pulse",
+              "duration": 10,
+              "repeat": "infinite",
+              "pauseOnHover": true
+            }
+          }
+        },
+        {
+          "WebsiteBlock": {
+            "_id": "sec_4_76c26299ce7f",
+            "description": "Tinto 섹션",
+            "type": "cta",
+            "name": "tinto-section",
+            "usage": 0,
+            "category": "tinto/default"
+          },
+          "frame": {
+            "maxWidth": "420px",
+            "padding": "32px 20px 40px",
+            "margin": "0 auto 32px",
+            "background": "#000000",
+            "color": "#f9fafb",
+            "center": true,
+            "wrapper": {
+              "padding": "32px 24px 28px",
+              "radius": "28px",
+              "shadow": "0 32px 100px rgba(0,0,0,0.9)",
+              "border": "1px solid rgba(148,163,184,0.45)",
+              "background": "radial-gradient(circle at top, #111827 0%, #020617 55%, #000000 100%)",
+              "layout": {
+                "direction": "column",
+                "justify": "space-between",
+                "align": "center",
+                "gap": "1.75rem"
+              },
+              "bgImage": {
+                "src": "https://images.pexels.com/photos/3826553/pexels-photo-3826553.jpeg",
+                "size": "cover",
+                "position": "50% 20%",
+                "repeat": "no-repeat",
+                "blend": "overlay"
+              },
+              "overlay": {
+                "value": "rgba(15,23,42,0.8)",
+                "opacity": 0.9
+              }
+            }
+          },
+          "typo_b2c492422c21": {
+            "_id": "typo_b2c492422c21",
+            "component": "tinto-typography",
+            "content": "<br/>          YOUR<br/><br/>          ABSTRACT<br/>",
+            "color": "#f9fafb",
+            "font": "clash-display",
+            "align": "center",
+            "variant": "h3"
+          },
+          "img_540c10f551dd": {
+            "_id": "img_540c10f551dd",
+            "component": "tinto-image",
+            "url": "https://images.pexels.com/photos/3826559/pexels-photo-3826559.jpeg",
+            "alt": "Soft flowing fabric",
+            "ratio": "4:5",
+            "fit": "cover",
+            "rounded": "soft",
+            "shadow": "0 28px 90px rgba(15,23,42,0.9)",
+            "animation": {
+              "name": "float",
+              "duration": 22,
+              "repeat": "infinite"
+            }
+          },
+          "btn_d17894f77c44": {
+            "_id": "btn_d17894f77c44",
+            "component": "tinto-button",
+            "label": "DON'T FIT BOX",
+            "variant": "primary",
+            "size": "md",
+            "pill": true,
+            "elevated": true,
+            "radius": "9999",
+            "text": {
+              "family": "clash-display",
+              "size": "sm",
+              "weight": "bold",
+              "color": "#f9fafb"
+            }
+          }
+        }
+      ],
+      "order": 0,
+      "createdAt": "2025-11-18T06:09:47.188Z",
+      "seo": {
+        "title": "TintoLab UXbit",
+        "description": "",
+        "keywords": [],
+        "image": null
+      }
+    }
+  ]
+}
