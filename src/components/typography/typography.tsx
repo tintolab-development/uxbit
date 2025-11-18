@@ -1,5 +1,4 @@
-// typography.tsx
-import { Component, h, Prop, Element } from '@stencil/core';
+import { Component, h, Prop, Element, Watch } from '@stencil/core';
 import {
   Align,
   Color,
@@ -150,8 +149,8 @@ export class TintoTypography {
   /** 폰트 패밀리 preset */
   @Prop({ reflect: true }) font: FontFamily = 'system';
 
-  /** 폰트 크기 토큰 (지정 시 variant 프리셋 override) */
-  @Prop({ reflect: true }) fontSize?: FontSize;
+  /** 폰트 크기 토큰 또는 직접 값 (예: "lg", "32px", "2.5rem") */
+  @Prop({ reflect: true }) fontSize?: FontSize | string;
 
   /** 텍스트 색상 (기본 상속) */
   @Prop({ reflect: true }) color: Color = 'inherit';
@@ -177,7 +176,7 @@ export class TintoTypography {
   /** 하이퍼링크 URL (설정 시 <a>로 감쌈) */
   @Prop({ reflect: true }) href?: string;
 
-  /** 링크 타겟 (_blank, _self, 등) */
+  /** 링크 타겟 (_blank, _self, _parent, _top) */
   @Prop({ reflect: true }) target?: '_blank' | '_self' | '_parent' | '_top';
 
   /** 링크 rel (target이 _blank면 보안 위해 자동 보정됨) */
@@ -322,6 +321,28 @@ export class TintoTypography {
     this.typingInitialized = true;
   }
 
+  /** font-size 토큰/값을 CSS 커스텀 프로퍼티로 투입 */
+  private applyFontSizeToken() {
+    if (!this.hostEl) return;
+
+    const style = this.hostEl.style;
+
+    if (this.fontSize == null || String(this.fontSize).trim() === '') {
+      style.removeProperty('--t-font-size');
+      return;
+    }
+
+    const key = String(this.fontSize).trim();
+    const tokenMap = FONT_SIZE as unknown as Record<string, string>;
+    const mapped = tokenMap[key] ?? key; // 토큰 없으면 그대로 사용 (ex. "200px", "3rem")
+
+    style.setProperty('--t-font-size', mapped);
+  }
+
+  componentWillLoad() {
+    this.applyFontSizeToken();
+  }
+
   componentDidLoad() {
     this.setupTypingEffect();
   }
@@ -330,12 +351,16 @@ export class TintoTypography {
     this.setupTypingEffect();
   }
 
+  @Watch('fontSize')
+  protected handleFontSizeChange() {
+    this.applyFontSizeToken();
+  }
+
   render() {
     const Tag = this.resolveTag();
 
     const style: Partial<CSSStyleDeclaration> = {
       fontFamily: FAMILY_MAP[this.font],
-      fontSize: this.fontSize ? FONT_SIZE[this.fontSize] : undefined, // 지정 없으면 variant 프리셋(clamp) 유지
       color: this.color,
       textAlign: this.align,
       fontWeight: this.weight != null ? (String(this.weight) as any) : undefined,
@@ -344,6 +369,7 @@ export class TintoTypography {
       backgroundColor: this.highlight,
       visibility: this.visible ? 'visible' : 'hidden', // 레이아웃 유지하며 숨김
       margin: '0',
+      // ❗ font-size는 여기서 직접 지정하지 않고 CSS var(--t-font-size)를 사용
     };
 
     const ariaHidden = this.visible ? null : 'true';

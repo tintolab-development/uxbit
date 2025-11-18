@@ -6,6 +6,17 @@
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  ButtonClickDetail,
+  ButtonLabelChangeDetail,
+  ButtonNativeType,
+  ButtonSize,
+  ButtonTextFamilyToken,
+  ButtonTextSizeToken,
+  ButtonTextWeightToken,
+  ButtonToggleDetail,
+  ButtonVariant,
+} from './components/button/button.types';
+import {
   AnimationRotate,
   AsKind,
   AspectRatio,
@@ -44,6 +55,17 @@ import {
   FlexWrap as FlexWrap1,
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
+export {
+  ButtonClickDetail,
+  ButtonLabelChangeDetail,
+  ButtonNativeType,
+  ButtonSize,
+  ButtonTextFamilyToken,
+  ButtonTextSizeToken,
+  ButtonTextWeightToken,
+  ButtonToggleDetail,
+  ButtonVariant,
+} from './components/button/button.types';
 export {
   AnimationRotate,
   AsKind,
@@ -84,6 +106,78 @@ export {
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
 export namespace Components {
+  interface TintoButton {
+    /**
+     * @default false
+     */
+    block: boolean;
+    /**
+     * @default false
+     */
+    disabled: boolean;
+    /**
+     * 라벨 편집 모드 (true 일 때 contenteditable)
+     * @default false
+     */
+    editable: boolean;
+    /**
+     * @default false
+     */
+    elevated: boolean;
+    /**
+     * 링크 모드일 때 이동할 href
+     */
+    href?: string;
+    /**
+     * 텍스트 라벨(슬롯 대신 사용 가능)
+     */
+    label?: string;
+    /**
+     * @default false
+     */
+    loading: boolean;
+    /**
+     * @default false
+     */
+    outline: boolean;
+    /**
+     * @default false
+     */
+    pill: boolean;
+    /**
+     * @default false
+     */
+    pressed: boolean;
+    /**
+     * border-radius 토큰(숫자만 넣으면 px 처리)
+     */
+    radius?: string;
+    /**
+     * @default 'md'
+     */
+    size: ButtonSize;
+    /**
+     * 링크 타겟 (href 지정 시)
+     */
+    target?: '_self' | '_blank' | '_parent' | '_top';
+    textColor?: string;
+    textFamily?: ButtonTextFamilyToken | string;
+    textSize?: ButtonTextSizeToken | string;
+    textWeight?: ButtonTextWeightToken | string;
+    /**
+     * @default false
+     */
+    toggle: boolean;
+    /**
+     * form 동작 (내부 button 은 항상 type="button" 이고, 여기 값 기준으로 form 요청)
+     * @default 'button'
+     */
+    type: ButtonNativeType;
+    /**
+     * @default 'primary'
+     */
+    variant: ButtonVariant;
+  }
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
@@ -257,9 +351,9 @@ export namespace Components {
      */
     font: FontFamily;
     /**
-     * 폰트 크기 토큰 (지정 시 variant 프리셋 override)
+     * 폰트 크기 토큰 또는 직접 값 (예: "lg", "32px", "2.5rem")
      */
-    fontSize?: FontSize;
+    fontSize?: FontSize | string;
     /**
      * 하이라이트 배경색
      */
@@ -314,7 +408,7 @@ export namespace Components {
      */
     rolling: boolean;
     /**
-     * 링크 타겟 (_blank, _self, 등)
+     * 링크 타겟 (_blank, _self, _parent, _top)
      */
     target?: '_blank' | '_self' | '_parent' | '_top';
     /**
@@ -437,11 +531,72 @@ export namespace Components {
     wrapDesktop?: FlexWrap1;
   }
 }
+export interface TintoButtonCustomEvent<T> extends CustomEvent<T> {
+  detail: T;
+  target: HTMLTintoButtonElement;
+}
 export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
   detail: T;
   target: HTMLTintoImageElement;
 }
 declare global {
+  interface HTMLTintoButtonElementEventMap {
+    tintoClick: ButtonClickDetail;
+    tintoToggle: ButtonToggleDetail;
+    labelChange: ButtonLabelChangeDetail;
+  }
+  interface HTMLTintoButtonElement extends Components.TintoButton, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
+      type: K,
+      listener: (
+        this: HTMLTintoButtonElement,
+        ev: TintoButtonCustomEvent<HTMLTintoButtonElementEventMap[K]>,
+      ) => any,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener<K extends keyof DocumentEventMap>(
+      type: K,
+      listener: (this: Document, ev: DocumentEventMap[K]) => any,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener<K extends keyof HTMLElementEventMap>(
+      type: K,
+      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener(
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    removeEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
+      type: K,
+      listener: (
+        this: HTMLTintoButtonElement,
+        ev: TintoButtonCustomEvent<HTMLTintoButtonElementEventMap[K]>,
+      ) => any,
+      options?: boolean | EventListenerOptions,
+    ): void;
+    removeEventListener<K extends keyof DocumentEventMap>(
+      type: K,
+      listener: (this: Document, ev: DocumentEventMap[K]) => any,
+      options?: boolean | EventListenerOptions,
+    ): void;
+    removeEventListener<K extends keyof HTMLElementEventMap>(
+      type: K,
+      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+      options?: boolean | EventListenerOptions,
+    ): void;
+    removeEventListener(
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | EventListenerOptions,
+    ): void;
+  }
+  var HTMLTintoButtonElement: {
+    prototype: HTMLTintoButtonElement;
+    new (): HTMLTintoButtonElement;
+  };
   interface HTMLTintoImageElementEventMap {
     'tinto:loaded': TintoImageLoadedDetail;
     'tinto:error': TintoImageErrorDetail;
@@ -521,6 +676,7 @@ declare global {
     new (): HTMLTintoWrapperElement;
   };
   interface HTMLElementTagNameMap {
+    'tinto-button': HTMLTintoButtonElement;
     'tinto-image': HTMLTintoImageElement;
     'tinto-section': HTMLTintoSectionElement;
     'tinto-typography': HTMLTintoTypographyElement;
@@ -528,6 +684,81 @@ declare global {
   }
 }
 declare namespace LocalJSX {
+  interface TintoButton {
+    /**
+     * @default false
+     */
+    block?: boolean;
+    /**
+     * @default false
+     */
+    disabled?: boolean;
+    /**
+     * 라벨 편집 모드 (true 일 때 contenteditable)
+     * @default false
+     */
+    editable?: boolean;
+    /**
+     * @default false
+     */
+    elevated?: boolean;
+    /**
+     * 링크 모드일 때 이동할 href
+     */
+    href?: string;
+    /**
+     * 텍스트 라벨(슬롯 대신 사용 가능)
+     */
+    label?: string;
+    /**
+     * @default false
+     */
+    loading?: boolean;
+    onLabelChange?: (event: TintoButtonCustomEvent<ButtonLabelChangeDetail>) => void;
+    onTintoClick?: (event: TintoButtonCustomEvent<ButtonClickDetail>) => void;
+    onTintoToggle?: (event: TintoButtonCustomEvent<ButtonToggleDetail>) => void;
+    /**
+     * @default false
+     */
+    outline?: boolean;
+    /**
+     * @default false
+     */
+    pill?: boolean;
+    /**
+     * @default false
+     */
+    pressed?: boolean;
+    /**
+     * border-radius 토큰(숫자만 넣으면 px 처리)
+     */
+    radius?: string;
+    /**
+     * @default 'md'
+     */
+    size?: ButtonSize;
+    /**
+     * 링크 타겟 (href 지정 시)
+     */
+    target?: '_self' | '_blank' | '_parent' | '_top';
+    textColor?: string;
+    textFamily?: ButtonTextFamilyToken | string;
+    textSize?: ButtonTextSizeToken | string;
+    textWeight?: ButtonTextWeightToken | string;
+    /**
+     * @default false
+     */
+    toggle?: boolean;
+    /**
+     * form 동작 (내부 button 은 항상 type="button" 이고, 여기 값 기준으로 form 요청)
+     * @default 'button'
+     */
+    type?: ButtonNativeType;
+    /**
+     * @default 'primary'
+     */
+    variant?: ButtonVariant;
+  }
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
@@ -704,9 +935,9 @@ declare namespace LocalJSX {
      */
     font?: FontFamily;
     /**
-     * 폰트 크기 토큰 (지정 시 variant 프리셋 override)
+     * 폰트 크기 토큰 또는 직접 값 (예: "lg", "32px", "2.5rem")
      */
-    fontSize?: FontSize;
+    fontSize?: FontSize | string;
     /**
      * 하이라이트 배경색
      */
@@ -761,7 +992,7 @@ declare namespace LocalJSX {
      */
     rolling?: boolean;
     /**
-     * 링크 타겟 (_blank, _self, 등)
+     * 링크 타겟 (_blank, _self, _parent, _top)
      */
     target?: '_blank' | '_self' | '_parent' | '_top';
     /**
@@ -884,6 +1115,7 @@ declare namespace LocalJSX {
     wrapDesktop?: FlexWrap1;
   }
   interface IntrinsicElements {
+    'tinto-button': TintoButton;
     'tinto-image': TintoImage;
     'tinto-section': TintoSection;
     'tinto-typography': TintoTypography;
@@ -894,6 +1126,7 @@ export { LocalJSX as JSX };
 declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
+      'tinto-button': LocalJSX.TintoButton & JSXBase.HTMLAttributes<HTMLTintoButtonElement>;
       /**
        * <tinto-image>
        * - Image/media props + simple animations (spin/float/wobble/pulse)
