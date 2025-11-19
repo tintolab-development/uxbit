@@ -29,7 +29,6 @@ const meta: Meta<TintoButton & ExtraArgs> = {
     loading: false,
     toggle: false,
     pressed: false,
-    editable: false,
 
     // 타이포 토큰
     textFamily: 'system',
@@ -60,7 +59,6 @@ const meta: Meta<TintoButton & ExtraArgs> = {
     loading: { control: 'boolean' },
     toggle: { control: 'boolean' },
     pressed: { control: 'boolean' },
-    editable: { control: 'boolean' },
 
     type: {
       control: { type: 'select' },
@@ -113,7 +111,6 @@ const meta: Meta<TintoButton & ExtraArgs> = {
     // 이벤트 → actions
     tintoClick: { action: 'tintoClick' },
     tintoToggle: { action: 'tintoToggle' },
-    labelChange: { action: 'labelChange' },
   },
 };
 

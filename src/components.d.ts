@@ -7,7 +7,6 @@
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   ButtonClickDetail,
-  ButtonLabelChangeDetail,
   ButtonNativeType,
   ButtonSize,
   ButtonTextFamilyToken,
@@ -57,7 +56,6 @@ import {
 } from './components/wrapper/wrapper.types';
 export {
   ButtonClickDetail,
-  ButtonLabelChangeDetail,
   ButtonNativeType,
   ButtonSize,
   ButtonTextFamilyToken,
@@ -115,11 +113,6 @@ export namespace Components {
      * @default false
      */
     disabled: boolean;
-    /**
-     * 라벨 편집 모드 (true 일 때 contenteditable)
-     * @default false
-     */
-    editable: boolean;
     /**
      * @default false
      */
@@ -543,7 +536,6 @@ declare global {
   interface HTMLTintoButtonElementEventMap {
     tintoClick: ButtonClickDetail;
     tintoToggle: ButtonToggleDetail;
-    labelChange: ButtonLabelChangeDetail;
   }
   interface HTMLTintoButtonElement extends Components.TintoButton, HTMLStencilElement {
     addEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
@@ -694,11 +686,6 @@ declare namespace LocalJSX {
      */
     disabled?: boolean;
     /**
-     * 라벨 편집 모드 (true 일 때 contenteditable)
-     * @default false
-     */
-    editable?: boolean;
-    /**
      * @default false
      */
     elevated?: boolean;
@@ -714,7 +701,6 @@ declare namespace LocalJSX {
      * @default false
      */
     loading?: boolean;
-    onLabelChange?: (event: TintoButtonCustomEvent<ButtonLabelChangeDetail>) => void;
     onTintoClick?: (event: TintoButtonCustomEvent<ButtonClickDetail>) => void;
     onTintoToggle?: (event: TintoButtonCustomEvent<ButtonToggleDetail>) => void;
     /**

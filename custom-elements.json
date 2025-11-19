@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-18T08:13:08",
+  "timestamp": "2025-11-19T04:49:46",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -55,35 +55,6 @@
           "attr": "disabled",
           "reflectToAttr": true,
           "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "editable",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "editable",
-          "reflectToAttr": true,
-          "docs": "라벨 편집 모드 (true 일 때 contenteditable)",
           "docsTags": [
             {
               "name": "default",
@@ -625,26 +596,6 @@
       ],
       "methods": [],
       "events": [
-        {
-          "event": "labelChange",
-          "detail": "ButtonLabelChangeDetail",
-          "bubbles": true,
-          "complexType": {
-            "original": "ButtonLabelChangeDetail",
-            "resolved": "ButtonLabelChangeDetail",
-            "references": {
-              "ButtonLabelChangeDetail": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonLabelChangeDetail"
-              }
-            }
-          },
-          "cancelable": true,
-          "composed": true,
-          "docs": "",
-          "docsTags": []
-        },
         {
           "event": "tintoClick",
           "detail": "ButtonClickDetail",
@@ -4186,11 +4137,6 @@
     },
     "src/components/button/button.types.ts::ButtonToggleDetail": {
       "declaration": "export interface ButtonToggleDetail {\n  pressed: boolean;\n}",
-      "docstring": "",
-      "path": "src/components/button/button.types.ts"
-    },
-    "src/components/button/button.types.ts::ButtonLabelChangeDetail": {
-      "declaration": "export interface ButtonLabelChangeDetail {\n  value: string;\n}",
       "docstring": "",
       "path": "src/components/button/button.types.ts"
     },
