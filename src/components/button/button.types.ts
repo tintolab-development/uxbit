@@ -30,7 +30,3 @@ export interface ButtonClickDetail {
 export interface ButtonToggleDetail {
   pressed: boolean;
 }
-
-export interface ButtonLabelChangeDetail {
-  value: string;
-}

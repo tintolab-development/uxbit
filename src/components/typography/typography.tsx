@@ -316,6 +316,14 @@ export class TintoTypography {
     if (this.typingInitialized) return;
     if (!this.typingEl) return;
 
+    // prefers-reduced-motion 고려: 애니메이션 비활성화 시 타이핑 효과 건너뛰기
+    const prefersReduce =
+      typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce) {
+      // 애니메이션 없이 정적 텍스트만 표시
+      return;
+    }
+
     const options = this.buildTypingOptions();
     new InternalTypingEffect(this.typingEl, options);
     this.typingInitialized = true;
@@ -380,9 +388,25 @@ export class TintoTypography {
 
     // rolling=true 이면 슬롯 텍스트를 .typing-effect span으로 감싼다
     let typedSpan: any;
+    let staticTextForSR: any = null; // 스크린 리더용 정적 텍스트
     if (this.rolling) {
+      // 스크린 리더용 정적 텍스트 추출 (타이핑 애니메이션과 별도로 제공)
+      const staticText =
+        this.parseTypingTexts()?.join(' ') || (this.hostEl.textContent || '').trim();
+      if (staticText) {
+        staticTextForSR = (
+          <span class="sr-only" aria-live="polite">
+            {staticText}
+          </span>
+        );
+      }
       typedSpan = (
-        <span class="typing-effect" ref={(el) => (this.typingEl = el as HTMLElement)}>
+        <span
+          class="typing-effect"
+          ref={(el) => (this.typingEl = el as HTMLElement)}
+          aria-live="polite"
+          aria-atomic="true"
+        >
           {slotNode}
         </span>
       );
@@ -412,6 +436,7 @@ export class TintoTypography {
         style={style}
         aria-hidden={ariaHidden as any}
       >
+        {staticTextForSR}
         {content}
       </Tag>
     );

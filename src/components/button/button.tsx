@@ -8,7 +8,6 @@ import type {
   ButtonTextWeightToken,
   ButtonClickDetail,
   ButtonToggleDetail,
-  ButtonLabelChangeDetail,
 } from './button.types';
 
 const FAMILY_MAP: Record<ButtonTextFamilyToken, string> = {
@@ -78,9 +77,6 @@ export class TintoButton {
   /** 텍스트 라벨(슬롯 대신 사용 가능) */
   @Prop({ reflect: true }) label?: string;
 
-  /** 라벨 편집 모드 (true 일 때 contenteditable) */
-  @Prop({ reflect: true }) editable = false;
-
   // ===== Typography tokens =====
   @Prop({ reflect: true, attribute: 'text-family' })
   textFamily?: ButtonTextFamilyToken | string;
@@ -97,9 +93,6 @@ export class TintoButton {
   // ===== Events =====
   @Event() tintoClick!: EventEmitter<ButtonClickDetail>;
   @Event() tintoToggle!: EventEmitter<ButtonToggleDetail>;
-  @Event() labelChange!: EventEmitter<ButtonLabelChangeDetail>;
-
-  private labelEl?: HTMLSpanElement;
 
   // ===== Lifecycle =====
   componentWillLoad(): void {
@@ -184,7 +177,7 @@ export class TintoButton {
 
   // ===== Handlers =====
   private handleClick = (event: MouseEvent): void => {
-    if (this.disabled || this.loading || this.editable) {
+    if (this.disabled || this.loading) {
       event.preventDefault();
       return;
     }
@@ -221,15 +214,6 @@ export class TintoButton {
     this.tintoClick.emit({ originalEvent: event });
   };
 
-  private handleLabelInput = (): void => {
-    if (!this.editable || !this.labelEl) {
-      return;
-    }
-    const value = this.labelEl.textContent ?? '';
-    this.label = value;
-    this.labelChange.emit({ value });
-  };
-
   private resolveLabel(): string {
     if (this.label && this.label.trim().length > 0) {
       return this.label.trim();
@@ -246,6 +230,13 @@ export class TintoButton {
 
     const labelText = this.resolveLabel();
 
+    // 호스트의 aria-label 패스스루
+    const hostAriaLabel = this.el.getAttribute('aria-label');
+    const hostAriaDescribedby = this.el.getAttribute('aria-describedby');
+    const a11yProps: any = {};
+    if (hostAriaLabel) a11yProps['aria-label'] = hostAriaLabel;
+    if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
+
     return (
       <Host aria-busy={ariaBusy} aria-disabled={ariaDisabled} aria-pressed={ariaPressed}>
         <button
@@ -256,6 +247,7 @@ export class TintoButton {
           aria-busy={ariaBusy}
           aria-pressed={ariaPressed}
           onClick={this.handleClick}
+          {...a11yProps}
         >
           <span class="spinner" part="spinner" aria-hidden={this.loading ? 'false' : 'true'}></span>
 
@@ -264,19 +256,7 @@ export class TintoButton {
           </span>
 
           <span class="content" part="label">
-            <span
-              class="label"
-              ref={(el) => {
-                this.labelEl = el ?? undefined;
-              }}
-              contentEditable={this.editable ? 'true' : 'false'}
-              spellcheck={this.editable ? false : undefined}
-              role={this.editable ? 'textbox' : undefined}
-              aria-multiline={this.editable ? 'false' : undefined}
-              onInput={this.handleLabelInput}
-            >
-              {labelText || <slot />}
-            </span>
+            <span class="label">{labelText || <slot />}</span>
           </span>
 
           <span class="suffix" part="suffix">
