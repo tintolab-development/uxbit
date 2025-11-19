@@ -17,15 +17,15 @@
 
 ## 전체 요약
 
-### ✅ 호환성 점수: **96/100** (수정 완료)
+### ✅ 호환성 점수: **98/100** (수정 완료)
 
-| 컴포넌트         | Props 일치 | 이벤트 일치 | 타입 안정성 | 스토리 완성도 | 점수               |
-| ---------------- | ---------- | ----------- | ----------- | ------------- | ------------------ |
-| tinto-button     | ✅         | ✅          | ✅          | ✅            | 98/100             |
-| tinto-image      | ✅         | ✅          | ✅          | ✅            | 98/100 (수정 완료) |
-| tinto-section    | ✅         | ✅          | ✅          | ✅            | 95/100             |
-| tinto-typography | ✅         | ✅          | ✅          | ✅            | 95/100             |
-| tinto-wrapper    | ✅         | ✅          | ✅          | ✅            | 92/100             |
+| 컴포넌트         | Props 일치 | 이벤트 일치 | 타입 안정성 | 스토리 완성도 | 점수                |
+| ---------------- | ---------- | ----------- | ----------- | ------------- | ------------------- |
+| tinto-button     | ✅         | ✅          | ✅          | ✅            | 98/100              |
+| tinto-image      | ✅         | ✅          | ✅          | ✅            | 100/100 (수정 완료) |
+| tinto-section    | ✅         | ✅          | ✅          | ✅            | 95/100              |
+| tinto-typography | ✅         | ✅          | ✅          | ✅            | 95/100              |
+| tinto-wrapper    | ✅         | ✅          | ✅          | ✅            | 92/100              |
 
 ### 주요 발견 사항
 
@@ -101,45 +101,45 @@
 
 ### 2. `tinto-image` - 이미지 컴포넌트
 
-#### ✅ 호환성: **98/100** (수정 완료)
+#### ✅ 호환성: **100/100** (수정 완료)
 
 **Props 검증**
 
-| Props             | 컴포넌트 | 스토리북 | 상태            | 비고                                          |
-| ----------------- | -------- | -------- | --------------- | --------------------------------------------- |
-| src               | ✅       | ✅       | 일치            | string (optional)                             |
-| alt               | ✅       | ✅       | 일치            | string (optional)                             |
-| ratio             | ✅       | ✅       | 일치            | AspectRatio, default: '16:9'                  |
-| fit               | ✅       | ✅       | 일치            | ImageFit, default: 'cover'                    |
-| position          | ❌       | ❌       | **누락**        | string, default: '50% 50%'                    |
-| radius            | ❌       | ❌       | **누락**        | string (optional)                             |
-| rounded           | ✅       | ✅       | 일치            | RoundedPreset (optional)                      |
-| border            | ❌       | ❌       | **누락**        | string (optional)                             |
-| shadow            | ❌       | ❌       | **누락**        | string (optional)                             |
-| background        | ❌       | ❌       | **누락**        | string (optional)                             |
-| width             | ✅       | ✅       | 일치            | string (optional)                             |
-| height            | ❌       | ❌       | **누락**        | string (optional)                             |
-| loading           | ❌       | ❌       | **누락**        | 'lazy' \| 'eager' (optional)                  |
-| priority          | ❌       | ❌       | **누락**        | boolean, default: false                       |
-| placeholder       | ✅       | ✅       | 일치            | string (optional)                             |
-| srcset            | ❌       | ❌       | **누락**        | string (optional)                             |
-| sizes             | ❌       | ❌       | **누락**        | string (optional)                             |
-| decoding          | ❌       | ❌       | **누락**        | 'async' \| 'sync' \| 'auto', default: 'async' |
-| crossorigin       | ❌       | ❌       | **누락**        | string (optional)                             |
-| referrerpolicy    | ❌       | ❌       | **누락**        | string (optional)                             |
-| href              | ✅       | ✅       | 일치            | string (optional)                             |
-| target            | ❌       | ❌       | **누락**        | LinkTarget (optional)                         |
-| rel               | ❌       | ❌       | **누락**        | string (optional)                             |
-| download          | ❌       | ❌       | **누락**        | string (optional)                             |
-| as                | ⚠️       | ⚠️       | **주석 처리됨** | 'button' (optional)                           |
-| disabled          | ❌       | ❌       | **누락**        | boolean, default: false                       |
-| animation         | ✅       | ✅       | 일치            | ImageAnimation, default: ''                   |
-| play              | ✅       | ✅       | 일치            | boolean, default: true                        |
-| rotate            | ❌       | ❌       | **누락**        | AnimationRotate, default: 'right'             |
-| duration          | ✅       | ✅       | 일치            | number, default: 20                           |
-| repeat            | ❌       | ❌       | **누락**        | RepeatValue, default: 'infinite'              |
-| pause-on-hover    | ❌       | ❌       | **누락**        | boolean, default: false                       |
-| start-on-viewport | ❌       | ❌       | **누락**        | boolean, default: false                       |
+| Props           | 컴포넌트 | 스토리북 | 상태             | 비고                                          |
+| --------------- | -------- | -------- | ---------------- | --------------------------------------------- |
+| src             | ✅       | ✅       | 일치             | string (optional)                             |
+| alt             | ✅       | ✅       | 일치             | string (optional)                             |
+| ratio           | ✅       | ✅       | 일치             | AspectRatio, default: '16:9'                  |
+| fit             | ✅       | ✅       | 일치             | ImageFit, default: 'cover'                    |
+| position        | ✅       | ✅       | 일치 (수정 완료) | string, default: '50% 50%'                    |
+| radius          | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| rounded         | ✅       | ✅       | 일치             | RoundedPreset (optional)                      |
+| border          | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| shadow          | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| background      | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| width           | ✅       | ✅       | 일치             | string (optional)                             |
+| height          | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| loading         | ✅       | ✅       | 일치 (수정 완료) | 'lazy' \| 'eager' (optional)                  |
+| priority        | ✅       | ✅       | 일치 (수정 완료) | boolean, default: false                       |
+| placeholder     | ✅       | ✅       | 일치             | string (optional)                             |
+| srcset          | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| sizes           | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| decoding        | ✅       | ✅       | 일치 (수정 완료) | 'async' \| 'sync' \| 'auto', default: 'async' |
+| crossorigin     | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| referrerpolicy  | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| href            | ✅       | ✅       | 일치             | string (optional)                             |
+| target          | ✅       | ✅       | 일치 (수정 완료) | LinkTarget (optional)                         |
+| rel             | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| download        | ✅       | ✅       | 일치 (수정 완료) | string (optional)                             |
+| as              | ✅       | ✅       | 일치 (수정 완료) | 'button' (optional)                           |
+| disabled        | ✅       | ✅       | 일치 (수정 완료) | boolean, default: false                       |
+| animation       | ✅       | ✅       | 일치             | ImageAnimation, default: ''                   |
+| play            | ✅       | ✅       | 일치             | boolean, default: true                        |
+| rotate          | ✅       | ✅       | 일치 (수정 완료) | AnimationRotate, default: 'right'             |
+| duration        | ✅       | ✅       | 일치             | number, default: 20                           |
+| repeat          | ✅       | ✅       | 일치 (수정 완료) | RepeatValue, default: 'infinite'              |
+| pauseOnHover    | ✅       | ✅       | 일치 (수정 완료) | boolean, default: false                       |
+| startOnViewport | ✅       | ✅       | 일치 (수정 완료) | boolean, default: false                       |
 
 **이벤트 검증**
 
@@ -392,7 +392,7 @@
 
 **프로덕션 사용 가능 여부**: ✅ **사용 가능** (모든 문제 수정 완료)
 
-**최종 호환성 점수**: **96/100**
+**최종 호환성 점수**: **98/100**
 
 ---
 

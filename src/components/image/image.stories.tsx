@@ -205,6 +205,7 @@ export const AsButton: Story = {
     ratio: '16:9',
     width: '300px',
   },
+  render: (props) => <tinto-image {...props} />,
 };
 
 /**

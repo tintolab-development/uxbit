@@ -39,7 +39,7 @@
 ### 개선 필요 사항
 
 - ✅ `tinto-typography`: 타이핑 애니메이션 시 스크린 리더 지원 보완 완료
-- ✅ `tinto-button`: 편집 모드 접근성 개선 완료
+- ✅ `tinto-button`: 접근성 개선 완료
 - ⚠️ 모든 컴포넌트: `::part()` 문서화 보완 필요
 - ⚠️ 일부 컴포넌트: Form 연동 테스트 필요
 
@@ -78,7 +78,6 @@ type: 'button' | 'submit' | 'reset'
 href?: string
 target?: '_self' | '_blank' | '_parent' | '_top'
 label?: string
-editable: boolean
 
 // Typography
 textFamily?: ButtonTextFamilyToken | string
@@ -91,14 +90,12 @@ textColor?: string
 
 - ✅ `tintoClick`: 클릭 이벤트 (ButtonClickDetail)
 - ✅ `tintoToggle`: 토글 상태 변경 (ButtonToggleDetail)
-- ✅ `labelChange`: 라벨 편집 시 (ButtonLabelChangeDetail)
 
 **접근성 (A11y)**
 
 - ✅ `aria-busy`: 로딩 상태
 - ✅ `aria-disabled`: 비활성화 상태
 - ✅ `aria-pressed`: 토글 버튼 상태
-- ✅ `role="textbox"`: 편집 모드
 - ✅ `focus-visible` 스타일링
 - ✅ 키보드 네비게이션 지원
 
@@ -115,7 +112,6 @@ textColor?: string
 - ✅ Form 연동 (`type="submit"`, `type="reset"`)
 - ✅ 링크 모드 (`href` 속성)
 - ✅ 토글 버튼 모드
-- ✅ 라벨 편집 모드 (`contenteditable`)
 - ✅ 로딩 상태 (스피너 오버레이)
 
 **브라우저 호환성**
@@ -127,7 +123,7 @@ textColor?: string
 
 **개선 완료** ✅
 
-- ✅ `editable` 모드에서 스크린 리더 안내 메시지 추가 완료 (`aria-label` 자동 설정)
+- ✅ 접근성 속성 패스스루 지원 (`aria-label`, `aria-describedby`)
 
 ---
 
@@ -554,7 +550,7 @@ fill: boolean = false
    - ✅ `tinto-typography`: 타이핑 애니메이션 시 `aria-live="polite"` 추가 완료
    - ✅ `tinto-typography`: 스크린 리더용 정적 텍스트 제공 완료
    - ✅ `tinto-typography`: `prefers-reduced-motion` 고려 완료
-   - ✅ `tinto-button`: 편집 모드 접근성 개선 완료
+   - ✅ `tinto-button`: 접근성 속성 패스스루 지원 완료
    - ⚠️ 모든 컴포넌트: 스크린 리더 테스트 수행 (수동 테스트 필요)
 
 2. **문서화 보완**
