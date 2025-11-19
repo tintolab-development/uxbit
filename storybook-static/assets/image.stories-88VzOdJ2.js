@@ -1,4 +1,4 @@
-import { h as s } from './iframe-D8ycX09S.js';
+import { h as s } from './iframe-BmXAU5mm.js';
 const l = {
     title: 'Uxbit/Image',
     component: 'tinto-image',
@@ -137,8 +137,8 @@ const l = {
       disabled: !1,
     },
   },
-  t = { render: (n) => s('tinto-image', { ...n }) },
-  o = {
+  o = { render: (t) => s('tinto-image', { ...t }) },
+  e = {
     args: {
       src: 'https://picsum.photos/800/450',
       alt: 'Image with placeholder',
@@ -147,7 +147,7 @@ const l = {
       width: '300px',
     },
   },
-  e = {
+  r = {
     args: {
       src: 'https://picsum.photos/800/450',
       alt: 'Clickable image link',
@@ -157,7 +157,7 @@ const l = {
       width: '300px',
     },
   },
-  r = {
+  a = {
     args: {
       src: 'https://picsum.photos/800/450',
       alt: 'Button image',
@@ -165,8 +165,9 @@ const l = {
       ratio: '16:9',
       width: '300px',
     },
+    render: (t) => s('tinto-image', { ...t }),
   },
-  a = {
+  i = {
     args: {
       src: 'https://picsum.photos/400/400',
       alt: 'Spinning image',
@@ -178,17 +179,17 @@ const l = {
       rotate: 'right',
     },
   },
-  i = {
+  n = {
     args: {
       src: 'https://picsum.photos/800/450',
       alt: 'Image with overlay',
       ratio: '16:9',
       width: '300px',
     },
-    render: (n) =>
+    render: (t) =>
       s(
         'tinto-image',
-        { ...n },
+        { ...t },
         s(
           'div',
           {
@@ -208,23 +209,23 @@ const l = {
         ),
       ),
   };
-t.parameters = {
-  ...t.parameters,
-  docs: {
-    ...t.parameters?.docs,
-    source: {
-      originalSource: `{
-  render: props => <tinto-image {...props} />
-}`,
-      ...t.parameters?.docs?.source,
-    },
-    description: { story: '기본 이미지 스토리', ...t.parameters?.docs?.description },
-  },
-};
 o.parameters = {
   ...o.parameters,
   docs: {
     ...o.parameters?.docs,
+    source: {
+      originalSource: `{
+  render: props => <tinto-image {...props} />
+}`,
+      ...o.parameters?.docs?.source,
+    },
+    description: { story: '기본 이미지 스토리', ...o.parameters?.docs?.description },
+  },
+};
+e.parameters = {
+  ...e.parameters,
+  docs: {
+    ...e.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -235,15 +236,15 @@ o.parameters = {
     width: '300px'
   }
 }`,
-      ...o.parameters?.docs?.source,
+      ...e.parameters?.docs?.source,
     },
-    description: { story: 'Placeholder 있는 버전', ...o.parameters?.docs?.description },
+    description: { story: 'Placeholder 있는 버전', ...e.parameters?.docs?.description },
   },
 };
-e.parameters = {
-  ...e.parameters,
+r.parameters = {
+  ...r.parameters,
   docs: {
-    ...e.parameters?.docs,
+    ...r.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -255,18 +256,18 @@ e.parameters = {
     width: '300px'
   }
 }`,
-      ...e.parameters?.docs?.source,
+      ...r.parameters?.docs?.source,
     },
     description: {
       story: '링크로 동작하는 버전 (href / target)',
-      ...e.parameters?.docs?.description,
+      ...r.parameters?.docs?.description,
     },
   },
 };
-r.parameters = {
-  ...r.parameters,
+a.parameters = {
+  ...a.parameters,
   docs: {
-    ...r.parameters?.docs,
+    ...a.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -275,17 +276,18 @@ r.parameters = {
     as: 'button',
     ratio: '16:9',
     width: '300px'
-  }
+  },
+  render: props => <tinto-image {...props} />
 }`,
-      ...r.parameters?.docs?.source,
+      ...a.parameters?.docs?.source,
     },
-    description: { story: '버튼 모드 (as="button")', ...r.parameters?.docs?.description },
+    description: { story: '버튼 모드 (as="button")', ...a.parameters?.docs?.description },
   },
 };
-a.parameters = {
-  ...a.parameters,
+i.parameters = {
+  ...i.parameters,
   docs: {
-    ...a.parameters?.docs,
+    ...i.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -299,15 +301,15 @@ a.parameters = {
     rotate: 'right'
   }
 }`,
-      ...a.parameters?.docs?.source,
+      ...i.parameters?.docs?.source,
     },
-    description: { story: '애니메이션 예제 (spin)', ...a.parameters?.docs?.description },
+    description: { story: '애니메이션 예제 (spin)', ...i.parameters?.docs?.description },
   },
 };
-i.parameters = {
-  ...i.parameters,
+n.parameters = {
+  ...n.parameters,
   docs: {
-    ...i.parameters?.docs,
+    ...n.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -331,19 +333,19 @@ i.parameters = {
       </div>
     </tinto-image>
 }`,
-      ...i.parameters?.docs?.source,
+      ...n.parameters?.docs?.source,
     },
-    description: { story: 'overlay 슬롯 사용 예시', ...i.parameters?.docs?.description },
+    description: { story: 'overlay 슬롯 사용 예시', ...n.parameters?.docs?.description },
   },
 };
 const p = ['Primary', 'WithPlaceholder', 'AsLink', 'AsButton', 'WithAnimation', 'WithOverlaySlot'];
 export {
-  r as AsButton,
-  e as AsLink,
-  t as Primary,
-  a as WithAnimation,
-  i as WithOverlaySlot,
-  o as WithPlaceholder,
+  a as AsButton,
+  r as AsLink,
+  o as Primary,
+  i as WithAnimation,
+  n as WithOverlaySlot,
+  e as WithPlaceholder,
   p as __namedExportsOrder,
   l as default,
 };
