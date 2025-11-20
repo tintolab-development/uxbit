@@ -9,6 +9,8 @@ const path = require('path');
 const OUTPUT_DIR = path.resolve(__dirname, '..', 'storybook-static');
 const SOURCE_FILE = path.join(OUTPUT_DIR, 'index.html');
 const FALLBACK_FILES = ['404.html', '200.html'].map((name) => path.join(OUTPUT_DIR, name));
+const STENCIL_ESM_DIR = path.resolve(__dirname, '..', 'dist', 'esm');
+const STORYBOOK_ASSETS_DIR = path.join(OUTPUT_DIR, 'assets');
 
 async function ensureFallbackFiles() {
   try {
@@ -25,7 +27,34 @@ async function ensureFallbackFiles() {
   );
 }
 
-ensureFallbackFiles().catch((error) => {
+async function copyStencilBundles() {
+  try {
+    await fs.access(STENCIL_ESM_DIR);
+  } catch {
+    throw new Error(`Cannot find ${STENCIL_ESM_DIR}. Run "pnpm build" before Storybook build.`);
+  }
+
+  const files = await fs.readdir(STENCIL_ESM_DIR);
+  const jsFiles = files.filter((file) => file.endsWith('.js'));
+
+  await fs.mkdir(STORYBOOK_ASSETS_DIR, { recursive: true });
+
+  await Promise.all(
+    jsFiles.map(async (file) => {
+      const src = path.join(STENCIL_ESM_DIR, file);
+      const dest = path.join(STORYBOOK_ASSETS_DIR, file);
+      await fs.copyFile(src, dest);
+      console.log(`Copied ${path.relative(process.cwd(), src)} -> ${path.relative(process.cwd(), dest)}`);
+    })
+  );
+}
+
+async function main() {
+  await ensureFallbackFiles();
+  await copyStencilBundles();
+}
+
+main().catch((error) => {
   console.error(error.message);
   process.exit(1);
 });
