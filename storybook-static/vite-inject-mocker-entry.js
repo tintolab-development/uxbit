@@ -1,12 +1,60 @@
-var l = Object.defineProperty;
-var c = (r, e, o) =>
-  e in r ? l(r, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : (r[e] = o);
-var t = (r, e, o) => c(r, typeof e != 'symbol' ? e + '' : e, o);
-import { MockerRegistry as n } from '@vitest/mocker';
-import { createCompilerHints as d, ModuleMocker as a } from '@vitest/mocker/browser';
-class _ {
+var c = Object.defineProperty;
+var n = (r, e, o) =>
+  e in r ? c(r, e, { enumerable: !0, configurable: !0, writable: !0, value: o }) : (r[e] = o);
+var t = (r, e, o) => n(r, typeof e != 'symbol' ? e + '' : e, o);
+class l {
   constructor() {
-    t(this, 'mocks', new n());
+    this.registry = new Map();
+  }
+  add(e) {
+    if (!e) return;
+    const o = e.url ?? e.id ?? Symbol();
+    this.registry.set(o, e);
+  }
+  delete(e) {
+    this.registry.delete(e);
+  }
+  clear() {
+    this.registry.clear();
+  }
+  get(e) {
+    return this.registry.get(e);
+  }
+  has(e) {
+    return this.registry.has(e);
+  }
+}
+class u {
+  constructor() {}
+  queueMock() {}
+  queueUnmock() {}
+  importActual() {
+    return Promise.resolve(void 0);
+  }
+  importMock() {
+    return Promise.resolve({});
+  }
+}
+function d() {
+  return {
+    hoisted(r) {
+      return typeof r == 'function' ? r() : r;
+    },
+    mock() {},
+    unmock() {},
+    doMock() {},
+    doUnmock() {},
+    importActual() {
+      return Promise.resolve(void 0);
+    },
+    importMock() {
+      return Promise.resolve({});
+    },
+  };
+}
+class a {
+  constructor() {
+    t(this, 'mocks', new l());
   }
   async register(e) {
     this.mocks.add(e);
@@ -34,17 +82,17 @@ const s = (r) => {
       return Promise.resolve();
   }
 };
-class m extends a {
+class m extends u {
   queueMock() {}
 }
-function u(r) {
+function k(r) {
   const e = new m(
     r('__vitest_mocker__'),
     {
       resolveId(o, i) {
         return s('resolveId');
       },
-      resolveMock(o, i, k) {
+      resolveMock(o, i, v) {
         return s('resolveMock');
       },
       async invalidate(o) {
@@ -54,6 +102,6 @@ function u(r) {
     (...o) => globalThis.__STORYBOOK_MODULE_TEST__.spyOn(...o),
     { root: '' },
   );
-  return ((globalThis.__vitest_mocker__ = e), d({ globalThisKey: '__vitest_mocker__' }));
+  return ((globalThis.__vitest_mocker__ = e), d());
 }
-globalThis.__STORYBOOK_MOCKER__ = u(() => new _());
+globalThis.__STORYBOOK_MOCKER__ = k(() => new a());

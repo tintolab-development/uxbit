@@ -23,32 +23,29 @@ const config: StorybookConfig = {
       ],
     };
 
-    // 2) @vitest/mocker를 완전히 외부화하여 번들에서 제외
-    finalConfig.build = {
-      ...(finalConfig.build ?? {}),
-      rollupOptions: {
-        ...(finalConfig.build?.rollupOptions ?? {}),
-        external: (id) => {
-          // @vitest/mocker 관련 모든 모듈을 외부화
-          if (id.includes('@vitest/mocker')) {
-            return true;
-          }
-          return false;
-        },
-      },
+    const CORE_STUB_ID = '\0vitest-mocker-core-stub';
+    const BROWSER_STUB_ID = '\0vitest-mocker-browser-stub';
+    const pickStubId = (target: string) => {
+      if (!target.includes('@vitest/mocker')) {
+        return null;
+      }
+
+      return target.includes('browser') ? BROWSER_STUB_ID : CORE_STUB_ID;
     };
 
-    // 3) 스토리북이 vitest 브라우저 런타임을 불러오려고 할 때
+    // 2) 스토리북이 vitest 브라우저 런타임을 불러오려고 할 때
     //    문제가 되는 경로를 가짜 모듈로 대체
     finalConfig.plugins = [
       ...(finalConfig.plugins ?? []),
       {
         name: 'stub-vitest-mocker-browser',
+        enforce: 'pre',
         // Vite 플러그인 훅
         resolveId(id: string, importer?: string) {
           // @vitest/mocker 관련 모든 import를 스텁으로 리다이렉트
-          if (id.includes('@vitest/mocker')) {
-            return { id: '\0vitest-mocker-stub', external: false };
+          const directMatch = pickStubId(id);
+          if (directMatch) {
+            return { id: directMatch, external: false };
           }
 
           // 상대 경로 import도 처리 (chunk-mocker.js에서 ./index.js 같은 경우)
@@ -57,38 +54,85 @@ const config: StorybookConfig = {
             importer.includes('@vitest/mocker') &&
             (id.startsWith('./') || id.startsWith('../'))
           ) {
-            return { id: '\0vitest-mocker-stub', external: false };
+            const relativeId = id.includes('browser') ? BROWSER_STUB_ID : CORE_STUB_ID;
+            return { id: relativeId, external: false };
           }
 
           return null;
         },
         load(id: string) {
           // 스텁 모듈 제공
-          if (id === '\0vitest-mocker-stub') {
+          if (id === CORE_STUB_ID) {
             return `
-              export function mockObject(obj) {
-                return obj;
+              class MockerRegistry {
+                constructor() {
+                  this.registry = new Map();
+                }
+
+                add(entry) {
+                  if (!entry) {
+                    return;
+                  }
+                  const key = entry.url ?? entry.id ?? Symbol();
+                  this.registry.set(key, entry);
+                }
+
+                delete(key) {
+                  this.registry.delete(key);
+                }
+
+                clear() {
+                  this.registry.clear();
+                }
+
+                get(key) {
+                  return this.registry.get(key);
+                }
+
+                has(key) {
+                  return this.registry.has(key);
+                }
               }
-              export default { mockObject };
+
+              export { MockerRegistry };
+              export default { MockerRegistry };
             `;
           }
 
-          // ENOTDIR가 나는 바로 그 경로
-          if (id.includes('@vitest/mocker/dist/index.js/browser')) {
-            return 'export {};';
-          }
-
-          // 내부에서 dist/index.js 자체를 직접 읽으려고 하는 경우도 방어
-          if (
-            id.includes('@vitest/mocker/dist/index.js') ||
-            id.includes('@vitest/mocker/dist/chunk-mocker.js') ||
-            id.includes('@vitest/mocker')
-          ) {
+          if (id === BROWSER_STUB_ID) {
             return `
-              export function mockObject(obj) {
-                return obj;
+              class ModuleMocker {
+                constructor() {}
+                queueMock() {}
+                queueUnmock() {}
+                importActual() {
+                  return Promise.resolve(undefined);
+                }
+                importMock() {
+                  return Promise.resolve({});
+                }
               }
-              export default { mockObject };
+
+              function createCompilerHints() {
+                return {
+                  hoisted(factory) {
+                    return typeof factory === 'function' ? factory() : factory;
+                  },
+                  mock() {},
+                  unmock() {},
+                  doMock() {},
+                  doUnmock() {},
+                  importActual() {
+                    return Promise.resolve(undefined);
+                  },
+                  importMock() {
+                    return Promise.resolve({});
+                  },
+                };
+              }
+
+              export { ModuleMocker, createCompilerHints };
+              export default { ModuleMocker, createCompilerHints };
             `;
           }
 

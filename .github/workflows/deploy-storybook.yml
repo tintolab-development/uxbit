@@ -40,8 +40,8 @@ jobs:
       - name: Build Stencil components
         run: pnpm run build
 
-      - name: Build Storybook
-        run: pnpm run storybook:build
+      - name: Build Storybook (with GitHub Pages fallbacks)
+        run: pnpm run storybook:build:gh-pages
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

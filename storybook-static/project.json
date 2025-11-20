@@ -1,5 +1,5 @@
 {
-  "generatedAt": 1763531042188,
+  "generatedAt": 1763626888296,
   "userSince": 1763095699598,
   "hasCustomBabel": false,
   "hasCustomWebpack": false,
@@ -18,7 +18,7 @@
   "framework": { "name": "@stencil/storybook-plugin" },
   "builder": "@storybook/builder-vite",
   "renderer": "@storybook/html",
-  "portableStoriesFileCount": 0,
+  "portableStoriesFileCount": 1,
   "applicationFileCount": 0,
   "storybookVersion": "9.1.16",
   "language": "typescript",
