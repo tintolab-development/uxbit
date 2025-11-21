@@ -1,4 +1,4 @@
-import { h as i } from './iframe-CPtNcteW.js';
+import { h as i } from './iframe-BiPF79mY.js';
 const l = ['system', 'pretendard', 'paperlogy', 'clash-display', 'climate-crisis'],
   a = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
   p = ['char', 'word'],
