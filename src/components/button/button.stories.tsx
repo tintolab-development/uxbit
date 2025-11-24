@@ -1,4 +1,3 @@
-// button.stories.tsx
 import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
 import type { TintoButton } from './button';

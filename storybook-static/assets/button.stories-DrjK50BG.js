@@ -1,4 +1,4 @@
-import { h as i } from './iframe-BiPF79mY.js';
+import { h as i } from './iframe-CreP7WI6.js';
 const p = {
     title: 'Uxbit/Button',
     component: 'tinto-button',
