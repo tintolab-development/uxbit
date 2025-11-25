@@ -7,7 +7,7 @@ import {
 } from './index-3CssInHd.js';
 
 const buttonCss =
-  ":host{display:inline-block}:host([block]){display:block}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5em;cursor:pointer;user-select:none;white-space:nowrap;border:var(--t-button-border, 1px solid #111827);background:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-radius:var(--t-button-radius, var(--t-button-variant-radius, 10px));padding:var(--t-button-py, 0.55rem) var(--t-button-px, 0.9rem);line-height:1;width:var(--t-button-w, auto);min-height:2.25rem;transition:transform 0.03s ease,\n    opacity 0.15s ease,\n    background-color 0.15s ease,\n    color 0.15s ease,\n    border-color 0.15s ease,\n    box-shadow 0.15s ease;position:relative}.tinto-button:focus-visible{outline:var(--t-button-ring, 2px solid #6366f1);outline-offset:2px}:host([pill]) .tinto-button{border-radius:9999px}:host([elevated]) .tinto-button{box-shadow:0 8px 20px rgba(0, 0, 0, 0.12)}:host([block]) .tinto-button{width:100%}.tinto-button[disabled]{cursor:not-allowed;opacity:0.55}.tinto-button:active:not([disabled]){transform:translateY(1px)}:host([variant='primary']) .tinto-button{--t-button-variant-radius:0px;--t-button-bg:#111827;--t-button-fg:#f9fafb;--t-button-border:1px solid transparent}:host([variant='secondary']) .tinto-button{--t-button-variant-radius:12px;--t-button-bg:#e5e7eb;--t-button-fg:#111827;--t-button-border:1px solid transparent}:host([variant='tertiary']) .tinto-button{--t-button-variant-radius:100px;--t-button-bg:#f3f4f6;--t-button-fg:var(--color-fg, #111827);--t-button-border:1px solid transparent}:host([outline]) .tinto-button{--t-button-bg:#ffffff;--t-button-border:1px solid currentColor}:host([variant='primary'][outline]) .tinto-button{--t-button-fg:var(--color-primary, #111827)}:host([variant='secondary'][outline]),:host([variant='tertiary'][outline]) .tinto-button{--t-button-fg:var(--color-fg, #111827)}:host([size='sm']) .tinto-button{font-size:0.875rem;--t-button-py:0.4rem;--t-button-px:0.7rem;min-height:2rem}:host([size='md']) .tinto-button{font-size:1rem}:host([size='lg']) .tinto-button{font-size:1.125rem;--t-button-py:0.7rem;--t-button-px:1.1rem;min-height:2.6rem}.prefix,.suffix{display:inline-flex;align-items:center;justify-content:center}::slotted([slot='prefix']),::slotted([slot='suffix']){display:inline-flex}.content{display:inline-flex;align-items:center;justify-content:center}.label{display:inline;font-family:var(--t-button-label-ff, inherit);font-size:var(--t-button-label-fs, inherit);font-weight:var(--t-button-label-fw, inherit);color:var(--t-button-label-color, currentColor);line-height:1.1}:host([loading]) .tinto-button{pointer-events:none}.spinner{display:none;width:1em;height:1em;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:tinto-button-spin 0.8s linear infinite;position:absolute;inset:0;margin:auto;pointer-events:none}:host([loading]) .spinner{display:inline-block}:host([loading]) .content{opacity:0}:host([loading]) .prefix,:host([loading]) .suffix{opacity:0}:host([toggle][pressed]) .tinto-button{background:var(--color-primary, #111827);color:#ffffff;--t-button-border:1px solid transparent}@keyframes tinto-button-spin{to{transform:rotate(360deg)}}@media (forced-colors: active){.tinto-button{border:1px solid CanvasText}}";
+  ":host{display:inline-block}:host([block]){display:block}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5em;cursor:pointer;-webkit-user-select:none;user-select:none;white-space:nowrap;border:var(--t-button-border, 1px solid #111827);background:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-radius:var(--t-button-radius, var(--t-button-variant-radius, 10px));padding:var(--t-button-py, 0.55rem) var(--t-button-px, 0.9rem);line-height:1;width:var(--t-button-w, auto);min-height:2.25rem;transition:transform 0.03s ease,\n    opacity 0.15s ease,\n    background-color 0.15s ease,\n    color 0.15s ease,\n    border-color 0.15s ease,\n    box-shadow 0.15s ease;position:relative}.tinto-button:focus-visible{outline:var(--t-button-ring, 2px solid #6366f1);outline-offset:2px}:host([pill]) .tinto-button{border-radius:9999px}:host([elevated]) .tinto-button{box-shadow:0 8px 20px rgba(0, 0, 0, 0.12)}:host([block]) .tinto-button{width:100%}.tinto-button[disabled]{cursor:not-allowed;opacity:0.55}.tinto-button:active:not([disabled]){transform:translateY(1px)}:host([variant='primary']) .tinto-button{--t-button-variant-radius:0px;--t-button-bg:#111827;--t-button-fg:#f9fafb;--t-button-border:1px solid transparent}:host([variant='secondary']) .tinto-button{--t-button-variant-radius:12px;--t-button-bg:#e5e7eb;--t-button-fg:#111827;--t-button-border:1px solid transparent}:host([variant='tertiary']) .tinto-button{--t-button-variant-radius:100px;--t-button-bg:#f3f4f6;--t-button-fg:var(--color-fg, #111827);--t-button-border:1px solid transparent}:host([outline]) .tinto-button{--t-button-bg:#ffffff;--t-button-border:1px solid currentColor}:host([variant='primary'][outline]) .tinto-button{--t-button-fg:var(--color-primary, #111827)}:host([variant='secondary'][outline]),:host([variant='tertiary'][outline]) .tinto-button{--t-button-fg:var(--color-fg, #111827)}:host([size='sm']) .tinto-button{font-size:0.875rem;--t-button-py:0.4rem;--t-button-px:0.7rem;min-height:2rem}:host([size='md']) .tinto-button{font-size:1rem}:host([size='lg']) .tinto-button{font-size:1.125rem;--t-button-py:0.7rem;--t-button-px:1.1rem;min-height:2.6rem}.prefix,.suffix{display:inline-flex;align-items:center;justify-content:center}::slotted([slot='prefix']),::slotted([slot='suffix']){display:inline-flex}.content{display:inline-flex;align-items:center;justify-content:center}.label{display:inline;font-family:var(--t-button-label-ff, inherit);font-size:var(--t-button-label-fs, inherit);font-weight:var(--t-button-label-fw, inherit);color:var(--t-button-label-color, currentColor);line-height:1.1}:host([loading]) .tinto-button{pointer-events:none}.spinner{display:none;width:1em;height:1em;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:tinto-button-spin 0.8s linear infinite;position:absolute;inset:0;margin:auto;pointer-events:none}:host([loading]) .spinner{display:inline-block}:host([loading]) .content{opacity:0}:host([loading]) .prefix,:host([loading]) .suffix{opacity:0}:host([toggle][pressed]) .tinto-button{background:var(--color-primary, #111827);color:#ffffff;--t-button-border:1px solid transparent}@keyframes tinto-button-spin{to{transform:rotate(360deg)}}@media (forced-colors: active){.tinto-button{border:1px solid CanvasText}}";
 
 const FAMILY_MAP$1 = {
   paperlogy:
@@ -178,14 +178,14 @@ const TintoButton = class {
     }
     return '';
   }
-  // ===== Render =====
   render() {
-    const ariaBusy = this.loading ? 'true' : 'false';
-    const ariaDisabled = this.disabled ? 'true' : 'false';
-    const ariaPressed =
-      this.toggle && !this.disabled ? (this.pressed ? 'true' : 'false') : undefined;
+    // 상태 플래그 (boolean 위주로)
+    const isBusy = this.loading;
+    const isDisabled = this.disabled;
+    const isToggle = this.toggle && !this.disabled;
+    const isPressed = isToggle ? this.pressed : undefined;
     const labelText = this.resolveLabel();
-    // 호스트의 aria-label 패스스루
+    // 호스트의 aria-* 패스스루
     const hostAriaLabel = this.el.getAttribute('aria-label');
     const hostAriaDescribedby = this.el.getAttribute('aria-describedby');
     const a11yProps = {};
@@ -193,49 +193,50 @@ const TintoButton = class {
     if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
     return h(
       Host,
+      // Host 쪽은 상태만 알려주는 용도로 boolean 사용
       {
-        key: '570ba4adc13d8ee66f370336073e317980b9c69f',
-        'aria-busy': ariaBusy,
-        'aria-disabled': ariaDisabled,
-        'aria-pressed': ariaPressed,
+        key: '1f245cec31388cafc74d951404a0464854d35033',
+        'aria-busy': isBusy || undefined,
+        'aria-disabled': isDisabled || undefined,
+        'aria-pressed': isToggle ? (isPressed ? 'true' : 'false') : undefined,
       },
       h(
         'button',
         {
-          key: 'c03b06cac7dc2bed5af0621a24ccbba786dc06c7',
+          key: 'dd00afbdf8f25cc31a442950532ef3028537bb9a',
           class: 'tinto-button',
           part: 'button',
           type: 'button',
-          disabled: this.disabled,
-          'aria-busy': ariaBusy,
-          'aria-pressed': ariaPressed,
+          disabled: isDisabled,
+          'aria-busy': String(isBusy) || 'false',
+          'aria-pressed': isToggle ? String(isPressed) : 'false',
           onClick: this.handleClick,
           ...a11yProps,
         },
         h('span', {
-          key: 'd11c60aea46204e1e36a645c9dba5a6769bbcf13',
+          key: 'f0834c7456e25d9b9eb585b8d10887692ceafc93',
           class: 'spinner',
           part: 'spinner',
-          'aria-hidden': this.loading ? 'false' : 'true',
+          'aria-hidden': 'false',
         }),
         h(
           'span',
-          { key: '48e457acf7c1e8949afa275a5109122fa94deb66', class: 'prefix', part: 'prefix' },
-          h('slot', { key: '0cfe75b8e735dea8de535901469d259a3c5cb33a', name: 'prefix' }),
+          { key: '8c3844fb8cd55fdcecd09fae904c1b4c7154ed5a', class: 'prefix', part: 'prefix' },
+          h('slot', { key: 'b620cd5d3901acbccd981cc4c65feb0cc7a7d081', name: 'prefix' }),
         ),
         h(
           'span',
-          { key: '756334f62f5a133702edc2e8d982043d6781bcc2', class: 'content', part: 'label' },
+          { key: '49bd118a3a5f21a86f4e0ab2b47b6b6f0f0e8468', class: 'content', part: 'label' },
           h(
             'span',
-            { key: '10c5403529f0b7aa393a642a576cfdc6bf07fe24', class: 'label' },
-            labelText || h('slot', { key: '557d643567e41028d91bac0ef83d9b9788b31b53' }),
+            { key: '2cf50942bd447a73fe963545a65f91a856b9a3bc', class: 'label' },
+            labelText || h('slot', { key: 'b857e1cacb7e1b59bdd2f9f08ae1fb16649b65d3' }),
           ),
         ),
         h(
           'span',
-          { key: 'd2260eb2a0ec04e173d32fbb195d82bfca3dc42f', class: 'suffix', part: 'suffix' },
-          h('slot', { key: 'bf707e7a64e0dc1d2e48c49ed7e651ca40300efb', name: 'suffix' }),
+          { key: '3d861fa1c2eb89b810efb851a230b3634a3ce893', class: 'suffix', part: 'suffix' },
+          h('slot', { key: '6ec9392d0490e3fdb3d105bf6b37cff2e7b49aa2', name: 'suffix' }),
         ),
       ),
     );

@@ -1,6 +1,6 @@
-import { h as i } from './iframe-CE9bZ-GX.js';
+import { h as i } from './iframe-D-gCD29K.js';
 const p = {
-    title: 'Uxbit/Button',
+    title: 'Uxbit/QButton',
     component: 'tinto-button',
     parameters: { layout: 'centered' },
     args: {

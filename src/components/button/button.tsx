@@ -221,35 +221,41 @@ export class TintoButton {
     return '';
   }
 
-  // ===== Render =====
   render() {
-    const ariaBusy = this.loading ? 'true' : 'false';
-    const ariaDisabled = this.disabled ? 'true' : 'false';
-    const ariaPressed =
-      this.toggle && !this.disabled ? (this.pressed ? 'true' : 'false') : undefined;
+    // 상태 플래그 (boolean 위주로)
+    const isBusy = this.loading;
+    const isDisabled = this.disabled;
+    const isToggle = this.toggle && !this.disabled;
+    const isPressed = isToggle ? this.pressed : undefined;
 
     const labelText = this.resolveLabel();
 
-    // 호스트의 aria-label 패스스루
+    // 호스트의 aria-* 패스스루
     const hostAriaLabel = this.el.getAttribute('aria-label');
     const hostAriaDescribedby = this.el.getAttribute('aria-describedby');
-    const a11yProps: any = {};
+    const a11yProps: Record<string, any> = {};
     if (hostAriaLabel) a11yProps['aria-label'] = hostAriaLabel;
     if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
 
     return (
-      <Host aria-busy={ariaBusy} aria-disabled={ariaDisabled} aria-pressed={ariaPressed}>
+      <Host
+        // Host 쪽은 상태만 알려주는 용도로 boolean 사용
+        aria-busy={isBusy || undefined}
+        aria-disabled={isDisabled || undefined}
+        aria-pressed={isToggle ? (isPressed ? 'true' : 'false') : undefined}
+      >
         <button
           class="tinto-button"
           part="button"
           type="button"
-          disabled={this.disabled}
-          aria-busy={ariaBusy}
-          aria-pressed={ariaPressed}
+          disabled={isDisabled}
+          // 버튼 본체에 실제 ARIA 상태 지정 (boolean 사용)
+          aria-busy={String(isBusy) || 'false'}
+          aria-pressed={isToggle ? String(isPressed) : 'false'}
           onClick={this.handleClick}
           {...a11yProps}
         >
-          <span class="spinner" part="spinner" aria-hidden={this.loading ? 'false' : 'true'}></span>
+          <span class="spinner" part="spinner" aria-hidden="false"></span>
 
           <span class="prefix" part="prefix">
             <slot name="prefix" />

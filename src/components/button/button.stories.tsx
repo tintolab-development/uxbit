@@ -9,7 +9,7 @@ type ExtraArgs = {
 };
 
 const meta: Meta<TintoButton & ExtraArgs> = {
-  title: 'Uxbit/Button',
+  title: 'Uxbit/QButton',
   component: 'tinto-button',
   parameters: {
     layout: 'centered',

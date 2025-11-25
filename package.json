@@ -40,6 +40,7 @@
     "storybook": "pnpm run build && pnpm run storybook:build && storybook dev -p 6006 --no-open",
     "storybook:build": "storybook build --output-dir storybook-static",
     "storybook:preview:static": "serve storybook-static -s -l 6007",
+    "storybook:preview:static:no-ssl": "serve storybook-static -s -l 6007",
     "storybook:build:gh-pages": "pnpm run storybook:build && node scripts/prepare-storybook-gh-pages.cjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",

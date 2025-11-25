@@ -21,11 +21,13 @@
   gap: 0.5em;
 
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   white-space: nowrap;
 
   border: var(--t-button-border, 1px solid #111827);
   background: var(--t-button-bg, #111827);
+
   color: var(--t-button-fg, #ffffff);
 
   border-radius: var(--t-button-radius, var(--t-button-variant-radius, 10px));
