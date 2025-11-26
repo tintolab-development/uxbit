@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
+import { ButtonSize, ButtonVariant } from './components/button/button.types';
 import {
   AnimationRotate,
   AsKind,
@@ -46,6 +47,7 @@ import {
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
 export { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
+export { ButtonSize, ButtonVariant } from './components/button/button.types';
 export {
   AnimationRotate,
   AsKind,
@@ -113,7 +115,18 @@ export namespace Components {
      */
     variant: TintoBadgeVariant;
   }
-  interface TintoButton {}
+  interface TintoButton {
+    /**
+     * 버튼 크기 토큰 예: 'sm' | 'md' | 'lg'
+     * @default 'md'
+     */
+    size: ButtonSize;
+    /**
+     * 시각 스타일(색 계열) 예: 'primary' | 'secondary' | 'tertiary'
+     * @default 'primary'
+     */
+    variant: ButtonVariant;
+  }
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
@@ -597,7 +610,18 @@ declare namespace LocalJSX {
      */
     variant?: TintoBadgeVariant;
   }
-  interface TintoButton {}
+  interface TintoButton {
+    /**
+     * 버튼 크기 토큰 예: 'sm' | 'md' | 'lg'
+     * @default 'md'
+     */
+    size?: ButtonSize;
+    /**
+     * 시각 스타일(색 계열) 예: 'primary' | 'secondary' | 'tertiary'
+     * @default 'primary'
+     */
+    variant?: ButtonVariant;
+  }
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)

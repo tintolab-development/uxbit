@@ -1,244 +1,18 @@
-import {
-  r as registerInstance,
-  c as createEvent,
-  g as getElement,
-  h,
-  H as Host,
-} from './index-3CssInHd.js';
+import { r as registerInstance, h, c as createEvent, g as getElement } from './index-3CssInHd.js';
 
 const buttonCss =
   ":host{display:inline-block}:host([block]){display:block}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5em;cursor:pointer;-webkit-user-select:none;user-select:none;white-space:nowrap;border:var(--t-button-border, 1px solid #111827);background:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-radius:var(--t-button-radius, var(--t-button-variant-radius, 10px));padding:var(--t-button-py, 0.55rem) var(--t-button-px, 0.9rem);line-height:1;width:var(--t-button-w, auto);min-height:2.25rem;transition:transform 0.03s ease,\n    opacity 0.15s ease,\n    background-color 0.15s ease,\n    color 0.15s ease,\n    border-color 0.15s ease,\n    box-shadow 0.15s ease;position:relative}.tinto-button:focus-visible{outline:var(--t-button-ring, 2px solid #6366f1);outline-offset:2px}:host([pill]) .tinto-button{border-radius:9999px}:host([elevated]) .tinto-button{box-shadow:0 8px 20px rgba(0, 0, 0, 0.12)}:host([block]) .tinto-button{width:100%}.tinto-button[disabled]{cursor:not-allowed;opacity:0.55}.tinto-button:active:not([disabled]){transform:translateY(1px)}:host([variant='primary']) .tinto-button{--t-button-variant-radius:0px;--t-button-bg:#111827;--t-button-fg:#f9fafb;--t-button-border:1px solid transparent}:host([variant='secondary']) .tinto-button{--t-button-variant-radius:12px;--t-button-bg:#e5e7eb;--t-button-fg:#111827;--t-button-border:1px solid transparent}:host([variant='tertiary']) .tinto-button{--t-button-variant-radius:100px;--t-button-bg:#f3f4f6;--t-button-fg:var(--color-fg, #111827);--t-button-border:1px solid transparent}:host([outline]) .tinto-button{--t-button-bg:#ffffff;--t-button-border:1px solid currentColor}:host([variant='primary'][outline]) .tinto-button{--t-button-fg:var(--color-primary, #111827)}:host([variant='secondary'][outline]),:host([variant='tertiary'][outline]) .tinto-button{--t-button-fg:var(--color-fg, #111827)}:host([size='sm']) .tinto-button{font-size:0.875rem;--t-button-py:0.4rem;--t-button-px:0.7rem;min-height:2rem}:host([size='md']) .tinto-button{font-size:1rem}:host([size='lg']) .tinto-button{font-size:1.125rem;--t-button-py:0.7rem;--t-button-px:1.1rem;min-height:2.6rem}.prefix,.suffix{display:inline-flex;align-items:center;justify-content:center}::slotted([slot='prefix']),::slotted([slot='suffix']){display:inline-flex}.content{display:inline-flex;align-items:center;justify-content:center}.label{display:inline;font-family:var(--t-button-label-ff, inherit);font-size:var(--t-button-label-fs, inherit);font-weight:var(--t-button-label-fw, inherit);color:var(--t-button-label-color, currentColor);line-height:1.1}:host([loading]) .tinto-button{pointer-events:none}.spinner{display:none;width:1em;height:1em;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:tinto-button-spin 0.8s linear infinite;position:absolute;inset:0;margin:auto;pointer-events:none}:host([loading]) .spinner{display:inline-block}:host([loading]) .content{opacity:0}:host([loading]) .prefix,:host([loading]) .suffix{opacity:0}:host([toggle][pressed]) .tinto-button{background:var(--color-primary, #111827);color:#ffffff;--t-button-border:1px solid transparent}@keyframes tinto-button-spin{to{transform:rotate(360deg)}}@media (forced-colors: active){.tinto-button{border:1px solid CanvasText}}";
 
-const FAMILY_MAP$1 = {
-  paperlogy:
-    '"Paperlogy", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  'clash-display':
-    '"Clash Display", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  'climate-crisis':
-    '"Climate Crisis", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  pretendard:
-    'Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  system:
-    'system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-};
-const SIZE_MAP = {
-  sm: '16px',
-  md: '20px',
-  lg: '40px',
-  xl: '64px',
-};
-const WEIGHT_MAP = {
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-  black: '900',
-};
 const TintoButton = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
-    this.tintoToggle = createEvent(this, 'tintoToggle');
   }
-  get hostEl() {
-    return getElement(this);
-  }
-  // ===== Visual / Layout tokens =====
-  /** 색/스타일 프리셋 (primary / secondary / ghost 등) */
-  variant = 'primary';
-  /** 버튼 크기(primitives에 연결되는 토큰) */
-  size = 'md';
-  /** pill 형태 (완전 라운드) */
-  pill = false;
-  /** 가로 전체폭 사용 여부 */
-  block = false;
-  /** 살짝 떠 있는 느낌의 그림자 사용 여부 */
-  elevated = false;
-  /** outline 스타일 여부 (filled 대신 테두리) */
-  outline = false;
-  /** border-radius 토큰(숫자만 넣으면 px 처리) */
-  radius;
-  // ===== State / Behavior =====
-  /** 비활성화 여부 */
-  disabled = false;
-  /** 로딩 상태 (스피너 표시 + 클릭 막기) */
-  loading = false;
-  /** 토글 버튼 모드 (pressed 토글) */
-  toggle = false;
-  /** 토글 상태 (toggle=true 일 때 사용, mutable) */
-  pressed = false;
-  /**
-   * form 동작 타입
-   * - "button": 기본 (아무 것도 안 함)
-   * - "submit": 조상 form submit
-   * - "reset": 조상 form reset
-   */
-  type = 'button';
-  /** 링크 모드일 때 이동할 href */
-  href;
-  /** 링크 타겟 (href 지정 시) */
-  target;
-  /** 텍스트 라벨(슬롯 대신 사용 가능) */
-  label;
-  // ===== Typography tokens =====
-  /** 라벨 폰트 패밀리 토큰 */
-  textFamily;
-  /** 라벨 폰트 크기 토큰 또는 raw 값 (ex. "18px") */
-  textSize;
-  /** 라벨 폰트 두께 토큰 또는 raw 값 */
-  textWeight;
-  /** 라벨 폰트 컬러 */
-  textColor;
-  // ===== Events =====
-  /** 토글 상태 변경 이벤트 (pressed 값 전달) */
-  tintoToggle;
-  // ===== Lifecycle =====
-  componentWillLoad() {
-    this.applyStyleTokens();
-  }
-  handleStyleTokenChange() {
-    this.applyStyleTokens();
-  }
-  // ===== Style token → CSS Custom Properties =====
-  applyStyleTokens() {
-    const style = this.hostEl.style;
-    // font-family
-    if (this.textFamily) {
-      style.setProperty('--t-button-label-ff', this.resolveFamily(this.textFamily));
-    } else {
-      style.removeProperty('--t-button-label-ff');
-    }
-    // font-size
-    if (this.textSize) {
-      const key = this.textSize.toString().trim().toLowerCase();
-      const mapped = SIZE_MAP[key] ?? this.textSize.toString();
-      style.setProperty('--t-button-label-fs', mapped);
-    } else {
-      style.removeProperty('--t-button-label-fs');
-    }
-    // font-weight
-    if (this.textWeight) {
-      const key = this.textWeight.toString().trim().toLowerCase();
-      const mapped = WEIGHT_MAP[key] ?? this.textWeight.toString();
-      style.setProperty('--t-button-label-fw', mapped);
-    } else {
-      style.removeProperty('--t-button-label-fw');
-    }
-    // font-color
-    if (this.textColor) {
-      style.setProperty('--t-button-label-color', this.textColor);
-    } else {
-      style.removeProperty('--t-button-label-color');
-    }
-    // radius → px 처리
-    if (this.radius != null && this.radius.trim() !== '') {
-      const trimmed = this.radius.trim();
-      const value = /^\d+(\.\d+)?$/.test(trimmed) ? `${trimmed}px` : trimmed;
-      style.setProperty('--t-button-radius', value);
-    } else {
-      style.removeProperty('--t-button-radius');
-    }
-  }
-  resolveFamily(token) {
-    const key = token.toString().toLowerCase().trim();
-    if (FAMILY_MAP$1[key]) {
-      return FAMILY_MAP$1[key];
-    }
-    if (key === 'clash' || key === 'clashdisplay') {
-      return FAMILY_MAP$1['clash-display'];
-    }
-    if (key === 'climate' || key === 'climatecrisis') {
-      return FAMILY_MAP$1['climate-crisis'];
-    }
-    if (key === 'paper') {
-      return FAMILY_MAP$1.paperlogy;
-    }
-    if (key === 'pretendard') {
-      return FAMILY_MAP$1.pretendard;
-    }
-    return FAMILY_MAP$1.system;
-  }
-  // ===== ARIA helpers =====
-  get ariaBusy() {
-    return this.loading ? 'true' : undefined;
-  }
-  get ariaDisabled() {
-    return this.disabled ? 'true' : undefined;
-  }
-  get ariaPressed() {
-    if (!this.toggle || this.disabled) return undefined;
-    return this.pressed ? 'true' : 'false';
-  }
-  resolveLabel() {
-    if (this.label && this.label.trim().length > 0) {
-      return this.label.trim();
-    }
-    return '';
-  }
-  // ===== Render =====
   render() {
-    const labelText = this.resolveLabel();
-    // 호스트의 aria-* 패스스루
-    const hostAriaLabel = this.hostEl.getAttribute('aria-label');
-    const hostAriaDescribedby = this.hostEl.getAttribute('aria-describedby');
-    const a11yProps = {};
-    if (hostAriaLabel) a11yProps['aria-label'] = hostAriaLabel;
-    if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
     return h(
-      Host,
-      {
-        key: '3118f7934737f2c29909be2fe2c62119ced24d7a',
-        'aria-busy': this.ariaBusy,
-        'aria-disabled': this.ariaDisabled,
-        'aria-pressed': this.ariaPressed,
-      },
-      h(
-        'button',
-        {
-          key: 'b33c7acda0471cf1a9075716d0fb7d6767806834',
-          class: 'tinto-button',
-          part: 'button',
-          type: 'button',
-          disabled: this.disabled,
-          'aria-busy': this.ariaBusy,
-          'aria-pressed': this.ariaPressed,
-          ...a11yProps,
-        },
-        h('span', {
-          key: '704085d30b4a9bd3c5e437096f57afd3624d5675',
-          class: 'spinner',
-          part: 'spinner',
-          'aria-hidden': this.loading ? 'false' : 'true',
-        }),
-        h(
-          'span',
-          { key: '123b43e2c5bff71ab1dec9b28bcb28eb7503318f', class: 'prefix', part: 'prefix' },
-          h('slot', { key: '7ec36bda0cc7b30d4bd3732c014366c5d7990fb9', name: 'prefix' }),
-        ),
-        h(
-          'span',
-          { key: 'fc3d3dc7b51c06371ee18946fd5b294956b5f340', class: 'content', part: 'label' },
-          h(
-            'span',
-            { key: '91026feacbca6976b29c783d160d7b1768c9d555', class: 'label' },
-            labelText || h('slot', { key: '1afd423046a413753815f147abb509b047b8ba58' }),
-          ),
-        ),
-        h(
-          'span',
-          { key: '74601596d131bfadc421dc8f671ee0b1ce7bc68b', class: 'suffix', part: 'suffix' },
-          h('slot', { key: 'b4c1cf4c9b449c44f928a4e74a817a1ae30985e9', name: 'suffix' }),
-        ),
-      ),
+      'button',
+      { key: '8424e459363ff2a9b8e7f10de6ba7cdb6c0c6fb1', class: 'tinto-button' },
+      h('slot', { key: 'c33f7a783468dc034e355483697e429d80384ac0' }, 'Button'),
     );
-  }
-  static get watchers() {
-    return {
-      textFamily: ['handleStyleTokenChange'],
-      textSize: ['handleStyleTokenChange'],
-      textWeight: ['handleStyleTokenChange'],
-      textColor: ['handleStyleTokenChange'],
-      radius: ['handleStyleTokenChange'],
-    };
   }
 };
 TintoButton.style = buttonCss;
@@ -918,7 +692,7 @@ const TintoSection = class {
     return h(
       'section',
       {
-        key: 'b68aa29d7fdbe5839b33a522266e659cd4122003',
+        key: '659a34fc57a40360036ede108ed4d101005b6536',
         part: 'root',
         class: 'tinto-section',
         style: styleVars,
@@ -928,7 +702,7 @@ const TintoSection = class {
         'aria-describedby': ariaDescribedby,
         tabIndex: tabIndex,
       },
-      h('slot', { key: 'f2a07b3f065d5aaf75dfc4872d226cc0b1270b98' }),
+      h('slot', { key: '11ad1949eaff728eb47a1c9c29d5ec8fdda4c907' }),
     );
   }
 };
@@ -1247,7 +1021,7 @@ const TintoTypography = class {
     const ariaHidden = this.visible ? null : 'true';
     const rel = this.computeRel();
     // 슬롯 + fallback 텍스트
-    const slotNode = h('slot', { key: 'b5a5dc4279dfd5cec9b2f38fc5391f8c43df4fb3' });
+    const slotNode = h('slot', { key: 'aa9f9f5f3146fedbb02319d0b6f6627749079632' });
     // rolling=true 이면 슬롯 텍스트를 .typing-effect span으로 감싼다
     let typedSpan;
     let staticTextForSR = null; // 스크린 리더용 정적 텍스트
@@ -1259,7 +1033,7 @@ const TintoTypography = class {
         staticTextForSR = h(
           'span',
           {
-            key: '121ed6b2ddacca233148e9f734c50a120887e874',
+            key: '962ed670c861f6a866e0d54361855150fd41e142',
             class: 'sr-only',
             'aria-live': 'polite',
           },
@@ -1269,7 +1043,7 @@ const TintoTypography = class {
       typedSpan = h(
         'span',
         {
-          key: '5330eb23db89663bf68754cbd5f598e634056b91',
+          key: '883741fb403bfd90dd9e47ec39c4e40d797a3f20',
           class: 'typing-effect',
           ref: (el) => (this.typingEl = el),
           'aria-live': 'polite',
@@ -1297,7 +1071,7 @@ const TintoTypography = class {
     return h(
       Tag,
       {
-        key: 'f04dd85a0ee0d32584eb7731df076941ad0cb34f',
+        key: '8bc7a6da33c1949bd742464830104d8851fd6007',
         part: 'root',
         class: `tinto-typography ${this.variant} ${this.rolling ? 'has-typing' : ''}`,
         style: style,
@@ -1397,15 +1171,15 @@ const TintoWrapper = class {
     return h(
       'div',
       {
-        key: 'bcfabe9b569584e5e3b5b6aaca4c84cdc9e5d49d',
+        key: 'b23d863ae8e7c1629be640fb1176e39cda2d3d8d',
         part: 'root',
         class: { 'tw-root': true, 'tw-fill': this.fill },
         style: styleVars,
       },
       h(
         'div',
-        { key: 'cd201c2322c4bba96b3e22a86e33001c476ea050', part: 'inner' },
-        h('slot', { key: '7ccc3677c1fe494f3a213def89dc7a53f5fe535d' }),
+        { key: '1dde12e109b0654ff35db4435d3a6a9537f637ec', part: 'inner' },
+        h('slot', { key: '55ca3c0837966c827eda1fe6c76e7f6c989147ed' }),
       ),
     );
   }
