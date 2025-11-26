@@ -1,65 +1,55 @@
 {
   "v": 5,
   "entries": {
-    "uxbit-image2--primary": {
+    "components-tintobutton--primary": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-image2--primary",
+      "id": "components-tintobutton--primary",
       "name": "Primary",
-      "title": "Uxbit/Image2",
+      "title": "Components/TintoButton",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Primary"
     },
-    "uxbit-image2--with-placeholder": {
+    "components-tintobutton--secondary": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-image2--with-placeholder",
-      "name": "With Placeholder",
-      "title": "Uxbit/Image2",
+      "id": "components-tintobutton--secondary",
+      "name": "Secondary",
+      "title": "Components/TintoButton",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
-      "exportName": "WithPlaceholder"
+      "exportName": "Secondary"
     },
-    "uxbit-image2--as-link": {
+    "components-tintobutton--ghost": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-image2--as-link",
-      "name": "As Link",
-      "title": "Uxbit/Image2",
+      "id": "components-tintobutton--ghost",
+      "name": "Ghost",
+      "title": "Components/TintoButton",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
-      "exportName": "AsLink"
+      "exportName": "Ghost"
     },
-    "uxbit-image2--as-button": {
+    "components-tintobutton--block": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-image2--as-button",
-      "name": "As Button",
-      "title": "Uxbit/Image2",
+      "id": "components-tintobutton--block",
+      "name": "Block (Full width)",
+      "title": "Components/TintoButton",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
-      "exportName": "AsButton"
+      "exportName": "Block"
     },
-    "uxbit-image2--with-animation": {
+    "components-tintobutton--disabled": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-image2--with-animation",
-      "name": "With Animation",
-      "title": "Uxbit/Image2",
+      "id": "components-tintobutton--disabled",
+      "name": "Disabled",
+      "title": "Components/TintoButton",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
-      "exportName": "WithAnimation"
-    },
-    "uxbit-image2--with-overlay-slot": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-image2--with-overlay-slot",
-      "name": "With Overlay Slot",
-      "title": "Uxbit/Image2",
-      "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "WithOverlaySlot"
+      "exportName": "Disabled"
     },
     "uxbit-image--primary": {
       "type": "story",

@@ -1,42 +1,8 @@
-import { Component, h, Prop, Element, Event, EventEmitter, Host, Watch } from '@stencil/core';
-import type {
-  ButtonVariant,
-  ButtonSize,
-  ButtonNativeType,
-  ButtonTextFamilyToken,
-  ButtonTextSizeToken,
-  ButtonTextWeightToken,
-  ButtonClickDetail,
-  ButtonToggleDetail,
-} from './button.types';
+import { Component, Prop, Event, EventEmitter, h, Host } from '@stencil/core';
 
-const FAMILY_MAP: Record<ButtonTextFamilyToken, string> = {
-  paperlogy:
-    '"Paperlogy", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  'clash-display':
-    '"Clash Display", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  'climate-crisis':
-    '"Climate Crisis", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  pretendard:
-    'Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  system:
-    'system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-};
-
-const SIZE_MAP: Record<ButtonTextSizeToken, string> = {
-  sm: '16px',
-  md: '20px',
-  lg: '40px',
-  xl: '64px',
-};
-
-const WEIGHT_MAP: Record<ButtonTextWeightToken, string> = {
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-  black: '900',
-};
+export type TintoButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type TintoButtonSize = 'sm' | 'md' | 'lg';
+export type TintoButtonType = 'button' | 'submit' | 'reset';
 
 @Component({
   tag: 'tinto-button',
@@ -44,237 +10,64 @@ const WEIGHT_MAP: Record<ButtonTextWeightToken, string> = {
   shadow: true,
 })
 export class TintoButton {
-  @Element() el!: HTMLElement;
+  /**
+   * 시각 스타일(색 계열)
+   */
+  @Prop({ reflect: true }) variant: TintoButtonVariant = 'primary';
 
-  // ===== Visual / Layout tokens =====
-  @Prop({ reflect: true }) variant: ButtonVariant = 'primary';
-  @Prop({ reflect: true }) size: ButtonSize = 'md';
+  /**
+   * 버튼 크기
+   */
+  @Prop({ reflect: true }) size: TintoButtonSize = 'md';
 
-  @Prop({ reflect: true }) pill = false;
-  @Prop({ reflect: true }) block = false;
-  @Prop({ reflect: true }) elevated = false;
-  @Prop({ reflect: true }) outline = false;
+  /**
+   * HTML button type
+   */
+  @Prop({ reflect: true }) type: TintoButtonType = 'button';
 
-  /** border-radius 토큰(숫자만 넣으면 px 처리) */
-  @Prop({ reflect: true }) radius?: string;
+  /**
+   * 비활성화 여부
+   */
+  @Prop({ reflect: true }) disabled: boolean = false;
 
-  // ===== State / Behavior =====
-  @Prop({ reflect: true }) disabled = false;
-  @Prop({ reflect: true }) loading = false;
+  /**
+   * 가로 전체폭 사용 여부
+   */
+  @Prop({ reflect: true }) block: boolean = false;
 
-  @Prop({ reflect: true }) toggle = false;
-  @Prop({ reflect: true, mutable: true }) pressed = false;
+  /**
+   * 클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)
+   */
+  @Event() tintoClick: EventEmitter<MouseEvent>;
 
-  /** form 동작 (내부 button 은 항상 type="button" 이고, 여기 값 기준으로 form 요청) */
-  @Prop({ reflect: true }) type: ButtonNativeType = 'button';
-
-  /** 링크 모드일 때 이동할 href */
-  @Prop({ reflect: true }) href?: string;
-
-  /** 링크 타겟 (href 지정 시) */
-  @Prop({ reflect: true }) target?: '_self' | '_blank' | '_parent' | '_top';
-
-  /** 텍스트 라벨(슬롯 대신 사용 가능) */
-  @Prop({ reflect: true }) label?: string;
-
-  // ===== Typography tokens =====
-  @Prop({ reflect: true, attribute: 'text-family' })
-  textFamily?: ButtonTextFamilyToken | string;
-
-  @Prop({ reflect: true, attribute: 'text-size' })
-  textSize?: ButtonTextSizeToken | string;
-
-  @Prop({ reflect: true, attribute: 'text-weight' })
-  textWeight?: ButtonTextWeightToken | string;
-
-  @Prop({ reflect: true, attribute: 'text-color' })
-  textColor?: string;
-
-  // ===== Events =====
-  @Event() tintoClick!: EventEmitter<ButtonClickDetail>;
-  @Event() tintoToggle!: EventEmitter<ButtonToggleDetail>;
-
-  // ===== Lifecycle =====
-  componentWillLoad(): void {
-    this.applyStyleTokens();
-  }
-
-  @Watch('textFamily')
-  @Watch('textSize')
-  @Watch('textWeight')
-  @Watch('textColor')
-  @Watch('radius')
-  protected handleStyleTokenChange(): void {
-    this.applyStyleTokens();
-  }
-
-  private applyStyleTokens(): void {
-    const style = this.el.style;
-
-    // font-family
-    if (this.textFamily) {
-      style.setProperty('--t-button-label-ff', this.resolveFamily(this.textFamily));
-    } else {
-      style.removeProperty('--t-button-label-ff');
-    }
-
-    // font-size
-    if (this.textSize) {
-      const key = this.textSize.toString().trim().toLowerCase();
-      const mapped = (SIZE_MAP as Record<string, string>)[key] ?? this.textSize.toString();
-      style.setProperty('--t-button-label-fs', mapped);
-    } else {
-      style.removeProperty('--t-button-label-fs');
-    }
-
-    // font-weight
-    if (this.textWeight) {
-      const key = this.textWeight.toString().trim().toLowerCase();
-      const mapped = (WEIGHT_MAP as Record<string, string>)[key] ?? this.textWeight.toString();
-      style.setProperty('--t-button-label-fw', mapped);
-    } else {
-      style.removeProperty('--t-button-label-fw');
-    }
-
-    // font-color
-    if (this.textColor) {
-      style.setProperty('--t-button-label-color', this.textColor);
-    } else {
-      style.removeProperty('--t-button-label-color');
-    }
-
-    // radius → px 처리
-    if (this.radius != null && this.radius.trim() !== '') {
-      const trimmed = this.radius.trim();
-      const value = /^\d+(\.\d+)?$/.test(trimmed) ? `${trimmed}px` : trimmed;
-      style.setProperty('--t-button-radius', value);
-    } else {
-      style.removeProperty('--t-button-radius');
-    }
-  }
-
-  private resolveFamily(token: ButtonTextFamilyToken | string): string {
-    const key = token.toString().toLowerCase().trim();
-    if ((FAMILY_MAP as Record<string, string>)[key]) {
-      return (FAMILY_MAP as Record<string, string>)[key];
-    }
-
-    if (key === 'clash' || key === 'clashdisplay') {
-      return FAMILY_MAP['clash-display'];
-    }
-    if (key === 'climate' || key === 'climatecrisis') {
-      return FAMILY_MAP['climate-crisis'];
-    }
-    if (key === 'paper') {
-      return FAMILY_MAP.paperlogy;
-    }
-    if (key === 'pretendard') {
-      return FAMILY_MAP.pretendard;
-    }
-
-    return FAMILY_MAP.system;
-  }
-
-  // ===== Handlers =====
-  private handleClick = (event: MouseEvent): void => {
-    if (this.disabled || this.loading) {
+  private handleClick = (event: MouseEvent) => {
+    if (this.disabled) {
       event.preventDefault();
+      event.stopPropagation();
       return;
     }
 
-    // toggle 모드
-    if (this.toggle) {
-      this.pressed = !this.pressed;
-      this.tintoToggle.emit({ pressed: this.pressed });
-    }
-
-    // 링크 모드
-    if (this.href) {
-      const target = this.target ?? '_self';
-      window.open(this.href, target);
-    }
-
-    // form 모드
-    if (!this.href && this.type) {
-      const form = this.el.closest('form') as HTMLFormElement | null;
-      const lower = this.type.toLowerCase() as ButtonNativeType;
-      if (form) {
-        if (lower === 'submit') {
-          if (typeof form.requestSubmit === 'function') {
-            form.requestSubmit();
-          } else {
-            form.submit();
-          }
-        } else if (lower === 'reset') {
-          form.reset();
-        }
-      }
-    }
-
-    this.tintoClick.emit({ originalEvent: event });
+    this.tintoClick.emit(event);
   };
 
-  private resolveLabel(): string {
-    if (this.label && this.label.trim().length > 0) {
-      return this.label.trim();
-    }
-    return '';
-  }
-
-  // ===== ARIA helper =====
-  private get ariaBusy(): 'true' | undefined {
-    return this.loading ? 'true' : undefined;
-  }
-
-  private get ariaDisabled(): 'true' | undefined {
-    return this.disabled ? 'true' : undefined;
-  }
-
-  private get ariaPressed(): 'true' | 'false' | undefined {
-    if (!this.toggle || this.disabled) return undefined;
-    return this.pressed ? 'true' : 'false';
-  }
-
-  // ===== Render =====
   render() {
-    const labelText = this.resolveLabel();
-
-    // 호스트의 aria-* 패스스루
-    const hostAriaLabel = this.el.getAttribute('aria-label');
-    const hostAriaDescribedby = this.el.getAttribute('aria-describedby');
-    const a11yProps: Record<string, any> = {};
-    if (hostAriaLabel) a11yProps['aria-label'] = hostAriaLabel;
-    if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
+    const classes = {
+      'tinto-button': true,
+      [`tinto-button--${this.variant}`]: true,
+      [`tinto-button--${this.size}`]: true,
+      'tinto-button--block': this.block,
+      'tinto-button--disabled': this.disabled,
+    };
 
     return (
-      <Host
-        aria-busy={this.ariaBusy}
-        aria-disabled={this.ariaDisabled}
-        aria-pressed={this.ariaPressed}
-      >
+      <Host>
         <button
-          class="tinto-button"
-          part="button"
-          type="button"
+          class={classes}
+          type={this.type}
           disabled={this.disabled}
-          aria-busy={this.ariaBusy}
-          aria-pressed={this.ariaPressed}
           onClick={this.handleClick}
-          {...a11yProps}
         >
-          <span class="spinner" part="spinner" aria-hidden={this.loading ? 'false' : 'true'}></span>
-
-          <span class="prefix" part="prefix">
-            <slot name="prefix" />
-          </span>
-
-          <span class="content" part="label">
-            <span class="label">{labelText || <slot />}</span>
-          </span>
-
-          <span class="suffix" part="suffix">
-            <slot name="suffix" />
-          </span>
+          <slot>Button</slot>
         </button>
       </Host>
     );

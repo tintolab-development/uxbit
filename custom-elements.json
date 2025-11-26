@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-26T02:35:52",
+  "timestamp": "2025-11-26T02:51:56",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -25,7 +25,7 @@
           "mutable": false,
           "attr": "block",
           "reflectToAttr": true,
-          "docs": "",
+          "docs": "가로 전체폭 사용 여부",
           "docsTags": [
             {
               "name": "default",
@@ -54,7 +54,7 @@
           "mutable": false,
           "attr": "disabled",
           "reflectToAttr": true,
-          "docs": "",
+          "docs": "비활성화 여부",
           "docsTags": [
             {
               "name": "default",
@@ -68,220 +68,6 @@
             }
           ],
           "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "elevated",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "elevated",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "href",
-          "type": "string",
-          "complexType": {
-            "original": "string",
-            "resolved": "string",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "href",
-          "reflectToAttr": true,
-          "docs": "링크 모드일 때 이동할 href",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "label",
-          "type": "string",
-          "complexType": {
-            "original": "string",
-            "resolved": "string",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "label",
-          "reflectToAttr": true,
-          "docs": "텍스트 라벨(슬롯 대신 사용 가능)",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "loading",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "loading",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "outline",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "outline",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "pill",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "pill",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "pressed",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": true,
-          "attr": "pressed",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "radius",
-          "type": "string",
-          "complexType": {
-            "original": "string",
-            "resolved": "string",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "radius",
-          "reflectToAttr": true,
-          "docs": "border-radius 토큰(숫자만 넣으면 px 처리)",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
           "required": false,
           "getter": false,
           "setter": false
@@ -290,20 +76,20 @@
           "name": "size",
           "type": "\"lg\" | \"md\" | \"sm\"",
           "complexType": {
-            "original": "ButtonSize",
+            "original": "TintoButtonSize",
             "resolved": "\"lg\" | \"md\" | \"sm\"",
             "references": {
-              "ButtonSize": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonSize"
+              "TintoButtonSize": {
+                "location": "local",
+                "path": "/Users/tintolab/Desktop/uxbit/src/components/button/button.tsx",
+                "id": "src/components/button/button.tsx::TintoButtonSize"
               }
             }
           },
           "mutable": false,
           "attr": "size",
           "reflectToAttr": true,
-          "docs": "",
+          "docs": "버튼 크기",
           "docsTags": [
             {
               "name": "default",
@@ -331,198 +117,23 @@
           "setter": false
         },
         {
-          "name": "target",
-          "type": "\"_blank\" | \"_parent\" | \"_self\" | \"_top\"",
-          "complexType": {
-            "original": "'_self' | '_blank' | '_parent' | '_top'",
-            "resolved": "\"_blank\" | \"_parent\" | \"_self\" | \"_top\"",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "target",
-          "reflectToAttr": true,
-          "docs": "링크 타겟 (href 지정 시)",
-          "docsTags": [],
-          "values": [
-            {
-              "value": "_blank",
-              "type": "string"
-            },
-            {
-              "value": "_parent",
-              "type": "string"
-            },
-            {
-              "value": "_self",
-              "type": "string"
-            },
-            {
-              "value": "_top",
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "textColor",
-          "type": "string",
-          "complexType": {
-            "original": "string",
-            "resolved": "string",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "text-color",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "textFamily",
-          "type": "string",
-          "complexType": {
-            "original": "ButtonTextFamilyToken | string",
-            "resolved": "string",
-            "references": {
-              "ButtonTextFamilyToken": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonTextFamilyToken"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "text-family",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "textSize",
-          "type": "string",
-          "complexType": {
-            "original": "ButtonTextSizeToken | string",
-            "resolved": "string",
-            "references": {
-              "ButtonTextSizeToken": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonTextSizeToken"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "text-size",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "textWeight",
-          "type": "string",
-          "complexType": {
-            "original": "ButtonTextWeightToken | string",
-            "resolved": "string",
-            "references": {
-              "ButtonTextWeightToken": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonTextWeightToken"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "text-weight",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "toggle",
-          "type": "boolean",
-          "complexType": {
-            "original": "boolean",
-            "resolved": "boolean",
-            "references": {}
-          },
-          "mutable": false,
-          "attr": "toggle",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "false"
-            }
-          ],
-          "default": "false",
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
           "name": "type",
           "type": "\"button\" | \"reset\" | \"submit\"",
           "complexType": {
-            "original": "ButtonNativeType",
+            "original": "TintoButtonType",
             "resolved": "\"button\" | \"reset\" | \"submit\"",
             "references": {
-              "ButtonNativeType": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonNativeType"
+              "TintoButtonType": {
+                "location": "local",
+                "path": "/Users/tintolab/Desktop/uxbit/src/components/button/button.tsx",
+                "id": "src/components/button/button.tsx::TintoButtonType"
               }
             }
           },
           "mutable": false,
           "attr": "type",
           "reflectToAttr": true,
-          "docs": "form 동작 (내부 button 은 항상 type=\"button\" 이고, 여기 값 기준으로 form 요청)",
+          "docs": "HTML button type",
           "docsTags": [
             {
               "name": "default",
@@ -551,22 +162,22 @@
         },
         {
           "name": "variant",
-          "type": "\"primary\" | \"secondary\" | \"tertiary\"",
+          "type": "\"ghost\" | \"primary\" | \"secondary\"",
           "complexType": {
-            "original": "ButtonVariant",
-            "resolved": "\"primary\" | \"secondary\" | \"tertiary\"",
+            "original": "TintoButtonVariant",
+            "resolved": "\"ghost\" | \"primary\" | \"secondary\"",
             "references": {
-              "ButtonVariant": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonVariant"
+              "TintoButtonVariant": {
+                "location": "local",
+                "path": "/Users/tintolab/Desktop/uxbit/src/components/button/button.tsx",
+                "id": "src/components/button/button.tsx::TintoButtonVariant"
               }
             }
           },
           "mutable": false,
           "attr": "variant",
           "reflectToAttr": true,
-          "docs": "",
+          "docs": "시각 스타일(색 계열)",
           "docsTags": [
             {
               "name": "default",
@@ -576,15 +187,15 @@
           "default": "'primary'",
           "values": [
             {
+              "value": "ghost",
+              "type": "string"
+            },
+            {
               "value": "primary",
               "type": "string"
             },
             {
               "value": "secondary",
-              "type": "string"
-            },
-            {
-              "value": "tertiary",
               "type": "string"
             }
           ],
@@ -598,70 +209,28 @@
       "events": [
         {
           "event": "tintoClick",
-          "detail": "ButtonClickDetail",
+          "detail": "MouseEvent",
           "bubbles": true,
           "complexType": {
-            "original": "ButtonClickDetail",
-            "resolved": "ButtonClickDetail",
+            "original": "MouseEvent",
+            "resolved": "MouseEvent",
             "references": {
-              "ButtonClickDetail": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonClickDetail"
+              "MouseEvent": {
+                "location": "global",
+                "id": "global::MouseEvent"
               }
             }
           },
           "cancelable": true,
           "composed": true,
-          "docs": "",
-          "docsTags": []
-        },
-        {
-          "event": "tintoToggle",
-          "detail": "ButtonToggleDetail",
-          "bubbles": true,
-          "complexType": {
-            "original": "ButtonToggleDetail",
-            "resolved": "ButtonToggleDetail",
-            "references": {
-              "ButtonToggleDetail": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonToggleDetail"
-              }
-            }
-          },
-          "cancelable": true,
-          "composed": true,
-          "docs": "",
+          "docs": "클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)",
           "docsTags": []
         }
       ],
       "listeners": [],
       "styles": [],
       "slots": [],
-      "parts": [
-        {
-          "name": "button",
-          "docs": ""
-        },
-        {
-          "name": "label",
-          "docs": ""
-        },
-        {
-          "name": "prefix",
-          "docs": ""
-        },
-        {
-          "name": "spinner",
-          "docs": ""
-        },
-        {
-          "name": "suffix",
-          "docs": ""
-        }
-      ],
+      "parts": [],
       "dependents": [],
       "dependencies": [],
       "dependencyGraph": {}
@@ -4100,45 +3669,20 @@
     }
   ],
   "typeLibrary": {
-    "src/components/button/button.types.ts::ButtonVariant": {
-      "declaration": "export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';",
+    "src/components/button/button.tsx::TintoButtonVariant": {
+      "declaration": "export type TintoButtonVariant = 'primary' | 'secondary' | 'ghost';",
       "docstring": "",
-      "path": "src/components/button/button.types.ts"
+      "path": "src/components/button/button.tsx"
     },
-    "src/components/button/button.types.ts::ButtonSize": {
-      "declaration": "export type ButtonSize = 'sm' | 'md' | 'lg';",
+    "src/components/button/button.tsx::TintoButtonSize": {
+      "declaration": "export type TintoButtonSize = 'sm' | 'md' | 'lg';",
       "docstring": "",
-      "path": "src/components/button/button.types.ts"
+      "path": "src/components/button/button.tsx"
     },
-    "src/components/button/button.types.ts::ButtonNativeType": {
-      "declaration": "export type ButtonNativeType = 'button' | 'submit' | 'reset';",
+    "src/components/button/button.tsx::TintoButtonType": {
+      "declaration": "export type TintoButtonType = 'button' | 'submit' | 'reset';",
       "docstring": "",
-      "path": "src/components/button/button.types.ts"
-    },
-    "src/components/button/button.types.ts::ButtonTextFamilyToken": {
-      "declaration": "export type ButtonTextFamilyToken =\n  | 'system'\n  | 'pretendard'\n  | 'paperlogy'\n  | 'clash-display'\n  | 'climate-crisis';",
-      "docstring": "",
-      "path": "src/components/button/button.types.ts"
-    },
-    "src/components/button/button.types.ts::ButtonTextSizeToken": {
-      "declaration": "export type ButtonTextSizeToken = 'sm' | 'md' | 'lg' | 'xl';",
-      "docstring": "",
-      "path": "src/components/button/button.types.ts"
-    },
-    "src/components/button/button.types.ts::ButtonTextWeightToken": {
-      "declaration": "export type ButtonTextWeightToken = 'regular' | 'medium' | 'semibold' | 'bold' | 'black';",
-      "docstring": "",
-      "path": "src/components/button/button.types.ts"
-    },
-    "src/components/button/button.types.ts::ButtonClickDetail": {
-      "declaration": "export interface ButtonClickDetail {\n  originalEvent: MouseEvent;\n}",
-      "docstring": "",
-      "path": "src/components/button/button.types.ts"
-    },
-    "src/components/button/button.types.ts::ButtonToggleDetail": {
-      "declaration": "export interface ButtonToggleDetail {\n  pressed: boolean;\n}",
-      "docstring": "",
-      "path": "src/components/button/button.types.ts"
+      "path": "src/components/button/button.tsx"
     },
     "src/components/image/image.types.ts::AspectRatio": {
       "declaration": "export type AspectRatio =\n  | '1:1'\n  | '2:1'\n  | '3:2'\n  | '4:3'\n  | '16:9'\n  | '3:1'\n  | '1:2'\n  | '2:3'\n  | '3:4'\n  | '9:16'\n  | '1:3';",
@@ -4231,7 +3775,7 @@
       "path": "src/components/typography/typography.types.ts"
     },
     "src/components/typography/typography.types.ts::FontSize": {
-      "declaration": "\"sm\" | \"md\" | \"lg\" | \"xl\" | \"xs\" | \"xxl\"",
+      "declaration": "\"sm\" | \"md\" | \"lg\" | \"xs\" | \"xl\" | \"xxl\"",
       "docstring": "",
       "path": "src/components/typography/typography.types.ts"
     },
