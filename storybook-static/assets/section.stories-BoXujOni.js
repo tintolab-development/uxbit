@@ -1,4 +1,4 @@
-import { h as e } from './iframe-BhXsNVLQ.js';
+import { h as e } from './iframe-D2Egk96O.js';
 const a = {
     title: 'Uxbit/Section',
     component: 'tinto-section',

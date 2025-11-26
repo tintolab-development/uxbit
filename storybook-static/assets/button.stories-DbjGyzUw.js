@@ -1,4 +1,4 @@
-import { h as r } from './iframe-BhXsNVLQ.js';
+import { h as r } from './iframe-D2Egk96O.js';
 const o = { title: 'Uxbit/Button', component: 'tinto-button', parameters: { layout: 'centered' } },
   t = { name: 'Primary', render: () => r('tinto-button', null, 'Primary button') };
 t.parameters = {
