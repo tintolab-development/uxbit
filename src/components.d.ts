@@ -6,7 +6,6 @@
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
-import { TintoButtonSize, TintoButtonType, TintoButtonVariant } from './components/button/button';
 import {
   AnimationRotate,
   AsKind,
@@ -47,7 +46,6 @@ import {
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
 export { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
-export { TintoButtonSize, TintoButtonType, TintoButtonVariant } from './components/button/button';
 export {
   AnimationRotate,
   AsKind,
@@ -115,33 +113,7 @@ export namespace Components {
      */
     variant: TintoBadgeVariant;
   }
-  interface TintoButton {
-    /**
-     * 가로 전체폭 사용 여부
-     * @default false
-     */
-    block: boolean;
-    /**
-     * 비활성화 여부
-     * @default false
-     */
-    disabled: boolean;
-    /**
-     * 버튼 크기
-     * @default 'md'
-     */
-    size: TintoButtonSize;
-    /**
-     * HTML button type
-     * @default 'button'
-     */
-    type: TintoButtonType;
-    /**
-     * 시각 스타일(색 계열)
-     * @default 'primary'
-     */
-    variant: TintoButtonVariant;
-  }
+  interface TintoButton {}
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
@@ -495,10 +467,6 @@ export namespace Components {
     wrapDesktop?: FlexWrap1;
   }
 }
-export interface TintoButtonCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLTintoButtonElement;
-}
 export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
   detail: T;
   target: HTMLTintoImageElement;
@@ -509,57 +477,7 @@ declare global {
     prototype: HTMLTintoBadgeElement;
     new (): HTMLTintoBadgeElement;
   };
-  interface HTMLTintoButtonElementEventMap {
-    tintoClick: MouseEvent;
-  }
-  interface HTMLTintoButtonElement extends Components.TintoButton, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
-      type: K,
-      listener: (
-        this: HTMLTintoButtonElement,
-        ev: TintoButtonCustomEvent<HTMLTintoButtonElementEventMap[K]>,
-      ) => any,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    addEventListener<K extends keyof DocumentEventMap>(
-      type: K,
-      listener: (this: Document, ev: DocumentEventMap[K]) => any,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    addEventListener<K extends keyof HTMLElementEventMap>(
-      type: K,
-      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    addEventListener(
-      type: string,
-      listener: EventListenerOrEventListenerObject,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    removeEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
-      type: K,
-      listener: (
-        this: HTMLTintoButtonElement,
-        ev: TintoButtonCustomEvent<HTMLTintoButtonElementEventMap[K]>,
-      ) => any,
-      options?: boolean | EventListenerOptions,
-    ): void;
-    removeEventListener<K extends keyof DocumentEventMap>(
-      type: K,
-      listener: (this: Document, ev: DocumentEventMap[K]) => any,
-      options?: boolean | EventListenerOptions,
-    ): void;
-    removeEventListener<K extends keyof HTMLElementEventMap>(
-      type: K,
-      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
-      options?: boolean | EventListenerOptions,
-    ): void;
-    removeEventListener(
-      type: string,
-      listener: EventListenerOrEventListenerObject,
-      options?: boolean | EventListenerOptions,
-    ): void;
-  }
+  interface HTMLTintoButtonElement extends Components.TintoButton, HTMLStencilElement {}
   var HTMLTintoButtonElement: {
     prototype: HTMLTintoButtonElement;
     new (): HTMLTintoButtonElement;
@@ -679,37 +597,7 @@ declare namespace LocalJSX {
      */
     variant?: TintoBadgeVariant;
   }
-  interface TintoButton {
-    /**
-     * 가로 전체폭 사용 여부
-     * @default false
-     */
-    block?: boolean;
-    /**
-     * 비활성화 여부
-     * @default false
-     */
-    disabled?: boolean;
-    /**
-     * 클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)
-     */
-    onTintoClick?: (event: TintoButtonCustomEvent<MouseEvent>) => void;
-    /**
-     * 버튼 크기
-     * @default 'md'
-     */
-    size?: TintoButtonSize;
-    /**
-     * HTML button type
-     * @default 'button'
-     */
-    type?: TintoButtonType;
-    /**
-     * 시각 스타일(색 계열)
-     * @default 'primary'
-     */
-    variant?: TintoButtonVariant;
-  }
+  interface TintoButton {}
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
