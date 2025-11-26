@@ -1,4 +1,4 @@
-import { Component, h, Prop, Element, Event, EventEmitter, Host, Watch } from '@stencil/core';
+import { Component, h, Prop, Element, Event, EventEmitter, Watch, Host } from '@stencil/core';
 import type {
   ButtonVariant,
   ButtonSize,
@@ -221,46 +221,6 @@ export class TintoButton {
     return '';
   }
 
-  // ===== Handlers =====
-  private handleClick = (event: MouseEvent): void => {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      return;
-    }
-
-    // toggle 모드
-    if (this.toggle) {
-      this.pressed = !this.pressed;
-      this.tintoToggle.emit({ pressed: this.pressed });
-    }
-
-    // 링크 모드
-    if (this.href) {
-      const target = this.target ?? '_self';
-      window.open(this.href, target);
-    }
-
-    // form 모드 (href 없을 때만)
-    if (!this.href && this.type) {
-      const lower = this.type.toLowerCase() as ButtonNativeType;
-      const form = this.hostEl.closest('form') as HTMLFormElement | null;
-      if (form) {
-        if (lower === 'submit') {
-          if (typeof form.requestSubmit === 'function') {
-            form.requestSubmit();
-          } else {
-            form.submit();
-          }
-        } else if (lower === 'reset') {
-          form.reset();
-        }
-      }
-    }
-
-    // 커스텀 tintoClick 이벤트는 제거
-    // 스토리북 / 외부에서는 그냥 onClick 으로 native click 사용
-  };
-
   // ===== Render =====
   render() {
     const labelText = this.resolveLabel();
@@ -285,7 +245,6 @@ export class TintoButton {
           disabled={this.disabled}
           aria-busy={this.ariaBusy}
           aria-pressed={this.ariaPressed}
-          onClick={this.handleClick}
           {...a11yProps}
         >
           {/* 로딩 스피너 */}
