@@ -7,254 +7,71 @@ import {
 } from './index-3CssInHd.js';
 
 const buttonCss =
-  ":host{display:inline-block}:host([block]){display:block}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5em;cursor:pointer;-webkit-user-select:none;user-select:none;white-space:nowrap;border:var(--t-button-border, 1px solid #111827);background:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-radius:var(--t-button-radius, var(--t-button-variant-radius, 10px));padding:var(--t-button-py, 0.55rem) var(--t-button-px, 0.9rem);line-height:1;width:var(--t-button-w, auto);min-height:2.25rem;transition:transform 0.03s ease,\n    opacity 0.15s ease,\n    background-color 0.15s ease,\n    color 0.15s ease,\n    border-color 0.15s ease,\n    box-shadow 0.15s ease;position:relative}.tinto-button:focus-visible{outline:var(--t-button-ring, 2px solid #6366f1);outline-offset:2px}:host([pill]) .tinto-button{border-radius:9999px}:host([elevated]) .tinto-button{box-shadow:0 8px 20px rgba(0, 0, 0, 0.12)}:host([block]) .tinto-button{width:100%}.tinto-button[disabled]{cursor:not-allowed;opacity:0.55}.tinto-button:active:not([disabled]){transform:translateY(1px)}:host([variant='primary']) .tinto-button{--t-button-variant-radius:0px;--t-button-bg:#111827;--t-button-fg:#f9fafb;--t-button-border:1px solid transparent}:host([variant='secondary']) .tinto-button{--t-button-variant-radius:12px;--t-button-bg:#e5e7eb;--t-button-fg:#111827;--t-button-border:1px solid transparent}:host([variant='tertiary']) .tinto-button{--t-button-variant-radius:100px;--t-button-bg:#f3f4f6;--t-button-fg:var(--color-fg, #111827);--t-button-border:1px solid transparent}:host([outline]) .tinto-button{--t-button-bg:#ffffff;--t-button-border:1px solid currentColor}:host([variant='primary'][outline]) .tinto-button{--t-button-fg:var(--color-primary, #111827)}:host([variant='secondary'][outline]),:host([variant='tertiary'][outline]) .tinto-button{--t-button-fg:var(--color-fg, #111827)}:host([size='sm']) .tinto-button{font-size:0.875rem;--t-button-py:0.4rem;--t-button-px:0.7rem;min-height:2rem}:host([size='md']) .tinto-button{font-size:1rem}:host([size='lg']) .tinto-button{font-size:1.125rem;--t-button-py:0.7rem;--t-button-px:1.1rem;min-height:2.6rem}.prefix,.suffix{display:inline-flex;align-items:center;justify-content:center}::slotted([slot='prefix']),::slotted([slot='suffix']){display:inline-flex}.content{display:inline-flex;align-items:center;justify-content:center}.label{display:inline;font-family:var(--t-button-label-ff, inherit);font-size:var(--t-button-label-fs, inherit);font-weight:var(--t-button-label-fw, inherit);color:var(--t-button-label-color, currentColor);line-height:1.1}:host([loading]) .tinto-button{pointer-events:none}.spinner{display:none;width:1em;height:1em;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:tinto-button-spin 0.8s linear infinite;position:absolute;inset:0;margin:auto;pointer-events:none}:host([loading]) .spinner{display:inline-block}:host([loading]) .content{opacity:0}:host([loading]) .prefix,:host([loading]) .suffix{opacity:0}:host([toggle][pressed]) .tinto-button{background:var(--color-primary, #111827);color:#ffffff;--t-button-border:1px solid transparent}@keyframes tinto-button-spin{to{transform:rotate(360deg)}}@media (forced-colors: active){.tinto-button{border:1px solid CanvasText}}";
+  ":host{display:inline-block;font-family:system-ui,\n    -apple-system,\n    BlinkMacSystemFont,\n    'Segoe UI',\n    Roboto,\n    'Noto Sans KR',\n    'Apple SD Gothic Neo',\n    'Malgun Gothic',\n    sans-serif}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;cursor:pointer;user-select:none;-webkit-user-select:none;white-space:nowrap;border-radius:9999px;padding:0.5rem 0.9rem;font-size:0.95rem;line-height:1;border-width:1px;border-style:solid;transition:background-color 0.15s ease,\n    color 0.15s ease,\n    border-color 0.15s ease,\n    box-shadow 0.15s ease,\n    transform 0.03s ease;--t-button-bg:#111827;--t-button-fg:#ffffff;--t-button-border:#111827}.tinto-button--primary{background-color:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-color:var(--t-button-border, #111827)}.tinto-button--primary:hover{background-color:#020617;border-color:#020617}.tinto-button--secondary{background-color:#ffffff;color:#111827;border-color:#d1d5db}.tinto-button--secondary:hover{background-color:#f3f4f6;border-color:#9ca3af}.tinto-button--ghost{background-color:transparent;color:#111827;border-color:transparent}.tinto-button--ghost:hover{background-color:rgba(15, 23, 42, 0.04);border-color:rgba(15, 23, 42, 0.08)}.tinto-button--sm{padding:0.35rem 0.7rem;font-size:0.82rem}.tinto-button--md{padding:0.5rem 0.9rem;font-size:0.95rem}.tinto-button--lg{padding:0.65rem 1.15rem;font-size:1.05rem}.tinto-button--block{width:100%;justify-content:center}.tinto-button--disabled,.tinto-button[disabled]{opacity:0.4;cursor:not-allowed;box-shadow:none}.tinto-button:focus-visible{outline:2px solid #2563eb;outline-offset:2px}.tinto-button:active{transform:translateY(1px)}";
 
-const FAMILY_MAP$1 = {
-  paperlogy:
-    '"Paperlogy", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  'clash-display':
-    '"Clash Display", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  'climate-crisis':
-    '"Climate Crisis", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  pretendard:
-    'Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-  system:
-    'system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
-};
-const SIZE_MAP = {
-  sm: '16px',
-  md: '20px',
-  lg: '40px',
-  xl: '64px',
-};
-const WEIGHT_MAP = {
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-  black: '900',
-};
 const TintoButton = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
     this.tintoClick = createEvent(this, 'tintoClick');
-    this.tintoToggle = createEvent(this, 'tintoToggle');
   }
   get el() {
     return getElement(this);
   }
-  // ===== Visual / Layout tokens =====
+  /**
+   * 시각 스타일(색 계열)
+   */
   variant = 'primary';
+  /**
+   * 버튼 크기
+   */
   size = 'md';
-  pill = false;
-  block = false;
-  elevated = false;
-  outline = false;
-  /** border-radius 토큰(숫자만 넣으면 px 처리) */
-  radius;
-  // ===== State / Behavior =====
-  disabled = false;
-  loading = false;
-  toggle = false;
-  pressed = false;
-  /** form 동작 (내부 button 은 항상 type="button" 이고, 여기 값 기준으로 form 요청) */
+  /**
+   * HTML button type
+   */
   type = 'button';
-  /** 링크 모드일 때 이동할 href */
-  href;
-  /** 링크 타겟 (href 지정 시) */
-  target;
-  /** 텍스트 라벨(슬롯 대신 사용 가능) */
-  label;
-  // ===== Typography tokens =====
-  textFamily;
-  textSize;
-  textWeight;
-  textColor;
-  // ===== Events =====
+  /**
+   * 비활성화 여부
+   */
+  disabled = false;
+  /**
+   * 가로 전체폭 사용 여부
+   */
+  block = false;
+  /**
+   * 클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)
+   */
   tintoClick;
-  tintoToggle;
-  // ===== Lifecycle =====
-  componentWillLoad() {
-    this.applyStyleTokens();
-  }
-  handleStyleTokenChange() {
-    this.applyStyleTokens();
-  }
-  applyStyleTokens() {
-    const style = this.el.style;
-    // font-family
-    if (this.textFamily) {
-      style.setProperty('--t-button-label-ff', this.resolveFamily(this.textFamily));
-    } else {
-      style.removeProperty('--t-button-label-ff');
-    }
-    // font-size
-    if (this.textSize) {
-      const key = this.textSize.toString().trim().toLowerCase();
-      const mapped = SIZE_MAP[key] ?? this.textSize.toString();
-      style.setProperty('--t-button-label-fs', mapped);
-    } else {
-      style.removeProperty('--t-button-label-fs');
-    }
-    // font-weight
-    if (this.textWeight) {
-      const key = this.textWeight.toString().trim().toLowerCase();
-      const mapped = WEIGHT_MAP[key] ?? this.textWeight.toString();
-      style.setProperty('--t-button-label-fw', mapped);
-    } else {
-      style.removeProperty('--t-button-label-fw');
-    }
-    // font-color
-    if (this.textColor) {
-      style.setProperty('--t-button-label-color', this.textColor);
-    } else {
-      style.removeProperty('--t-button-label-color');
-    }
-    // radius → px 처리
-    if (this.radius != null && this.radius.trim() !== '') {
-      const trimmed = this.radius.trim();
-      const value = /^\d+(\.\d+)?$/.test(trimmed) ? `${trimmed}px` : trimmed;
-      style.setProperty('--t-button-radius', value);
-    } else {
-      style.removeProperty('--t-button-radius');
-    }
-  }
-  resolveFamily(token) {
-    const key = token.toString().toLowerCase().trim();
-    if (FAMILY_MAP$1[key]) {
-      return FAMILY_MAP$1[key];
-    }
-    if (key === 'clash' || key === 'clashdisplay') {
-      return FAMILY_MAP$1['clash-display'];
-    }
-    if (key === 'climate' || key === 'climatecrisis') {
-      return FAMILY_MAP$1['climate-crisis'];
-    }
-    if (key === 'paper') {
-      return FAMILY_MAP$1.paperlogy;
-    }
-    if (key === 'pretendard') {
-      return FAMILY_MAP$1.pretendard;
-    }
-    return FAMILY_MAP$1.system;
-  }
-  // ===== Handlers =====
   handleClick = (event) => {
-    if (this.disabled || this.loading) {
+    if (this.disabled) {
       event.preventDefault();
+      event.stopPropagation();
       return;
     }
-    // toggle 모드
-    if (this.toggle) {
-      this.pressed = !this.pressed;
-      this.tintoToggle.emit({ pressed: this.pressed });
-    }
-    // 링크 모드
-    if (this.href) {
-      const target = this.target ?? '_self';
-      window.open(this.href, target);
-    }
-    // form 모드
-    if (!this.href && this.type) {
-      const form = this.el.closest('form');
-      const lower = this.type.toLowerCase();
-      if (form) {
-        if (lower === 'submit') {
-          if (typeof form.requestSubmit === 'function') {
-            form.requestSubmit();
-          } else {
-            form.submit();
-          }
-        } else if (lower === 'reset') {
-          form.reset();
-        }
-      }
-    }
-    this.tintoClick.emit({ originalEvent: event });
+    this.tintoClick.emit(event);
   };
-  resolveLabel() {
-    if (this.label && this.label.trim().length > 0) {
-      return this.label.trim();
-    }
-    return '';
-  }
-  // ===== ARIA helper =====
-  get ariaBusy() {
-    return this.loading ? 'true' : undefined;
-  }
-  get ariaDisabled() {
-    return this.disabled ? 'true' : undefined;
-  }
-  get ariaPressed() {
-    if (!this.toggle || this.disabled) return undefined;
-    return this.pressed ? 'true' : 'false';
-  }
-  // ===== Render =====
   render() {
-    const labelText = this.resolveLabel();
-    // 호스트의 aria-* 패스스루
-    const hostAriaLabel = this.el.getAttribute('aria-label');
-    const hostAriaDescribedby = this.el.getAttribute('aria-describedby');
-    const a11yProps = {};
-    if (hostAriaLabel) a11yProps['aria-label'] = hostAriaLabel;
-    if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
+    const classes = {
+      'tinto-button': true,
+      [`tinto-button--${this.variant}`]: true,
+      [`tinto-button--${this.size}`]: true,
+      'tinto-button--block': this.block,
+      'tinto-button--disabled': this.disabled,
+    };
     return h(
       Host,
-      {
-        key: 'bd84fa51f92ff467d1ee90d43f0e9b74d4e8a348',
-        'aria-busy': this.ariaBusy,
-        'aria-disabled': this.ariaDisabled,
-        'aria-pressed': this.ariaPressed,
-      },
+      { key: 'a565b312d3dba88b78e8cbd1c60280bc13c13dbc' },
       h(
         'button',
         {
-          key: '0b965990f18af97dc14ae6d1fb964273fe5a4bbd',
-          class: 'tinto-button',
-          part: 'button',
-          type: 'button',
+          key: '5d8e4d8424fcf0cd0f38e773f37c2cbd62423f5f',
+          class: classes,
+          type: this.type,
           disabled: this.disabled,
-          'aria-busy': this.ariaBusy,
-          'aria-pressed': this.ariaPressed,
           onClick: this.handleClick,
-          ...a11yProps,
         },
-        h('span', {
-          key: '8b604694737cf82968c933d3552681aea346fb10',
-          class: 'spinner',
-          part: 'spinner',
-          'aria-hidden': this.loading ? 'false' : 'true',
-        }),
-        h(
-          'span',
-          { key: '212198140aaeb6a6a756ff135378a4f1c24b6a74', class: 'prefix', part: 'prefix' },
-          h('slot', { key: '6446d27712f70aadbbe9a10afaefe4a5f2cb8a88', name: 'prefix' }),
-        ),
-        h(
-          'span',
-          { key: 'cce19085bef599a053f6ef9ef0009c378f8834e8', class: 'content', part: 'label' },
-          h(
-            'span',
-            { key: 'd9e7ac19b350d38b7017112a11897836d5e4d2e1', class: 'label' },
-            labelText || h('slot', { key: '253b356ec3f7e95352210a4580f5a9d2f7ff6e56' }),
-          ),
-        ),
-        h(
-          'span',
-          { key: '4b1a07de33dc5feac8e2aad2170aa22324df1b42', class: 'suffix', part: 'suffix' },
-          h('slot', { key: '2cadbdf2de5e9f3af9b2da0ee96afb311476ce19', name: 'suffix' }),
-        ),
+        h('slot', { key: 'bbd0feb8cc7bef18fcd51247f9b50f894bc572f8' }, 'Button'),
       ),
     );
-  }
-  static get watchers() {
-    return {
-      textFamily: ['handleStyleTokenChange'],
-      textSize: ['handleStyleTokenChange'],
-      textWeight: ['handleStyleTokenChange'],
-      textColor: ['handleStyleTokenChange'],
-      radius: ['handleStyleTokenChange'],
-    };
   }
 };
 TintoButton.style = buttonCss;
@@ -934,7 +751,7 @@ const TintoSection = class {
     return h(
       'section',
       {
-        key: '1d9f208862873f75cfa8e240b9c2e43679123c2c',
+        key: 'df22583e7e0139434b0f6123412d4efe269bd683',
         part: 'root',
         class: 'tinto-section',
         style: styleVars,
@@ -944,7 +761,7 @@ const TintoSection = class {
         'aria-describedby': ariaDescribedby,
         tabIndex: tabIndex,
       },
-      h('slot', { key: '41540ba71aa5edf32bcebf7b2b160a9374259ec9' }),
+      h('slot', { key: '7ff35beaf5d860ab841c4dbda8845a2b1a78110c' }),
     );
   }
 };
@@ -1263,7 +1080,7 @@ const TintoTypography = class {
     const ariaHidden = this.visible ? null : 'true';
     const rel = this.computeRel();
     // 슬롯 + fallback 텍스트
-    const slotNode = h('slot', { key: '5b9e6ed8c25beffc4a4be014d95ad78279992247' });
+    const slotNode = h('slot', { key: 'c3a1a74d17398726eb110ef98643e2a2a9ebc5c0' });
     // rolling=true 이면 슬롯 텍스트를 .typing-effect span으로 감싼다
     let typedSpan;
     let staticTextForSR = null; // 스크린 리더용 정적 텍스트
@@ -1275,7 +1092,7 @@ const TintoTypography = class {
         staticTextForSR = h(
           'span',
           {
-            key: '0a5efb82d9151744d824f6df92e41581bce972a7',
+            key: 'b527ea0c13c7d36fd07d1cda4e7b0f3a81f68443',
             class: 'sr-only',
             'aria-live': 'polite',
           },
@@ -1285,7 +1102,7 @@ const TintoTypography = class {
       typedSpan = h(
         'span',
         {
-          key: '8be10a351133b308ee48f912a1324fc8974225ac',
+          key: 'dd76c156a1672e05f50d23991f79df3a9b28c52e',
           class: 'typing-effect',
           ref: (el) => (this.typingEl = el),
           'aria-live': 'polite',
@@ -1313,7 +1130,7 @@ const TintoTypography = class {
     return h(
       Tag,
       {
-        key: '0225d399b421ff61eb654f234ba87f84250d23d2',
+        key: '592eb33c828c1ef88b702439aa8f64a46e876554',
         part: 'root',
         class: `tinto-typography ${this.variant} ${this.rolling ? 'has-typing' : ''}`,
         style: style,
@@ -1413,15 +1230,15 @@ const TintoWrapper = class {
     return h(
       'div',
       {
-        key: '5caecce028a9f05dd382ac9f1ebb092486b26c3c',
+        key: 'a8b0429f8adeb905d1b6b7dbfa2087d3df14a6be',
         part: 'root',
         class: { 'tw-root': true, 'tw-fill': this.fill },
         style: styleVars,
       },
       h(
         'div',
-        { key: '625804e08bf43394690cbc66efec189393580ab2', part: 'inner' },
-        h('slot', { key: 'bf93fd802614e3ae35b846ddc33fff9c21da9a6f' }),
+        { key: 'bdc71c83793932533f2fe7459ddb654f7243fd61', part: 'inner' },
+        h('slot', { key: 'f18106c31e5766b9c1ba420ec942b52c9760a3b8' }),
       ),
     );
   }

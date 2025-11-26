@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
+import { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
 import { TintoButtonSize, TintoButtonType, TintoButtonVariant } from './components/button/button';
 import {
   AnimationRotate,
@@ -45,6 +46,7 @@ import {
   FlexWrap as FlexWrap1,
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
+export { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
 export { TintoButtonSize, TintoButtonType, TintoButtonVariant } from './components/button/button';
 export {
   AnimationRotate,
@@ -86,6 +88,33 @@ export {
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
 export namespace Components {
+  interface TintoBadge {
+    /**
+     * 아웃라인 모드 (배경 없음, border만)
+     * @default false
+     */
+    outline: boolean;
+    /**
+     * pill 모양 여부 (full radius)
+     * @default true
+     */
+    pill: boolean;
+    /**
+     * 사이즈
+     * @default 'md'
+     */
+    size: TintoBadgeSize;
+    /**
+     * 소프트 톤 (배경 연한 스타일)
+     * @default true
+     */
+    soft: boolean;
+    /**
+     * 색상/의미 스타일
+     * @default 'neutral'
+     */
+    variant: TintoBadgeVariant;
+  }
   interface TintoButton {
     /**
      * 가로 전체폭 사용 여부
@@ -475,6 +504,11 @@ export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
   target: HTMLTintoImageElement;
 }
 declare global {
+  interface HTMLTintoBadgeElement extends Components.TintoBadge, HTMLStencilElement {}
+  var HTMLTintoBadgeElement: {
+    prototype: HTMLTintoBadgeElement;
+    new (): HTMLTintoBadgeElement;
+  };
   interface HTMLTintoButtonElementEventMap {
     tintoClick: MouseEvent;
   }
@@ -609,6 +643,7 @@ declare global {
     new (): HTMLTintoWrapperElement;
   };
   interface HTMLElementTagNameMap {
+    'tinto-badge': HTMLTintoBadgeElement;
     'tinto-button': HTMLTintoButtonElement;
     'tinto-image': HTMLTintoImageElement;
     'tinto-section': HTMLTintoSectionElement;
@@ -617,6 +652,33 @@ declare global {
   }
 }
 declare namespace LocalJSX {
+  interface TintoBadge {
+    /**
+     * 아웃라인 모드 (배경 없음, border만)
+     * @default false
+     */
+    outline?: boolean;
+    /**
+     * pill 모양 여부 (full radius)
+     * @default true
+     */
+    pill?: boolean;
+    /**
+     * 사이즈
+     * @default 'md'
+     */
+    size?: TintoBadgeSize;
+    /**
+     * 소프트 톤 (배경 연한 스타일)
+     * @default true
+     */
+    soft?: boolean;
+    /**
+     * 색상/의미 스타일
+     * @default 'neutral'
+     */
+    variant?: TintoBadgeVariant;
+  }
   interface TintoButton {
     /**
      * 가로 전체폭 사용 여부
@@ -1004,6 +1066,7 @@ declare namespace LocalJSX {
     wrapDesktop?: FlexWrap1;
   }
   interface IntrinsicElements {
+    'tinto-badge': TintoBadge;
     'tinto-button': TintoButton;
     'tinto-image': TintoImage;
     'tinto-section': TintoSection;
@@ -1015,6 +1078,7 @@ export { LocalJSX as JSX };
 declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
+      'tinto-badge': LocalJSX.TintoBadge & JSXBase.HTMLAttributes<HTMLTintoBadgeElement>;
       'tinto-button': LocalJSX.TintoButton & JSXBase.HTMLAttributes<HTMLTintoButtonElement>;
       /**
        * <tinto-image>

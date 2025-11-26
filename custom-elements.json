@@ -1,11 +1,209 @@
 {
-  "timestamp": "2025-11-26T02:52:12",
+  "timestamp": "2025-11-26T02:58:43",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
     "typescriptVersion": "5.9.3"
   },
   "components": [
+    {
+      "filePath": "src/components/badge/badge.tsx",
+      "encapsulation": "shadow",
+      "tag": "tinto-badge",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "outline",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "outline",
+          "reflectToAttr": true,
+          "docs": "아웃라인 모드 (배경 없음, border만)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "pill",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "pill",
+          "reflectToAttr": true,
+          "docs": "pill 모양 여부 (full radius)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "\"md\" | \"sm\"",
+          "complexType": {
+            "original": "TintoBadgeSize",
+            "resolved": "\"md\" | \"sm\"",
+            "references": {
+              "TintoBadgeSize": {
+                "location": "local",
+                "path": "/Users/tintolab/Desktop/uxbit/src/components/badge/badge.tsx",
+                "id": "src/components/badge/badge.tsx::TintoBadgeSize"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": true,
+          "docs": "사이즈",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'md'"
+            }
+          ],
+          "default": "'md'",
+          "values": [
+            {
+              "value": "md",
+              "type": "string"
+            },
+            {
+              "value": "sm",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "soft",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "soft",
+          "reflectToAttr": true,
+          "docs": "소프트 톤 (배경 연한 스타일)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "variant",
+          "type": "\"danger\" | \"neutral\" | \"primary\" | \"success\" | \"warning\"",
+          "complexType": {
+            "original": "TintoBadgeVariant",
+            "resolved": "\"danger\" | \"neutral\" | \"primary\" | \"success\" | \"warning\"",
+            "references": {
+              "TintoBadgeVariant": {
+                "location": "local",
+                "path": "/Users/tintolab/Desktop/uxbit/src/components/badge/badge.tsx",
+                "id": "src/components/badge/badge.tsx::TintoBadgeVariant"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "variant",
+          "reflectToAttr": true,
+          "docs": "색상/의미 스타일",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'neutral'"
+            }
+          ],
+          "default": "'neutral'",
+          "values": [
+            {
+              "value": "danger",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "primary",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "warning",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
     {
       "filePath": "src/components/button/button.tsx",
       "encapsulation": "shadow",
@@ -3669,6 +3867,16 @@
     }
   ],
   "typeLibrary": {
+    "src/components/badge/badge.tsx::TintoBadgeVariant": {
+      "declaration": "export type TintoBadgeVariant = 'neutral' | 'primary' | 'success' | 'warning' | 'danger';",
+      "docstring": "",
+      "path": "src/components/badge/badge.tsx"
+    },
+    "src/components/badge/badge.tsx::TintoBadgeSize": {
+      "declaration": "export type TintoBadgeSize = 'sm' | 'md';",
+      "docstring": "",
+      "path": "src/components/badge/badge.tsx"
+    },
     "src/components/button/button.tsx::TintoButtonVariant": {
       "declaration": "export type TintoButtonVariant = 'primary' | 'secondary' | 'ghost';",
       "docstring": "",

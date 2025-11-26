@@ -1,52 +1,92 @@
 {
   "v": 5,
   "entries": {
-    "components-tintobutton--primary": {
+    "uxbit-badge--primary": {
       "type": "story",
       "subtype": "story",
-      "id": "components-tintobutton--primary",
+      "id": "uxbit-badge--primary",
+      "name": "Default (Neutral)",
+      "title": "Uxbit/Badge",
+      "importPath": "./src/components/badge/badge.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Primary"
+    },
+    "uxbit-badge--status-variants": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-badge--status-variants",
+      "name": "Status variants",
+      "title": "Uxbit/Badge",
+      "importPath": "./src/components/badge/badge.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "StatusVariants"
+    },
+    "uxbit-badge--soft-vs-outline": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-badge--soft-vs-outline",
+      "name": "Soft vs Outline",
+      "title": "Uxbit/Badge",
+      "importPath": "./src/components/badge/badge.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "SoftVsOutline"
+    },
+    "uxbit-badge--small-size": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-badge--small-size",
+      "name": "Small size",
+      "title": "Uxbit/Badge",
+      "importPath": "./src/components/badge/badge.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "SmallSize"
+    },
+    "uxbit-button--primary": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-button--primary",
       "name": "Primary",
-      "title": "Components/TintoButton",
+      "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Primary"
     },
-    "components-tintobutton--secondary": {
+    "uxbit-button--secondary": {
       "type": "story",
       "subtype": "story",
-      "id": "components-tintobutton--secondary",
+      "id": "uxbit-button--secondary",
       "name": "Secondary",
-      "title": "Components/TintoButton",
+      "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Secondary"
     },
-    "components-tintobutton--ghost": {
+    "uxbit-button--ghost": {
       "type": "story",
       "subtype": "story",
-      "id": "components-tintobutton--ghost",
+      "id": "uxbit-button--ghost",
       "name": "Ghost",
-      "title": "Components/TintoButton",
+      "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Ghost"
     },
-    "components-tintobutton--block": {
+    "uxbit-button--block": {
       "type": "story",
       "subtype": "story",
-      "id": "components-tintobutton--block",
+      "id": "uxbit-button--block",
       "name": "Block (Full width)",
-      "title": "Components/TintoButton",
+      "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Block"
     },
-    "components-tintobutton--disabled": {
+    "uxbit-button--disabled": {
       "type": "story",
       "subtype": "story",
-      "id": "components-tintobutton--disabled",
+      "id": "uxbit-button--disabled",
       "name": "Disabled",
-      "title": "Components/TintoButton",
+      "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Disabled"
