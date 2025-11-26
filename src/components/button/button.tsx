@@ -1,4 +1,4 @@
-import { Component, Prop, Event, EventEmitter, h, Host } from '@stencil/core';
+import { Component, Prop, Event, EventEmitter, Element, h, Host } from '@stencil/core';
 
 export type TintoButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type TintoButtonSize = 'sm' | 'md' | 'lg';
@@ -10,6 +10,8 @@ export type TintoButtonType = 'button' | 'submit' | 'reset';
   shadow: true,
 })
 export class TintoButton {
+  @Element() el!: HTMLElement;
+
   /**
    * 시각 스타일(색 계열)
    */
