@@ -1,3 +1,4 @@
+// src/components/button/button.tsx
 import { Component, Prop, Event, EventEmitter, h, Host } from '@stencil/core';
 
 export type TintoButtonVariant = 'primary' | 'secondary' | 'ghost';
@@ -10,35 +11,23 @@ export type TintoButtonType = 'button' | 'submit' | 'reset';
   shadow: true,
 })
 export class TintoButton {
-  /**
-   * 시각 스타일(색 계열)
-   */
+  /** 시각 스타일(색 계열) */
   @Prop({ reflect: true }) variant: TintoButtonVariant = 'primary';
 
-  /**
-   * 버튼 크기
-   */
+  /** 버튼 크기 */
   @Prop({ reflect: true }) size: TintoButtonSize = 'md';
 
-  /**
-   * HTML button type
-   */
+  /** HTML button type */
   @Prop({ reflect: true }) type: TintoButtonType = 'button';
 
-  /**
-   * 비활성화 여부
-   */
-  @Prop({ reflect: true }) disabled: boolean = false;
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled = false;
 
-  /**
-   * 가로 전체폭 사용 여부
-   */
-  @Prop({ reflect: true }) block: boolean = false;
+  /** 가로 전체폭 사용 여부 */
+  @Prop({ reflect: true }) block = false;
 
-  /**
-   * 클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)
-   */
-  @Event() tintoClick: EventEmitter<MouseEvent>;
+  /** 클릭 이벤트 (Stencil 커스텀 이벤트) */
+  @Event() tintoClick!: EventEmitter<MouseEvent>;
 
   private handleClick = (event: MouseEvent) => {
     if (this.disabled) {

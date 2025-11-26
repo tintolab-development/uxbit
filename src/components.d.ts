@@ -691,7 +691,7 @@ declare namespace LocalJSX {
      */
     disabled?: boolean;
     /**
-     * 클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)
+     * 클릭 이벤트 (Stencil 커스텀 이벤트)
      */
     onTintoClick?: (event: TintoButtonCustomEvent<MouseEvent>) => void;
     /**
