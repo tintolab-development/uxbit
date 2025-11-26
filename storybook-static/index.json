@@ -61,15 +61,15 @@
       "tags": ["dev", "test"],
       "exportName": "Secondary"
     },
-    "uxbit-button--ghost": {
+    "uxbit-button--tertiary": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-button--ghost",
-      "name": "Ghost",
+      "id": "uxbit-button--tertiary",
+      "name": "Tertiary",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
-      "exportName": "Ghost"
+      "exportName": "Tertiary"
     },
     "uxbit-button--block": {
       "type": "story",
@@ -81,15 +81,35 @@
       "tags": ["dev", "test"],
       "exportName": "Block"
     },
-    "uxbit-button--disabled": {
+    "uxbit-button--loading": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-button--disabled",
-      "name": "Disabled",
+      "id": "uxbit-button--loading",
+      "name": "Loading",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
-      "exportName": "Disabled"
+      "exportName": "Loading"
+    },
+    "uxbit-button--as-link": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-button--as-link",
+      "name": "As link",
+      "title": "Uxbit/Button",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "AsLink"
+    },
+    "uxbit-button--toggle-button": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-button--toggle-button",
+      "name": "Toggle button",
+      "title": "Uxbit/Button",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "ToggleButton"
     },
     "uxbit-image--primary": {
       "type": "story",

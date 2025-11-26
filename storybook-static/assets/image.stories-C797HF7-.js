@@ -1,4 +1,4 @@
-import { h as s } from './iframe-YqQtUz0I.js';
+import { h as s } from './iframe-DU4XJZYZ.js';
 const l = {
     title: 'Uxbit/Image',
     component: 'tinto-image',
