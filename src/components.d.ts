@@ -7,15 +7,6 @@
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
 import {
-  ButtonNativeType,
-  ButtonSize,
-  ButtonTextFamilyToken,
-  ButtonTextSizeToken,
-  ButtonTextWeightToken,
-  ButtonToggleDetail,
-  ButtonVariant,
-} from './components/button/button.types';
-import {
   AnimationRotate,
   AsKind,
   AspectRatio,
@@ -55,15 +46,6 @@ import {
   Justify as Justify1,
 } from './components/wrapper/wrapper.types';
 export { TintoBadgeSize, TintoBadgeVariant } from './components/badge/badge';
-export {
-  ButtonNativeType,
-  ButtonSize,
-  ButtonTextFamilyToken,
-  ButtonTextSizeToken,
-  ButtonTextWeightToken,
-  ButtonToggleDetail,
-  ButtonVariant,
-} from './components/button/button.types';
 export {
   AnimationRotate,
   AsKind,
@@ -131,95 +113,7 @@ export namespace Components {
      */
     variant: TintoBadgeVariant;
   }
-  interface TintoButton {
-    /**
-     * 가로 전체폭 사용 여부
-     * @default false
-     */
-    block: boolean;
-    /**
-     * 비활성화 여부
-     * @default false
-     */
-    disabled: boolean;
-    /**
-     * 살짝 떠 있는 느낌의 그림자 사용 여부
-     * @default false
-     */
-    elevated: boolean;
-    /**
-     * 링크 모드일 때 이동할 href
-     */
-    href?: string;
-    /**
-     * 텍스트 라벨(슬롯 대신 사용 가능)
-     */
-    label?: string;
-    /**
-     * 로딩 상태 (스피너 표시 + 클릭 막기)
-     * @default false
-     */
-    loading: boolean;
-    /**
-     * outline 스타일 여부 (filled 대신 테두리)
-     * @default false
-     */
-    outline: boolean;
-    /**
-     * pill 형태 (완전 라운드)
-     * @default false
-     */
-    pill: boolean;
-    /**
-     * 토글 상태 (toggle=true 일 때 사용, mutable)
-     * @default false
-     */
-    pressed: boolean;
-    /**
-     * border-radius 토큰(숫자만 넣으면 px 처리)
-     */
-    radius?: string;
-    /**
-     * 버튼 크기(primitives에 연결되는 토큰)
-     * @default 'md'
-     */
-    size: ButtonSize;
-    /**
-     * 링크 타겟 (href 지정 시)
-     */
-    target?: '_self' | '_blank' | '_parent' | '_top';
-    /**
-     * 라벨 폰트 컬러
-     */
-    textColor?: string;
-    /**
-     * 라벨 폰트 패밀리 토큰
-     */
-    textFamily?: ButtonTextFamilyToken | string;
-    /**
-     * 라벨 폰트 크기 토큰 또는 raw 값 (ex. "18px")
-     */
-    textSize?: ButtonTextSizeToken | string;
-    /**
-     * 라벨 폰트 두께 토큰 또는 raw 값
-     */
-    textWeight?: ButtonTextWeightToken | string;
-    /**
-     * 토글 버튼 모드 (pressed 토글)
-     * @default false
-     */
-    toggle: boolean;
-    /**
-     * form 동작 타입 - "button": 기본 (아무 것도 안 함) - "submit": 조상 form submit - "reset": 조상 form reset
-     * @default 'button'
-     */
-    type: ButtonNativeType;
-    /**
-     * 색/스타일 프리셋 (primary / secondary / ghost 등)
-     * @default 'primary'
-     */
-    variant: ButtonVariant;
-  }
+  interface TintoButton {}
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
@@ -573,10 +467,6 @@ export namespace Components {
     wrapDesktop?: FlexWrap1;
   }
 }
-export interface TintoButtonCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLTintoButtonElement;
-}
 export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
   detail: T;
   target: HTMLTintoImageElement;
@@ -587,57 +477,7 @@ declare global {
     prototype: HTMLTintoBadgeElement;
     new (): HTMLTintoBadgeElement;
   };
-  interface HTMLTintoButtonElementEventMap {
-    tintoToggle: ButtonToggleDetail;
-  }
-  interface HTMLTintoButtonElement extends Components.TintoButton, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
-      type: K,
-      listener: (
-        this: HTMLTintoButtonElement,
-        ev: TintoButtonCustomEvent<HTMLTintoButtonElementEventMap[K]>,
-      ) => any,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    addEventListener<K extends keyof DocumentEventMap>(
-      type: K,
-      listener: (this: Document, ev: DocumentEventMap[K]) => any,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    addEventListener<K extends keyof HTMLElementEventMap>(
-      type: K,
-      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    addEventListener(
-      type: string,
-      listener: EventListenerOrEventListenerObject,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-    removeEventListener<K extends keyof HTMLTintoButtonElementEventMap>(
-      type: K,
-      listener: (
-        this: HTMLTintoButtonElement,
-        ev: TintoButtonCustomEvent<HTMLTintoButtonElementEventMap[K]>,
-      ) => any,
-      options?: boolean | EventListenerOptions,
-    ): void;
-    removeEventListener<K extends keyof DocumentEventMap>(
-      type: K,
-      listener: (this: Document, ev: DocumentEventMap[K]) => any,
-      options?: boolean | EventListenerOptions,
-    ): void;
-    removeEventListener<K extends keyof HTMLElementEventMap>(
-      type: K,
-      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
-      options?: boolean | EventListenerOptions,
-    ): void;
-    removeEventListener(
-      type: string,
-      listener: EventListenerOrEventListenerObject,
-      options?: boolean | EventListenerOptions,
-    ): void;
-  }
+  interface HTMLTintoButtonElement extends Components.TintoButton, HTMLStencilElement {}
   var HTMLTintoButtonElement: {
     prototype: HTMLTintoButtonElement;
     new (): HTMLTintoButtonElement;
@@ -757,99 +597,7 @@ declare namespace LocalJSX {
      */
     variant?: TintoBadgeVariant;
   }
-  interface TintoButton {
-    /**
-     * 가로 전체폭 사용 여부
-     * @default false
-     */
-    block?: boolean;
-    /**
-     * 비활성화 여부
-     * @default false
-     */
-    disabled?: boolean;
-    /**
-     * 살짝 떠 있는 느낌의 그림자 사용 여부
-     * @default false
-     */
-    elevated?: boolean;
-    /**
-     * 링크 모드일 때 이동할 href
-     */
-    href?: string;
-    /**
-     * 텍스트 라벨(슬롯 대신 사용 가능)
-     */
-    label?: string;
-    /**
-     * 로딩 상태 (스피너 표시 + 클릭 막기)
-     * @default false
-     */
-    loading?: boolean;
-    /**
-     * 토글 상태 변경 이벤트 (pressed 값 전달)
-     */
-    onTintoToggle?: (event: TintoButtonCustomEvent<ButtonToggleDetail>) => void;
-    /**
-     * outline 스타일 여부 (filled 대신 테두리)
-     * @default false
-     */
-    outline?: boolean;
-    /**
-     * pill 형태 (완전 라운드)
-     * @default false
-     */
-    pill?: boolean;
-    /**
-     * 토글 상태 (toggle=true 일 때 사용, mutable)
-     * @default false
-     */
-    pressed?: boolean;
-    /**
-     * border-radius 토큰(숫자만 넣으면 px 처리)
-     */
-    radius?: string;
-    /**
-     * 버튼 크기(primitives에 연결되는 토큰)
-     * @default 'md'
-     */
-    size?: ButtonSize;
-    /**
-     * 링크 타겟 (href 지정 시)
-     */
-    target?: '_self' | '_blank' | '_parent' | '_top';
-    /**
-     * 라벨 폰트 컬러
-     */
-    textColor?: string;
-    /**
-     * 라벨 폰트 패밀리 토큰
-     */
-    textFamily?: ButtonTextFamilyToken | string;
-    /**
-     * 라벨 폰트 크기 토큰 또는 raw 값 (ex. "18px")
-     */
-    textSize?: ButtonTextSizeToken | string;
-    /**
-     * 라벨 폰트 두께 토큰 또는 raw 값
-     */
-    textWeight?: ButtonTextWeightToken | string;
-    /**
-     * 토글 버튼 모드 (pressed 토글)
-     * @default false
-     */
-    toggle?: boolean;
-    /**
-     * form 동작 타입 - "button": 기본 (아무 것도 안 함) - "submit": 조상 form submit - "reset": 조상 form reset
-     * @default 'button'
-     */
-    type?: ButtonNativeType;
-    /**
-     * 색/스타일 프리셋 (primary / secondary / ghost 등)
-     * @default 'primary'
-     */
-    variant?: ButtonVariant;
-  }
+  interface TintoButton {}
   /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
