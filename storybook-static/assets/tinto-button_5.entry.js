@@ -1,21 +1,18 @@
 import {
   r as registerInstance,
   c as createEvent,
-  g as getElement,
   h,
   H as Host,
+  g as getElement,
 } from './index-3CssInHd.js';
 
 const buttonCss =
-  ":host{display:inline-block;font-family:system-ui,\n    -apple-system,\n    BlinkMacSystemFont,\n    'Segoe UI',\n    Roboto,\n    'Noto Sans KR',\n    'Apple SD Gothic Neo',\n    'Malgun Gothic',\n    sans-serif}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;cursor:pointer;user-select:none;-webkit-user-select:none;white-space:nowrap;border-radius:9999px;padding:0.5rem 0.9rem;font-size:0.95rem;line-height:1;border-width:1px;border-style:solid;transition:background-color 0.15s ease,\n    color 0.15s ease,\n    border-color 0.15s ease,\n    box-shadow 0.15s ease,\n    transform 0.03s ease;--t-button-bg:#111827;--t-button-fg:#ffffff;--t-button-border:#111827}.tinto-button--primary{background-color:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-color:var(--t-button-border, #111827)}.tinto-button--primary:hover{background-color:#020617;border-color:#020617}.tinto-button--secondary{background-color:#ffffff;color:#111827;border-color:#d1d5db}.tinto-button--secondary:hover{background-color:#f3f4f6;border-color:#9ca3af}.tinto-button--ghost{background-color:transparent;color:#111827;border-color:transparent}.tinto-button--ghost:hover{background-color:rgba(15, 23, 42, 0.04);border-color:rgba(15, 23, 42, 0.08)}.tinto-button--sm{padding:0.35rem 0.7rem;font-size:0.82rem}.tinto-button--md{padding:0.5rem 0.9rem;font-size:0.95rem}.tinto-button--lg{padding:0.65rem 1.15rem;font-size:1.05rem}.tinto-button--block{width:100%;justify-content:center}.tinto-button--disabled,.tinto-button[disabled]{opacity:0.4;cursor:not-allowed;box-shadow:none}.tinto-button:focus-visible{outline:2px solid #2563eb;outline-offset:2px}.tinto-button:active{transform:translateY(1px)}";
+  ":host{display:inline-block;font-family:system-ui,\n        -apple-system,\n        BlinkMacSystemFont,\n        'Segoe UI',\n        Roboto,\n        'Noto Sans KR',\n        'Apple SD Gothic Neo',\n        'Malgun Gothic',\n        sans-serif}:host([hidden]){display:none !important}.tinto-button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;cursor:pointer;white-space:nowrap;border-radius:9999px;padding:0.5rem 0.9rem;font-size:0.95rem;line-height:1;border-width:1px;border-style:solid;transition:background-color 0.15s ease,\n        color 0.15s ease,\n        border-color 0.15s ease,\n        box-shadow 0.15s ease,\n        transform 0.03s ease;--t-button-bg:#111827;--t-button-fg:#ffffff;--t-button-border:#111827}.tinto-button--primary{background-color:var(--t-button-bg, #111827);color:var(--t-button-fg, #ffffff);border-color:var(--t-button-border, #111827)}.tinto-button--primary:hover{background-color:#020617;border-color:#020617}.tinto-button--secondary{background-color:#ffffff;color:#111827;border-color:#d1d5db}.tinto-button--secondary:hover{background-color:#f3f4f6;border-color:#9ca3af}.tinto-button--ghost{background-color:transparent;color:#111827;border-color:transparent}.tinto-button--ghost:hover{background-color:rgba(15, 23, 42, 0.04);border-color:rgba(15, 23, 42, 0.08)}.tinto-button--sm{padding:0.35rem 0.7rem;font-size:0.82rem}.tinto-button--md{padding:0.5rem 0.9rem;font-size:0.95rem}.tinto-button--lg{padding:0.65rem 1.15rem;font-size:1.05rem}.tinto-button--block{width:100%;justify-content:center}.tinto-button--disabled,.tinto-button[disabled]{opacity:0.4;cursor:not-allowed;box-shadow:none}.tinto-button:focus-visible{outline:2px solid #2563eb;outline-offset:2px}.tinto-button:active{transform:translateY(1px)}";
 
 const TintoButton = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
     this.tintoClick = createEvent(this, 'tintoClick');
-  }
-  get el() {
-    return getElement(this);
   }
   /**
    * 시각 스타일(색 계열)
@@ -59,17 +56,17 @@ const TintoButton = class {
     };
     return h(
       Host,
-      { key: 'a565b312d3dba88b78e8cbd1c60280bc13c13dbc' },
+      { key: 'cfa57608fde84d44d3a1e04fc5ccc34cd5abe6f7' },
       h(
         'button',
         {
-          key: '5d8e4d8424fcf0cd0f38e773f37c2cbd62423f5f',
+          key: '1d19cd2ad268637c47e077539974ec75bdeb9515',
           class: classes,
           type: this.type,
           disabled: this.disabled,
           onClick: this.handleClick,
         },
-        h('slot', { key: 'bbd0feb8cc7bef18fcd51247f9b50f894bc572f8' }, 'Button'),
+        h('slot', { key: '71635a1f7cb95da1ed258235594f03321bb41fb5' }, 'Button'),
       ),
     );
   }

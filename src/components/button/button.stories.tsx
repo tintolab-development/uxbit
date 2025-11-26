@@ -1,20 +1,24 @@
+// src/components/button/button.stories.tsx
 import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
-import type { TintoButton } from './button';
+import { TintoButton } from './button';
 
-type ButtonStoryProps = TintoButton & {
-  /**
-   * 슬롯에 들어갈 텍스트
-   */
+/**
+ * 스토리에서 사용할 추가 Args 타입
+ * - Stencil 컴포넌트(TintoButton) + label(슬롯 텍스트)
+ */
+type ButtonArgs = TintoButton & {
   label: string;
 };
 
-const meta = {
+const meta: Meta<ButtonArgs> = {
   title: 'Uxbit/Button',
-  component: 'tinto-button',
+  // ✅ 공식 문서 패턴: component에 실제 클래스 전달
+  component: TintoButton,
   parameters: {
     layout: 'centered',
   },
+
   argTypes: {
     // ===== Appearance =====
     variant: {
@@ -55,6 +59,7 @@ const meta = {
       table: { category: 'events' },
     },
   },
+
   args: {
     variant: 'primary',
     size: 'md',
@@ -63,11 +68,11 @@ const meta = {
     disabled: false,
     label: 'Primary button',
   },
-} satisfies Meta<ButtonStoryProps>;
+};
 
 export default meta;
 
-type Story = StoryObj<ButtonStoryProps>;
+type Story = StoryObj<ButtonArgs>;
 
 /**
  * 기본 프라이머리 버튼
@@ -85,7 +90,7 @@ export const Primary: Story = {
       type={props.type}
       block={props.block}
       disabled={props.disabled}
-      // 스토리북 actions 패널에 tintoClick 이벤트 바인딩
+      // Storybook action panel로 이벤트 전달
       onTintoClick={props.tintoClick as any}
     >
       {props.label}
@@ -102,18 +107,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     label: 'Secondary button',
   },
-  render: (props) => (
-    <tinto-button
-      variant={props.variant}
-      size={props.size}
-      type={props.type}
-      block={props.block}
-      disabled={props.disabled}
-      onTintoClick={props.tintoClick as any}
-    >
-      {props.label}
-    </tinto-button>
-  ),
+  render: (props) => <tinto-button {...props}>{props.label}</tinto-button>,
 };
 
 /**

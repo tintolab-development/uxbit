@@ -48,6 +48,7 @@
       "name": "Primary",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
+      "componentPath": "./src/components/button/button.tsx",
       "tags": ["dev", "test"],
       "exportName": "Primary"
     },
@@ -58,6 +59,7 @@
       "name": "Secondary",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
+      "componentPath": "./src/components/button/button.tsx",
       "tags": ["dev", "test"],
       "exportName": "Secondary"
     },
@@ -68,6 +70,7 @@
       "name": "Ghost",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
+      "componentPath": "./src/components/button/button.tsx",
       "tags": ["dev", "test"],
       "exportName": "Ghost"
     },
@@ -78,6 +81,7 @@
       "name": "Block (Full width)",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
+      "componentPath": "./src/components/button/button.tsx",
       "tags": ["dev", "test"],
       "exportName": "Block"
     },
@@ -88,6 +92,7 @@
       "name": "Disabled",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
+      "componentPath": "./src/components/button/button.tsx",
       "tags": ["dev", "test"],
       "exportName": "Disabled"
     },

@@ -1,4 +1,4 @@
-import { Component, Prop, h, Host } from '@stencil/core';
+import { Component, Prop, Element, h, Host } from '@stencil/core';
 
 export type TintoBadgeVariant = 'neutral' | 'primary' | 'success' | 'warning' | 'danger';
 export type TintoBadgeSize = 'sm' | 'md';
@@ -9,6 +9,8 @@ export type TintoBadgeSize = 'sm' | 'md';
   shadow: true,
 })
 export class TintoBadge {
+  @Element() el!: HTMLElement;
+
   /**
    * 색상/의미 스타일
    */
