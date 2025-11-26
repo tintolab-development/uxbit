@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+      - storybook-button
   workflow_dispatch:
 
 permissions:

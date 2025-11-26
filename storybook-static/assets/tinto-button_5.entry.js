@@ -13,7 +13,7 @@ const FAMILY_MAP$1 = {
   paperlogy:
     '"Paperlogy", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
   'clash-display':
-    '"Clash Display", "Inter", system-ui, -apple-sastem, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
+    '"Clash Display", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
   'climate-crisis':
     '"Climate Crisis", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
   pretendard:
@@ -178,12 +178,19 @@ const TintoButton = class {
     }
     return '';
   }
+  // ===== ARIA helper =====
+  get ariaBusy() {
+    return this.loading ? 'true' : undefined;
+  }
+  get ariaDisabled() {
+    return this.disabled ? 'true' : undefined;
+  }
+  get ariaPressed() {
+    if (!this.toggle || this.disabled) return undefined;
+    return this.pressed ? 'true' : 'false';
+  }
+  // ===== Render =====
   render() {
-    // 상태 플래그 (boolean 위주로)
-    const isBusy = this.loading;
-    const isDisabled = this.disabled;
-    const isToggle = this.toggle && !this.disabled;
-    const isPressed = isToggle ? this.pressed : undefined;
     const labelText = this.resolveLabel();
     // 호스트의 aria-* 패스스루
     const hostAriaLabel = this.el.getAttribute('aria-label');
@@ -193,50 +200,49 @@ const TintoButton = class {
     if (hostAriaDescribedby) a11yProps['aria-describedby'] = hostAriaDescribedby;
     return h(
       Host,
-      // Host 쪽은 상태만 알려주는 용도로 boolean 사용
       {
-        key: '1f245cec31388cafc74d951404a0464854d35033',
-        'aria-busy': isBusy || undefined,
-        'aria-disabled': isDisabled || undefined,
-        'aria-pressed': isToggle ? (isPressed ? 'true' : 'false') : undefined,
+        key: 'bd84fa51f92ff467d1ee90d43f0e9b74d4e8a348',
+        'aria-busy': this.ariaBusy,
+        'aria-disabled': this.ariaDisabled,
+        'aria-pressed': this.ariaPressed,
       },
       h(
         'button',
         {
-          key: 'dd00afbdf8f25cc31a442950532ef3028537bb9a',
+          key: '0b965990f18af97dc14ae6d1fb964273fe5a4bbd',
           class: 'tinto-button',
           part: 'button',
           type: 'button',
-          disabled: isDisabled,
-          'aria-busy': String(isBusy) || 'false',
-          'aria-pressed': isToggle ? String(isPressed) : 'false',
+          disabled: this.disabled,
+          'aria-busy': this.ariaBusy,
+          'aria-pressed': this.ariaPressed,
           onClick: this.handleClick,
           ...a11yProps,
         },
         h('span', {
-          key: 'f0834c7456e25d9b9eb585b8d10887692ceafc93',
+          key: '8b604694737cf82968c933d3552681aea346fb10',
           class: 'spinner',
           part: 'spinner',
-          'aria-hidden': 'false',
+          'aria-hidden': this.loading ? 'false' : 'true',
         }),
         h(
           'span',
-          { key: '8c3844fb8cd55fdcecd09fae904c1b4c7154ed5a', class: 'prefix', part: 'prefix' },
-          h('slot', { key: 'b620cd5d3901acbccd981cc4c65feb0cc7a7d081', name: 'prefix' }),
+          { key: '212198140aaeb6a6a756ff135378a4f1c24b6a74', class: 'prefix', part: 'prefix' },
+          h('slot', { key: '6446d27712f70aadbbe9a10afaefe4a5f2cb8a88', name: 'prefix' }),
         ),
         h(
           'span',
-          { key: '49bd118a3a5f21a86f4e0ab2b47b6b6f0f0e8468', class: 'content', part: 'label' },
+          { key: 'cce19085bef599a053f6ef9ef0009c378f8834e8', class: 'content', part: 'label' },
           h(
             'span',
-            { key: '2cf50942bd447a73fe963545a65f91a856b9a3bc', class: 'label' },
-            labelText || h('slot', { key: 'b857e1cacb7e1b59bdd2f9f08ae1fb16649b65d3' }),
+            { key: 'd9e7ac19b350d38b7017112a11897836d5e4d2e1', class: 'label' },
+            labelText || h('slot', { key: '253b356ec3f7e95352210a4580f5a9d2f7ff6e56' }),
           ),
         ),
         h(
           'span',
-          { key: '3d861fa1c2eb89b810efb851a230b3634a3ce893', class: 'suffix', part: 'suffix' },
-          h('slot', { key: '6ec9392d0490e3fdb3d105bf6b37cff2e7b49aa2', name: 'suffix' }),
+          { key: '4b1a07de33dc5feac8e2aad2170aa22324df1b42', class: 'suffix', part: 'suffix' },
+          h('slot', { key: '2cadbdf2de5e9f3af9b2da0ee96afb311476ce19', name: 'suffix' }),
         ),
       ),
     );
