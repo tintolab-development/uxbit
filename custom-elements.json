@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-26T05:35:43",
+  "timestamp": "2025-11-26T05:59:53",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -421,7 +421,7 @@
           },
           "cancelable": true,
           "composed": true,
-          "docs": "클릭 이벤트 (Stencil 커스텀 이벤트)",
+          "docs": "클릭 이벤트 (기본 click 외에 Stencil 커스텀 이벤트)",
           "docsTags": []
         }
       ],

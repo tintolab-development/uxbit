@@ -40,7 +40,7 @@ async function copyStencilBundles() {
     const jsFiles = files.filter((file) => file.endsWith('.js'));
 
     await fs.mkdir(STORYBOOK_ASSETS_DIR, {
-        recursive: true
+        recursive: true,
     });
 
     await Promise.all(

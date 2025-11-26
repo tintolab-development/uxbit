@@ -1,29 +1,32 @@
 // src/components/button/button.stories.tsx
 import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
+import type { TintoButton } from './button';
 
 /**
- * 스토리에서 사용할 Props 타입
- * - Stencil 컴포넌트 클래스(TintoButton)를 직접 상속하지 않고
- *   필요한 prop만 명시적으로 선언
- * - 이벤트(tintoClick)는 여기 타입에 넣지 않는다 (argTypes에서만 action으로 정의)
+ * Story에서 사용할 Args 타입
+ * - 실제 컴포넌트 props + label (슬롯용 텍스트)
+ * - 이벤트(tintoClick)는 Args에 넣지 않는다.
  */
-type ButtonStoryProps = {
-  variant: 'primary' | 'secondary' | 'ghost';
-  size: 'sm' | 'md' | 'lg';
-  type: 'button' | 'submit' | 'reset';
-  block: boolean;
-  disabled: boolean;
-  /** 슬롯 텍스트 */
+type ButtonArgs = TintoButton & {
+  /**
+   * 슬롯에 들어갈 텍스트
+   */
   label: string;
 };
 
 const meta = {
   title: 'Uxbit/Button',
   component: 'tinto-button',
+
   parameters: {
     layout: 'centered',
+    // ✅ Web Components 이벤트 → Storybook Actions 패널로 연결
+    actions: {
+      handles: ['tintoClick'],
+    },
   },
+
   argTypes: {
     // ===== Appearance =====
     variant: {
@@ -52,83 +55,130 @@ const meta = {
       table: { category: 'state' },
     },
 
-    // ===== Content =====
-    label: {
-      control: { type: 'text' },
-      table: { category: 'content' },
-    },
+    // ❌ 여기에는 더 이상 tintoClick을 넣지 않는다
   },
+
   args: {
     variant: 'primary',
     size: 'md',
     type: 'button',
     block: false,
     disabled: false,
-    label: 'Primary button',
   },
-} satisfies Meta<ButtonStoryProps>;
+} satisfies Meta<TintoButton>; // ✅ image.stories.tsx와 동일한 패턴
 
 export default meta;
 
-type Story = StoryObj<ButtonStoryProps>;
+type Story = StoryObj<ButtonArgs>;
 
 /**
- * 내부적으로 공통 렌더 함수 (image story 패턴과 동일)
- * - props 중 label은 슬롯으로, 나머지는 모두 속성으로 전달
- * - tintoClick 같은 이벤트 핸들러는 여기서 직접 넘기지 않는다.
+ * 기본 프라이머리 버튼
  */
-const renderButton = (props: ButtonStoryProps) => {
-  const { label, ...rest } = props;
-
-  return <tinto-button {...rest}>{label}</tinto-button>;
-};
-
-/** 기본 프라이머리 버튼 */
 export const Primary: Story = {
   name: 'Primary',
   args: {
     variant: 'primary',
     label: 'Primary button',
   },
-  render: renderButton,
+  render: (props) => (
+    <tinto-button
+      variant={props.variant}
+      size={props.size}
+      type={props.type}
+      block={props.block}
+      disabled={props.disabled}
+    >
+      {props.label}
+    </tinto-button>
+  ),
 };
 
-/** 세컨더리 스타일 버튼 */
+/**
+ * 세컨더리 스타일 버튼
+ */
 export const Secondary: Story = {
   name: 'Secondary',
   args: {
     variant: 'secondary',
     label: 'Secondary button',
   },
-  render: renderButton,
+  render: (props) => (
+    <tinto-button
+      variant={props.variant}
+      size={props.size}
+      type={props.type}
+      block={props.block}
+      disabled={props.disabled}
+    >
+      {props.label}
+    </tinto-button>
+  ),
 };
 
-/** Ghost 스타일 버튼 */
+/**
+ * Ghost 스타일 버튼
+ */
 export const Ghost: Story = {
   name: 'Ghost',
   args: {
     variant: 'ghost',
     label: 'Ghost button',
   },
-  render: renderButton,
+  render: (props) => (
+    <tinto-button
+      variant={props.variant}
+      size={props.size}
+      type={props.type}
+      block={props.block}
+      disabled={props.disabled}
+    >
+      {props.label}
+    </tinto-button>
+  ),
 };
 
-/** 가로 전체 폭 버튼 (block) */
+/**
+ * 가로 전체 폭 버튼 (block)
+ */
 export const Block: Story = {
   name: 'Block (Full width)',
   args: {
     block: true,
     label: 'Full width button',
   },
-  render: (props) => <div style={{ width: '320px' }}>{renderButton(props)}</div>,
+  render: (props) => (
+    <div style={{ width: '320px' }}>
+      <tinto-button
+        variant={props.variant}
+        size={props.size}
+        type={props.type}
+        block={props.block}
+        disabled={props.disabled}
+      >
+        {props.label}
+      </tinto-button>
+    </div>
+  ),
 };
 
-/** 비활성화 버튼 */
+/**
+ * 비활성화 버튼
+ */
 export const Disabled: Story = {
   name: 'Disabled',
   args: {
     disabled: true,
     label: 'Disabled button',
   },
-  render: renderButton,
+  render: (props) => (
+    <tinto-button
+      variant={props.variant}
+      size={props.size}
+      type={props.type}
+      block={props.block}
+      disabled={props.disabled}
+    >
+      {props.label}
+    </tinto-button>
+  ),
 };
