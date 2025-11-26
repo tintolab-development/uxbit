@@ -104,4 +104,40 @@ function App() {
 export default App;
 ```
 
-Check out this [Live Demo](https://stackblitz.com/edit/vitejs-vite-b6zuds?file=src%2FApp.tsx).
+### Storybook 과 같이 사용할때 안전가이드
+
+- Host는 계속 안 쓴다
+
+```
+굳이 Host에 직접 attribute를 걸어야 하는 요구가 생기기 전까지는 <button> 루트 유지.
+
+나중에 정말 필요해도, Host + Story 복잡도 + 이벤트 다 한 번에 붙이지 말고
+“한 번에 하나씩 추가 → 정적 빌드 확인” 패턴으로.
+
+```
+
+- Story args 타입은 항상 “필요한 값만”
+
+```
+type ButtonStoryProps = { variant, size, label, disabled, loading } 식으로만 구성
+```
+
+- 컴포넌트 클래스 TintoButton 혼합 금지
+
+- argTypes에 이벤트 등록은 당분간 하지 말기
+
+```
+클릭 트래킹 필요하면,
+stories에서 <tinto-button onClick={() => console.log('clicked')} /> 정도로만 테스트.
+
+actions 탭 연동은 나중에 여유되면,
+그때 다시 tintoClick 부활시키는 식으로 단계적으로.
+```
+
+- 스프레드도 조심
+
+```
+<tinto-button {...args} /> 대신,
+꼭 필요한 prop만 나열해서 넘기기
+(variant={args.variant} / size={args.size} / disabled={args.disabled} … 이런 식).
+```

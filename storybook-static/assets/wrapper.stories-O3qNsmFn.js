@@ -1,4 +1,4 @@
-import { h as t } from './iframe-Bv9pGKuV.js';
+import { h as t } from './iframe-DKF8m9xq.js';
 const s = {
     title: 'Uxbit/wrapper',
     component: 'tinto-wrapper',

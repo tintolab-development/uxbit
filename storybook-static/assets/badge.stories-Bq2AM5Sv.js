@@ -1,4 +1,4 @@
-import { h as a } from './iframe-Bv9pGKuV.js';
+import { h as a } from './iframe-DKF8m9xq.js';
 const l = {
     title: 'Uxbit/Badge',
     component: 'tinto-badge',
