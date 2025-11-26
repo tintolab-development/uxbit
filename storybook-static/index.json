@@ -1,10 +1,26 @@
 {
   "v": 5,
   "entries": {
-    "uxbit-image--as-button": {
+    "uxbit-button--primary": {
       "type": "story",
-      "id": "uxbit-image--as-button",
-      "name": "As Button",
+      "id": "uxbit-button--primary",
+      "name": "Primary",
+      "title": "Uxbit/Button",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"]
+    },
+    "uxbit-image--primary": {
+      "type": "story",
+      "id": "uxbit-image--primary",
+      "name": "Primary",
+      "title": "Uxbit/Image",
+      "importPath": "./src/components/image/image.stories.tsx",
+      "tags": ["dev", "test"]
+    },
+    "uxbit-image--with-placeholder": {
+      "type": "story",
+      "id": "uxbit-image--with-placeholder",
+      "name": "With Placeholder",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
       "tags": ["dev", "test"]
@@ -17,10 +33,10 @@
       "importPath": "./src/components/image/image.stories.tsx",
       "tags": ["dev", "test"]
     },
-    "uxbit-image--primary": {
+    "uxbit-image--as-button": {
       "type": "story",
-      "id": "uxbit-image--primary",
-      "name": "Primary",
+      "id": "uxbit-image--as-button",
+      "name": "As Button",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
       "tags": ["dev", "test"]
@@ -37,14 +53,6 @@
       "type": "story",
       "id": "uxbit-image--with-overlay-slot",
       "name": "With Overlay Slot",
-      "title": "Uxbit/Image",
-      "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-image--with-placeholder": {
-      "type": "story",
-      "id": "uxbit-image--with-placeholder",
-      "name": "With Placeholder",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
       "tags": ["dev", "test"]
@@ -79,54 +87,6 @@
       "name": "Primary",
       "title": "Uxbit/wrapper",
       "importPath": "./src/components/wrapper/wrapper.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-qbutton--playground": {
-      "type": "story",
-      "id": "uxbit-qbutton--playground",
-      "name": "Playground",
-      "title": "Uxbit/QButton",
-      "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-qbutton--secondary": {
-      "type": "story",
-      "id": "uxbit-qbutton--secondary",
-      "name": "Secondary",
-      "title": "Uxbit/QButton",
-      "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-qbutton--tertiary-outline": {
-      "type": "story",
-      "id": "uxbit-qbutton--tertiary-outline",
-      "name": "Tertiary Outline",
-      "title": "Uxbit/QButton",
-      "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-qbutton--with-prefix-suffix": {
-      "type": "story",
-      "id": "uxbit-qbutton--with-prefix-suffix",
-      "name": "With Prefix Suffix",
-      "title": "Uxbit/QButton",
-      "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-qbutton--loading": {
-      "type": "story",
-      "id": "uxbit-qbutton--loading",
-      "name": "Loading",
-      "title": "Uxbit/QButton",
-      "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"]
-    },
-    "uxbit-qbutton--toggle-button": {
-      "type": "story",
-      "id": "uxbit-qbutton--toggle-button",
-      "name": "Toggle Button",
-      "title": "Uxbit/QButton",
-      "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"]
     }
   }

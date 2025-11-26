@@ -9,36 +9,16 @@ type ExtraArgs = {
 };
 
 const meta: Meta<TintoButton & ExtraArgs> = {
-  title: 'Uxbit/QButton',
+  title: 'Uxbit/Button',
   component: 'tinto-button',
   parameters: {
     layout: 'centered',
   },
   args: {
-    // 기본 비주얼
     variant: 'primary',
     size: 'md',
-    pill: false,
-    block: false,
-    elevated: false,
-    outline: false,
-
-    // 상태
-    disabled: false,
-    loading: false,
-    toggle: false,
-    pressed: false,
-
-    // 타이포 토큰
-    textFamily: 'system',
-    textSize: 'md',
-    textWeight: 'medium',
-
-    // 라벨 / 슬롯 컨트롤용
     label: 'Button',
     content: 'Button',
-    prefixIcon: '',
-    suffixIcon: '',
   },
   argTypes: {
     variant: {
@@ -125,49 +105,49 @@ const Template: Story['render'] = (args) => (
   </tinto-button>
 );
 
-export const Playground: Story = {
+export const Primary: Story = {
   render: Template,
 };
 
-export const Secondary: Story = {
-  render: Template,
-  args: {
-    variant: 'secondary',
-    label: 'Secondary',
-  },
-};
+// export const Secondary: Story = {
+//   render: Template,
+//   args: {
+//     variant: 'secondary',
+//     label: 'Secondary',
+//   },
+// };
 
-export const TertiaryOutline: Story = {
-  render: Template,
-  args: {
-    variant: 'tertiary',
-    outline: true,
-    label: 'Tertiary outline',
-  },
-};
+// export const TertiaryOutline: Story = {
+//   render: Template,
+//   args: {
+//     variant: 'tertiary',
+//     outline: true,
+//     label: 'Tertiary outline',
+//   },
+// };
 
-export const WithPrefixSuffix: Story = {
-  render: Template,
-  args: {
-    label: 'With slots',
-    prefixIcon: '🔥',
-    suffixIcon: '→',
-  },
-};
+// export const WithPrefixSuffix: Story = {
+//   render: Template,
+//   args: {
+//     label: 'With slots',
+//     prefixIcon: '🔥',
+//     suffixIcon: '→',
+//   },
+// };
 
-export const Loading: Story = {
-  render: Template,
-  args: {
-    label: 'Loading…',
-    loading: true,
-  },
-};
+// export const Loading: Story = {
+//   render: Template,
+//   args: {
+//     label: 'Loading…',
+//     loading: true,
+//   },
+// };
 
-export const ToggleButton: Story = {
-  render: Template,
-  args: {
-    label: 'Toggle',
-    toggle: true,
-    pressed: true,
-  },
-};
+// export const ToggleButton: Story = {
+//   render: Template,
+//   args: {
+//     label: 'Toggle',
+//     toggle: true,
+//     pressed: true,
+//   },
+// };
