@@ -3,91 +3,113 @@
   "entries": {
     "uxbit-button--primary": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-button--primary",
       "name": "Primary",
       "title": "Uxbit/Button",
       "importPath": "./src/components/button/button.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "Primary"
     },
     "uxbit-image--primary": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-image--primary",
       "name": "Primary",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "Primary"
     },
     "uxbit-image--with-placeholder": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-image--with-placeholder",
       "name": "With Placeholder",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "WithPlaceholder"
     },
     "uxbit-image--as-link": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-image--as-link",
       "name": "As Link",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "AsLink"
     },
     "uxbit-image--as-button": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-image--as-button",
       "name": "As Button",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "AsButton"
     },
     "uxbit-image--with-animation": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-image--with-animation",
       "name": "With Animation",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "WithAnimation"
     },
     "uxbit-image--with-overlay-slot": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-image--with-overlay-slot",
       "name": "With Overlay Slot",
       "title": "Uxbit/Image",
       "importPath": "./src/components/image/image.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "WithOverlaySlot"
     },
     "uxbit-section--primary": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-section--primary",
       "name": "Primary",
       "title": "Uxbit/Section",
       "importPath": "./src/components/section/section.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "Primary"
     },
     "uxbit-typography--primary": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-typography--primary",
       "name": "Primary",
       "title": "Uxbit/Typography",
       "importPath": "./src/components/typography/typography.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "Primary"
     },
     "uxbit-typography--rolling": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-typography--rolling",
       "name": "Rolling / Typing",
       "title": "Uxbit/Typography",
       "importPath": "./src/components/typography/typography.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "Rolling"
     },
     "uxbit-wrapper--primary": {
       "type": "story",
+      "subtype": "story",
       "id": "uxbit-wrapper--primary",
       "name": "Primary",
       "title": "Uxbit/wrapper",
       "importPath": "./src/components/wrapper/wrapper.stories.tsx",
-      "tags": ["dev", "test"]
+      "tags": ["dev", "test"],
+      "exportName": "Primary"
     }
   }
 }

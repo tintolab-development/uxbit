@@ -1,16 +1,16 @@
 {
-  "generatedAt": 1764116071132,
+  "generatedAt": 1764124516691,
   "userSince": 1763095699598,
   "hasCustomBabel": false,
   "hasCustomWebpack": false,
   "hasStaticDirs": false,
-  "hasStorybookEslint": false,
+  "hasStorybookEslint": true,
   "refCount": 0,
   "testPackages": {
     "@types/jest": null,
     "jest": "29.7.0",
     "jest-cli": "29.7.0",
-    "puppeteer": "24.30.0"
+    "puppeteer": null
   },
   "hasRouterPackage": false,
   "packageManager": { "type": "pnpm", "agent": "pnpm", "nodeLinker": "undefined" },
@@ -20,11 +20,12 @@
   "renderer": "@storybook/html",
   "portableStoriesFileCount": 1,
   "applicationFileCount": 0,
-  "storybookVersion": "9.1.16",
+  "storybookVersion": "10.0.8",
   "language": "typescript",
   "storybookPackages": {
     "@stencil/storybook-plugin": { "version": "0.5.6" },
-    "storybook": { "version": "9.1.16" }
+    "storybook": {},
+    "eslint-plugin-storybook": { "version": "10.0.8" }
   },
   "addons": {}
 }
