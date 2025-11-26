@@ -1,153 +1,256 @@
 import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
-import type { TintoButton } from './button';
+import type { TintoImage } from '../image/image';
 
-type ExtraArgs = {
-  content: string;
-  prefixIcon?: string;
-  suffixIcon?: string;
-};
-
-const meta: Meta<TintoButton & ExtraArgs> = {
-  title: 'Uxbit/Button',
-  component: 'tinto-button',
+const meta = {
+  title: 'Uxbit/Image2',
+  component: 'tinto-image',
   parameters: {
     layout: 'centered',
   },
-  args: {
-    variant: 'primary',
-    size: 'md',
-    label: 'Button',
-    content: 'Button',
-  },
   argTypes: {
-    variant: {
+    // ===== Image / Media =====
+    src: { control: 'text', table: { category: 'image' } },
+    alt: { control: 'text', table: { category: 'image' } },
+    ratio: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'tertiary'],
+      options: ['1:1', '2:1', '3:2', '4:3', '16:9', '3:1', '1:2', '2:3', '3:4', '9:16', '1:3'],
+      table: { category: 'image' },
     },
-    size: {
+    fit: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
+      options: ['cover', 'contain', 'fill', 'none', 'scale-down'],
+      table: { category: 'image' },
     },
-    pill: { control: 'boolean' },
-    block: { control: 'boolean' },
-    elevated: { control: 'boolean' },
-    outline: { control: 'boolean' },
-
-    disabled: { control: 'boolean' },
-    loading: { control: 'boolean' },
-    toggle: { control: 'boolean' },
-    pressed: { control: 'boolean' },
-
-    type: {
-      control: { type: 'select' },
-      options: ['button', 'submit', 'reset'],
-    },
-    href: { control: 'text' },
-    target: {
-      control: { type: 'select' },
-      options: ['_self', '_blank', '_parent', '_top'],
+    position: {
+      control: 'text',
+      description: 'object-position (예: 50% 50%, center top)',
+      table: { category: 'image' },
     },
     radius: {
       control: 'text',
-      description: 'border-radius 토큰 (예: "8px", "1.25rem", "50%")',
+      description: 'border-radius (예: 8px, 50%)',
+      table: { category: 'image' },
     },
-
-    label: {
-      control: 'text',
-      description: 'label prop (비어 있으면 슬롯 content 사용)',
-    },
-
-    textFamily: {
+    rounded: {
       control: { type: 'select' },
-      options: ['system', 'pretendard', 'paperlogy', 'clash-display', 'climate-crisis'],
+      options: ['soft', 'oval', 'top', 'diagonal', 'circle', 'base', 'full', 't', 'lr'],
+      table: { category: 'image' },
     },
-    textSize: {
+    border: {
+      control: 'text',
+      description: 'border 토큰 (예: 1px solid #000)',
+      table: { category: 'visual' },
+    },
+    shadow: {
+      control: 'text',
+      description: 'box-shadow 토큰',
+      table: { category: 'visual' },
+    },
+    background: {
+      control: 'text',
+      description: '배경색/그라디언트',
+      table: { category: 'visual' },
+    },
+    width: { control: 'text', table: { category: 'sizing' } },
+    height: { control: 'text', table: { category: 'sizing' } },
+
+    // ===== Loading =====
+    loading: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg', 'xl'],
+      options: ['lazy', 'eager'],
+      table: { category: 'loading' },
     },
-    textWeight: {
+    priority: {
+      control: 'boolean',
+      description: 'true일 때 fetchpriority="high" + preload',
+      table: { category: 'loading' },
+    },
+    placeholder: {
+      control: 'text',
+      description: '블러/저해상도 플레이스홀더 URL',
+      table: { category: 'loading' },
+    },
+    srcset: { control: 'text', table: { category: 'loading' } },
+    sizes: { control: 'text', table: { category: 'loading' } },
+    decoding: {
       control: { type: 'select' },
-      options: ['regular', 'medium', 'semibold', 'bold', 'black'],
+      options: ['async', 'sync', 'auto'],
+      table: { category: 'loading' },
     },
-    textColor: {
-      control: 'color',
+    crossorigin: { control: 'text', table: { category: 'loading' } },
+    referrerpolicy: { control: 'text', table: { category: 'loading' } },
+
+    // ===== Interactivity =====
+    href: { control: 'text', table: { category: 'interactivity' } },
+    target: {
+      control: { type: 'select' },
+      options: ['_self', '_blank', '_parent', '_top'],
+      table: { category: 'interactivity' },
+    },
+    rel: { control: 'text', table: { category: 'interactivity' } },
+    download: { control: 'text', table: { category: 'interactivity' } },
+    as: {
+      control: { type: 'select' },
+      options: [undefined, 'button'],
+      table: { category: 'interactivity' },
+    },
+    disabled: { control: 'boolean', table: { category: 'interactivity' } },
+
+    // ===== Animation =====
+    animation: {
+      control: { type: 'select' },
+      options: ['', 'spin', 'float', 'wobble', 'pulse'],
+      table: { category: 'animation' },
+    },
+    play: { control: 'boolean', table: { category: 'animation' } },
+    rotate: {
+      control: { type: 'select' },
+      options: ['left', 'right'],
+      table: { category: 'animation' },
+    },
+    duration: {
+      control: { type: 'number', min: 1, max: 100 },
+      description: '애니메이션 지속 시간 (초)',
+      table: { category: 'animation' },
+    },
+    repeat: {
+      control: 'text',
+      description: "'infinite' 또는 숫자 (반복 횟수)",
+      table: { category: 'animation' },
+    },
+    pauseOnHover: {
+      control: 'boolean',
+      description: 'hover 시 애니메이션 일시정지',
+      table: { category: 'animation' },
+    },
+    startOnViewport: {
+      control: 'boolean',
+      description: '뷰포트 진입 시 애니메이션 시작',
+      table: { category: 'animation' },
     },
 
-    content: {
-      control: 'text',
-      description: 'default 슬롯 텍스트 (label 미사용 시)',
-    },
-    prefixIcon: {
-      control: 'text',
-      description: 'prefix 슬롯에 들어갈 텍스트/아이콘',
-    },
-    suffixIcon: {
-      control: 'text',
-      description: 'suffix 슬롯에 들어갈 텍스트/아이콘',
-    },
-
-    // 이벤트 → actions
-    tintoClick: { action: 'tintoClick' },
-    tintoToggle: { action: 'tintoToggle' },
+    // ===== Events =====
+    tintoLoaded: { action: 'tintoLoaded', table: { category: 'events' } },
+    tintoError: { action: 'tintoError', table: { category: 'events' } },
+    tintoPress: { action: 'tintoPress', table: { category: 'events' } },
   },
-};
+  args: {
+    src: 'https://picsum.photos/800/450',
+    alt: 'Random image',
+    ratio: '16:9',
+    fit: 'cover',
+    position: '50% 50%',
+    width: '300px',
+    rounded: 'soft',
+    animation: '',
+    play: true,
+    rotate: 'right',
+    duration: 20,
+    repeat: 'infinite',
+    pauseOnHover: false,
+    startOnViewport: false,
+    loading: 'lazy',
+    priority: false,
+    disabled: false,
+  },
+} satisfies Meta<TintoImage>;
 
 export default meta;
 
-type Story = StoryObj<TintoButton & ExtraArgs>;
+type Story = StoryObj<TintoImage>;
 
-const Template: Story['render'] = (args) => (
-  <tinto-button {...args}>
-    {args.prefixIcon && <span slot="prefix">{args.prefixIcon}</span>}
-    {args.content}
-    {args.suffixIcon && <span slot="suffix">{args.suffixIcon}</span>}
-  </tinto-button>
-);
-
+/**
+ * 기본 이미지 스토리
+ */
 export const Primary: Story = {
-  render: Template,
+  render: (props) => <tinto-image {...props} />,
 };
 
-// export const Secondary: Story = {
-//   render: Template,
-//   args: {
-//     variant: 'secondary',
-//     label: 'Secondary',
-//   },
-// };
+/**
+ * Placeholder 있는 버전
+ */
+export const WithPlaceholder: Story = {
+  args: {
+    src: 'https://picsum.photos/800/450',
+    alt: 'Image with placeholder',
+    placeholder: 'https://picsum.photos/80/45?blur=10',
+    ratio: '16:9',
+    width: '300px',
+  },
+};
 
-// export const TertiaryOutline: Story = {
-//   render: Template,
-//   args: {
-//     variant: 'tertiary',
-//     outline: true,
-//     label: 'Tertiary outline',
-//   },
-// };
+/**
+ * 링크로 동작하는 버전 (href / target)
+ */
+export const AsLink: Story = {
+  args: {
+    src: 'https://picsum.photos/800/450',
+    alt: 'Clickable image link',
+    href: 'https://example.com',
+    target: '_blank',
+    ratio: '16:9',
+    width: '300px',
+  },
+};
 
-// export const WithPrefixSuffix: Story = {
-//   render: Template,
-//   args: {
-//     label: 'With slots',
-//     prefixIcon: '🔥',
-//     suffixIcon: '→',
-//   },
-// };
+/**
+ * 버튼 모드 (as="button")
+ */
+export const AsButton: Story = {
+  args: {
+    src: 'https://picsum.photos/800/450',
+    alt: 'Button image',
+    as: 'button',
+    ratio: '16:9',
+    width: '300px',
+  },
+  render: (props) => <tinto-image {...props} />,
+};
 
-// export const Loading: Story = {
-//   render: Template,
-//   args: {
-//     label: 'Loading…',
-//     loading: true,
-//   },
-// };
+/**
+ * 애니메이션 예제 (spin)
+ */
+export const WithAnimation: Story = {
+  args: {
+    src: 'https://picsum.photos/400/400',
+    alt: 'Spinning image',
+    ratio: '1:1',
+    width: '200px',
+    animation: 'spin',
+    play: true,
+    duration: 3,
+    rotate: 'right',
+  },
+};
 
-// export const ToggleButton: Story = {
-//   render: Template,
-//   args: {
-//     label: 'Toggle',
-//     toggle: true,
-//     pressed: true,
-//   },
-// };
+/**
+ * overlay 슬롯 사용 예시
+ */
+export const WithOverlaySlot: Story = {
+  args: {
+    src: 'https://picsum.photos/800/450',
+    alt: 'Image with overlay',
+    ratio: '16:9',
+    width: '300px',
+  },
+  render: (props) => (
+    <tinto-image {...props}>
+      <div
+        slot="overlay"
+        style={{
+          position: 'absolute',
+          right: '1rem',
+          bottom: '1rem',
+          padding: '0.25rem 0.5rem',
+          background: 'rgba(0, 0, 0, 0.6)',
+          color: '#fff',
+          borderRadius: '999px',
+          fontSize: '12px',
+        }}
+      >
+        OVERLAY
+      </div>
+    </tinto-image>
+  ),
+};

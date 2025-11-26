@@ -1,15 +1,65 @@
 {
   "v": 5,
   "entries": {
-    "uxbit-button--primary": {
+    "uxbit-image2--primary": {
       "type": "story",
       "subtype": "story",
-      "id": "uxbit-button--primary",
+      "id": "uxbit-image2--primary",
       "name": "Primary",
-      "title": "Uxbit/Button",
+      "title": "Uxbit/Image2",
       "importPath": "./src/components/button/button.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Primary"
+    },
+    "uxbit-image2--with-placeholder": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-image2--with-placeholder",
+      "name": "With Placeholder",
+      "title": "Uxbit/Image2",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "WithPlaceholder"
+    },
+    "uxbit-image2--as-link": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-image2--as-link",
+      "name": "As Link",
+      "title": "Uxbit/Image2",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "AsLink"
+    },
+    "uxbit-image2--as-button": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-image2--as-button",
+      "name": "As Button",
+      "title": "Uxbit/Image2",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "AsButton"
+    },
+    "uxbit-image2--with-animation": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-image2--with-animation",
+      "name": "With Animation",
+      "title": "Uxbit/Image2",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "WithAnimation"
+    },
+    "uxbit-image2--with-overlay-slot": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-image2--with-overlay-slot",
+      "name": "With Overlay Slot",
+      "title": "Uxbit/Image2",
+      "importPath": "./src/components/button/button.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "WithOverlaySlot"
     },
     "uxbit-image--primary": {
       "type": "story",
