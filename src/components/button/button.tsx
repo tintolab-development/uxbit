@@ -14,7 +14,7 @@ const FAMILY_MAP: Record<ButtonTextFamilyToken, string> = {
   paperlogy:
     '"Paperlogy", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
   'clash-display':
-    '"Clash Display", "Inter", system-ui, -apple-sastem, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
+    '"Clash Display", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
   'climate-crisis':
     '"Climate Crisis", Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
   pretendard:
@@ -221,13 +221,22 @@ export class TintoButton {
     return '';
   }
 
-  render() {
-    // 상태 플래그 (boolean 위주로)
-    const isBusy = this.loading;
-    const isDisabled = this.disabled;
-    const isToggle = this.toggle && !this.disabled;
-    const isPressed = isToggle ? this.pressed : undefined;
+  // ===== ARIA helper =====
+  private get ariaBusy(): 'true' | undefined {
+    return this.loading ? 'true' : undefined;
+  }
 
+  private get ariaDisabled(): 'true' | undefined {
+    return this.disabled ? 'true' : undefined;
+  }
+
+  private get ariaPressed(): 'true' | 'false' | undefined {
+    if (!this.toggle || this.disabled) return undefined;
+    return this.pressed ? 'true' : 'false';
+  }
+
+  // ===== Render =====
+  render() {
     const labelText = this.resolveLabel();
 
     // 호스트의 aria-* 패스스루
@@ -239,23 +248,21 @@ export class TintoButton {
 
     return (
       <Host
-        // Host 쪽은 상태만 알려주는 용도로 boolean 사용
-        aria-busy={isBusy || undefined}
-        aria-disabled={isDisabled || undefined}
-        aria-pressed={isToggle ? (isPressed ? 'true' : 'false') : undefined}
+        aria-busy={this.ariaBusy}
+        aria-disabled={this.ariaDisabled}
+        aria-pressed={this.ariaPressed}
       >
         <button
           class="tinto-button"
           part="button"
           type="button"
-          disabled={isDisabled}
-          // 버튼 본체에 실제 ARIA 상태 지정 (boolean 사용)
-          aria-busy={String(isBusy) || 'false'}
-          aria-pressed={isToggle ? String(isPressed) : 'false'}
+          disabled={this.disabled}
+          aria-busy={this.ariaBusy}
+          aria-pressed={this.ariaPressed}
           onClick={this.handleClick}
           {...a11yProps}
         >
-          <span class="spinner" part="spinner" aria-hidden="false"></span>
+          <span class="spinner" part="spinner" aria-hidden={this.loading ? 'false' : 'true'}></span>
 
           <span class="prefix" part="prefix">
             <slot name="prefix" />
