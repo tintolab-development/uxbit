@@ -1,11 +1,16 @@
 // button.stories.tsx
 import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
-import type { ButtonSize, ButtonVariant, ButtonNativeType } from './button.types';
+import type {
+  ButtonSize,
+  ButtonVariant,
+  ButtonNativeType,
+  ButtonTextFamilyToken,
+} from './button.types';
 
 /**
  * Storybook에서 사용할 Args 타입
- * - 실제 컴포넌트 prop(variant, size, disabled, loading, block, pill, outline, elevated, type, href, target)
+ * - 실제 컴포넌트 prop(variant, size, disabled, loading, block, pill, outline, elevated, type, href, target, textFamily)
  * - 스토리 전용 필드(label)
  * (컴포넌트 클래스 TintoButton 과는 완전히 분리)
  */
@@ -24,6 +29,9 @@ type ButtonStoryProps = {
   type?: ButtonNativeType;
   href?: string;
   target?: '_self' | '_blank' | '_parent' | '_top';
+
+  /** 라벨 폰트 패밀리 토큰 (Controls용) */
+  textFamily?: ButtonTextFamilyToken;
 };
 
 const meta = {
@@ -46,7 +54,8 @@ const meta = {
     type: 'button',
     href: undefined,
     target: '_self',
-  },
+    textFamily: 'system', // ✅ 기본 폰트 패밀리
+  } satisfies ButtonStoryProps,
   argTypes: {
     // ===== Appearance =====
     variant: {
@@ -102,6 +111,13 @@ const meta = {
       table: { category: 'behavior' },
     },
 
+    // ===== Typography =====
+    textFamily: {
+      control: { type: 'select' },
+      options: ['system', 'pretendard', 'paperlogy', 'clash-display', 'climate-crisis'],
+      table: { category: 'typography' },
+    },
+
     // ===== Content =====
     label: {
       control: 'text',
@@ -134,6 +150,7 @@ export const Playground: Story = {
       type={args.type}
       href={args.href}
       target={args.target}
+      textFamily={args.textFamily} // ✅ 여기서 내려줌
     >
       {args.label}
     </tinto-button>
@@ -151,9 +168,15 @@ export const Primary: Story = {
     label: 'Primary button',
     disabled: false,
     loading: false,
+    textFamily: 'system',
   },
   render: (args) => (
-    <tinto-button variant={args.variant} size={args.size} disabled={args.disabled}>
+    <tinto-button
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      textFamily={args.textFamily}
+    >
       {args.label}
     </tinto-button>
   ),
@@ -168,9 +191,15 @@ export const Secondary: Story = {
     variant: 'secondary',
     size: 'md',
     label: 'Secondary button',
+    textFamily: 'system',
   },
   render: (args) => (
-    <tinto-button variant={args.variant} size={args.size} disabled={args.disabled}>
+    <tinto-button
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      textFamily={args.textFamily}
+    >
       {args.label}
     </tinto-button>
   ),
@@ -185,9 +214,15 @@ export const Tertiary: Story = {
     variant: 'tertiary',
     size: 'md',
     label: 'Tertiary button',
+    textFamily: 'system',
   },
   render: (args) => (
-    <tinto-button variant={args.variant} size={args.size} disabled={args.disabled}>
+    <tinto-button
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      textFamily={args.textFamily}
+    >
       {args.label}
     </tinto-button>
   ),
@@ -203,9 +238,15 @@ export const Disabled: Story = {
     size: 'md',
     label: 'Disabled button',
     disabled: true,
+    textFamily: 'system',
   },
   render: (args) => (
-    <tinto-button variant={args.variant} size={args.size} disabled={args.disabled}>
+    <tinto-button
+      variant={args.variant}
+      size={args.size}
+      disabled={args.disabled}
+      textFamily={args.textFamily}
+    >
       {args.label}
     </tinto-button>
   ),
@@ -221,9 +262,15 @@ export const Loading: Story = {
     size: 'md',
     label: 'Loading...',
     loading: true,
+    textFamily: 'system',
   },
   render: (args) => (
-    <tinto-button variant={args.variant} size={args.size} loading={args.loading}>
+    <tinto-button
+      variant={args.variant}
+      size={args.size}
+      loading={args.loading}
+      textFamily={args.textFamily}
+    >
       {args.label}
     </tinto-button>
   ),
@@ -237,16 +284,17 @@ export const Sizes: Story = {
   args: {
     variant: 'primary',
     label: 'Button',
+    textFamily: 'system',
   } as ButtonStoryProps,
   render: (args) => (
     <div style={{ display: 'flex', gap: '0.75rem' }}>
-      <tinto-button variant={args.variant} size="sm">
+      <tinto-button variant={args.variant} size="sm" textFamily={args.textFamily}>
         Small
       </tinto-button>
-      <tinto-button variant={args.variant} size="md">
+      <tinto-button variant={args.variant} size="md" textFamily={args.textFamily}>
         Medium
       </tinto-button>
-      <tinto-button variant={args.variant} size="lg">
+      <tinto-button variant={args.variant} size="lg" textFamily={args.textFamily}>
         Large
       </tinto-button>
     </div>
@@ -264,9 +312,16 @@ export const AsLink: Story = {
     label: 'Go to example.com',
     href: 'https://example.com',
     target: '_blank',
+    textFamily: 'system',
   },
   render: (args) => (
-    <tinto-button variant={args.variant} size={args.size} href={args.href} target={args.target}>
+    <tinto-button
+      variant={args.variant}
+      size={args.size}
+      href={args.href}
+      target={args.target}
+      textFamily={args.textFamily}
+    >
       {args.label}
     </tinto-button>
   ),
