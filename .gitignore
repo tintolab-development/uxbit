@@ -1,7 +1,12 @@
+# 빌드 산출물
 dist/
-www/
+www/build/
 loader/
+storybook-static/
+asset-output/
+output/
 
+# 임시/에디터/환경 파일
 *~
 *.sw[mnpcod]
 *.log
@@ -11,7 +16,6 @@ loader/
 log.txt
 *.sublime-project
 *.sublime-workspace
-storybook-static
 
 .stencil/
 .idea/
