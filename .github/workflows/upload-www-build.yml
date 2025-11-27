@@ -1,0 +1,71 @@
+name: Upload WWW build bundle to S3
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'stencil.config.ts'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-www-build:
+    name: Build and sync www/build to S3
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      S3_BUCKET: ${{ secrets.WWW_BUILD_S3_BUCKET }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Stencil components (generates www/build)
+        run: pnpm run build
+
+      - name: Ensure www/build exists
+        run: test -d www/build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync bundle to S3
+        env:
+          CACHE_CONTROL: 'public, max-age=300'
+        run: |
+          if [ -z "$S3_BUCKET" ]; then
+            echo "::error::Missing WWW_BUILD_S3_BUCKET secret/variable." >&2
+            exit 1
+          fi
+
+          aws s3 sync \
+            --delete \
+            --cache-control "$CACHE_CONTROL" \
+            www/build \
+            "s3://$S3_BUCKET"

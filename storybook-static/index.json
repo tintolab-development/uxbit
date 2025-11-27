@@ -1,46 +1,6 @@
 {
   "v": 5,
   "entries": {
-    "uxbit-badge--primary": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-badge--primary",
-      "name": "Default (Neutral)",
-      "title": "Uxbit/Badge",
-      "importPath": "./src/components/badge/badge.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "Primary"
-    },
-    "uxbit-badge--status-variants": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-badge--status-variants",
-      "name": "Status variants",
-      "title": "Uxbit/Badge",
-      "importPath": "./src/components/badge/badge.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "StatusVariants"
-    },
-    "uxbit-badge--soft-vs-outline": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-badge--soft-vs-outline",
-      "name": "Soft vs Outline",
-      "title": "Uxbit/Badge",
-      "importPath": "./src/components/badge/badge.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "SoftVsOutline"
-    },
-    "uxbit-badge--small-size": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-badge--small-size",
-      "name": "Small size",
-      "title": "Uxbit/Badge",
-      "importPath": "./src/components/badge/badge.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "SmallSize"
-    },
     "uxbit-button--playground": {
       "type": "story",
       "subtype": "story",
