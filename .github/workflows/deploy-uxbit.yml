@@ -1,0 +1,70 @@
+name: Deploy Uxbit to S3
+
+on:
+  push:
+    branches:
+      - master
+    # www/build 결과에 영향을 줄만한 변경에만 배포
+    paths:
+      - 'www/**'
+      - 'src/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-www-build-to-s3.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      # CloudFront ID를 env로 매핑해서 if 조건에서 사용
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build www bundle
+        # 필요하면 여기 빌드 스크립트만 너 프로젝트에 맞게 변경 (예: pnpm www:build)
+        run: pnpm build
+        working-directory: .
+
+      # ===== AWS 인증 (IAM User Access Key 사용) =====
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # ===== S3 업로드 (sync + delete) =====
+      - name: Sync www/build to S3
+        run: |
+          aws s3 sync ./www/build \
+            s3://${{ secrets.S3_BUCKET }}/uxbit/build/ \
+            --delete
+
+      # ===== CloudFront 캐시 무효화 =====
+      - name: Invalidate CloudFront cache
+        if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+            --paths "/uxbit/build/*"
