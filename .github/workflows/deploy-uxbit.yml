@@ -40,11 +40,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        working-directory: apps/stencil-components
 
       - name: Build www bundle
-        # 필요하면 여기 빌드 스크립트만 너 프로젝트에 맞게 변경 (예: pnpm www:build)
-        run: pnpm build
-        working-directory: .
+        run: pnpm run build
+        working-directory: apps/stencil-components
 
       # ===== AWS 인증 (IAM User Access Key 사용) =====
       - name: Configure AWS credentials
@@ -57,7 +57,7 @@ jobs:
       # ===== S3 업로드 (sync + delete) =====
       - name: Sync www/build to S3
         run: |
-          aws s3 sync ./www/build \
+          aws s3 sync www/build \
             s3://${{ secrets.S3_BUCKET }}/uxbit/build/ \
             --delete
 
