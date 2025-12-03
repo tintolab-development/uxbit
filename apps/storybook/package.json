@@ -1,0 +1,32 @@
+{
+  "name": "storybook",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "storybook dev -p 6006 --no-open",
+    "build": "storybook build --output-dir storybook-static",
+    "build:gh-pages": "pnpm run build && node scripts/prepare-storybook-gh-pages.cjs",
+    "preview": "serve storybook-static -s -l 6007",
+    "lint": "eslint \".storybook/**/*.{ts,tsx}\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf storybook-static"
+  },
+  "dependencies": {
+    "@uxbit/stencil-components": "workspace:*"
+  },
+  "devDependencies": {
+    "@stencil/storybook-plugin": "^0.5.6",
+    "@types/node": "^22.13.5",
+    "@types/react": "18.3.12",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-storybook": "10.0.8",
+    "prettier": "^3.6.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "serve": "^14.2.3",
+    "storybook": "10.0.8",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

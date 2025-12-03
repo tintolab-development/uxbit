@@ -1,10 +1,10 @@
 # 빌드 산출물
-dist/
-www/build/
-loader/
-storybook-static/
-asset-output/
-output/
+apps/stencil-components/dist/
+apps/stencil-components/www/build/
+apps/stencil-components/loader/
+apps/stencil-components/asset-output/
+apps/stencil-components/output/
+apps/storybook/storybook-static/
 
 # 임시/에디터/환경 파일
 *~

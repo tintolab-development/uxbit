@@ -7,9 +7,20 @@ import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [{
-  ignores: ['dist/**', 'loader/**', 'www/**', 'coverage/**', 'storybook-static/**', '**/*.d.ts'],
+  ignores: [
+    'apps/stencil-components/dist/**',
+    'apps/stencil-components/loader/**',
+    'apps/stencil-components/www/**',
+    'apps/stencil-components/coverage/**',
+    'apps/storybook/storybook-static/**',
+    '**/*.d.ts'
+  ],
 }, eslint.configs.recommended, ...tseslint.configs.recommended, {
-  files: ['src/**/*.{ts,tsx,js,jsx}'],
+  files: [
+    'apps/stencil-components/src/**/*.{ts,tsx,js,jsx}',
+    'apps/**/*.{ts,tsx,js,jsx}',
+    'workspace/**/*.{ts,tsx,js,jsx}'
+  ],
   rules: {
     '@typescript-eslint/no-unused-vars': [
       'warn',
@@ -26,5 +37,24 @@ export default [{
     // 빈 블록 허용 (image.tsx 같은 곳에서 의도적으로 비워둔 블록 때문에 막히지 않도록)
     'no-empty': 'off',
     // 만약 경고만 띄우고 싶으면: 'no-empty': 'warn'
+    'storybook/no-redundant-story-name': 'off',
   },
-}, eslintConfigPrettier, ...storybook.configs["flat/recommended"]];
+}, {
+  files: ['**/*.spec.{ts,tsx,js}', '**/*.e2e.{ts,tsx,js}'],
+  languageOptions: {
+    globals: {
+      describe: false,
+      it: false,
+      expect: false,
+      beforeEach: false,
+      afterEach: false,
+      beforeAll: false,
+      afterAll: false,
+    },
+  },
+}, eslintConfigPrettier, ...storybook.configs["flat/recommended"], {
+  files: ['apps/stencil-components/src/**/*.stories.{ts,tsx,js,jsx}'],
+  rules: {
+    'storybook/no-redundant-story-name': 'off',
+  },
+}];
