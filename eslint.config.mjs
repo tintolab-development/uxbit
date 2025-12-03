@@ -13,6 +13,7 @@ export default [{
     'apps/stencil-components/www/**',
     'apps/stencil-components/coverage/**',
     'apps/storybook/storybook-static/**',
+    'apps/templates/dist/**',
     '**/*.d.ts'
   ],
 }, eslint.configs.recommended, ...tseslint.configs.recommended, {
