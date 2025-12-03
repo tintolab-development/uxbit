@@ -6,12 +6,14 @@ on:
       - main
       - master
     paths:
-      - 'src/**'
-      - 'public/**'
-      - 'stencil.config.ts'
+      - 'apps/stencil-components/src/**'
+      - 'apps/stencil-components/public/**'
+      - 'apps/stencil-components/stencil.config.ts'
+      - 'apps/stencil-components/package.json'
+      - 'apps/stencil-components/tsconfig.json'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - 'tsconfig.json'
+      - '.github/workflows/upload-www-build.yml'
   workflow_dispatch:
 
 permissions:
@@ -72,3 +74,4 @@ jobs:
             --cache-control "$CACHE_CONTROL" \
             www/build \
             "s3://$S3_BUCKET"
+        working-directory: apps/stencil-components

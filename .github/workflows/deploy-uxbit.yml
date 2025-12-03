@@ -6,11 +6,15 @@ on:
       - master
     # www/build 결과에 영향을 줄만한 변경에만 배포
     paths:
-      - 'www/**'
-      - 'src/**'
+      - 'apps/stencil-components/www/**'
+      - 'apps/stencil-components/src/**'
+      - 'apps/stencil-components/public/**'
+      - 'apps/stencil-components/stencil.config.ts'
+      - 'apps/stencil-components/package.json'
+      - 'apps/stencil-components/tsconfig.json'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - '.github/workflows/deploy-www-build-to-s3.yml'
+      - '.github/workflows/deploy-uxbit.yml'
 
 jobs:
   build-and-deploy:
@@ -60,6 +64,7 @@ jobs:
           aws s3 sync www/build \
             s3://${{ secrets.S3_BUCKET }}/uxbit/build/ \
             --delete
+        working-directory: apps/stencil-components
 
       # ===== CloudFront 캐시 무효화 =====
       - name: Invalidate CloudFront cache

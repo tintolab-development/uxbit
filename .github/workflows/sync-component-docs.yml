@@ -3,7 +3,7 @@ name: Sync Component Docs to Issues
 on:
   push:
     paths:
-      - 'docs/components/*.md' # 이 경로의 md가 바뀌면 동작
+      - 'apps/stencil-components/docs/components/*.md' # 이 경로의 md가 바뀌면 동작
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         uses: tj-actions/changed-files@v45
         with:
           files: |
-            docs/components/*.md
+            apps/stencil-components/docs/components/*.md
 
       - name: Create or update issues for changed files
         if: steps.changed.outputs.all_changed_files != ''
