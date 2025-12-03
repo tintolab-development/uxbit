@@ -68,5 +68,5 @@ jobs:
             --delete \
             --cache-control "$CACHE_CONTROL" \
             www/build \
-            "s3://$S3_BUCKET"
+            "s3://$S3_BUCKET/uxbit/build/"
         working-directory: apps/stencil-components
