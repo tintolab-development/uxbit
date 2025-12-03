@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       AWS_REGION: ${{ secrets.AWS_REGION }}
-      S3_BUCKET: ${{ secrets.WWW_BUILD_S3_BUCKET }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -64,11 +64,6 @@ jobs:
         env:
           CACHE_CONTROL: 'public, max-age=300'
         run: |
-          if [ -z "$S3_BUCKET" ]; then
-            echo "::error::Missing WWW_BUILD_S3_BUCKET secret/variable." >&2
-            exit 1
-          fi
-
           aws s3 sync \
             --delete \
             --cache-control "$CACHE_CONTROL" \
