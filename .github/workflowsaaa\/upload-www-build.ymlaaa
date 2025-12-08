@@ -1,12 +1,11 @@
-name: Deploy Uxbit to S3
+name: Upload WWW build bundle to S3
 
 on:
   push:
     branches:
+      - main
       - master
-    # www/build 결과에 영향을 줄만한 변경에만 배포
     paths:
-      - 'apps/stencil-components/www/**'
       - 'apps/stencil-components/src/**'
       - 'apps/stencil-components/public/**'
       - 'apps/stencil-components/stencil.config.ts'
@@ -14,19 +13,19 @@ on:
       - 'apps/stencil-components/tsconfig.json'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - '.github/workflows/deploy-uxbit.yml'
+      - '.github/workflows/upload-www-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-deploy:
+  deploy-www-build:
+    name: Build and sync www/build to S3
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-
     env:
-      # CloudFront ID를 env로 매핑해서 if 조건에서 사용
-      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,40 +35,37 @@ jobs:
         with:
           version: 9.15.4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         working-directory: apps/stencil-components
 
-      - name: Build www bundle
+      - name: Build Stencil components (generates www/build)
         run: pnpm run build
         working-directory: apps/stencil-components
 
-      # ===== AWS 인증 (IAM User Access Key 사용) =====
+      - name: Ensure www/build exists
+        run: test -d www/build
+        working-directory: apps/stencil-components
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      # ===== S3 업로드 (sync + delete) =====
-      - name: Sync www/build to S3
+      - name: Sync bundle to S3 (no delete)
+        env:
+          CACHE_CONTROL: 'public, max-age=300'
         run: |
-          aws s3 sync www/build \
-            s3://${{ secrets.S3_BUCKET }}/uxbit/build/ \
-            --delete
+          aws s3 sync \
+            --cache-control "$CACHE_CONTROL" \
+            www/build \
+            "s3://$S3_BUCKET/uxbit/build/"
         working-directory: apps/stencil-components
-
-      # ===== CloudFront 캐시 무효화 =====
-      - name: Invalidate CloudFront cache
-        if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID != '' }}
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
-            --paths "/uxbit/build/*"
