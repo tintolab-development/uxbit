@@ -3,7 +3,7 @@ name: Deploy Uxbit to S3
 on:
   push:
     branches:
-      - master
+      - 
     # www/build 결과에 영향을 줄만한 변경에만 배포
     paths:
       - 'apps/stencil-components/www/**'
