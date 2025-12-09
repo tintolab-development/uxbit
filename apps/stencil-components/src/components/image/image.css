@@ -2,6 +2,9 @@
 :host {
   display: block;
   inline-size: var(--ti-width, 100%);
+  max-inline-size: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* allow standard hidden */

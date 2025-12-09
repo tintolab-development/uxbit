@@ -6,6 +6,24 @@
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  AlignContent,
+  AlignItems,
+  BgAttachment,
+  BgBlend,
+  BgRepeat,
+  BgSize,
+  FlexDirection,
+  FlexWrap,
+  HeightMode,
+  Justify,
+  OverflowMode,
+  ScrollBehavior,
+  ScrollSnapType,
+  SnapAlign,
+  TextAlign,
+  TextTransform,
+} from './components/app-route/app-route.types';
+import {
   ButtonClickDetail,
   ButtonNativeType,
   ButtonSize,
@@ -29,11 +47,11 @@ import {
   TintoImagePressDetail,
 } from './components/image/image.types';
 import {
-  AlignItems,
-  FlexDirection,
-  FlexWrap,
-  HeightMode,
-  Justify,
+  AlignItems as AlignItems1,
+  FlexDirection as FlexDirection1,
+  FlexWrap as FlexWrap1,
+  HeightMode as HeightMode1,
+  Justify as Justify1,
 } from './components/section/section.types';
 import {
   Align,
@@ -45,16 +63,34 @@ import {
   Variant,
 } from './components/typography/typography.types';
 import {
-  AlignItems as AlignItems1,
-  BgAttachment,
-  BgBlend,
-  BgRepeat,
-  BgSize,
-  FlexDirection as FlexDirection1,
-  FlexWrap as FlexWrap1,
-  Justify as Justify1,
+  AlignItems as AlignItems2,
+  BgAttachment as BgAttachment1,
+  BgBlend as BgBlend1,
+  BgRepeat as BgRepeat1,
+  BgSize as BgSize1,
+  FlexDirection as FlexDirection2,
+  FlexWrap as FlexWrap2,
+  Justify as Justify2,
 } from './components/wrapper/wrapper.types';
 export {
+  AlignContent,
+  AlignItems,
+  BgAttachment,
+  BgBlend,
+  BgRepeat,
+  BgSize,
+  FlexDirection,
+  FlexWrap,
+  HeightMode,
+  Justify,
+  OverflowMode,
+  ScrollBehavior,
+  ScrollSnapType,
+  SnapAlign,
+  TextAlign,
+  TextTransform,
+} from './components/app-route/app-route.types';
+export {
   ButtonClickDetail,
   ButtonNativeType,
   ButtonSize,
@@ -78,11 +114,11 @@ export {
   TintoImagePressDetail,
 } from './components/image/image.types';
 export {
-  AlignItems,
-  FlexDirection,
-  FlexWrap,
-  HeightMode,
-  Justify,
+  AlignItems as AlignItems1,
+  FlexDirection as FlexDirection1,
+  FlexWrap as FlexWrap1,
+  HeightMode as HeightMode1,
+  Justify as Justify1,
 } from './components/section/section.types';
 export {
   Align,
@@ -94,16 +130,147 @@ export {
   Variant,
 } from './components/typography/typography.types';
 export {
-  AlignItems as AlignItems1,
-  BgAttachment,
-  BgBlend,
-  BgRepeat,
-  BgSize,
-  FlexDirection as FlexDirection1,
-  FlexWrap as FlexWrap1,
-  Justify as Justify1,
+  AlignItems as AlignItems2,
+  BgAttachment as BgAttachment1,
+  BgBlend as BgBlend1,
+  BgRepeat as BgRepeat1,
+  BgSize as BgSize1,
+  FlexDirection as FlexDirection2,
+  FlexWrap as FlexWrap2,
+  Justify as Justify2,
 } from './components/wrapper/wrapper.types';
 export namespace Components {
+  interface TintoAppRoute {
+    /**
+     * @default 'stretch'
+     */
+    align: AlignItems;
+    /**
+     * @default 'stretch'
+     */
+    alignContent: AlignContent;
+    backdropFilter?: string;
+    /**
+     * 시각/타이포 토큰
+     */
+    background?: string;
+    /**
+     * @default 'scroll'
+     */
+    bgAttachment: BgAttachment;
+    /**
+     * @default 'normal'
+     */
+    bgBlend: BgBlend;
+    /**
+     * @default '50% 50%'
+     */
+    bgPosition: string;
+    /**
+     * @default 'no-repeat'
+     */
+    bgRepeat: BgRepeat;
+    /**
+     * @default 'cover'
+     */
+    bgSize: BgSize;
+    border?: string;
+    /**
+     * @default false
+     */
+    center: boolean;
+    color?: string;
+    columnGap?: string;
+    /**
+     * Flex 레이아웃
+     * @default 'column'
+     */
+    direction: FlexDirection;
+    font?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    gap?: string;
+    height?: string;
+    /**
+     * @default 'auto'
+     */
+    heightMode: HeightMode;
+    /**
+     * @default 'flex-start'
+     */
+    justify: Justify;
+    letterSpacing?: string;
+    lineHeight?: string;
+    /**
+     * 마진 토큰
+     */
+    margin?: string;
+    marginBlock?: string;
+    marginBlockEnd?: string;
+    marginBlockStart?: string;
+    marginInline?: string;
+    marginInlineEnd?: string;
+    marginInlineStart?: string;
+    maxWidth?: string;
+    minHeight?: string;
+    overflow?: OverflowMode;
+    /**
+     * @default 'visible'
+     */
+    overflowX: OverflowMode;
+    /**
+     * @default 'visible'
+     */
+    overflowY: OverflowMode;
+    /**
+     * 오버레이
+     */
+    overlay?: string;
+    overlayBlend?: string;
+    overlayOpacity?: number;
+    /**
+     * 패딩 토큰
+     */
+    padding?: string;
+    paddingBlock?: string;
+    paddingBlockEnd?: string;
+    paddingBlockStart?: string;
+    paddingInline?: string;
+    paddingInlineEnd?: string;
+    paddingInlineStart?: string;
+    radius?: string;
+    rowGap?: string;
+    /**
+     * 스크롤/세이프에어리어
+     * @default false
+     */
+    safeArea: boolean;
+    /**
+     * @default 'auto'
+     */
+    scrollBehavior: ScrollBehavior;
+    scrollPadding?: string;
+    scrollPaddingBlock?: string;
+    scrollPaddingInline?: string;
+    scrollSnapType?: ScrollSnapType;
+    shadow?: string;
+    snapAlign?: SnapAlign;
+    /**
+     * 배경 이미지
+     */
+    src?: string;
+    textAlign?: TextAlign;
+    textTransform?: TextTransform;
+    /**
+     * 크기/여백
+     * @default '100%'
+     */
+    width: string;
+    /**
+     * @default 'nowrap'
+     */
+    wrap: FlexWrap;
+  }
   interface TintoButton {
     /**
      * 가로 전체폭 사용 여부
@@ -304,7 +471,7 @@ export namespace Components {
     /**
      * @default 'stretch'
      */
-    align: AlignItems;
+    align: AlignItems1;
     background?: string;
     /**
      * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
@@ -316,17 +483,17 @@ export namespace Components {
      * Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용)
      * @default 'column'
      */
-    direction: FlexDirection;
+    direction: FlexDirection1;
     gap?: string;
     /**
      * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
      * @default 'auto'
      */
-    heightMode: HeightMode;
+    heightMode: HeightMode1;
     /**
      * @default 'flex-start'
      */
-    justify: Justify;
+    justify: Justify1;
     margin?: string;
     /**
      * 크기/여백/배경 등 토큰
@@ -343,7 +510,7 @@ export namespace Components {
     /**
      * @default 'nowrap'
      */
-    wrap: FlexWrap;
+    wrap: FlexWrap1;
   }
   interface TintoTypography {
     /**
@@ -477,8 +644,8 @@ export namespace Components {
     /**
      * @default 'stretch'
      */
-    align: AlignItems1;
-    alignDesktop?: AlignItems1;
+    align: AlignItems2;
+    alignDesktop?: AlignItems2;
     /**
      * 배경(색/그라디언트) + 배경 이미지
      */
@@ -486,11 +653,11 @@ export namespace Components {
     /**
      * @default 'scroll'
      */
-    bgAttachment?: BgAttachment;
+    bgAttachment?: BgAttachment1;
     /**
      * @default 'normal'
      */
-    bgBlend?: BgBlend;
+    bgBlend?: BgBlend1;
     /**
      * @default '50% 50%'
      */
@@ -498,22 +665,22 @@ export namespace Components {
     /**
      * @default 'no-repeat'
      */
-    bgRepeat?: BgRepeat;
+    bgRepeat?: BgRepeat1;
     /**
      * @default 'cover'
      */
-    bgSize?: BgSize;
+    bgSize?: BgSize1;
     border?: string;
     color?: string;
     /**
      * Flex (모바일 기본)
      * @default 'row'
      */
-    direction: FlexDirection1;
+    direction: FlexDirection2;
     /**
      * Flex (데스크탑 오버라이드, >=1920px)
      */
-    directionDesktop?: FlexDirection1;
+    directionDesktop?: FlexDirection2;
     /**
      * 부모를 덮는 모드 (absolute; inset:0)
      * @default false
@@ -524,8 +691,8 @@ export namespace Components {
     /**
      * @default 'flex-start'
      */
-    justify: Justify1;
-    justifyDesktop?: Justify1;
+    justify: Justify2;
+    justifyDesktop?: Justify2;
     margin?: string;
     /**
      * 오버레이
@@ -542,8 +709,8 @@ export namespace Components {
     /**
      * @default 'nowrap'
      */
-    wrap: FlexWrap1;
-    wrapDesktop?: FlexWrap1;
+    wrap: FlexWrap2;
+    wrapDesktop?: FlexWrap2;
   }
 }
 export interface TintoButtonCustomEvent<T> extends CustomEvent<T> {
@@ -555,6 +722,11 @@ export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
   target: HTMLTintoImageElement;
 }
 declare global {
+  interface HTMLTintoAppRouteElement extends Components.TintoAppRoute, HTMLStencilElement {}
+  var HTMLTintoAppRouteElement: {
+    prototype: HTMLTintoAppRouteElement;
+    new (): HTMLTintoAppRouteElement;
+  };
   interface HTMLTintoButtonElementEventMap {
     tintoClick: ButtonClickDetail;
     tintoToggle: ButtonToggleDetail;
@@ -690,6 +862,7 @@ declare global {
     new (): HTMLTintoWrapperElement;
   };
   interface HTMLElementTagNameMap {
+    'tinto-app-route': HTMLTintoAppRouteElement;
     'tinto-button': HTMLTintoButtonElement;
     'tinto-image': HTMLTintoImageElement;
     'tinto-section': HTMLTintoSectionElement;
@@ -698,6 +871,137 @@ declare global {
   }
 }
 declare namespace LocalJSX {
+  interface TintoAppRoute {
+    /**
+     * @default 'stretch'
+     */
+    align?: AlignItems;
+    /**
+     * @default 'stretch'
+     */
+    alignContent?: AlignContent;
+    backdropFilter?: string;
+    /**
+     * 시각/타이포 토큰
+     */
+    background?: string;
+    /**
+     * @default 'scroll'
+     */
+    bgAttachment?: BgAttachment;
+    /**
+     * @default 'normal'
+     */
+    bgBlend?: BgBlend;
+    /**
+     * @default '50% 50%'
+     */
+    bgPosition?: string;
+    /**
+     * @default 'no-repeat'
+     */
+    bgRepeat?: BgRepeat;
+    /**
+     * @default 'cover'
+     */
+    bgSize?: BgSize;
+    border?: string;
+    /**
+     * @default false
+     */
+    center?: boolean;
+    color?: string;
+    columnGap?: string;
+    /**
+     * Flex 레이아웃
+     * @default 'column'
+     */
+    direction?: FlexDirection;
+    font?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    gap?: string;
+    height?: string;
+    /**
+     * @default 'auto'
+     */
+    heightMode?: HeightMode;
+    /**
+     * @default 'flex-start'
+     */
+    justify?: Justify;
+    letterSpacing?: string;
+    lineHeight?: string;
+    /**
+     * 마진 토큰
+     */
+    margin?: string;
+    marginBlock?: string;
+    marginBlockEnd?: string;
+    marginBlockStart?: string;
+    marginInline?: string;
+    marginInlineEnd?: string;
+    marginInlineStart?: string;
+    maxWidth?: string;
+    minHeight?: string;
+    overflow?: OverflowMode;
+    /**
+     * @default 'visible'
+     */
+    overflowX?: OverflowMode;
+    /**
+     * @default 'visible'
+     */
+    overflowY?: OverflowMode;
+    /**
+     * 오버레이
+     */
+    overlay?: string;
+    overlayBlend?: string;
+    overlayOpacity?: number;
+    /**
+     * 패딩 토큰
+     */
+    padding?: string;
+    paddingBlock?: string;
+    paddingBlockEnd?: string;
+    paddingBlockStart?: string;
+    paddingInline?: string;
+    paddingInlineEnd?: string;
+    paddingInlineStart?: string;
+    radius?: string;
+    rowGap?: string;
+    /**
+     * 스크롤/세이프에어리어
+     * @default false
+     */
+    safeArea?: boolean;
+    /**
+     * @default 'auto'
+     */
+    scrollBehavior?: ScrollBehavior;
+    scrollPadding?: string;
+    scrollPaddingBlock?: string;
+    scrollPaddingInline?: string;
+    scrollSnapType?: ScrollSnapType;
+    shadow?: string;
+    snapAlign?: SnapAlign;
+    /**
+     * 배경 이미지
+     */
+    src?: string;
+    textAlign?: TextAlign;
+    textTransform?: TextTransform;
+    /**
+     * 크기/여백
+     * @default '100%'
+     */
+    width?: string;
+    /**
+     * @default 'nowrap'
+     */
+    wrap?: FlexWrap;
+  }
   interface TintoButton {
     /**
      * 가로 전체폭 사용 여부
@@ -909,7 +1213,7 @@ declare namespace LocalJSX {
     /**
      * @default 'stretch'
      */
-    align?: AlignItems;
+    align?: AlignItems1;
     background?: string;
     /**
      * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
@@ -921,17 +1225,17 @@ declare namespace LocalJSX {
      * Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용)
      * @default 'column'
      */
-    direction?: FlexDirection;
+    direction?: FlexDirection1;
     gap?: string;
     /**
      * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
      * @default 'auto'
      */
-    heightMode?: HeightMode;
+    heightMode?: HeightMode1;
     /**
      * @default 'flex-start'
      */
-    justify?: Justify;
+    justify?: Justify1;
     margin?: string;
     /**
      * 크기/여백/배경 등 토큰
@@ -948,7 +1252,7 @@ declare namespace LocalJSX {
     /**
      * @default 'nowrap'
      */
-    wrap?: FlexWrap;
+    wrap?: FlexWrap1;
   }
   interface TintoTypography {
     /**
@@ -1082,8 +1386,8 @@ declare namespace LocalJSX {
     /**
      * @default 'stretch'
      */
-    align?: AlignItems1;
-    alignDesktop?: AlignItems1;
+    align?: AlignItems2;
+    alignDesktop?: AlignItems2;
     /**
      * 배경(색/그라디언트) + 배경 이미지
      */
@@ -1091,11 +1395,11 @@ declare namespace LocalJSX {
     /**
      * @default 'scroll'
      */
-    bgAttachment?: BgAttachment;
+    bgAttachment?: BgAttachment1;
     /**
      * @default 'normal'
      */
-    bgBlend?: BgBlend;
+    bgBlend?: BgBlend1;
     /**
      * @default '50% 50%'
      */
@@ -1103,22 +1407,22 @@ declare namespace LocalJSX {
     /**
      * @default 'no-repeat'
      */
-    bgRepeat?: BgRepeat;
+    bgRepeat?: BgRepeat1;
     /**
      * @default 'cover'
      */
-    bgSize?: BgSize;
+    bgSize?: BgSize1;
     border?: string;
     color?: string;
     /**
      * Flex (모바일 기본)
      * @default 'row'
      */
-    direction?: FlexDirection1;
+    direction?: FlexDirection2;
     /**
      * Flex (데스크탑 오버라이드, >=1920px)
      */
-    directionDesktop?: FlexDirection1;
+    directionDesktop?: FlexDirection2;
     /**
      * 부모를 덮는 모드 (absolute; inset:0)
      * @default false
@@ -1129,8 +1433,8 @@ declare namespace LocalJSX {
     /**
      * @default 'flex-start'
      */
-    justify?: Justify1;
-    justifyDesktop?: Justify1;
+    justify?: Justify2;
+    justifyDesktop?: Justify2;
     margin?: string;
     /**
      * 오버레이
@@ -1147,10 +1451,11 @@ declare namespace LocalJSX {
     /**
      * @default 'nowrap'
      */
-    wrap?: FlexWrap1;
-    wrapDesktop?: FlexWrap1;
+    wrap?: FlexWrap2;
+    wrapDesktop?: FlexWrap2;
   }
   interface IntrinsicElements {
+    'tinto-app-route': TintoAppRoute;
     'tinto-button': TintoButton;
     'tinto-image': TintoImage;
     'tinto-section': TintoSection;
@@ -1162,6 +1467,7 @@ export { LocalJSX as JSX };
 declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
+      'tinto-app-route': LocalJSX.TintoAppRoute & JSXBase.HTMLAttributes<HTMLTintoAppRouteElement>;
       'tinto-button': LocalJSX.TintoButton & JSXBase.HTMLAttributes<HTMLTintoButtonElement>;
       /**
        * <tinto-image>

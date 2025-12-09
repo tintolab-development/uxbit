@@ -329,6 +329,36 @@ export class TintoTypography {
     this.typingInitialized = true;
   }
 
+  /** 롤링 텍스트일 때 현재 line-height 기반 min-height를 계산 */
+  private syncTypingMetrics() {
+    if (!this.hostEl) return;
+    if (!this.rolling) {
+      this.hostEl.style.removeProperty('--typing-line-height');
+      return;
+    }
+
+    let lineHeightValue: string | undefined;
+    try {
+      if (typeof window !== 'undefined') {
+        const computed = window.getComputedStyle(this.hostEl);
+        const rawLineHeight = computed?.lineHeight;
+        if (rawLineHeight && rawLineHeight !== 'normal') {
+          lineHeightValue = rawLineHeight;
+        } else {
+          const fontSize = computed?.fontSize;
+          const numeric = fontSize ? parseFloat(fontSize) : NaN;
+          if (!isNaN(numeric) && isFinite(numeric) && numeric > 0) {
+            lineHeightValue = `${numeric * 1.4}px`;
+          }
+        }
+      }
+    } catch {
+      /* noop */
+    }
+
+    this.hostEl.style.setProperty('--typing-line-height', lineHeightValue ?? '1.4em');
+  }
+
   /** font-size 토큰/값을 CSS 커스텀 프로퍼티로 투입 */
   private applyFontSizeToken() {
     if (!this.hostEl) return;
@@ -353,10 +383,12 @@ export class TintoTypography {
 
   componentDidLoad() {
     this.setupTypingEffect();
+    this.syncTypingMetrics();
   }
 
   componentDidRender() {
     this.setupTypingEffect();
+    this.syncTypingMetrics();
   }
 
   @Watch('fontSize')

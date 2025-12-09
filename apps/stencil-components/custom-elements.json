@@ -1,11 +1,1859 @@
 {
-  "timestamp": "2025-12-08T06:14:50",
+  "timestamp": "2025-12-09T05:20:25",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
     "typescriptVersion": "5.9.3"
   },
   "components": [
+    {
+      "filePath": "src/components/app-route/app-route.tsx",
+      "encapsulation": "shadow",
+      "tag": "tinto-app-route",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "align",
+          "type": "\"baseline\" | \"center\" | \"flex-end\" | \"flex-start\" | \"stretch\"",
+          "complexType": {
+            "original": "AlignItems",
+            "resolved": "\"baseline\" | \"center\" | \"flex-end\" | \"flex-start\" | \"stretch\"",
+            "references": {
+              "AlignItems": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::AlignItems"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "align",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'stretch'"
+            }
+          ],
+          "default": "'stretch'",
+          "values": [
+            {
+              "value": "baseline",
+              "type": "string"
+            },
+            {
+              "value": "center",
+              "type": "string"
+            },
+            {
+              "value": "flex-end",
+              "type": "string"
+            },
+            {
+              "value": "flex-start",
+              "type": "string"
+            },
+            {
+              "value": "stretch",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "alignContent",
+          "type": "\"center\" | \"flex-end\" | \"flex-start\" | \"space-around\" | \"space-between\" | \"stretch\"",
+          "complexType": {
+            "original": "AlignContent",
+            "resolved": "\"center\" | \"flex-end\" | \"flex-start\" | \"space-around\" | \"space-between\" | \"stretch\"",
+            "references": {
+              "AlignContent": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::AlignContent"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "align-content",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'stretch'"
+            }
+          ],
+          "default": "'stretch'",
+          "values": [
+            {
+              "value": "center",
+              "type": "string"
+            },
+            {
+              "value": "flex-end",
+              "type": "string"
+            },
+            {
+              "value": "flex-start",
+              "type": "string"
+            },
+            {
+              "value": "space-around",
+              "type": "string"
+            },
+            {
+              "value": "space-between",
+              "type": "string"
+            },
+            {
+              "value": "stretch",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "backdropFilter",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "backdrop-filter",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "background",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "background",
+          "reflectToAttr": true,
+          "docs": "시각/타이포 토큰",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "bgAttachment",
+          "type": "string",
+          "complexType": {
+            "original": "BgAttachment",
+            "resolved": "string",
+            "references": {
+              "BgAttachment": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::BgAttachment"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "bg-attachment",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'scroll'"
+            }
+          ],
+          "default": "'scroll'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "bgBlend",
+          "type": "string",
+          "complexType": {
+            "original": "BgBlend",
+            "resolved": "string",
+            "references": {
+              "BgBlend": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::BgBlend"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "bg-blend",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'normal'"
+            }
+          ],
+          "default": "'normal'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "bgPosition",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "bg-position",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'50% 50%'"
+            }
+          ],
+          "default": "'50% 50%'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "bgRepeat",
+          "type": "string",
+          "complexType": {
+            "original": "BgRepeat",
+            "resolved": "string",
+            "references": {
+              "BgRepeat": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::BgRepeat"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "bg-repeat",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'no-repeat'"
+            }
+          ],
+          "default": "'no-repeat'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "bgSize",
+          "type": "string",
+          "complexType": {
+            "original": "BgSize",
+            "resolved": "string",
+            "references": {
+              "BgSize": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::BgSize"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "bg-size",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'cover'"
+            }
+          ],
+          "default": "'cover'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "border",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "border",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "center",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "center",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "color",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "columnGap",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "column-gap",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "direction",
+          "type": "\"column\" | \"column-reverse\" | \"row\" | \"row-reverse\"",
+          "complexType": {
+            "original": "FlexDirection",
+            "resolved": "\"column\" | \"column-reverse\" | \"row\" | \"row-reverse\"",
+            "references": {
+              "FlexDirection": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::FlexDirection"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "direction",
+          "reflectToAttr": true,
+          "docs": "Flex 레이아웃",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'column'"
+            }
+          ],
+          "default": "'column'",
+          "values": [
+            {
+              "value": "column",
+              "type": "string"
+            },
+            {
+              "value": "column-reverse",
+              "type": "string"
+            },
+            {
+              "value": "row",
+              "type": "string"
+            },
+            {
+              "value": "row-reverse",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "font",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "font",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "fontSize",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "font-size",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "fontWeight",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "font-weight",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "gap",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "gap",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "height",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "heightMode",
+          "type": "\"auto\" | \"dvh\" | \"screen\"",
+          "complexType": {
+            "original": "HeightMode",
+            "resolved": "\"auto\" | \"dvh\" | \"screen\"",
+            "references": {
+              "HeightMode": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::HeightMode"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "height-mode",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'auto'"
+            }
+          ],
+          "default": "'auto'",
+          "values": [
+            {
+              "value": "auto",
+              "type": "string"
+            },
+            {
+              "value": "dvh",
+              "type": "string"
+            },
+            {
+              "value": "screen",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "justify",
+          "type": "\"center\" | \"flex-end\" | \"flex-start\" | \"space-around\" | \"space-between\" | \"space-evenly\"",
+          "complexType": {
+            "original": "Justify",
+            "resolved": "\"center\" | \"flex-end\" | \"flex-start\" | \"space-around\" | \"space-between\" | \"space-evenly\"",
+            "references": {
+              "Justify": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::Justify"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "justify",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'flex-start'"
+            }
+          ],
+          "default": "'flex-start'",
+          "values": [
+            {
+              "value": "center",
+              "type": "string"
+            },
+            {
+              "value": "flex-end",
+              "type": "string"
+            },
+            {
+              "value": "flex-start",
+              "type": "string"
+            },
+            {
+              "value": "space-around",
+              "type": "string"
+            },
+            {
+              "value": "space-between",
+              "type": "string"
+            },
+            {
+              "value": "space-evenly",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "letterSpacing",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "letter-spacing",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "lineHeight",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "line-height",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "margin",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin",
+          "reflectToAttr": true,
+          "docs": "마진 토큰",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginBlock",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin-block",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginBlockEnd",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin-block-end",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginBlockStart",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin-block-start",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginInline",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin-inline",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginInlineEnd",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin-inline-end",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginInlineStart",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "margin-inline-start",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "max-width",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "min-height",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "overflow",
+          "type": "\"auto\" | \"clip\" | \"hidden\" | \"scroll\" | \"visible\"",
+          "complexType": {
+            "original": "OverflowMode",
+            "resolved": "\"auto\" | \"clip\" | \"hidden\" | \"scroll\" | \"visible\"",
+            "references": {
+              "OverflowMode": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::OverflowMode"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "overflow",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "value": "auto",
+              "type": "string"
+            },
+            {
+              "value": "clip",
+              "type": "string"
+            },
+            {
+              "value": "hidden",
+              "type": "string"
+            },
+            {
+              "value": "scroll",
+              "type": "string"
+            },
+            {
+              "value": "visible",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "overflowX",
+          "type": "\"auto\" | \"clip\" | \"hidden\" | \"scroll\" | \"visible\"",
+          "complexType": {
+            "original": "OverflowMode",
+            "resolved": "\"auto\" | \"clip\" | \"hidden\" | \"scroll\" | \"visible\"",
+            "references": {
+              "OverflowMode": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::OverflowMode"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "overflow-x",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'visible'"
+            }
+          ],
+          "default": "'visible'",
+          "values": [
+            {
+              "value": "auto",
+              "type": "string"
+            },
+            {
+              "value": "clip",
+              "type": "string"
+            },
+            {
+              "value": "hidden",
+              "type": "string"
+            },
+            {
+              "value": "scroll",
+              "type": "string"
+            },
+            {
+              "value": "visible",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "overflowY",
+          "type": "\"auto\" | \"clip\" | \"hidden\" | \"scroll\" | \"visible\"",
+          "complexType": {
+            "original": "OverflowMode",
+            "resolved": "\"auto\" | \"clip\" | \"hidden\" | \"scroll\" | \"visible\"",
+            "references": {
+              "OverflowMode": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::OverflowMode"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "overflow-y",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'visible'"
+            }
+          ],
+          "default": "'visible'",
+          "values": [
+            {
+              "value": "auto",
+              "type": "string"
+            },
+            {
+              "value": "clip",
+              "type": "string"
+            },
+            {
+              "value": "hidden",
+              "type": "string"
+            },
+            {
+              "value": "scroll",
+              "type": "string"
+            },
+            {
+              "value": "visible",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "overlay",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "overlay",
+          "reflectToAttr": true,
+          "docs": "오버레이",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "overlayBlend",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "overlay-blend",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "overlayOpacity",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "overlay-opacity",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "padding",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding",
+          "reflectToAttr": true,
+          "docs": "패딩 토큰",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "paddingBlock",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding-block",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "paddingBlockEnd",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding-block-end",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "paddingBlockStart",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding-block-start",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "paddingInline",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding-inline",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "paddingInlineEnd",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding-inline-end",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "paddingInlineStart",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "padding-inline-start",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "radius",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "radius",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rowGap",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "row-gap",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "safeArea",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "safe-area",
+          "reflectToAttr": true,
+          "docs": "스크롤/세이프에어리어",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "scrollBehavior",
+          "type": "\"auto\" | \"smooth\"",
+          "complexType": {
+            "original": "ScrollBehavior",
+            "resolved": "\"auto\" | \"smooth\"",
+            "references": {
+              "ScrollBehavior": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::ScrollBehavior"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "scroll-behavior",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'auto'"
+            }
+          ],
+          "default": "'auto'",
+          "values": [
+            {
+              "value": "auto",
+              "type": "string"
+            },
+            {
+              "value": "smooth",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "scrollPadding",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "scroll-padding",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "scrollPaddingBlock",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "scroll-padding-block",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "scrollPaddingInline",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "scroll-padding-inline",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "scrollSnapType",
+          "type": "\"block mandatory\" | \"block proximity\" | \"both mandatory\" | \"both proximity\" | \"inline mandatory\" | \"inline proximity\" | \"none\" | \"x mandatory\" | \"x proximity\" | \"y mandatory\" | \"y proximity\"",
+          "complexType": {
+            "original": "ScrollSnapType",
+            "resolved": "\"block mandatory\" | \"block proximity\" | \"both mandatory\" | \"both proximity\" | \"inline mandatory\" | \"inline proximity\" | \"none\" | \"x mandatory\" | \"x proximity\" | \"y mandatory\" | \"y proximity\"",
+            "references": {
+              "ScrollSnapType": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::ScrollSnapType"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "scroll-snap-type",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "value": "block mandatory",
+              "type": "string"
+            },
+            {
+              "value": "block proximity",
+              "type": "string"
+            },
+            {
+              "value": "both mandatory",
+              "type": "string"
+            },
+            {
+              "value": "both proximity",
+              "type": "string"
+            },
+            {
+              "value": "inline mandatory",
+              "type": "string"
+            },
+            {
+              "value": "inline proximity",
+              "type": "string"
+            },
+            {
+              "value": "none",
+              "type": "string"
+            },
+            {
+              "value": "x mandatory",
+              "type": "string"
+            },
+            {
+              "value": "x proximity",
+              "type": "string"
+            },
+            {
+              "value": "y mandatory",
+              "type": "string"
+            },
+            {
+              "value": "y proximity",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "shadow",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "shadow",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "snapAlign",
+          "type": "\"center\" | \"end\" | \"none\" | \"start\"",
+          "complexType": {
+            "original": "SnapAlign",
+            "resolved": "\"center\" | \"end\" | \"none\" | \"start\"",
+            "references": {
+              "SnapAlign": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::SnapAlign"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "snap-align",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "value": "center",
+              "type": "string"
+            },
+            {
+              "value": "end",
+              "type": "string"
+            },
+            {
+              "value": "none",
+              "type": "string"
+            },
+            {
+              "value": "start",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "src",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "src",
+          "reflectToAttr": true,
+          "docs": "배경 이미지",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "textAlign",
+          "type": "\"center\" | \"end\" | \"justify\" | \"left\" | \"right\" | \"start\"",
+          "complexType": {
+            "original": "TextAlign",
+            "resolved": "\"center\" | \"end\" | \"justify\" | \"left\" | \"right\" | \"start\"",
+            "references": {
+              "TextAlign": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::TextAlign"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "text-align",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "value": "center",
+              "type": "string"
+            },
+            {
+              "value": "end",
+              "type": "string"
+            },
+            {
+              "value": "justify",
+              "type": "string"
+            },
+            {
+              "value": "left",
+              "type": "string"
+            },
+            {
+              "value": "right",
+              "type": "string"
+            },
+            {
+              "value": "start",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "textTransform",
+          "type": "\"capitalize\" | \"lowercase\" | \"none\" | \"uppercase\"",
+          "complexType": {
+            "original": "TextTransform",
+            "resolved": "\"capitalize\" | \"lowercase\" | \"none\" | \"uppercase\"",
+            "references": {
+              "TextTransform": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::TextTransform"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "text-transform",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "value": "capitalize",
+              "type": "string"
+            },
+            {
+              "value": "lowercase",
+              "type": "string"
+            },
+            {
+              "value": "none",
+              "type": "string"
+            },
+            {
+              "value": "uppercase",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "width",
+          "reflectToAttr": true,
+          "docs": "크기/여백",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'100%'"
+            }
+          ],
+          "default": "'100%'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "wrap",
+          "type": "\"nowrap\" | \"wrap\" | \"wrap-reverse\"",
+          "complexType": {
+            "original": "FlexWrap",
+            "resolved": "\"nowrap\" | \"wrap\" | \"wrap-reverse\"",
+            "references": {
+              "FlexWrap": {
+                "location": "import",
+                "path": "./app-route.types",
+                "id": "src/components/app-route/app-route.types.ts::FlexWrap"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "wrap",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'nowrap'"
+            }
+          ],
+          "default": "'nowrap'",
+          "values": [
+            {
+              "value": "nowrap",
+              "type": "string"
+            },
+            {
+              "value": "wrap",
+              "type": "string"
+            },
+            {
+              "value": "wrap-reverse",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [
+        {
+          "name": "root",
+          "docs": ""
+        }
+      ],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
     {
       "filePath": "src/components/button/button.tsx",
       "encapsulation": "shadow",
@@ -4100,6 +5948,86 @@
     }
   ],
   "typeLibrary": {
+    "src/components/app-route/app-route.types.ts::FlexDirection": {
+      "declaration": "export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::FlexWrap": {
+      "declaration": "export type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::Justify": {
+      "declaration": "export type Justify =\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around'\n  | 'space-evenly';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::AlignItems": {
+      "declaration": "export type AlignItems = 'stretch' | 'flex-start' | 'center' | 'flex-end' | 'baseline';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::AlignContent": {
+      "declaration": "export type AlignContent =\n  | 'stretch'\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::HeightMode": {
+      "declaration": "export type HeightMode = 'auto' | 'dvh' | 'screen';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::TextTransform": {
+      "declaration": "export type TextTransform = 'none' | 'capitalize' | 'uppercase' | 'lowercase';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::TextAlign": {
+      "declaration": "export type TextAlign = 'start' | 'end' | 'left' | 'center' | 'right' | 'justify';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::BgSize": {
+      "declaration": "string",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::BgRepeat": {
+      "declaration": "string",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::BgAttachment": {
+      "declaration": "string",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::BgBlend": {
+      "declaration": "string",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::OverflowMode": {
+      "declaration": "export type OverflowMode = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::ScrollBehavior": {
+      "declaration": "export type ScrollBehavior = 'auto' | 'smooth';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::ScrollSnapType": {
+      "declaration": "export type ScrollSnapType =\n  | 'none'\n  | 'x mandatory'\n  | 'x proximity'\n  | 'y mandatory'\n  | 'y proximity'\n  | 'block mandatory'\n  | 'block proximity'\n  | 'inline mandatory'\n  | 'inline proximity'\n  | 'both mandatory'\n  | 'both proximity';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
+    "src/components/app-route/app-route.types.ts::SnapAlign": {
+      "declaration": "export type SnapAlign = 'start' | 'center' | 'end' | 'none';",
+      "docstring": "",
+      "path": "src/components/app-route/app-route.types.ts"
+    },
     "src/components/button/button.types.ts::ButtonVariant": {
       "declaration": "export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';",
       "docstring": "",

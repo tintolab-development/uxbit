@@ -37,9 +37,10 @@
     "custom-elements.d.ts"
   ],
   "scripts": {
-    "dev": "stencil build --dev --watch --serve",
+    "dev": "stencil build --watch",
     "build": "stencil build",
-    "start": "stencil build --dev --watch --serve",
+    "serve": "stencil build --watch --serve",
+    "start": "pnpm run serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
