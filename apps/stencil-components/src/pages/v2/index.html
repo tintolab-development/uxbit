@@ -132,14 +132,17 @@
     </style>
   </head>
   <body>
-    <!-- Hero Section -->
-    <tinto-app-route height-mode="dvh" padding="2rem 1rem" class="berlin-hero">
+    <tinto-app-route>
+      <!-- Hero Section -->
       <tinto-section
         direction="column"
         justify="center"
         align="center"
         gap="3rem"
         max-width="1400px"
+        padding="2rem 1rem"
+        background="linear-gradient(135deg, #000 0%, #1a1a1a 100%)"
+        style="min-height: 100vh"
         center
       >
         <!-- Hero Title -->
@@ -182,11 +185,16 @@
           </tinto-section>
         </tinto-section>
       </tinto-section>
-    </tinto-app-route>
 
-    <!-- Featured Carousel Section -->
-    <tinto-app-route padding="4rem 1rem" class="berlin-section-dark">
-      <tinto-section direction="column" gap="3rem" max-width="1400px" center>
+      <!-- Featured Carousel Section -->
+      <tinto-section
+        direction="column"
+        gap="3rem"
+        max-width="1400px"
+        padding="4rem 1rem"
+        background="#0a0a0a"
+        center
+      >
         <tinto-typography variant="h2" class="berlin-typography-medium" style="text-align: center">
           <span class="berlin-accent">Featured</span> Components
         </tinto-typography>
@@ -277,11 +285,16 @@
           </tinto-wrapper>
         </tinto-carousel>
       </tinto-section>
-    </tinto-app-route>
 
-    <!-- Typography Showcase -->
-    <tinto-app-route padding="4rem 1rem" class="berlin-section-light">
-      <tinto-section direction="column" gap="2rem" max-width="1400px" center>
+      <!-- Typography Showcase -->
+      <tinto-section
+        direction="column"
+        gap="2rem"
+        max-width="1400px"
+        padding="4rem 1rem"
+        background="#1a1a1a"
+        center
+      >
         <tinto-typography variant="h2" class="berlin-typography-medium" style="text-align: center">
           <span class="berlin-accent">Typography</span> Showcase
         </tinto-typography>
@@ -336,49 +349,55 @@
           </tinto-wrapper>
         </tinto-section>
       </tinto-section>
-    </tinto-app-route>
 
-    <!-- Image Carousel Section -->
-    <tinto-app-route padding="0" class="berlin-section-dark">
-      <tinto-carousel
-        show-navigation
-        navigation-position="overlay"
-        navigation-style="circle"
-        navigation-display="hover"
-        show-indicator
-        indicator-type="dot"
-        indicator-position="bottom"
-        autoplay
-        autoplay-interval="5000"
-        loop
-        transition="fade"
-        transition-duration="600"
-        style="width: 100%"
+      <!-- Image Carousel Section -->
+      <tinto-section padding="0" background="#0a0a0a">
+        <tinto-carousel
+          show-navigation
+          navigation-position="overlay"
+          navigation-style="circle"
+          navigation-display="hover"
+          show-indicator
+          indicator-type="dot"
+          indicator-position="bottom"
+          autoplay
+          autoplay-interval="5000"
+          loop
+          transition="fade"
+          transition-duration="600"
+          style="width: 100%"
+        >
+          <tinto-image
+            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1920&q=80"
+            aspect-ratio="21/9"
+            fit="cover"
+            radius="0"
+          ></tinto-image>
+          <tinto-image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+            aspect-ratio="21/9"
+            fit="cover"
+            radius="0"
+          ></tinto-image>
+          <tinto-image
+            src="https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=1920&q=80"
+            aspect-ratio="21/9"
+            fit="cover"
+            radius="0"
+          ></tinto-image>
+        </tinto-carousel>
+      </tinto-section>
+
+      <!-- Footer Section -->
+      <tinto-section
+        direction="column"
+        gap="2rem"
+        max-width="1400px"
+        padding="3rem 1rem"
+        background="#000"
+        center
+        align="center"
       >
-        <tinto-image
-          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1920&q=80"
-          aspect-ratio="21/9"
-          fit="cover"
-          radius="0"
-        ></tinto-image>
-        <tinto-image
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
-          aspect-ratio="21/9"
-          fit="cover"
-          radius="0"
-        ></tinto-image>
-        <tinto-image
-          src="https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=1920&q=80"
-          aspect-ratio="21/9"
-          fit="cover"
-          radius="0"
-        ></tinto-image>
-      </tinto-carousel>
-    </tinto-app-route>
-
-    <!-- Footer Section -->
-    <tinto-app-route padding="3rem 1rem" background="#000">
-      <tinto-section direction="column" gap="2rem" max-width="1400px" center align="center">
         <tinto-typography variant="h3" style="color: #ff0000"> BERLIN </tinto-typography>
         <tinto-typography variant="p" style="text-align: center; opacity: 0.7">
           Built with UXBIT Design System

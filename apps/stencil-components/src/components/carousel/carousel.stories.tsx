@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@stencil/storybook-plugin';
 import { h } from '@stencil/core';
 
 const meta: Meta = {
-  title: 'Components/tinto-carousel',
+  title: 'Uxbit/Carousel',
   component: 'tinto-carousel',
   parameters: {
     layout: 'fullscreen',

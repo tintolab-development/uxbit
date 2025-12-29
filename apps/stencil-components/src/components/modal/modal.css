@@ -1,0 +1,163 @@
+:host {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--t-modal-backdrop-bg, rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Container */
+.modal-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: var(--t-modal-bg, #ffffff);
+  border-radius: var(--t-modal-radius, 16px);
+  box-shadow: var(--t-modal-shadow, 0 8px 32px rgba(0, 0, 0, 0.2));
+  animation: slideUp 0.3s ease;
+  overflow: hidden;
+  outline: none;
+}
+
+/* Reduced motion 지원 */
+@media (prefers-reduced-motion: reduce) {
+  .modal-backdrop,
+  .modal-container {
+    animation: none;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Modal Sizes */
+.modal-container.sm {
+  width: 400px;
+}
+
+.modal-container.md {
+  width: 600px;
+}
+
+.modal-container.lg {
+  width: 800px;
+}
+
+.modal-container.full {
+  width: 95vw;
+  height: 95vh;
+}
+
+/* Modal Close */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--t-modal-close-color, #666);
+  cursor: pointer;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.modal-close:hover {
+  background: var(--t-modal-close-hover-bg, #f0f0f0);
+  color: var(--t-modal-close-hover-color, #333);
+}
+
+.modal-close:active {
+  background: var(--t-modal-close-active-bg, #e0e0e0);
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: var(--t-modal-header-border, 1px solid #e0e0e0);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--t-modal-title-color, #333);
+}
+
+/* Modal Body */
+.modal-body {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  color: var(--t-modal-body-color, #333);
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 16px 24px;
+  border-top: var(--t-modal-footer-border, 1px solid #e0e0e0);
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Desktop 오버라이드 (>=1920px) */
+@media (min-width: 1920px) {
+  .modal-container {
+    border-radius: var(--t-modal-radius-desktop, 18px);
+  }
+
+  .modal-header {
+    padding: var(--t-modal-header-py-desktop, 24px 28px);
+  }
+
+  .modal-body {
+    padding: var(--t-modal-body-py-desktop, 28px);
+  }
+}

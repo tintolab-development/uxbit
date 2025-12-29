@@ -63,7 +63,7 @@ const sectionCards = [
 ];
 
 const meta: Meta<RouteArgs> = {
-  title: 'Uxbit/App Route',
+  title: 'Uxbit/AppRoute',
   component: 'tinto-app-route',
   parameters: {
     layout: 'fullscreen',

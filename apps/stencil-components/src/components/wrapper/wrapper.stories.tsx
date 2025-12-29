@@ -60,7 +60,7 @@ type WrapperArgs = ExtraArgs & {
 };
 
 const meta: Meta<WrapperArgs> = {
-  title: 'Uxbit/wrapper',
+  title: 'Uxbit/Wrapper',
   component: 'tinto-wrapper',
   parameters: {
     layout: 'padded',

@@ -156,7 +156,7 @@ const meta = {
     tintoPress: { action: 'tintoPress', table: { category: 'events' } },
   },
   args: {
-    src: 'https://picsum.photos/800/450',
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop',
     alt: 'Random image',
     ratio: '16:9',
     fit: 'cover',
@@ -193,9 +193,10 @@ export const Primary: Story = {
  */
 export const WithPlaceholder: Story = {
   args: {
-    src: 'https://picsum.photos/800/450',
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop',
     alt: 'Image with placeholder',
-    placeholder: 'https://picsum.photos/80/45?blur=10',
+    placeholder:
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&h=45&fit=crop&blur=10',
     ratio: '16:9',
     width: '300px',
   },
@@ -206,7 +207,7 @@ export const WithPlaceholder: Story = {
  */
 export const AsLink: Story = {
   args: {
-    src: 'https://picsum.photos/800/450',
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop',
     alt: 'Clickable image link',
     href: 'https://example.com',
     target: '_blank',
@@ -220,7 +221,7 @@ export const AsLink: Story = {
  */
 export const AsButton: Story = {
   args: {
-    src: 'https://picsum.photos/800/450',
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop',
     alt: 'Button image',
     as: 'button',
     ratio: '16:9',
@@ -234,7 +235,7 @@ export const AsButton: Story = {
  */
 export const WithAnimation: Story = {
   args: {
-    src: 'https://picsum.photos/400/400',
+    src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=400&fit=crop',
     alt: 'Spinning image',
     ratio: '1:1',
     width: '200px',
@@ -268,7 +269,7 @@ export const SpinAutoScale: Story = {
  */
 export const WithOverlaySlot: Story = {
   args: {
-    src: 'https://picsum.photos/800/450',
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop',
     alt: 'Image with overlay',
     ratio: '16:9',
     width: '300px',
