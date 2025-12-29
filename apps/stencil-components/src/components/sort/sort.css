@@ -1,0 +1,203 @@
+/* sort.css */
+:host {
+  display: inline-block;
+  position: relative;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Noto Sans KR',
+    'Apple SD Gothic Neo',
+    'Malgun Gothic',
+    sans-serif;
+}
+
+.sort-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Trigger Button */
+.sort-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--t-sort-bg, #ffffff);
+  border: 1px solid var(--t-sort-border, #d1d5db);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--t-sort-text-color, #374151);
+  transition: all 0.2s ease;
+  min-height: 36px;
+}
+
+.sort-trigger:hover:not(.disabled) {
+  border-color: var(--t-sort-hover-border, #9ca3af);
+}
+
+.sort-trigger.open:not(.disabled) {
+  border-color: var(--t-sort-active-border, #3b82f6);
+  box-shadow: 0 0 0 3px var(--t-sort-focus-shadow, rgba(59, 130, 246, 0.1));
+}
+
+.sort-trigger.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sort-label {
+  color: var(--t-sort-label-color, #6b7280);
+}
+
+.sort-value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-align: left;
+}
+
+.sort-direction {
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px;
+  transition: transform 0.2s ease;
+}
+
+.sort-direction:hover {
+  opacity: 0.7;
+}
+
+.sort-arrow {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+/* Dropdown */
+.sort-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 150px;
+  background-color: var(--t-sort-dropdown-bg, #ffffff);
+  border: 1px solid var(--t-sort-dropdown-border, #d1d5db);
+  border-radius: 8px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Options */
+.sort-options {
+  padding: 4px;
+}
+
+.sort-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--t-sort-option-text-color, #374151);
+  transition: background-color 0.15s ease;
+}
+
+.sort-option:hover:not(.disabled) {
+  background-color: var(--t-sort-option-hover-bg, #f3f4f6);
+}
+
+.sort-option.selected {
+  background-color: var(--t-sort-option-selected-bg, #eff6ff);
+  color: var(--t-sort-option-selected-color, #1e40af);
+}
+
+.sort-option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sort-option-label {
+  flex: 1;
+  text-align: left;
+}
+
+.sort-option-direction {
+  font-size: 12px;
+  color: var(--t-sort-direction-color, #3b82f6);
+}
+
+/* Select Variant */
+.sort-select {
+  padding: 8px 12px;
+  background-color: var(--t-sort-select-bg, #ffffff);
+  border: 1px solid var(--t-sort-select-border, #d1d5db);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--t-sort-select-text-color, #374151);
+  cursor: pointer;
+  outline: none;
+  min-width: 150px;
+}
+
+.sort-select:hover:not(:disabled) {
+  border-color: var(--t-sort-select-hover-border, #9ca3af);
+}
+
+.sort-select:focus {
+  border-color: var(--t-sort-select-focus-border, #3b82f6);
+  box-shadow: 0 0 0 3px var(--t-sort-focus-shadow, rgba(59, 130, 246, 0.1));
+}
+
+.sort-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Variant */
+.sort-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sort-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: var(--t-sort-button-bg, #ffffff);
+  border: 1px solid var(--t-sort-button-border, #d1d5db);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--t-sort-button-text-color, #374151);
+  transition: all 0.15s ease;
+}
+
+.sort-button:hover:not(.disabled) {
+  border-color: var(--t-sort-button-hover-border, #9ca3af);
+  background-color: var(--t-sort-button-hover-bg, #f9fafb);
+}
+
+.sort-button.selected {
+  background-color: var(--t-sort-button-selected-bg, #3b82f6);
+  border-color: var(--t-sort-button-selected-border, #3b82f6);
+  color: var(--t-sort-button-selected-color, #ffffff);
+}
+
+.sort-button.selected .sort-direction {
+  color: var(--t-sort-button-selected-color, #ffffff);
+}
+
+.sort-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
