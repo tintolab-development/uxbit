@@ -1,6 +1,6 @@
 // wrapper.tsx
 import { Component, h, Prop, Element } from '@stencil/core';
-import {
+import type {
   AlignItems,
   FlexDirection,
   FlexWrap,
@@ -9,7 +9,7 @@ import {
   BgRepeat,
   BgAttachment,
   BgBlend,
-} from './wrapper.types';
+} from '../../types/common.types';
 
 @Component({
   tag: 'tinto-wrapper',
@@ -26,12 +26,14 @@ export class TintoWrapper {
   @Prop({ reflect: true }) align: AlignItems = 'stretch';
   @Prop({ reflect: true }) gap?: string; // ex) "24px", "1rem"
 
-  /** Flex (데스크탑 오버라이드, >=1920px) */
+  /** Flex (데스크탑 오버라이드) */
   @Prop({ reflect: true }) directionDesktop?: FlexDirection;
   @Prop({ reflect: true }) wrapDesktop?: FlexWrap;
   @Prop({ reflect: true }) justifyDesktop?: Justify;
   @Prop({ reflect: true }) alignDesktop?: AlignItems;
   @Prop({ reflect: true }) gapDesktop?: string;
+  /** 데스크탑 브레이크포인트 (기본: '1920px') */
+  @Prop({ reflect: true, attribute: 'breakpoint' }) breakpoint: string = '1920px';
 
   /** Box / Visual */
   @Prop({ reflect: true }) padding?: string;
@@ -98,6 +100,9 @@ export class TintoWrapper {
       // Overlay
       '--tw-overlay': this.overlay,
       '--tw-overlay-opacity': ovOpacity,
+
+      // Breakpoint (CSS 변수로 전달, CSS에서 사용)
+      '--tw-breakpoint': this.breakpoint,
     };
 
     return (

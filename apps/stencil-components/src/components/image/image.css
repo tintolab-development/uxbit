@@ -5,6 +5,12 @@
   max-inline-size: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  overflow: hidden;
+  contain: layout paint;
+  --ti-base-scale: 1;
+  /* 반응형 이미지 기본 설정 */
+  width: 100%;
+  height: auto;
 }
 
 /* allow standard hidden */
@@ -30,6 +36,7 @@
   display: block;
   color: inherit;
   text-decoration: none;
+  transform-origin: center;
 }
 
 [part='button'] {
@@ -85,6 +92,8 @@
   background: var(--ti-bg, transparent);
   box-shadow: var(--ti-shadow, none);
   border: var(--ti-border, none);
+  transform-origin: center;
+  transform: scale(var(--ti-base-scale, 1));
 }
 
 /* host에 height가 있을 때: aspect-ratio 비활성 + 높이 채움 */

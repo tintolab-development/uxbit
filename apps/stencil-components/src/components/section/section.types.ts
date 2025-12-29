@@ -1,13 +1,13 @@
 // section.types.ts
-export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
-export type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
-export type Justify =
-  | 'flex-start'
-  | 'center'
-  | 'flex-end'
-  | 'space-between'
-  | 'space-around'
-  | 'space-evenly';
-export type AlignItems = 'stretch' | 'flex-start' | 'center' | 'flex-end' | 'baseline';
+import type {
+  FlexDirection,
+  FlexWrap,
+  Justify,
+  AlignItems,
+  HeightMode,
+} from '../../types/common.types';
 
-export type HeightMode = 'auto' | 'dvh' | 'screen';
+// 공통 타입 re-export (기존 코드 호환성 유지)
+export type { FlexDirection, FlexWrap, Justify, AlignItems, HeightMode };
+
+// 컴포넌트별 고유 타입만 여기에 정의
