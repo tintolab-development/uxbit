@@ -2,6 +2,16 @@
   display: inline-block;
 }
 
+/* absolute 위치일 때 중앙 정렬 */
+:host([style*='position: absolute'], :host[style*='position:absolute']) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 :host([hidden]) {
   display: none !important;
 }
@@ -145,4 +155,47 @@
 
 :host([size='lg']) .loading-text {
   font-size: 16px;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .spinner svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  :host([size='sm']) .spinner svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  :host([size='lg']) .spinner svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .loading-text {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) {
+  .spinner svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  :host([size='lg']) .spinner svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .spinner svg,
+  .dots span,
+  .pulse span {
+    animation: none;
+  }
 }

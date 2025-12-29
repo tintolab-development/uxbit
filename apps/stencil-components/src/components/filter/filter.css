@@ -221,3 +221,64 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .filter-trigger {
+    min-height: 44px; /* 터치 타겟 최소 크기 */
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .filter-dropdown {
+    min-width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+
+  .filter-button {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .filter-option {
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .filter-trigger {
+    min-height: 40px;
+  }
+
+  .filter-dropdown {
+    min-width: 250px;
+    max-width: 350px;
+  }
+}
+
+/* 접근성: 포커스 가시화 */
+.filter-trigger:focus-visible,
+.filter-option:focus-visible,
+.filter-button:focus-visible,
+.filter-clear-button:focus-visible {
+  outline: 2px solid var(--t-filter-focus-color, #005fcc);
+  outline-offset: 2px;
+}
+
+.filter-search-input:focus-visible {
+  outline: 2px solid var(--t-filter-focus-border, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .filter-trigger,
+  .filter-arrow,
+  .filter-option,
+  .filter-button,
+  .filter-clear-button {
+    transition: none;
+  }
+}

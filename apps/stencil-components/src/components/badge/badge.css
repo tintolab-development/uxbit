@@ -99,3 +99,57 @@
   min-width: 10px;
   min-height: 10px;
 }
+
+/* 접근성: 포커스 가시화 */
+.badge:focus-visible {
+  outline: 2px solid var(--t-badge-focus-color, #005fcc);
+  outline-offset: 2px;
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+}
+
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .badge.sm {
+    font-size: 10px;
+    padding: 2px 5px;
+    min-height: 16px;
+  }
+
+  .badge.md {
+    font-size: 11px;
+    padding: 3px 7px;
+    min-height: 18px;
+  }
+
+  .badge.lg {
+    font-size: 13px;
+    padding: 5px 10px;
+    min-height: 22px;
+  }
+}
+
+@media (min-width: 768px) {
+  .badge.sm {
+    font-size: 12px;
+    padding: 3px 7px;
+    min-height: 20px;
+  }
+
+  .badge.md {
+    font-size: 13px;
+    padding: 5px 9px;
+    min-height: 22px;
+  }
+
+  .badge.lg {
+    font-size: 15px;
+    padding: 7px 14px;
+    min-height: 26px;
+  }
+}

@@ -53,6 +53,25 @@ export default [{
       afterAll: false,
     },
   },
+}, {
+  files: [
+    'apps/stencil-components/src/pages/**/*.{js,jsx}',
+    'apps/stencil-components/www/pages/**/*.{js,jsx}',
+  ],
+  languageOptions: {
+    globals: {
+      document: 'readonly',
+      window: 'readonly',
+      console: 'readonly',
+      setTimeout: 'readonly',
+      clearTimeout: 'readonly',
+      setInterval: 'readonly',
+      clearInterval: 'readonly',
+      CustomEvent: 'readonly',
+      HTMLElement: 'readonly',
+      Event: 'readonly',
+    },
+  },
 }, eslintConfigPrettier, ...storybook.configs["flat/recommended"], {
   files: ['apps/stencil-components/src/**/*.stories.{ts,tsx,js,jsx}', '**/*.stories.{ts,tsx,js,jsx}'],
   rules: {
