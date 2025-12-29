@@ -1,6 +1,6 @@
 # tinto-image
 
-이미지 컴포넌트. 이미지 최적화, 애니메이션, 링크/버튼 모드를 지원하며, placeholder와 반응형 이미지(srcset/sizes)를 지원합니다.
+고성능 이미지 컴포넌트. Lazy loading, placeholder, 애니메이션, 링크/버튼 모드를 지원합니다.
 
 ---
 
@@ -8,43 +8,16 @@
 
 ```html
 <!-- 기본 이미지 -->
-<tinto-image
-  src="https://example.com/image.jpg"
-  alt="이미지 설명"
-  ratio="16:9"
-  width="300px"
-></tinto-image>
+<tinto-image src="https://example.com/image.jpg" alt="설명"></tinto-image>
+
+<!-- Lazy loading -->
+<tinto-image src="image.jpg" loading="lazy" ratio="16:9"></tinto-image>
 
 <!-- Placeholder와 함께 -->
-<tinto-image
-  src="https://example.com/image.jpg"
-  alt="이미지 설명"
-  placeholder="https://example.com/placeholder.jpg"
-  ratio="16:9"
-  width="300px"
-></tinto-image>
-
-<!-- 링크 모드 -->
-<tinto-image
-  src="https://example.com/image.jpg"
-  alt="클릭 가능한 이미지"
-  href="https://example.com"
-  target="_blank"
-  ratio="16:9"
-  width="300px"
-></tinto-image>
+<tinto-image src="image.jpg" placeholder="blur.jpg" alt="고해상도 이미지"> </tinto-image>
 
 <!-- 애니메이션 -->
-<tinto-image
-  src="https://example.com/image.jpg"
-  alt="회전하는 이미지"
-  ratio="1:1"
-  width="200px"
-  animation="spin"
-  play
-  duration="3"
-  rotate="right"
-></tinto-image>
+<tinto-image src="logo.png" animation="spin" duration="10" alt="회전하는 로고"> </tinto-image>
 ```
 
 ---
@@ -53,309 +26,352 @@
 
 ### 이미지/미디어
 
-| Prop       | Type                                                       | Default     | 설명                                              |
-| ---------- | ---------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| `src`      | `string`                                                   | -           | 이미지 URL                                        |
-| `alt`      | `string`                                                   | -           | 대체 텍스트 (필수)                                |
-| `ratio`    | `'16:9' \| '4:3' \| '1:1' \| '3:2' \| '21:9' \| string`    | `'16:9'`    | 종횡비 (예: `"16:9"`, `"1:1"`)                    |
-| `fit`      | `'cover' \| 'contain' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'`   | object-fit                                        |
-| `position` | `string`                                                   | `'50% 50%'` | object-position (예: `"50% 50%"`, `"center top"`) |
+| Prop         | Type                                                       | Default     | 설명                                                                            |
+| ------------ | ---------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------- |
+| `src`        | `string`                                                   | -           | 이미지 URL (필수)                                                               |
+| `alt`        | `string`                                                   | -           | 대체 텍스트 (접근성 필수)                                                       |
+| `ratio`      | `AspectRatio \| string`                                    | `'16:9'`    | 종횡비 (`"16:9"`, `"1:1"` 등)                                                   |
+| `fit`        | `'cover' \| 'contain' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'`   | object-fit 값                                                                   |
+| `position`   | `string`                                                   | `'50% 50%'` | object-position 값                                                              |
+| `radius`     | `string`                                                   | -           | border-radius (숫자만 입력 시 `px` 자동 추가)                                   |
+| `rounded`    | `RoundedPreset`                                            | -           | 미리 정의된 둥근 모서리 (`'soft'`, `'oval'`, `'top'`, `'diagonal'`, `'circle'`) |
+| `border`     | `string`                                                   | -           | 테두리 스타일                                                                   |
+| `shadow`     | `string`                                                   | -           | box-shadow 값                                                                   |
+| `background` | `string`                                                   | -           | 배경색/그라디언트                                                               |
+| `width`      | `string`                                                   | -           | 호스트 너비                                                                     |
+| `height`     | `string`                                                   | -           | 호스트 높이                                                                     |
 
-### 비주얼
+### 로딩 정책
 
-| Prop         | Type                                                  | Default | 설명                                   |
-| ------------ | ----------------------------------------------------- | ------- | -------------------------------------- |
-| `radius`     | `string`                                              | -       | border-radius (예: `"8px"`, `"50%"`)   |
-| `rounded`    | `'soft' \| 'oval' \| 'top' \| 'diagonal' \| 'circle'` | -       | 반경 프리셋 (`radius`가 있으면 무시됨) |
-| `border`     | `string`                                              | -       | border 토큰 (예: `"1px solid #000"`)   |
-| `shadow`     | `string`                                              | -       | box-shadow 토큰                        |
-| `background` | `string`                                              | -       | 배경 색/그라디언트                     |
-| `width`      | `string`                                              | -       | 호스트 박스 너비 (CSS inline-size)     |
-| `height`     | `string`                                              | -       | 호스트 박스 높이 (CSS block-size)      |
-
-### 로딩
-
-| Prop             | Type                          | Default   | 설명                                                                    |
-| ---------------- | ----------------------------- | --------- | ----------------------------------------------------------------------- |
-| `loading`        | `'lazy' \| 'eager'`           | -         | 로딩 정책                                                               |
-| `priority`       | `boolean`                     | `false`   | 우선 로딩 (`true`일 때 `fetchpriority="high"` + `<link rel="preload">`) |
-| `placeholder`    | `string`                      | -         | 블러/저해상도 placeholder URL                                           |
-| `srcset`         | `string`                      | -         | 반응형 이미지 srcset                                                    |
-| `sizes`          | `string`                      | -         | 반응형 이미지 sizes                                                     |
-| `decoding`       | `'async' \| 'sync' \| 'auto'` | `'async'` | 디코딩 방식                                                             |
-| `crossorigin`    | `string`                      | -         | CORS 설정                                                               |
-| `referrerpolicy` | `string`                      | -         | Referrer 정책                                                           |
+| Prop             | Type                          | Default   | 설명                          |
+| ---------------- | ----------------------------- | --------- | ----------------------------- |
+| `loading`        | `'lazy' \| 'eager'`           | `'lazy'`  | 로딩 전략                     |
+| `priority`       | `boolean`                     | `false`   | 우선 로딩 (preload 주입)      |
+| `placeholder`    | `string`                      | -         | 블러/저해상도 placeholder URL |
+| `srcset`         | `string`                      | -         | 반응형 이미지 srcset          |
+| `sizes`          | `string`                      | -         | 반응형 이미지 sizes           |
+| `decoding`       | `'async' \| 'sync' \| 'auto'` | `'async'` | 디코딩 전략                   |
+| `crossorigin`    | `string`                      | -         | CORS 설정                     |
+| `referrerpolicy` | `string`                      | -         | Referrer 정책                 |
 
 ### 상호작용
 
-| Prop       | Type                                         | Default | 설명                             |
-| ---------- | -------------------------------------------- | ------- | -------------------------------- |
-| `href`     | `string`                                     | -       | 링크 모드일 때 이동할 URL        |
-| `target`   | `'_self' \| '_blank' \| '_parent' \| '_top'` | -       | 링크 타겟                        |
-| `rel`      | `string`                                     | -       | 링크 rel                         |
-| `download` | `string`                                     | -       | 다운로드 파일명 (빈 문자열 허용) |
-| `as`       | `'button'`                                   | -       | 버튼 모드 (`as="button"`)        |
-| `disabled` | `boolean`                                    | `false` | 비활성화 상태 (버튼 모드)        |
+| Prop       | Type         | Default | 설명                                     |
+| ---------- | ------------ | ------- | ---------------------------------------- |
+| `href`     | `string`     | -       | 링크 모드일 때 이동할 URL                |
+| `target`   | `LinkTarget` | -       | 링크 타겟                                |
+| `rel`      | `string`     | -       | 링크 rel (target이 `_blank`면 자동 보정) |
+| `download` | `string`     | -       | 다운로드 속성                            |
+| `as`       | `'button'`   | -       | 버튼 모드 활성화                         |
+| `disabled` | `boolean`    | `false` | 비활성화 상태                            |
 
 ### 애니메이션
 
-| Prop                | Type                                             | Default      | 설명                        |
-| ------------------- | ------------------------------------------------ | ------------ | --------------------------- |
-| `animation`         | `'spin' \| 'float' \| 'wobble' \| 'pulse' \| ''` | `''`         | 애니메이션 타입             |
-| `play`              | `boolean`                                        | `true`       | 재생/일시정지               |
-| `rotate`            | `'left' \| 'right'`                              | `'right'`    | 회전 방향 (spin 애니메이션) |
-| `duration`          | `number`                                         | `20`         | 애니메이션 지속 시간 (초)   |
-| `repeat`            | `'infinite' \| number \| string`                 | `'infinite'` | 반복 횟수                   |
-| `pause-on-hover`    | `boolean`                                        | `false`      | hover 시 일시정지           |
-| `start-on-viewport` | `boolean`                                        | `false`      | 뷰포트 진입 시 시작         |
+| Prop                   | Type                             | Default      | 설명                                                         |
+| ---------------------- | -------------------------------- | ------------ | ------------------------------------------------------------ |
+| `animation`            | `ImageAnimation`                 | `''`         | 애니메이션 타입 (`'spin'`, `'float'`, `'wobble'`, `'pulse'`) |
+| `play`                 | `boolean`                        | `true`       | 재생/일시정지                                                |
+| `rotate`               | `'left' \| 'right'`              | `'right'`    | 회전 방향 (spin 모드)                                        |
+| `duration`             | `number`                         | `20`         | 애니메이션 지속 시간 (초)                                    |
+| `animation-scale`      | `number`                         | -            | 애니메이션 중 스케일 배수                                    |
+| `auto-scale-threshold` | `number`                         | `0.8`        | 자동 스케일 임계값 (부모 대비 너비 비율)                     |
+| `auto-scale-value`     | `number`                         | `0.6`        | 자동 스케일 값                                               |
+| `repeat`               | `'infinite' \| number \| string` | `'infinite'` | 반복 횟수                                                    |
+| `pause-on-hover`       | `boolean`                        | `false`      | 호버 시 일시정지                                             |
+| `start-on-viewport`    | `boolean`                        | `false`      | 뷰포트 진입 시 시작                                          |
 
 ---
 
 ## Slots
 
-| Slot      | 설명                                 |
-| --------- | ------------------------------------ |
-| `overlay` | 이미지 위에 표시되는 오버레이 콘텐츠 |
+| Slot      | 설명                            |
+| --------- | ------------------------------- |
+| `overlay` | 이미지 위에 오버레이되는 콘텐츠 |
 
 ---
 
 ## 이벤트
 
-| 이벤트         | Payload                          | 설명                         |
-| -------------- | -------------------------------- | ---------------------------- |
-| `tinto:loaded` | `{ src: string }`                | 이미지 로드 완료             |
-| `tinto:error`  | `{ src: string, error?: Error }` | 이미지 로드 실패             |
-| `tinto:press`  | `{ originalEvent: MouseEvent }`  | 클릭/터치 이벤트 (버튼 모드) |
+| 이벤트         | Payload                                           | 설명             |
+| -------------- | ------------------------------------------------- | ---------------- |
+| `tinto:loaded` | `{ width: number, height: number, src?: string }` | 이미지 로드 완료 |
+| `tinto:error`  | `{ src?: string }`                                | 이미지 로드 실패 |
+| `tinto:press`  | `{ kind: 'link' \| 'button' \| 'plain' }`         | 클릭/탭 이벤트   |
 
 ---
 
 ## 사용 예시
 
-### 기본 이미지
+### 기본 사용
 
 ```html
-<tinto-image
-  src="https://picsum.photos/800/450"
-  alt="랜덤 이미지"
-  ratio="16:9"
-  width="300px"
-></tinto-image>
+<tinto-image src="hero.jpg" alt="히어로 이미지" ratio="16:9"> </tinto-image>
 ```
 
 ### Placeholder와 함께
 
 ```html
-<tinto-image
-  src="https://picsum.photos/800/450"
-  alt="Placeholder 이미지"
-  placeholder="https://picsum.photos/80/45?blur=10"
-  ratio="16:9"
-  width="300px"
-></tinto-image>
+<tinto-image src="high-res.jpg" placeholder="blur.jpg" alt="고해상도 이미지" ratio="1:1">
+</tinto-image>
 ```
-
-> **참고**: `placeholder`가 있으면 메인 이미지는 기본적으로 `eager` 로딩됩니다 (빠른 스왑).
 
 ### 반응형 이미지
 
 ```html
 <tinto-image
-  src="https://example.com/image-800w.jpg"
+  src="image.jpg"
+  srcset="image-400.jpg 400w, image-800.jpg 800w, image-1200.jpg 1200w"
+  sizes="(max-width: 600px) 100vw, 50vw"
   alt="반응형 이미지"
-  srcset="https://example.com/image-400w.jpg 400w, https://example.com/image-800w.jpg 800w, https://example.com/image-1200w.jpg 1200w"
-  sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
-  ratio="16:9"
-  width="100%"
-></tinto-image>
-```
-
-### 링크 모드
-
-```html
-<tinto-image
-  src="https://picsum.photos/800/450"
-  alt="클릭 가능한 이미지"
-  href="https://example.com"
-  target="_blank"
-  ratio="16:9"
-  width="300px"
-></tinto-image>
-```
-
-### 버튼 모드
-
-```html
-<tinto-image
-  src="https://picsum.photos/400/400"
-  alt="버튼 이미지"
-  as="button"
-  ratio="1:1"
-  width="200px"
-></tinto-image>
-
-<script>
-  document.querySelector('tinto-image[as="button"]').addEventListener('tinto:press', (e) => {
-    console.log('이미지 클릭됨', e.detail);
-  });
-</script>
+>
+</tinto-image>
 ```
 
 ### 애니메이션
 
 ```html
 <!-- 회전 애니메이션 -->
-<tinto-image
-  src="https://picsum.photos/400/400"
-  alt="회전하는 이미지"
-  ratio="1:1"
-  width="200px"
-  animation="spin"
-  play
-  duration="3"
-  rotate="right"
-></tinto-image>
+<tinto-image src="logo.png" animation="spin" duration="5" rotate="right" alt="회전 로고">
+</tinto-image>
 
-<!-- Float 애니메이션 -->
-<tinto-image
-  src="https://picsum.photos/400/400"
-  alt="떠다니는 이미지"
-  ratio="1:1"
-  width="200px"
-  animation="float"
-  play
-  duration="2"
-  repeat="infinite"
-></tinto-image>
-
-<!-- Hover 시 일시정지 -->
-<tinto-image
-  src="https://picsum.photos/400/400"
-  alt="Hover 일시정지"
-  ratio="1:1"
-  width="200px"
-  animation="spin"
-  play
-  pause-on-hover
-></tinto-image>
+<!-- 떠다니는 애니메이션 -->
+<tinto-image src="icon.png" animation="float" duration="3" pause-on-hover alt="떠다니는 아이콘">
+</tinto-image>
 
 <!-- 뷰포트 진입 시 시작 -->
+<tinto-image src="animated.gif" animation="pulse" start-on-viewport alt="펄스 애니메이션">
+</tinto-image>
+```
+
+### 링크 모드
+
+```html
 <tinto-image
-  src="https://picsum.photos/400/400"
-  alt="뷰포트 진입 시 시작"
-  ratio="1:1"
-  width="200px"
-  animation="pulse"
-  start-on-viewport
-></tinto-image>
+  src="thumbnail.jpg"
+  href="https://example.com/article"
+  target="_blank"
+  alt="기사 썸네일"
+>
+</tinto-image>
+```
+
+### 버튼 모드
+
+```html
+<tinto-image src="icon.png" as="button" alt="클릭 가능한 아이콘"> </tinto-image>
+
+<script>
+  document.querySelector('tinto-image[as="button"]').addEventListener('tinto:press', (e) => {
+    console.log('클릭됨:', e.detail.kind);
+  });
+</script>
+```
+
+### 둥근 모서리
+
+```html
+<!-- Soft 모서리 -->
+<tinto-image src="photo.jpg" rounded="soft" alt="사진"></tinto-image>
+
+<!-- 상단만 둥글게 -->
+<tinto-image src="card.jpg" rounded="oval" alt="카드"></tinto-image>
+
+<!-- 원형 -->
+<tinto-image src="avatar.jpg" rounded="circle" alt="아바타"></tinto-image>
+
+<!-- 커스텀 반경 -->
+<tinto-image src="image.jpg" radius="20" alt="이미지"></tinto-image>
 ```
 
 ### 오버레이 슬롯
 
 ```html
-<tinto-image src="https://picsum.photos/800/450" alt="오버레이 이미지" ratio="16:9" width="300px">
-  <div
-    slot="overlay"
-    style="
-      position: absolute;
-      right: 1rem;
-      bottom: 1rem;
-      padding: 0.25rem 0.5rem;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border-radius: 999px;
-      font-size: 12px;
-    "
-  >
-    OVERLAY
+<tinto-image src="background.jpg" alt="배경">
+  <div slot="overlay" style="color: white; padding: 2rem;">
+    <h2>오버레이 텍스트</h2>
   </div>
 </tinto-image>
 ```
 
-### 반경 프리셋
-
-```html
-<!-- Soft (기본 반경) -->
-<tinto-image src="..." alt="..." rounded="soft"></tinto-image>
-
-<!-- Oval (상단만 라운드) -->
-<tinto-image src="..." alt="..." rounded="oval"></tinto-image>
-
-<!-- Top (상단 모서리만) -->
-<tinto-image src="..." alt="..." rounded="top"></tinto-image>
-
-<!-- Diagonal (대각선) -->
-<tinto-image src="..." alt="..." rounded="diagonal"></tinto-image>
-
-<!-- Circle (완전 원형) -->
-<tinto-image src="..." alt="..." rounded="circle"></tinto-image>
-
-<!-- 커스텀 반경 -->
-<tinto-image src="..." alt="..." radius="12px"></tinto-image>
-```
-
-### 우선 로딩
-
-```html
-<tinto-image
-  src="https://example.com/hero.jpg"
-  alt="히어로 이미지"
-  priority
-  ratio="21:9"
-  width="100%"
-></tinto-image>
-```
-
-> **참고**: `priority`가 `true`이면 `fetchpriority="high"`와 `<link rel="preload">`가 자동으로 추가됩니다.
-
 ---
 
-## CSS Parts
+## 성능 최적화
 
-- `part="frame"`: 이미지 프레임 컨테이너
-- `part="img"`: 실제 이미지 요소
-- `part="placeholder"`: placeholder 이미지 요소
+### 1. Lazy Loading
 
-```css
-tinto-image::part(frame) {
-  border: 2px solid #000;
-}
+```html
+<!-- 기본적으로 lazy loading 활성화 -->
+<tinto-image src="below-fold.jpg" loading="lazy" alt="하단 이미지"></tinto-image>
 
-tinto-image::part(img) {
-  filter: grayscale(100%);
-}
+<!-- 위쪽 폴드 이미지는 eager -->
+<tinto-image src="hero.jpg" loading="eager" priority alt="히어로"></tinto-image>
+```
+
+### 2. Priority 힌트
+
+```html
+<!-- 중요한 이미지는 priority 사용 -->
+<tinto-image src="logo.jpg" priority alt="로고"> </tinto-image>
+```
+
+### 3. Placeholder 전략
+
+```html
+<!-- 저해상도 placeholder로 CLS 방지 -->
+<tinto-image src="high-res.jpg" placeholder="low-res-blur.jpg" alt="이미지"> </tinto-image>
 ```
 
 ---
 
 ## 접근성
 
-- `alt` 속성 필수 (이미지 설명)
-- `aria-busy`: 로딩 중 상태 표시
-- 키보드 네비게이션: 링크/버튼 모드에서 지원
-- `prefers-reduced-motion`: 애니메이션 비활성화 고려
+- ✅ `alt` 속성 필수 (이미지 의미 전달)
+- ✅ `aria-busy` 자동 설정 (로딩 중)
+- ✅ 키보드 포커스 지원 (링크/버튼 모드)
+- ✅ `prefers-reduced-motion` 고려 (애니메이션 자동 비활성화)
+
+```html
+<!-- 접근성 좋은 예시 -->
+<tinto-image
+  src="chart.jpg"
+  alt="2024년 매출 증가 그래프. 전년 대비 25% 증가."
+  aria-label="매출 차트"
+>
+</tinto-image>
+```
 
 ---
 
-## FAQ
+## CSS Parts
 
-**Q: placeholder가 표시되지 않아요**  
-A: `placeholder` prop에 유효한 이미지 URL을 제공했는지 확인하세요. placeholder는 메인 이미지가 로드되기 전에 표시됩니다.
+외부에서 `::part()` 선택자로 스타일 오버라이드:
 
-**Q: 애니메이션이 시작되지 않아요**  
-A: `play` prop이 `true`인지, `animation` prop이 올바른 값인지 확인하세요. `start-on-viewport`가 `true`이면 뷰포트에 진입해야 시작됩니다.
+- `part="frame"`: 이미지 프레임
+- `part="img"`: 실제 이미지 요소
+- `part="placeholder"`: placeholder 이미지
+- `part="link"`: 링크 래퍼 (href 사용 시)
+- `part="button"`: 버튼 래퍼 (as="button" 사용 시)
+- `part="plain"`: 일반 래퍼
 
-**Q: 반응형 이미지가 작동하지 않아요**  
-A: `srcset`과 `sizes` prop을 함께 제공해야 합니다. 브라우저가 적절한 이미지를 선택합니다.
+```css
+tinto-image::part(frame) {
+  border: 2px solid #ccc;
+}
 
-**Q: 링크 모드에서 새 탭이 열리지 않아요**  
-A: `target="_blank"`와 함께 `href`를 제공하세요. 자동으로 `rel="noopener noreferrer"`가 추가됩니다.
+tinto-image::part(img) {
+  filter: grayscale(50%);
+}
+```
+
+---
+
+## CSS 변수
+
+컴포넌트 내부에서 사용하는 CSS 변수:
+
+- `--ti-width`: 호스트 너비
+- `--ti-base-scale`: 기본 스케일
+- `--ratio-w`, `--ratio-h`: 종횡비
+- `--ti-fit`: object-fit
+- `--ti-pos`: object-position
+- `--ti-radius`: border-radius
+- `--ti-border`: 테두리
+- `--ti-shadow`: 그림자
+- `--ti-bg`: 배경
+- `--ti-focus`: 포커스 링 색상
+
+---
+
+## 문제 해결
+
+### Q: 이미지가 로드되지 않아요
+
+A:
+
+1. `src` URL이 올바른지 확인
+2. CORS 설정 확인 (`crossorigin` 속성)
+3. `tinto:error` 이벤트 리스너로 에러 확인
+
+```html
+<tinto-image src="image.jpg" alt="이미지" id="img1"></tinto-image>
+<script>
+  document.getElementById('img1').addEventListener('tinto:error', (e) => {
+    console.error('이미지 로드 실패:', e.detail.src);
+  });
+</script>
+```
+
+### Q: Placeholder가 사라지지 않아요
+
+A: 메인 이미지가 로드되면 자동으로 사라집니다. `tinto:loaded` 이벤트로 확인:
+
+```javascript
+img.addEventListener('tinto:loaded', () => {
+  console.log('이미지 로드 완료');
+});
+```
+
+### Q: 애니메이션이 너무 빠르거나 느려요
+
+A: `duration` prop으로 조절:
+
+```html
+<!-- 더 빠르게 (5초) -->
+<tinto-image animation="spin" duration="5"></tinto-image>
+
+<!-- 더 느리게 (30초) -->
+<tinto-image animation="spin" duration="30"></tinto-image>
+```
+
+### Q: 모바일에서 성능이 안 좋아요
+
+A:
+
+1. `loading="lazy"` 사용
+2. `srcset`/`sizes`로 적절한 크기 이미지 로드
+3. 애니메이션은 필요한 경우만 사용
+
+---
+
+## 고급 사용법
+
+### 동적 이미지 교체
+
+```javascript
+const img = document.querySelector('tinto-image');
+img.src = 'new-image.jpg'; // 자동으로 새 이미지 로드
+```
+
+### 애니메이션 제어
+
+```javascript
+const img = document.querySelector('tinto-image[animation]');
+img.play = false; // 일시정지
+img.play = true; // 재생
+```
+
+### IntersectionObserver와 함께 사용
+
+```javascript
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.setAttribute('loading', 'eager');
+    }
+  });
+});
+
+document.querySelectorAll('tinto-image[loading="lazy"]').forEach((img) => {
+  observer.observe(img);
+});
+```
 
 ---
 
 ## TL;DR
 
-- 이미지 최적화: placeholder, 반응형 이미지, 우선 로딩 지원
-- 애니메이션: spin, float, wobble, pulse
-- 링크/버튼 모드: 클릭 가능한 이미지
-- 오버레이 슬롯: 이미지 위 콘텐츠 배치
-- 반경 프리셋: soft, oval, top, diagonal, circle
+- ✅ Lazy loading, placeholder, 애니메이션 지원
+- ✅ 링크/버튼 모드로 상호작용 가능
+- ✅ 성능 최적화 (IntersectionObserver, preload)
+- ✅ 접근성 고려 (alt, aria-busy, 키보드 지원)
+- ✅ 반응형 이미지 지원 (srcset/sizes)
