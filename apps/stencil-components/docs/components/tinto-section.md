@@ -1,6 +1,6 @@
 # tinto-section
 
-모바일 퍼스트 flex 레이아웃 컨테이너 컴포넌트. 섹션 레이아웃을 제어하고, 1920px 이상에서도 모바일 값을 기본으로 유지합니다.
+Flex 레이아웃 기반 섹션 컴포넌트. 높이 모드, 중앙 정렬, 스크롤 가능한 섹션을 지원합니다.
 
 ---
 
@@ -8,19 +8,19 @@
 
 ```html
 <!-- 기본 섹션 -->
-<tinto-section padding="24px" gap="16px">
-  <h1>제목</h1>
-  <p>내용</p>
+<tinto-section>
+  <h2>섹션 제목</h2>
+  <p>섹션 내용</p>
 </tinto-section>
 
-<!-- 가운데 정렬된 고정 폭 섹션 -->
-<tinto-section center max-width="1200px" padding="32px">
+<!-- 중앙 정렬, 최대 너비 제한 -->
+<tinto-section center max-width="1200px" padding="24px">
   <h2>중앙 정렬 섹션</h2>
 </tinto-section>
 
-<!-- 풀 스크린 섹션 -->
-<tinto-section height-mode="screen" scrollable padding="24px">
-  <h1>풀 스크린 콘텐츠</h1>
+<!-- 전체 화면 높이 -->
+<tinto-section height-mode="screen" background="#f0f0f0">
+  <h1>풀스크린 섹션</h1>
 </tinto-section>
 ```
 
@@ -28,112 +28,145 @@
 
 ## Props
 
-### Flex 레이아웃 (모바일 기본)
+### Flex 레이아웃
 
-| Prop        | Type                                                                                            | Default        | 설명                                    |
-| ----------- | ----------------------------------------------------------------------------------------------- | -------------- | --------------------------------------- |
-| `direction` | `'row' \| 'row-reverse' \| 'column' \| 'column-reverse'`                                        | `'column'`     | Flex 방향                               |
-| `wrap`      | `'nowrap' \| 'wrap' \| 'wrap-reverse'`                                                          | `'nowrap'`     | Flex wrap                               |
-| `justify`   | `'flex-start' \| 'center' \| 'flex-end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | `'flex-start'` | 주 축 정렬                              |
-| `align`     | `'stretch' \| 'flex-start' \| 'center' \| 'flex-end' \| 'baseline'`                             | `'stretch'`    | 교차 축 정렬                            |
-| `gap`       | `string`                                                                                        | -              | 아이템 간 간격 (예: `"12px"`, `"1rem"`) |
+| Prop        | Type            | Default        | 설명                                                                                                        |
+| ----------- | --------------- | -------------- | ----------------------------------------------------------------------------------------------------------- |
+| `direction` | `FlexDirection` | `'column'`     | Flex 방향 (`'row'`, `'column'`, `'row-reverse'`, `'column-reverse'`)                                        |
+| `wrap`      | `FlexWrap`      | `'nowrap'`     | 줄바꿈 (`'nowrap'`, `'wrap'`, `'wrap-reverse'`)                                                             |
+| `justify`   | `Justify`       | `'flex-start'` | 주축 정렬 (`'flex-start'`, `'center'`, `'flex-end'`, `'space-between'`, `'space-around'`, `'space-evenly'`) |
+| `align`     | `AlignItems`    | `'stretch'`    | 교차축 정렬 (`'stretch'`, `'flex-start'`, `'center'`, `'flex-end'`, `'baseline'`)                           |
+| `gap`       | `string`        | -              | Flex gap (예: `"12px"`, `"1rem"`)                                                                           |
 
-### Flex 레이아웃 (데스크톱 ≥1920px 오버라이드)
+### 크기/여백
 
-| Prop                | Type                                                                                            | Default | 설명                    |
-| ------------------- | ----------------------------------------------------------------------------------------------- | ------- | ----------------------- |
-| `direction-desktop` | `'row' \| 'row-reverse' \| 'column' \| 'column-reverse'`                                        | -       | 데스크톱 Flex 방향      |
-| `wrap-desktop`      | `'nowrap' \| 'wrap' \| 'wrap-reverse'`                                                          | -       | 데스크톱 Flex wrap      |
-| `justify-desktop`   | `'flex-start' \| 'center' \| 'flex-end' \| 'space-between' \| 'space-around' \| 'space-evenly'` | -       | 데스크톱 주 축 정렬     |
-| `align-desktop`     | `'stretch' \| 'flex-start' \| 'center' \| 'flex-end' \| 'baseline'`                             | -       | 데스크톱 교차 축 정렬   |
-| `gap-desktop`       | `string`                                                                                        | -       | 데스크톱 아이템 간 간격 |
+| Prop       | Type      | Default | 설명                                                 |
+| ---------- | --------- | ------- | ---------------------------------------------------- |
+| `maxWidth` | `string`  | -       | 최대 너비 (예: `"1200px"`, `"100%"`, `"80ch"`)       |
+| `padding`  | `string`  | -       | 패딩 (예: `"16px"`, `"24px 12px"`)                   |
+| `margin`   | `string`  | -       | 마진 (예: `"0 auto"`)                                |
+| `center`   | `boolean` | `false` | 가운데 정렬 (maxWidth 사용 시 `margin-inline: auto`) |
 
-> **참고**: 데스크톱 오버라이드 props를 지정하지 않으면, 1920px 이상에서도 모바일 설정이 그대로 사용됩니다.
+### 시각
 
-### 박스/스타일
+| Prop         | Type     | Default | 설명              |
+| ------------ | -------- | ------- | ----------------- |
+| `background` | `string` | -       | 배경색/그라디언트 |
+| `color`      | `string` | -       | 텍스트 색상       |
+| `radius`     | `string` | -       | border-radius     |
+| `shadow`     | `string` | -       | box-shadow        |
 
-| Prop         | Type      | Default | 설명                                                           |
-| ------------ | --------- | ------- | -------------------------------------------------------------- |
-| `max-width`  | `string`  | -       | 섹션 최대 너비 (예: `"1200px"`, `"100%"`)                      |
-| `padding`    | `string`  | -       | 안쪽 여백 (예: `"16px"`, `"24px 12px"`)                        |
-| `margin`     | `string`  | -       | 바깥 여백 (예: `"0 auto"`)                                     |
-| `background` | `string`  | -       | 배경 색/그라디언트                                             |
-| `color`      | `string`  | -       | 기본 텍스트 색                                                 |
-| `radius`     | `string`  | -       | border-radius                                                  |
-| `shadow`     | `string`  | -       | box-shadow                                                     |
-| `center`     | `boolean` | `false` | 가운데 정렬 (`max-width`와 함께 사용 시 `margin-inline: auto`) |
+### 높이 모드
 
-### 높이/스크롤
-
-| Prop          | Type                          | Default  | 설명                                                                                     |
-| ------------- | ----------------------------- | -------- | ---------------------------------------------------------------------------------------- |
-| `height-mode` | `'auto' \| 'dvh' \| 'screen'` | `'auto'` | 높이 모드 (`auto`: 콘텐츠 높이, `dvh`: `min-height: 100dvh`, `screen`: `height: 100dvh`) |
-| `scrollable`  | `boolean`                     | `false`  | 내부 스크롤 허용 (`height-mode`가 `dvh`/`screen`일 때)                                   |
+| Prop         | Type         | Default  | 설명                                                                                       |
+| ------------ | ------------ | -------- | ------------------------------------------------------------------------------------------ |
+| `heightMode` | `HeightMode` | `'auto'` | 높이 모드 (`'auto'`: 내용 높이, `'dvh'`: 동적 뷰포트 최소 높이, `'screen'`: 정확히 100dvh) |
+| `scrollable` | `boolean`    | `false`  | 내부 스크롤 허용 (heightMode가 `dvh`/`screen`일 때)                                        |
 
 ---
 
 ## 사용 예시
 
-### 모바일/데스크톱 동일 레이아웃
+### 기본 레이아웃
 
 ```html
-<tinto-section padding="20px" gap="16px" direction="column" center>
-  <tinto-typography variant="h1">UXBIT Demo Section</tinto-typography>
-  <tinto-typography variant="p">
-    이 섹션은 모바일/데스크톱에서 동일한 column 레이아웃을 유지합니다.
-  </tinto-typography>
+<!-- 세로 배치 (기본) -->
+<tinto-section direction="column" gap="16px">
+  <h2>제목</h2>
+  <p>내용</p>
+</tinto-section>
+
+<!-- 가로 배치 -->
+<tinto-section direction="row" gap="24px" align="center">
+  <img src="image1.jpg" alt="이미지1" />
+  <img src="image2.jpg" alt="이미지2" />
 </tinto-section>
 ```
 
-### 1920px 이상에서만 row 레이아웃으로 전환
+### 중앙 정렬 컨테이너
 
 ```html
-<tinto-section
-  padding="24px"
-  gap="16px"
-  direction="column"
-  direction-desktop="row"
-  gap-desktop="32px"
-  center
->
-  <tinto-typography variant="h2">Responsive Section</tinto-typography>
-  <tinto-image src="..." ratio="16:9" rounded="soft" width="100%"></tinto-image>
+<tinto-section center max-width="1200px" padding="32px" background="#ffffff">
+  <h2>중앙 정렬된 콘텐츠</h2>
+  <p>최대 너비 1200px로 제한되고 중앙에 정렬됩니다.</p>
 </tinto-section>
 ```
 
-**동작**:
-
-- 1919px 이하: 세로(column) 레이아웃
-- 1920px 이상: 가로(row) 레이아웃으로 전환
-
-### 풀 스크린 섹션 + 내부 스크롤
+### 높이 모드
 
 ```html
-<tinto-section height-mode="screen" scrollable padding="24px">
-  <h1>긴 콘텐츠</h1>
-  <!-- 이 안에서 overflow: auto -->
+<!-- 자동 높이 (기본) -->
+<tinto-section>
+  <p>내용에 따라 높이가 결정됩니다.</p>
+</tinto-section>
+
+<!-- 동적 뷰포트 최소 높이 -->
+<tinto-section height-mode="dvh" background="#f5f5f5">
+  <h1>최소한 화면 높이만큼</h1>
+</tinto-section>
+
+<!-- 정확히 화면 높이 -->
+<tinto-section height-mode="screen" background="#000" color="#fff">
+  <h1>정확히 화면 높이</h1>
+</tinto-section>
+
+<!-- 스크롤 가능한 전체 화면 -->
+<tinto-section height-mode="screen" scrollable>
+  <div style="height: 200vh;">
+    <h1>긴 콘텐츠</h1>
+    <p>스크롤 가능합니다.</p>
+  </div>
 </tinto-section>
 ```
 
-### 가운데 정렬된 고정 폭 섹션
+### Flex 정렬
 
 ```html
-<tinto-section center max-width="1200px" padding="24px" gap="20px">
-  <h2>중앙 정렬 콘텐츠</h2>
+<!-- 중앙 정렬 -->
+<tinto-section justify="center" align="center" height-mode="screen">
+  <h1>완벽한 중앙 정렬</h1>
+</tinto-section>
+
+<!-- 공간 분배 -->
+<tinto-section direction="row" justify="space-between" align="center">
+  <span>왼쪽</span>
+  <span>중앙</span>
+  <span>오른쪽</span>
+</tinto-section>
+
+<!-- 줄바꿈 -->
+<tinto-section direction="row" wrap="wrap" gap="16px">
+  <div style="width: 200px;">아이템 1</div>
+  <div style="width: 200px;">아이템 2</div>
+  <div style="width: 200px;">아이템 3</div>
 </tinto-section>
 ```
 
-### 배경과 그림자
+### 시각 스타일
 
 ```html
+<!-- 배경과 그림자 -->
 <tinto-section
   background="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
   color="#fff"
-  radius="24px"
-  shadow="0 20px 45px rgba(0,0,0,0.12)"
-  padding="40px"
+  padding="48px"
+  radius="16px"
+  shadow="0 4px 6px rgba(0,0,0,0.1)"
 >
-  <h2>히어로 섹션</h2>
+  <h2>스타일링된 섹션</h2>
+</tinto-section>
+```
+
+---
+
+## 접근성
+
+- ✅ `role`, `aria-label`, `aria-labelledby`, `aria-describedby` 패스스루 지원
+- ✅ `scrollable` 활성화 시 키보드 스크롤 가능 (`tabIndex` 자동 설정)
+
+```html
+<tinto-section role="region" aria-label="주요 콘텐츠 섹션" height-mode="screen" scrollable>
+  <h2>스크롤 가능한 섹션</h2>
 </tinto-section>
 ```
 
@@ -145,7 +178,7 @@
 
 ```css
 tinto-section::part(root) {
-  background: #f9fafb;
+  border: 1px solid #ccc;
 }
 ```
 
@@ -153,64 +186,82 @@ tinto-section::part(root) {
 
 ## CSS 변수
 
-내부에서 사용하는 주요 CSS 변수:
-
-### 레이아웃/박스
+컴포넌트 내부에서 사용하는 CSS 변수:
 
 - `--t-max-w`: 최대 너비
 - `--t-pad`: 패딩
 - `--t-mar`: 마진
-
-### 비주얼
-
 - `--t-bg`: 배경
 - `--t-color`: 텍스트 색상
 - `--t-radius`: border-radius
 - `--t-shadow`: box-shadow
-
-### Flex (모바일)
-
 - `--t-dir`: flex-direction
 - `--t-wrap`: flex-wrap
 - `--t-justify`: justify-content
 - `--t-align`: align-items
 - `--t-gap`: gap
-
-### Flex (데스크톱 ≥1920px)
-
-- `--t-dir-desktop`: flex-direction
-- `--t-wrap-desktop`: flex-wrap
-- `--t-justify-desktop`: justify-content
-- `--t-align-desktop`: align-items
-- `--t-gap-desktop`: gap
-
-> **참고**: 데스크톱 변수는 값이 정의된 경우에만 미디어쿼리 안에서 사용됩니다.
+- `--t-vh`: 뷰포트 높이 (구형 iOS 대비)
 
 ---
 
-## 접근성
+## 문제 해결
 
-- ARIA 속성 패스스루: `aria-label`, `aria-labelledby`, `aria-describedby`, `role`
-- 키보드 스크롤: `scrollable` 활성 시 `tabIndex=0`으로 키보드 포커스 가능
+### Q: 중앙 정렬이 안 돼요
+
+A: `center` prop과 `maxWidth`를 함께 사용하세요:
+
+```html
+<tinto-section center max-width="1200px">
+  <!-- 중앙 정렬됨 -->
+</tinto-section>
+```
+
+### Q: 높이가 화면을 채우지 않아요
+
+A: `heightMode`를 `"dvh"` 또는 `"screen"`으로 설정:
+
+```html
+<tinto-section height-mode="screen">
+  <!-- 화면 높이만큼 -->
+</tinto-section>
+```
+
+### Q: 모바일에서 레이아웃이 깨져요
+
+A: `direction`을 `"column"`으로 설정하고 `wrap`을 활용:
+
+```html
+<tinto-section direction="column" wrap="wrap" gap="16px">
+  <!-- 모바일 친화적 -->
+</tinto-section>
+```
 
 ---
 
-## FAQ
+## 고급 사용법
 
-**Q: 1920px 이상에서 레이아웃이 갑자기 바뀌는 경우**  
-A: 전역 CSS에서 `tinto-section::part(root)` 또는 `--t-*-desktop` 변수를 설정했는지 확인하세요. 필요하면 컴포넌트에 직접 `direction-desktop`, `gap-desktop` 등을 모바일과 동일 값으로 명시해서 고정하세요.
+### 동적 레이아웃 변경
 
-**Q: 풀 스크린 섹션에서 스크롤이 안 돼요**  
-A: `height-mode="screen"` 또는 `height-mode="dvh"`와 함께 `scrollable` prop을 `true`로 설정하세요.
+```javascript
+const section = document.querySelector('tinto-section');
+section.direction = 'row'; // 가로로 변경
+section.justify = 'space-between'; // 공간 분배
+```
 
-**Q: 가운데 정렬이 안 돼요**  
-A: `center` prop과 함께 `max-width`를 설정해야 합니다.
+### 반응형 패딩
+
+```html
+<!-- CSS 변수로 반응형 제어 -->
+<tinto-section style="--t-pad: clamp(16px, 4vw, 48px);">
+  <h2>반응형 패딩</h2>
+</tinto-section>
+```
 
 ---
 
 ## TL;DR
 
-- 모바일 퍼스트 flex 레이아웃 컨테이너
-- 1920px 이상에서도 모바일 값 기본 유지 (오버라이드 가능)
-- 높이 모드와 스크롤 제어 지원
-- 배경, 그림자, 반경 등 비주얼 스타일 지원
+- ✅ Flex 레이아웃 완벽 지원
+- ✅ 높이 모드 다양 (auto/dvh/screen)
+- ✅ 중앙 정렬 및 스크롤 지원
+- ✅ 접근성 속성 패스스루

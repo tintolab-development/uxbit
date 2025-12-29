@@ -2,6 +2,9 @@
   display: block;
   box-sizing: border-box;
   max-width: 100%;
+  width: 100%;
+  /* 반응형 기본 설정 */
+  min-width: 0;
 }
 
 /* ===== Root Flex Box ===== */

@@ -60,7 +60,9 @@
   gap: var(--tw-gap, 0);
 }
 
-/* 데스크탑 오버라이드 (>=1920px) */
+/* 데스크탑 오버라이드 (기본: >=1920px) */
+/* breakpoint prop으로 커스터마이징 가능하지만, CSS 미디어 쿼리는 정적이므로 */
+/* 기본값 1920px 기준으로 작동하며, 다른 브레이크포인트가 필요하면 CSS를 직접 오버라이드 */
 @media (min-width: 1920px) {
   [part='inner'] {
     flex-direction: var(--tw-dir-desktop, var(--tw-dir, row));
@@ -69,4 +71,10 @@
     align-items: var(--tw-align-desktop, var(--tw-align, stretch));
     gap: var(--tw-gap-desktop, var(--tw-gap, 0));
   }
+}
+
+/* 커스텀 브레이크포인트를 위한 CSS 변수 (참고용) */
+/* 실제로는 CSS에서 직접 미디어 쿼리를 오버라이드해야 함 */
+:host {
+  --tw-breakpoint: var(--tw-breakpoint, 1920px);
 }

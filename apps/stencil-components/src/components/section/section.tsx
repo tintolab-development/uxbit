@@ -1,5 +1,11 @@
 import { Component, h, Prop, Element } from '@stencil/core';
-import { AlignItems, FlexDirection, FlexWrap, Justify, HeightMode } from './section.types';
+import type {
+  AlignItems,
+  FlexDirection,
+  FlexWrap,
+  Justify,
+  HeightMode,
+} from '../../types/common.types';
 
 @Component({
   tag: 'tinto-section',

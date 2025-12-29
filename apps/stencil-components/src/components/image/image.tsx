@@ -13,6 +13,7 @@ import {
   TintoImagePressDetail,
   AspectRatio,
 } from './image.types';
+import { validateUrl, warnComponentError } from '../../utils/error-handler';
 
 /** Quick viewport check to avoid IO delay for initially visible elements */
 function isInViewport(el: HTMLElement) {
@@ -66,6 +67,8 @@ export class TintoImage {
   @Prop({ reflect: true }) priority?: boolean = false;
   /** Blurred/low-res placeholder URL */
   @Prop({ reflect: true }) placeholder?: string;
+  /** 에러 발생 시 대체 이미지 URL */
+  @Prop({ reflect: true, attribute: 'error-fallback' }) errorFallback?: string;
 
   /** Responsive images */
   @Prop({ reflect: true }) srcset?: string;
@@ -87,11 +90,19 @@ export class TintoImage {
   @Prop({ reflect: true }) disabled?: boolean = false;
 
   /* ============================== Animation ============================== */
+  /** Base transform scale (1 = original size) */
+  @Prop({ reflect: true }) scale?: number;
   @Prop({ reflect: true }) animation?: ImageAnimation = '';
   @Prop({ reflect: true }) play?: boolean = true;
   @Prop({ reflect: true }) rotate?: AnimationRotate = 'right';
   /** seconds (e.g., 20) */
   @Prop({ reflect: true }) duration?: number = 20;
+  /** optional scale multiplier applied during animation (esp. spin) */
+  @Prop({ reflect: true, attribute: 'animation-scale' }) animationScale?: number;
+  /** auto scale threshold (host width / parent width) for spin */
+  @Prop({ reflect: true, attribute: 'auto-scale-threshold' }) autoScaleThreshold?: number;
+  /** auto scale value applied when threshold exceeded */
+  @Prop({ reflect: true, attribute: 'auto-scale-value' }) autoScaleValue?: number;
   /** 'infinite' or finite count (string/number) */
   @Prop({ reflect: true }) repeat?: RepeatValue = 'infinite';
   /** pause on hover */
@@ -125,19 +136,27 @@ export class TintoImage {
     this.syncHostBoxSize();
   }
 
+  private handleResize = () => {
+    this.syncVhVar();
+    if (this.animation) {
+      this.applyAnimation();
+    }
+  };
+
   componentDidLoad() {
     this.applyFrameStyles();
+    this.updateBaseScaleVar();
     this.updateImageAttrs();
     this.setupIOIfNeeded();
     this.applyAnimation();
-    window.addEventListener('resize', this.syncVhVar, { passive: true });
-    this.syncVhVar();
+    window.addEventListener('resize', this.handleResize, { passive: true });
+    this.handleResize();
     // 로딩 시작 상태 표시
     this.el.setAttribute('aria-busy', 'true');
   }
 
   disconnectedCallback() {
-    window.removeEventListener('resize', this.syncVhVar);
+    window.removeEventListener('resize', this.handleResize);
     this.teardownIO();
     this.teardownAnimation();
   }
@@ -214,6 +233,7 @@ export class TintoImage {
     this.setCSSVar('--ti-border', this.border);
     this.setCSSVar('--ti-shadow', this.shadow);
     this.setCSSVar('--ti-bg', this.background);
+    this.updateBaseScaleVar();
   }
 
   @Watch('width')
@@ -241,6 +261,14 @@ export class TintoImage {
         this.frameEl.style.removeProperty('height');
         this.frameEl.style.removeProperty('aspect-ratio');
       }
+    }
+  }
+
+  @Watch('scale')
+  protected handleScaleChange() {
+    this.updateBaseScaleVar();
+    if (this.animation) {
+      this.applyAnimation();
     }
   }
 
@@ -331,15 +359,35 @@ export class TintoImage {
     this.el.setAttribute('aria-busy', 'true');
 
     if (!shouldDelayWithIO) {
-      if (this.src) img.src = this.src;
-      else img.removeAttribute('src');
+      if (this.src) {
+        const validatedUrl = validateUrl('tinto-image', 'src', this.src);
+        if (validatedUrl) {
+          img.src = validatedUrl;
+        } else {
+          // URL이 유효하지 않으면 에러 처리
+          this.onImgError();
+          return;
+        }
+      } else {
+        img.removeAttribute('src');
+      }
     } else {
       // IO fallback: if initially in viewport, load now; otherwise wait for IO
       if (this.src && isInViewport(this.el)) {
-        img.src = this.src;
-        this.wasObserved = true;
+        const validatedUrl = validateUrl('tinto-image', 'src', this.src);
+        if (validatedUrl) {
+          img.src = validatedUrl;
+          this.wasObserved = true;
+        } else {
+          this.onImgError();
+        }
       } else if (this.wasObserved && this.src) {
-        img.src = this.src;
+        const validatedUrl = validateUrl('tinto-image', 'src', this.src);
+        if (validatedUrl) {
+          img.src = validatedUrl;
+        } else {
+          this.onImgError();
+        }
       } else {
         img.removeAttribute('src');
       }
@@ -367,6 +415,9 @@ export class TintoImage {
   @Watch('play')
   @Watch('rotate')
   @Watch('duration')
+  @Watch('animationScale')
+  @Watch('autoScaleThreshold')
+  @Watch('autoScaleValue')
   @Watch('repeat')
   @Watch('pauseOnHover')
   @Watch('startOnViewport')
@@ -389,14 +440,19 @@ export class TintoImage {
     const repRaw = String(this.repeat ?? 'infinite').toLowerCase();
     const iterations = repRaw === 'infinite' ? Infinity : Math.max(1, parseInt(repRaw, 10) || 1);
 
-    const keyframes = this.buildKeyframes(type, rotateDir);
+    const scaleValue = this.computeAnimationScale(type);
+    const keyframes = this.buildKeyframes(type, rotateDir, scaleValue);
     const timing: KeyframeAnimationOptions = {
       duration: durationSec * 1000,
       iterations,
       easing: type === 'float' ? 'ease-in-out' : 'linear',
     };
 
-    this.anim = (this.el as any).animate(keyframes, timing);
+    const targetEl = this.frameEl ?? this.el;
+    if (!targetEl) return;
+
+    // Ensure we don't keep multiple animations around
+    this.anim = (targetEl as any).animate(keyframes, timing);
     if (!isPlay) this.anim.pause();
 
     if (this.startOnViewport) {
@@ -442,6 +498,20 @@ export class TintoImage {
       '1:2': [1, 2],
     };
     return known[s] || [16, 9];
+  }
+
+  private getBaseScale(): number {
+    const raw = Number(this.scale);
+    if (!isNaN(raw) && isFinite(raw) && raw > 0) {
+      return raw;
+    }
+    return 1;
+  }
+
+  private updateBaseScaleVar() {
+    if (!this.frameEl) return;
+    const base = this.getBaseScale();
+    this.frameEl.style.setProperty('--ti-base-scale', String(base));
   }
 
   private setCSSVar(name: string, value?: string) {
@@ -497,27 +567,66 @@ export class TintoImage {
     }
   }
 
-  private buildKeyframes(type: ImageAnimation, rotate: AnimationRotate): Keyframe[] {
+  private measureContainerRatio(): number | undefined {
+    try {
+      const parent = this.el.parentElement;
+      if (!parent) return undefined;
+      const parentWidth = parent.clientWidth;
+      if (!parentWidth) return undefined;
+      const hostWidth = this.el.offsetWidth;
+      if (!hostWidth) return undefined;
+      return hostWidth / parentWidth;
+    } catch {
+      return undefined;
+    }
+  }
+
+  private computeAnimationScale(type: ImageAnimation): number {
+    const base = this.getBaseScale();
+    const custom = Number(this.animationScale);
+    if (!isNaN(custom) && isFinite(custom) && custom > 0) return base * custom;
+    if (type === 'spin') {
+      const threshold = Number(this.autoScaleThreshold);
+      const value = Number(this.autoScaleValue);
+      const effectiveThreshold = !isNaN(threshold) && isFinite(threshold) ? threshold : 0.8;
+      const effectiveValue = !isNaN(value) && isFinite(value) && value > 0 ? value : 0.6;
+      const ratio = this.measureContainerRatio();
+      if (ratio !== undefined && ratio >= effectiveThreshold) {
+        return base * effectiveValue;
+      }
+      return base;
+    }
+    return base;
+  }
+
+  private buildKeyframes(type: ImageAnimation, rotate: AnimationRotate, scale = 1): Keyframe[] {
     const dir = rotate === 'left' ? -1 : 1;
     switch (type) {
       case 'float':
         return [
-          { transform: 'translateY(0)' },
-          { transform: 'translateY(-10px)' },
-          { transform: 'translateY(0)' },
+          { transform: `translateY(0) scale(${scale})` },
+          { transform: `translateY(-10px) scale(${scale})` },
+          { transform: `translateY(0) scale(${scale})` },
         ];
       case 'wobble':
         return [
-          { transform: 'rotate(0deg)' },
-          { transform: 'rotate(3deg)' },
-          { transform: 'rotate(-3deg)' },
-          { transform: 'rotate(0deg)' },
+          { transform: `rotate(0deg) scale(${scale})` },
+          { transform: `rotate(3deg) scale(${scale})` },
+          { transform: `rotate(-3deg) scale(${scale})` },
+          { transform: `rotate(0deg) scale(${scale})` },
         ];
       case 'pulse':
-        return [{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }];
+        return [
+          { transform: `scale(${scale})` },
+          { transform: `scale(${(scale * 1.06).toFixed(3)})` },
+          { transform: `scale(${scale})` },
+        ];
       case 'spin':
       default:
-        return [{ transform: 'rotate(0deg)' }, { transform: `rotate(${dir * 360}deg)` }];
+        return [
+          { transform: `scale(${scale}) rotate(0deg)` },
+          { transform: `scale(${scale}) rotate(${dir * 360}deg)` },
+        ];
     }
   }
 
@@ -555,9 +664,23 @@ export class TintoImage {
   };
 
   private onImgError = () => {
+    // 에러 fallback이 있으면 시도
+    if (this.errorFallback && this.imgEl && this.imgEl.src !== this.errorFallback) {
+      const validatedUrl = validateUrl('tinto-image', 'errorFallback', this.errorFallback);
+      if (validatedUrl) {
+        this.imgEl.src = validatedUrl;
+        this.frameEl?.setAttribute('data-state', 'loading');
+        this.el.setAttribute('aria-busy', 'true');
+        return; // fallback 이미지 로드 시도
+      }
+    }
+
+    // fallback 실패 또는 없으면 에러 상태
     const next = this.placeholder ? 'error' : 'loaded';
     this.frameEl?.setAttribute('data-state', next);
     this.el.removeAttribute('aria-busy');
+
+    warnComponentError('tinto-image', 'src', this.src, 'Image failed to load');
     this.tintoError.emit({ src: this.src });
   };
 

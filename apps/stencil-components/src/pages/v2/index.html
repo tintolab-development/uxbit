@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Berlin - UXBIT Components</title>
+    <link
+      rel="stylesheet"
+      href="https://d20gpxbcszdbc7.cloudfront.net/uxbit/css/global/global.css"
+    />
+    <script
+      type="module"
+      src="/build/uxbit.esm.js"
+      data-stencil
+      data-resources-url="/build/"
+    ></script>
+    <script nomodule src="/build/uxbit.js" data-stencil></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      /* 베를린 느낌의 강렬한 대비와 그리드 레이아웃 */
+      .berlin-hero {
+        background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .berlin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      /* Carousel 커스터마이징 */
+      tinto-carousel {
+        --tc-nav-button-bg: rgba(0, 0, 0, 0.7);
+        --tc-nav-button-color: #ffffff;
+        --tc-nav-button-bg-hover: rgba(255, 0, 0, 0.8);
+        --tc-indicator-color: rgba(255, 255, 255, 0.4);
+        --tc-indicator-active-color: #ff0000;
+        --tc-focus-color: #ff0000;
+      }
+
+      /* 센터링 개선 */
+      tinto-section[center] {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* 카드 내부 정렬 개선 */
+      .berlin-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .berlin-accent {
+        background: #ff0000;
+        color: #000;
+        padding: 0.25rem 0.5rem;
+        display: inline-block;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .berlin-section-dark {
+        background: #0a0a0a;
+      }
+
+      .berlin-section-light {
+        background: #1a1a1a;
+      }
+
+      .berlin-typography-large {
+        font-size: clamp(3rem, 8vw, 8rem);
+        font-weight: 900;
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+
+      .berlin-typography-medium {
+        font-size: clamp(1.5rem, 4vw, 3rem);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+      }
+
+      .berlin-border {
+        border: 2px solid #fff;
+      }
+
+      .berlin-border-red {
+        border: 2px solid #ff0000;
+      }
+
+      @media (min-width: 1920px) {
+        .berlin-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* 반응형 개선 */
+      @media (max-width: 768px) {
+        .berlin-typography-large {
+          font-size: clamp(2rem, 6vw, 4rem);
+        }
+
+        .berlin-typography-medium {
+          font-size: clamp(1.25rem, 3vw, 2rem);
+        }
+
+        tinto-section[center] {
+          padding: 0 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <tinto-app-route height-mode="dvh" padding="2rem 1rem" class="berlin-hero">
+      <tinto-section
+        direction="column"
+        justify="center"
+        align="center"
+        gap="3rem"
+        max-width="1400px"
+        center
+      >
+        <!-- Hero Title -->
+        <tinto-typography variant="h1" class="berlin-typography-large">
+          <span style="color: #ff0000">BER</span>LIN
+        </tinto-typography>
+
+        <!-- Hero Subtitle -->
+        <tinto-typography variant="h2" class="berlin-typography-medium">
+          Urban. Bold. Modern.
+        </tinto-typography>
+
+        <!-- Hero Description -->
+        <tinto-section
+          direction="column"
+          gap="1.5rem"
+          max-width="600px"
+          align="center"
+          style="width: 100%"
+        >
+          <tinto-typography
+            variant="p"
+            style="text-align: center; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.6"
+          >
+            Experience the essence of Berlin through a modern design system. Bold typography, strong
+            contrasts, and urban aesthetics.
+          </tinto-typography>
+
+          <!-- CTA Buttons -->
+          <tinto-section
+            direction="row"
+            gap="1rem"
+            justify="center"
+            align="center"
+            wrap="wrap"
+            style="width: 100%"
+          >
+            <tinto-button variant="primary" size="lg"> Explore </tinto-button>
+            <tinto-button variant="secondary" size="lg" outline> Learn More </tinto-button>
+          </tinto-section>
+        </tinto-section>
+      </tinto-section>
+    </tinto-app-route>
+
+    <!-- Featured Carousel Section -->
+    <tinto-app-route padding="4rem 1rem" class="berlin-section-dark">
+      <tinto-section direction="column" gap="3rem" max-width="1400px" center>
+        <tinto-typography variant="h2" class="berlin-typography-medium" style="text-align: center">
+          <span class="berlin-accent">Featured</span> Components
+        </tinto-typography>
+
+        <tinto-carousel
+          show-navigation
+          navigation-position="overlay"
+          navigation-style="circle"
+          navigation-display="hover"
+          show-indicator
+          indicator-type="dot"
+          indicator-position="bottom"
+          autoplay
+          autoplay-interval="4000"
+          loop
+          transition="slide"
+          transition-duration="400"
+          slides-per-view="1"
+          space-between="0"
+          style="width: 100%; max-width: 1200px; margin: 0 auto"
+        >
+          <!-- Card 1 -->
+          <tinto-wrapper
+            direction="column"
+            gap="1.5rem"
+            padding="2rem"
+            background="#000"
+            class="berlin-border"
+            style="min-height: 500px"
+          >
+            <tinto-image
+              src="https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&q=80"
+              aspect-ratio="16/9"
+              radius="0"
+              fit="cover"
+            ></tinto-image>
+            <tinto-typography variant="h3" style="color: #ff0000"> Architecture </tinto-typography>
+            <tinto-typography variant="p">
+              Bold structures that define the city's skyline. Modern meets historical in perfect
+              harmony.
+            </tinto-typography>
+            <tinto-button variant="tertiary" size="md"> View Details </tinto-button>
+          </tinto-wrapper>
+
+          <!-- Card 2 -->
+          <tinto-wrapper
+            direction="column"
+            gap="1.5rem"
+            padding="2rem"
+            background="#000"
+            class="berlin-border"
+            style="min-height: 500px"
+          >
+            <tinto-image
+              src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80"
+              aspect-ratio="16/9"
+              radius="0"
+              fit="cover"
+            ></tinto-image>
+            <tinto-typography variant="h3" style="color: #ff0000"> Culture </tinto-typography>
+            <tinto-typography variant="p">
+              A vibrant arts scene that never sleeps. From galleries to street art, creativity flows
+              everywhere.
+            </tinto-typography>
+            <tinto-button variant="tertiary" size="md"> View Details </tinto-button>
+          </tinto-wrapper>
+
+          <!-- Card 3 -->
+          <tinto-wrapper
+            direction="column"
+            gap="1.5rem"
+            padding="2rem"
+            background="#000"
+            class="berlin-border"
+            style="min-height: 500px"
+          >
+            <tinto-image
+              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80"
+              aspect-ratio="16/9"
+              radius="0"
+              fit="cover"
+            ></tinto-image>
+            <tinto-typography variant="h3" style="color: #ff0000"> Nightlife </tinto-typography>
+            <tinto-typography variant="p">
+              The city that never stops. Experience Berlin's legendary nightlife and music scene.
+            </tinto-typography>
+            <tinto-button variant="tertiary" size="md"> View Details </tinto-button>
+          </tinto-wrapper>
+        </tinto-carousel>
+      </tinto-section>
+    </tinto-app-route>
+
+    <!-- Typography Showcase -->
+    <tinto-app-route padding="4rem 1rem" class="berlin-section-light">
+      <tinto-section direction="column" gap="2rem" max-width="1400px" center>
+        <tinto-typography variant="h2" class="berlin-typography-medium" style="text-align: center">
+          <span class="berlin-accent">Typography</span> Showcase
+        </tinto-typography>
+
+        <tinto-section direction="column" gap="3rem">
+          <tinto-wrapper
+            direction="column"
+            gap="1rem"
+            padding="2rem"
+            background="#000"
+            class="berlin-border-red"
+            style="width: 100%"
+          >
+            <tinto-typography variant="h1" style="color: #ff0000; margin-bottom: 0.5rem">
+              Heading 1
+            </tinto-typography>
+            <tinto-typography variant="p" style="line-height: 1.6">
+              Bold and impactful. Perfect for hero sections and major announcements.
+            </tinto-typography>
+          </tinto-wrapper>
+
+          <tinto-wrapper
+            direction="column"
+            gap="1rem"
+            padding="2rem"
+            background="#000"
+            class="berlin-border"
+            style="width: 100%"
+          >
+            <tinto-typography variant="h2" style="margin-bottom: 0.5rem">
+              Heading 2
+            </tinto-typography>
+            <tinto-typography variant="p" style="line-height: 1.6">
+              Strong secondary headings that guide the user through the content hierarchy.
+            </tinto-typography>
+          </tinto-wrapper>
+
+          <tinto-wrapper
+            direction="column"
+            gap="1rem"
+            padding="2rem"
+            background="#000"
+            class="berlin-border"
+            style="width: 100%"
+          >
+            <tinto-typography variant="h3" style="margin-bottom: 0.5rem">
+              Heading 3
+            </tinto-typography>
+            <tinto-typography variant="p" style="line-height: 1.6">
+              Section headers that maintain visual consistency while providing clear structure.
+            </tinto-typography>
+          </tinto-wrapper>
+        </tinto-section>
+      </tinto-section>
+    </tinto-app-route>
+
+    <!-- Image Carousel Section -->
+    <tinto-app-route padding="0" class="berlin-section-dark">
+      <tinto-carousel
+        show-navigation
+        navigation-position="overlay"
+        navigation-style="circle"
+        navigation-display="hover"
+        show-indicator
+        indicator-type="dot"
+        indicator-position="bottom"
+        autoplay
+        autoplay-interval="5000"
+        loop
+        transition="fade"
+        transition-duration="600"
+        style="width: 100%"
+      >
+        <tinto-image
+          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1920&q=80"
+          aspect-ratio="21/9"
+          fit="cover"
+          radius="0"
+        ></tinto-image>
+        <tinto-image
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+          aspect-ratio="21/9"
+          fit="cover"
+          radius="0"
+        ></tinto-image>
+        <tinto-image
+          src="https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=1920&q=80"
+          aspect-ratio="21/9"
+          fit="cover"
+          radius="0"
+        ></tinto-image>
+      </tinto-carousel>
+    </tinto-app-route>
+
+    <!-- Footer Section -->
+    <tinto-app-route padding="3rem 1rem" background="#000">
+      <tinto-section direction="column" gap="2rem" max-width="1400px" center align="center">
+        <tinto-typography variant="h3" style="color: #ff0000"> BERLIN </tinto-typography>
+        <tinto-typography variant="p" style="text-align: center; opacity: 0.7">
+          Built with UXBIT Design System
+        </tinto-typography>
+        <tinto-section direction="row" gap="1.5rem" justify="center" wrap="wrap">
+          <tinto-button variant="secondary" size="md" outline> Components </tinto-button>
+          <tinto-button variant="secondary" size="md" outline> Documentation </tinto-button>
+          <tinto-button variant="secondary" size="md" outline> GitHub </tinto-button>
+        </tinto-section>
+      </tinto-section>
+    </tinto-app-route>
+  </body>
+</html>

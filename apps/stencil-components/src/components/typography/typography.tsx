@@ -38,6 +38,8 @@ class InternalTypingEffect {
   private textIndex = 0;
   private displayText = '';
   private isDeleting = false;
+  private animationFrameId?: number;
+  private lastUpdateTime = 0;
 
   constructor(element: HTMLElement, options: TypingOptions) {
     this.el = element;
@@ -72,11 +74,23 @@ class InternalTypingEffect {
     this.textIndex = 0;
     this.displayText = '';
     this.isDeleting = false;
+    this.lastUpdateTime = 0;
 
     this.startTyping();
   }
 
   private startTyping() {
+    const now = performance.now();
+    const elapsed = now - this.lastUpdateTime;
+    const delay = this.isDeleting ? this.eraseSpeed : this.speed;
+
+    // 프레임 타이밍 체크 (너무 빠르게 업데이트 방지)
+    if (elapsed < delay) {
+      this.animationFrameId = requestAnimationFrame(() => this.startTyping());
+      return;
+    }
+
+    this.lastUpdateTime = now;
     const currentText = this.texts[this.textIndex] ?? '';
 
     if (!this.isDeleting) {
@@ -91,11 +105,22 @@ class InternalTypingEffect {
 
       // 문장이 끝났으면 일정 시간 후 삭제 시작 (loop=true일 때만)
       if (this.displayText === currentText) {
-        setTimeout(() => {
-          if (this.loop) {
-            this.isDeleting = true;
-          }
-        }, 1000);
+        // requestAnimationFrame으로 타이밍 조절
+        this.animationFrameId = requestAnimationFrame(() => {
+          const frameStart = performance.now();
+          const waitTime = 1000; // 1초 대기
+          const checkWait = () => {
+            if (performance.now() - frameStart >= waitTime) {
+              if (this.loop) {
+                this.isDeleting = true;
+              }
+            } else {
+              this.animationFrameId = requestAnimationFrame(checkWait);
+            }
+          };
+          checkWait();
+        });
+        return;
       }
     } else {
       // 삭제 (문자 or 단어 단위)
@@ -124,8 +149,26 @@ class InternalTypingEffect {
       this.el.classList.remove('cursor');
     }
 
-    const delay = this.isDeleting ? this.eraseSpeed : this.speed;
-    setTimeout(() => this.startTyping(), delay);
+    // requestAnimationFrame으로 성능 개선
+    const typingDelay = this.isDeleting ? this.eraseSpeed : this.speed;
+    const targetTime = this.lastUpdateTime + typingDelay;
+    const scheduleNext = () => {
+      const now = performance.now();
+      if (now >= targetTime) {
+        this.animationFrameId = requestAnimationFrame(() => this.startTyping());
+      } else {
+        this.animationFrameId = requestAnimationFrame(scheduleNext);
+      }
+    };
+    this.animationFrameId = requestAnimationFrame(scheduleNext);
+  }
+
+  // 정리 메서드 (컴포넌트 언마운트 시 호출)
+  destroy() {
+    if (this.animationFrameId !== undefined) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = undefined;
+    }
   }
 }
 
@@ -139,6 +182,7 @@ export class TintoTypography {
 
   private typingEl?: HTMLElement;
   private typingInitialized = false;
+  private typingEffectInstance?: InternalTypingEffect;
 
   /** 출력할 HTML 태그 스타일 (시맨틱은 as로 지정 가능) */
   @Prop({ reflect: true }) variant: Variant = 'p';
@@ -325,7 +369,7 @@ export class TintoTypography {
     }
 
     const options = this.buildTypingOptions();
-    new InternalTypingEffect(this.typingEl, options);
+    this.typingEffectInstance = new InternalTypingEffect(this.typingEl, options);
     this.typingInitialized = true;
   }
 
@@ -389,6 +433,15 @@ export class TintoTypography {
   componentDidRender() {
     this.setupTypingEffect();
     this.syncTypingMetrics();
+  }
+
+  disconnectedCallback() {
+    // 타이핑 애니메이션 정리
+    if (this.typingEffectInstance) {
+      this.typingEffectInstance.destroy();
+      this.typingEffectInstance = undefined;
+    }
+    this.typingInitialized = false;
   }
 
   @Watch('fontSize')

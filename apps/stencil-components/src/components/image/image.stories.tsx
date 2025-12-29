@@ -54,6 +54,11 @@ const meta = {
     },
     width: { control: 'text', table: { category: 'sizing' } },
     height: { control: 'text', table: { category: 'sizing' } },
+    scale: {
+      control: { type: 'number', min: 0.1, max: 2, step: 0.05 },
+      description: '기본 transform scale (1 = 원본)',
+      table: { category: 'sizing' },
+    },
 
     // ===== Loading =====
     loading: {
@@ -114,6 +119,21 @@ const meta = {
       description: '애니메이션 지속 시간 (초)',
       table: { category: 'animation' },
     },
+    animationScale: {
+      control: { type: 'number', min: 0.1, max: 2, step: 0.05 },
+      description: '애니메이션 시 강제로 적용할 scale 배수',
+      table: { category: 'animation' },
+    },
+    autoScaleThreshold: {
+      control: { type: 'number', min: 0, max: 1, step: 0.05 },
+      description: 'spin일 때 부모 대비 폭 비율이 이 값 이상이면 자동 축소',
+      table: { category: 'animation' },
+    },
+    autoScaleValue: {
+      control: { type: 'number', min: 0.1, max: 1, step: 0.05 },
+      description: 'autoScaleThreshold 만족 시 적용될 scale 값',
+      table: { category: 'animation' },
+    },
     repeat: {
       control: 'text',
       description: "'infinite' 또는 숫자 (반복 횟수)",
@@ -144,6 +164,7 @@ const meta = {
     width: '300px',
     rounded: 'soft',
     animation: '',
+    scale: 1,
     play: true,
     rotate: 'right',
     duration: 20,
@@ -221,6 +242,24 @@ export const WithAnimation: Story = {
     play: true,
     duration: 3,
     rotate: 'right',
+  },
+};
+
+/**
+ * Spin + auto scale demo
+ */
+export const SpinAutoScale: Story = {
+  args: {
+    src: 'https://images.pexels.com/photos/3826675/pexels-photo-3826675.jpeg',
+    alt: 'Auto scaled spinning image',
+    ratio: '3:4',
+    width: '100%',
+    animation: 'spin',
+    duration: 10,
+    repeat: 'infinite',
+    pauseOnHover: true,
+    autoScaleThreshold: 0.85,
+    autoScaleValue: 0.6,
   },
 };
 

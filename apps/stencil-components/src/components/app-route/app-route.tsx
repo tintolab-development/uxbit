@@ -16,7 +16,7 @@ import type {
   SnapAlign,
   TextAlign,
   TextTransform,
-} from './app-route.types';
+} from '../../types/common.types';
 
 @Component({
   tag: 'tinto-app-route',

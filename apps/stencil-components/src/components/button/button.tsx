@@ -131,6 +131,32 @@ export class TintoButton {
 
   componentWillLoad() {
     this.applyStyleTokens();
+    this.validateProps();
+  }
+
+  /* ============================ Props 검증 ========================= */
+
+  private validateProps() {
+    // variant 검증
+    const validVariants: ButtonVariant[] = ['primary', 'secondary', 'tertiary'];
+    if (!validVariants.includes(this.variant)) {
+      console.warn(`[tinto-button] Invalid variant "${this.variant}", using default "primary"`);
+      this.variant = 'primary';
+    }
+
+    // size 검증
+    const validSizes: ButtonSize[] = ['sm', 'md', 'lg'];
+    if (!validSizes.includes(this.size)) {
+      console.warn(`[tinto-button] Invalid size "${this.size}", using default "md"`);
+      this.size = 'md';
+    }
+
+    // type 검증
+    const validTypes: ButtonNativeType[] = ['button', 'submit', 'reset'];
+    if (!validTypes.includes(this.type)) {
+      console.warn(`[tinto-button] Invalid type "${this.type}", using default "button"`);
+      this.type = 'button';
+    }
   }
 
   @Watch('textFamily')

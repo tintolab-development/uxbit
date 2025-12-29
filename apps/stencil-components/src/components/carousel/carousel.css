@@ -1,0 +1,331 @@
+/* carousel.css */
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* 터치 최적화 */
+  touch-action: pan-y pinch-zoom;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+/* 슬라이드 컨테이너 */
+.tc-container {
+  display: flex;
+  width: 100%;
+  transition: transform var(--tc-transition-duration, 300ms) ease-in-out;
+  will-change: transform;
+  align-items: stretch;
+  /* 슬라이드가 정확히 정렬되도록 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 슬라이드 아이템 */
+::slotted(*) {
+  flex: 0 0 calc(100% / var(--tc-slides-per-view, 1));
+  min-width: 0;
+  box-sizing: border-box;
+  width: calc(100% / var(--tc-slides-per-view, 1));
+  max-width: calc(100% / var(--tc-slides-per-view, 1));
+  transition: opacity var(--tc-transition-duration, 300ms) ease-in-out;
+  /* 슬라이드 간격 제거 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 슬라이드 간격 처리 (space-between이 있을 때만) */
+:host([space-between]:not([space-between='0']):not([space-between='0px'])) ::slotted(*) {
+  margin-right: var(--tc-space-between, 16px);
+}
+
+:host([space-between]:not([space-between='0']):not([space-between='0px'])) ::slotted(*:last-child) {
+  margin-right: 0;
+}
+
+/* slides-per-view가 1일 때는 간격 없이 전체 너비 */
+:host([slides-per-view='1']) ::slotted(*) {
+  width: 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-right: 0 !important;
+}
+
+/* 페이드 전환 */
+:host([transition='fade']) .tc-container {
+  transform: none !important;
+}
+
+:host([transition='fade']) ::slotted(*) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+:host([transition='fade']) ::slotted(*:nth-child(n)) {
+  position: relative;
+}
+
+/* 네비게이션 버튼 */
+.tc-navigation {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+/* 오버레이 위치 (기본) */
+.tc-nav-overlay {
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+/* 내부 위치 */
+.tc-nav-inside {
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  justify-content: space-between;
+}
+
+/* 외부 위치 */
+.tc-nav-outside {
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tc-nav-outside.tc-nav-prev {
+  left: -3rem;
+}
+
+.tc-nav-outside.tc-nav-next {
+  right: -3rem;
+}
+
+/* 네비게이션 버튼 */
+.tc-nav-button {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tc-nav-button-size, 44px);
+  height: var(--tc-nav-button-size, 44px);
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: var(--tc-nav-button-bg, rgba(0, 0, 0, 0.5));
+  color: var(--tc-nav-button-color, #ffffff);
+  font-size: 1.25rem;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.tc-nav-button:hover:not(:disabled) {
+  background: var(--tc-nav-button-bg-hover, rgba(0, 0, 0, 0.7));
+  transform: scale(1.1);
+}
+
+.tc-nav-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.tc-nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* 원형 스타일 */
+.tc-nav-button {
+  border-radius: 50%;
+}
+
+/* 화살표 스타일 */
+.tc-navigation[class*='navigation-style="arrow"] .tc-nav-button {
+  background: transparent;
+  border: 2px solid var(--tc-nav-button-color, #ffffff);
+}
+
+/* 텍스트 스타일 */
+.tc-navigation[class*='navigation-style="text"] .tc-nav-button {
+  background: transparent;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* 호버 시에만 표시 (기본) */
+.tc-nav-hover .tc-navigation {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tc-nav-hover:hover .tc-navigation {
+  opacity: 1;
+}
+
+/* 항상 표시 */
+.tc-nav-always .tc-navigation {
+  opacity: 1;
+}
+
+/* 자동 표시 (첫/마지막에서 숨김) */
+.tc-nav-auto .tc-nav-button:disabled {
+  display: none;
+}
+
+/* 인디케이터 */
+.tc-indicator {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+/* 인디케이터 위치 */
+.tc-indicator-bottom {
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+.tc-indicator-top {
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+.tc-indicator-left {
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.tc-indicator-right {
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+/* 인디케이터 아이템 */
+.tc-indicator-item {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 점 타입 (기본) */
+.tc-indicator-dot .tc-indicator-item {
+  width: var(--tc-indicator-size, 8px);
+  height: var(--tc-indicator-size, 8px);
+  border-radius: 50%;
+  background: var(--tc-indicator-color, rgba(255, 255, 255, 0.5));
+}
+
+.tc-indicator-dot .tc-indicator-item.active {
+  background: var(--tc-indicator-active-color, #ffffff);
+  transform: scale(1.2);
+}
+
+/* 바 타입 */
+.tc-indicator-bar .tc-indicator-item {
+  width: var(--tc-indicator-size, 24px);
+  height: 3px;
+  border-radius: 2px;
+  background: var(--tc-indicator-color, rgba(255, 255, 255, 0.5));
+}
+
+.tc-indicator-bar .tc-indicator-item.active {
+  background: var(--tc-indicator-active-color, #ffffff);
+  width: calc(var(--tc-indicator-size, 24px) * 1.5);
+}
+
+/* 숫자 타입 */
+.tc-indicator-number .tc-indicator-item {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border-radius: 4px;
+  background: var(--tc-indicator-color, rgba(255, 255, 255, 0.5));
+  color: var(--tc-indicator-text-color, #ffffff);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tc-indicator-number .tc-indicator-item.active {
+  background: var(--tc-indicator-active-color, #ffffff);
+  color: var(--tc-indicator-active-text-color, #000000);
+}
+
+/* 접근성: 키보드 포커스 */
+.tc-nav-button:focus-visible,
+.tc-indicator-item:focus-visible {
+  outline: 2px solid var(--tc-focus-color, #005fcc);
+  outline-offset: 2px;
+}
+
+/* 모바일 터치 최적화 */
+@media (hover: none) and (pointer: coarse) {
+  .tc-nav-button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .tc-nav-button:active {
+    transform: scale(0.9);
+  }
+
+  /* 모바일에서는 항상 표시 */
+  .tc-nav-hover .tc-navigation {
+    opacity: 1;
+  }
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .tc-container,
+  ::slotted(*) {
+    transition: none;
+  }
+
+  .tc-nav-button,
+  .tc-indicator-item {
+    transition: none;
+  }
+}
+
+/* 데스크탑 호버 효과 */
+@media (hover: hover) and (pointer: fine) {
+  .tc-nav-button:hover:not(:disabled) {
+    background: var(--tc-nav-button-bg-hover, rgba(0, 0, 0, 0.7));
+  }
+}
