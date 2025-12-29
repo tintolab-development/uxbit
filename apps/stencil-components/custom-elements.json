@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-09T05:20:25",
+  "timestamp": "2025-12-29T02:26:15",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.38.3",
@@ -23,8 +23,8 @@
             "references": {
               "AlignItems": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::AlignItems"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::AlignItems"
               }
             }
           },
@@ -75,8 +75,8 @@
             "references": {
               "AlignContent": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::AlignContent"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::AlignContent"
               }
             }
           },
@@ -177,8 +177,8 @@
             "references": {
               "BgAttachment": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::BgAttachment"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgAttachment"
               }
             }
           },
@@ -212,8 +212,8 @@
             "references": {
               "BgBlend": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::BgBlend"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgBlend"
               }
             }
           },
@@ -276,8 +276,8 @@
             "references": {
               "BgRepeat": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::BgRepeat"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgRepeat"
               }
             }
           },
@@ -311,8 +311,8 @@
             "references": {
               "BgSize": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::BgSize"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgSize"
               }
             }
           },
@@ -444,8 +444,8 @@
             "references": {
               "FlexDirection": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::FlexDirection"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexDirection"
               }
             }
           },
@@ -607,8 +607,8 @@
             "references": {
               "HeightMode": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::HeightMode"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::HeightMode"
               }
             }
           },
@@ -651,8 +651,8 @@
             "references": {
               "Justify": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::Justify"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::Justify"
               }
             }
           },
@@ -960,8 +960,8 @@
             "references": {
               "OverflowMode": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::OverflowMode"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::OverflowMode"
               }
             }
           },
@@ -1006,8 +1006,8 @@
             "references": {
               "OverflowMode": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::OverflowMode"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::OverflowMode"
               }
             }
           },
@@ -1058,8 +1058,8 @@
             "references": {
               "OverflowMode": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::OverflowMode"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::OverflowMode"
               }
             }
           },
@@ -1415,8 +1415,8 @@
             "references": {
               "ScrollBehavior": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::ScrollBehavior"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::ScrollBehavior"
               }
             }
           },
@@ -1524,8 +1524,8 @@
             "references": {
               "ScrollSnapType": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::ScrollSnapType"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::ScrollSnapType"
               }
             }
           },
@@ -1617,8 +1617,8 @@
             "references": {
               "SnapAlign": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::SnapAlign"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::SnapAlign"
               }
             }
           },
@@ -1682,8 +1682,8 @@
             "references": {
               "TextAlign": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::TextAlign"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::TextAlign"
               }
             }
           },
@@ -1732,8 +1732,8 @@
             "references": {
               "TextTransform": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::TextTransform"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::TextTransform"
               }
             }
           },
@@ -1803,8 +1803,8 @@
             "references": {
               "FlexWrap": {
                 "location": "import",
-                "path": "./app-route.types",
-                "id": "src/components/app-route/app-route.types.ts::FlexWrap"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexWrap"
               }
             }
           },
@@ -2515,6 +2515,781 @@
       "dependencyGraph": {}
     },
     {
+      "filePath": "src/components/carousel/carousel.tsx",
+      "encapsulation": "shadow",
+      "tag": "tinto-carousel",
+      "docs": "<tinto-carousel>\n- 터치/스와이프 슬라이드 지원\n- 네비게이션 버튼 (옵션)\n- 인디케이터 (옵션)\n- 자동 재생 (옵션)\n- 키보드 네비게이션 지원",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "autoplay",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "autoplay",
+          "reflectToAttr": true,
+          "docs": "자동 재생",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "autoplayInterval",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "autoplay-interval",
+          "reflectToAttr": true,
+          "docs": "자동 재생 간격 (ms)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "3000"
+            }
+          ],
+          "default": "3000",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "current",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": true,
+          "attr": "current",
+          "reflectToAttr": true,
+          "docs": "현재 슬라이드 인덱스 (0부터 시작)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "0"
+            }
+          ],
+          "default": "0",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "indicatorPosition",
+          "type": "\"bottom\" | \"left\" | \"right\" | \"top\"",
+          "complexType": {
+            "original": "IndicatorPosition",
+            "resolved": "\"bottom\" | \"left\" | \"right\" | \"top\"",
+            "references": {
+              "IndicatorPosition": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::IndicatorPosition"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "indicator-position",
+          "reflectToAttr": true,
+          "docs": "인디케이터 위치",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'bottom'"
+            }
+          ],
+          "default": "'bottom'",
+          "values": [
+            {
+              "value": "bottom",
+              "type": "string"
+            },
+            {
+              "value": "left",
+              "type": "string"
+            },
+            {
+              "value": "right",
+              "type": "string"
+            },
+            {
+              "value": "top",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "indicatorType",
+          "type": "\"bar\" | \"dot\" | \"number\"",
+          "complexType": {
+            "original": "IndicatorType",
+            "resolved": "\"bar\" | \"dot\" | \"number\"",
+            "references": {
+              "IndicatorType": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::IndicatorType"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "indicator-type",
+          "reflectToAttr": true,
+          "docs": "인디케이터 타입",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'dot'"
+            }
+          ],
+          "default": "'dot'",
+          "values": [
+            {
+              "value": "bar",
+              "type": "string"
+            },
+            {
+              "value": "dot",
+              "type": "string"
+            },
+            {
+              "value": "number",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "loop",
+          "reflectToAttr": true,
+          "docs": "무한 루프",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "navigationDisplay",
+          "type": "\"always\" | \"auto\" | \"hover\"",
+          "complexType": {
+            "original": "NavigationDisplay",
+            "resolved": "\"always\" | \"auto\" | \"hover\"",
+            "references": {
+              "NavigationDisplay": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::NavigationDisplay"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "navigation-display",
+          "reflectToAttr": true,
+          "docs": "네비게이션 버튼 표시 조건",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'hover'"
+            }
+          ],
+          "default": "'hover'",
+          "values": [
+            {
+              "value": "always",
+              "type": "string"
+            },
+            {
+              "value": "auto",
+              "type": "string"
+            },
+            {
+              "value": "hover",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "navigationPosition",
+          "type": "\"inside\" | \"outside\" | \"overlay\"",
+          "complexType": {
+            "original": "NavigationPosition",
+            "resolved": "\"inside\" | \"outside\" | \"overlay\"",
+            "references": {
+              "NavigationPosition": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::NavigationPosition"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "navigation-position",
+          "reflectToAttr": true,
+          "docs": "네비게이션 버튼 위치",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'overlay'"
+            }
+          ],
+          "default": "'overlay'",
+          "values": [
+            {
+              "value": "inside",
+              "type": "string"
+            },
+            {
+              "value": "outside",
+              "type": "string"
+            },
+            {
+              "value": "overlay",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "navigationStyle",
+          "type": "\"arrow\" | \"circle\" | \"text\"",
+          "complexType": {
+            "original": "NavigationStyle",
+            "resolved": "\"arrow\" | \"circle\" | \"text\"",
+            "references": {
+              "NavigationStyle": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::NavigationStyle"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "navigation-style",
+          "reflectToAttr": true,
+          "docs": "네비게이션 버튼 스타일",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'circle'"
+            }
+          ],
+          "default": "'circle'",
+          "values": [
+            {
+              "value": "arrow",
+              "type": "string"
+            },
+            {
+              "value": "circle",
+              "type": "string"
+            },
+            {
+              "value": "text",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "showIndicator",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "show-indicator",
+          "reflectToAttr": true,
+          "docs": "인디케이터 표시",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "showNavigation",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "show-navigation",
+          "reflectToAttr": true,
+          "docs": "네비게이션 버튼 표시",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "slideCount",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "slide-count",
+          "reflectToAttr": true,
+          "docs": "슬라이드 개수 (자동 감지 또는 수동 지정)",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "slidesPerView",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "slides-per-view",
+          "reflectToAttr": true,
+          "docs": "한 번에 표시할 슬라이드 개수",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "1"
+            }
+          ],
+          "default": "1",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "spaceBetween",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "space-between",
+          "reflectToAttr": true,
+          "docs": "슬라이드 간격",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'16px'"
+            }
+          ],
+          "default": "'16px'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "swipeThreshold",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "swipe-threshold",
+          "reflectToAttr": true,
+          "docs": "스와이프 임계값 (px)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "50"
+            }
+          ],
+          "default": "50",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "touchEnabled",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "touch-enabled",
+          "reflectToAttr": true,
+          "docs": "터치 활성화",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "transition",
+          "type": "\"fade\" | \"slide\"",
+          "complexType": {
+            "original": "TransitionType",
+            "resolved": "\"fade\" | \"slide\"",
+            "references": {
+              "TransitionType": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::TransitionType"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "transition",
+          "reflectToAttr": true,
+          "docs": "전환 효과",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'slide'"
+            }
+          ],
+          "default": "'slide'",
+          "values": [
+            {
+              "value": "fade",
+              "type": "string"
+            },
+            {
+              "value": "slide",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "transitionDuration",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "transition-duration",
+          "reflectToAttr": true,
+          "docs": "전환 시간 (ms)",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "300"
+            }
+          ],
+          "default": "300",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [
+        {
+          "name": "goToSlide",
+          "returns": {
+            "type": "Promise<void>",
+            "docs": ""
+          },
+          "complexType": {
+            "signature": "(index: number, emitEvent?: boolean) => Promise<void>",
+            "parameters": [
+              {
+                "name": "index",
+                "type": "number",
+                "docs": ""
+              },
+              {
+                "name": "emitEvent",
+                "type": "boolean",
+                "docs": ""
+              }
+            ],
+            "references": {
+              "Promise": {
+                "location": "global",
+                "id": "global::Promise"
+              }
+            },
+            "return": "Promise<void>"
+          },
+          "signature": "goToSlide(index: number, emitEvent?: boolean) => Promise<void>",
+          "parameters": [
+            {
+              "name": "index",
+              "type": "number",
+              "docs": ""
+            },
+            {
+              "name": "emitEvent",
+              "type": "boolean",
+              "docs": ""
+            }
+          ],
+          "docs": "특정 슬라이드로 이동",
+          "docsTags": []
+        },
+        {
+          "name": "next",
+          "returns": {
+            "type": "Promise<void>",
+            "docs": ""
+          },
+          "complexType": {
+            "signature": "() => Promise<void>",
+            "parameters": [],
+            "references": {
+              "Promise": {
+                "location": "global",
+                "id": "global::Promise"
+              }
+            },
+            "return": "Promise<void>"
+          },
+          "signature": "next() => Promise<void>",
+          "parameters": [],
+          "docs": "다음 슬라이드",
+          "docsTags": []
+        },
+        {
+          "name": "prev",
+          "returns": {
+            "type": "Promise<void>",
+            "docs": ""
+          },
+          "complexType": {
+            "signature": "() => Promise<void>",
+            "parameters": [],
+            "references": {
+              "Promise": {
+                "location": "global",
+                "id": "global::Promise"
+              }
+            },
+            "return": "Promise<void>"
+          },
+          "signature": "prev() => Promise<void>",
+          "parameters": [],
+          "docs": "이전 슬라이드",
+          "docsTags": []
+        }
+      ],
+      "events": [
+        {
+          "event": "tintoSlideChange",
+          "detail": "TintoCarouselSlideChangeDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "TintoCarouselSlideChangeDetail",
+            "resolved": "TintoCarouselSlideChangeDetail",
+            "references": {
+              "TintoCarouselSlideChangeDetail": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::TintoCarouselSlideChangeDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "슬라이드 변경 이벤트",
+          "docsTags": []
+        },
+        {
+          "event": "tintoSlideEnd",
+          "detail": "TintoCarouselSlideEndDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "TintoCarouselSlideEndDetail",
+            "resolved": "TintoCarouselSlideEndDetail",
+            "references": {
+              "TintoCarouselSlideEndDetail": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::TintoCarouselSlideEndDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "슬라이드 종료 이벤트",
+          "docsTags": []
+        },
+        {
+          "event": "tintoSlideStart",
+          "detail": "TintoCarouselSlideStartDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "TintoCarouselSlideStartDetail",
+            "resolved": "TintoCarouselSlideStartDetail",
+            "references": {
+              "TintoCarouselSlideStartDetail": {
+                "location": "import",
+                "path": "./carousel.types",
+                "id": "src/components/carousel/carousel.types.ts::TintoCarouselSlideStartDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "슬라이드 시작 이벤트",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
       "filePath": "src/components/image/image.tsx",
       "encapsulation": "shadow",
       "tag": "tinto-image",
@@ -2598,6 +3373,29 @@
           "setter": false
         },
         {
+          "name": "animationScale",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "animation-scale",
+          "reflectToAttr": true,
+          "docs": "optional scale multiplier applied during animation (esp. spin)",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "as",
           "type": "\"button\"",
           "complexType": {
@@ -2620,6 +3418,52 @@
             {
               "value": "button",
               "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "autoScaleThreshold",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "auto-scale-threshold",
+          "reflectToAttr": true,
+          "docs": "auto scale threshold (host width / parent width) for spin",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "autoScaleValue",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "auto-scale-value",
+          "reflectToAttr": true,
+          "docs": "auto scale value applied when threshold exceeded",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
             }
           ],
           "optional": true,
@@ -2808,6 +3652,29 @@
           "values": [
             {
               "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "errorFallback",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "error-fallback",
+          "reflectToAttr": true,
+          "docs": "에러 발생 시 대체 이미지 URL",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
             }
           ],
           "optional": true,
@@ -3366,6 +4233,29 @@
           "setter": false
         },
         {
+          "name": "scale",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "scale",
+          "reflectToAttr": true,
+          "docs": "Base transform scale (1 = original size)",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "shadow",
           "type": "string",
           "complexType": {
@@ -3661,8 +4551,8 @@
             "references": {
               "AlignItems": {
                 "location": "import",
-                "path": "./section.types",
-                "id": "src/components/section/section.types.ts::AlignItems"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::AlignItems"
               }
             }
           },
@@ -3788,8 +4678,8 @@
             "references": {
               "FlexDirection": {
                 "location": "import",
-                "path": "./section.types",
-                "id": "src/components/section/section.types.ts::FlexDirection"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexDirection"
               }
             }
           },
@@ -3859,8 +4749,8 @@
             "references": {
               "HeightMode": {
                 "location": "import",
-                "path": "./section.types",
-                "id": "src/components/section/section.types.ts::HeightMode"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::HeightMode"
               }
             }
           },
@@ -3903,8 +4793,8 @@
             "references": {
               "Justify": {
                 "location": "import",
-                "path": "./section.types",
-                "id": "src/components/section/section.types.ts::Justify"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::Justify"
               }
             }
           },
@@ -4103,8 +4993,8 @@
             "references": {
               "FlexWrap": {
                 "location": "import",
-                "path": "./section.types",
-                "id": "src/components/section/section.types.ts::FlexWrap"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexWrap"
               }
             }
           },
@@ -5085,8 +5975,8 @@
             "references": {
               "AlignItems": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::AlignItems"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::AlignItems"
               }
             }
           },
@@ -5137,8 +6027,8 @@
             "references": {
               "AlignItems": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::AlignItems"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::AlignItems"
               }
             }
           },
@@ -5206,8 +6096,8 @@
             "references": {
               "BgAttachment": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::BgAttachment"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgAttachment"
               }
             }
           },
@@ -5241,8 +6131,8 @@
             "references": {
               "BgBlend": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::BgBlend"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgBlend"
               }
             }
           },
@@ -5305,8 +6195,8 @@
             "references": {
               "BgRepeat": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::BgRepeat"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgRepeat"
               }
             }
           },
@@ -5340,8 +6230,8 @@
             "references": {
               "BgSize": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::BgSize"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::BgSize"
               }
             }
           },
@@ -5390,6 +6280,35 @@
           "setter": false
         },
         {
+          "name": "breakpoint",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "breakpoint",
+          "reflectToAttr": true,
+          "docs": "데스크탑 브레이크포인트 (기본: '1920px')",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'1920px'"
+            }
+          ],
+          "default": "'1920px'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "color",
           "type": "string",
           "complexType": {
@@ -5421,8 +6340,8 @@
             "references": {
               "FlexDirection": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::FlexDirection"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexDirection"
               }
             }
           },
@@ -5469,15 +6388,15 @@
             "references": {
               "FlexDirection": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::FlexDirection"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexDirection"
               }
             }
           },
           "mutable": false,
           "attr": "direction-desktop",
           "reflectToAttr": true,
-          "docs": "Flex (데스크탑 오버라이드, >=1920px)",
+          "docs": "Flex (데스크탑 오버라이드)",
           "docsTags": [],
           "values": [
             {
@@ -5586,8 +6505,8 @@
             "references": {
               "Justify": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::Justify"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::Justify"
               }
             }
           },
@@ -5642,8 +6561,8 @@
             "references": {
               "Justify": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::Justify"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::Justify"
               }
             }
           },
@@ -5853,8 +6772,8 @@
             "references": {
               "FlexWrap": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::FlexWrap"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexWrap"
               }
             }
           },
@@ -5897,8 +6816,8 @@
             "references": {
               "FlexWrap": {
                 "location": "import",
-                "path": "./wrapper.types",
-                "id": "src/components/wrapper/wrapper.types.ts::FlexWrap"
+                "path": "../../types/common.types",
+                "id": "src/types/common.types.ts::FlexWrap"
               }
             }
           },
@@ -5948,85 +6867,85 @@
     }
   ],
   "typeLibrary": {
-    "src/components/app-route/app-route.types.ts::FlexDirection": {
+    "src/types/common.types.ts::FlexDirection": {
       "declaration": "export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::FlexWrap": {
+    "src/types/common.types.ts::FlexWrap": {
       "declaration": "export type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::Justify": {
+    "src/types/common.types.ts::Justify": {
       "declaration": "export type Justify =\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around'\n  | 'space-evenly';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::AlignItems": {
+    "src/types/common.types.ts::AlignItems": {
       "declaration": "export type AlignItems = 'stretch' | 'flex-start' | 'center' | 'flex-end' | 'baseline';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::AlignContent": {
+    "src/types/common.types.ts::AlignContent": {
       "declaration": "export type AlignContent =\n  | 'stretch'\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::HeightMode": {
+    "src/types/common.types.ts::HeightMode": {
       "declaration": "export type HeightMode = 'auto' | 'dvh' | 'screen';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::TextTransform": {
+    "src/types/common.types.ts::TextTransform": {
       "declaration": "export type TextTransform = 'none' | 'capitalize' | 'uppercase' | 'lowercase';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::TextAlign": {
+    "src/types/common.types.ts::TextAlign": {
       "declaration": "export type TextAlign = 'start' | 'end' | 'left' | 'center' | 'right' | 'justify';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::BgSize": {
+    "src/types/common.types.ts::BgSize": {
       "declaration": "string",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::BgRepeat": {
+    "src/types/common.types.ts::BgRepeat": {
       "declaration": "string",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::BgAttachment": {
+    "src/types/common.types.ts::BgAttachment": {
       "declaration": "string",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::BgBlend": {
+    "src/types/common.types.ts::BgBlend": {
       "declaration": "string",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::OverflowMode": {
+    "src/types/common.types.ts::OverflowMode": {
       "declaration": "export type OverflowMode = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::ScrollBehavior": {
+    "src/types/common.types.ts::ScrollBehavior": {
       "declaration": "export type ScrollBehavior = 'auto' | 'smooth';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::ScrollSnapType": {
+    "src/types/common.types.ts::ScrollSnapType": {
       "declaration": "export type ScrollSnapType =\n  | 'none'\n  | 'x mandatory'\n  | 'x proximity'\n  | 'y mandatory'\n  | 'y proximity'\n  | 'block mandatory'\n  | 'block proximity'\n  | 'inline mandatory'\n  | 'inline proximity'\n  | 'both mandatory'\n  | 'both proximity';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
-    "src/components/app-route/app-route.types.ts::SnapAlign": {
+    "src/types/common.types.ts::SnapAlign": {
       "declaration": "export type SnapAlign = 'start' | 'center' | 'end' | 'none';",
       "docstring": "",
-      "path": "src/components/app-route/app-route.types.ts"
+      "path": "src/types/common.types.ts"
     },
     "src/components/button/button.types.ts::ButtonVariant": {
       "declaration": "export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';",
@@ -6067,6 +6986,51 @@
       "declaration": "export interface ButtonToggleDetail {\n  pressed: boolean;\n}",
       "docstring": "",
       "path": "src/components/button/button.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::NavigationPosition": {
+      "declaration": "export type NavigationPosition = 'inside' | 'outside' | 'overlay';",
+      "docstring": "",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::NavigationStyle": {
+      "declaration": "export type NavigationStyle = 'circle' | 'arrow' | 'text';",
+      "docstring": "",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::NavigationDisplay": {
+      "declaration": "export type NavigationDisplay = 'always' | 'hover' | 'auto';",
+      "docstring": "",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::IndicatorType": {
+      "declaration": "export type IndicatorType = 'dot' | 'bar' | 'number';",
+      "docstring": "",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::IndicatorPosition": {
+      "declaration": "export type IndicatorPosition = 'bottom' | 'top' | 'left' | 'right';",
+      "docstring": "",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::TransitionType": {
+      "declaration": "export type TransitionType = 'slide' | 'fade';",
+      "docstring": "",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::TintoCarouselSlideChangeDetail": {
+      "declaration": "export interface TintoCarouselSlideChangeDetail {\n  /** 현재 슬라이드 인덱스 (0부터 시작) */\n  current: number;\n  /** 이전 슬라이드 인덱스 */\n  previous: number;\n  /** 총 슬라이드 개수 */\n  total: number;\n}",
+      "docstring": "슬라이드 변경 이벤트 상세 정보",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::TintoCarouselSlideStartDetail": {
+      "declaration": "export interface TintoCarouselSlideStartDetail {\n  /** 슬라이드 인덱스 */\n  index: number;\n}",
+      "docstring": "슬라이드 시작 이벤트 상세 정보",
+      "path": "src/components/carousel/carousel.types.ts"
+    },
+    "src/components/carousel/carousel.types.ts::TintoCarouselSlideEndDetail": {
+      "declaration": "export interface TintoCarouselSlideEndDetail {\n  /** 슬라이드 인덱스 */\n  index: number;\n}",
+      "docstring": "슬라이드 종료 이벤트 상세 정보",
+      "path": "src/components/carousel/carousel.types.ts"
     },
     "src/components/image/image.types.ts::AspectRatio": {
       "declaration": "export type AspectRatio =\n  | '1:1'\n  | '2:1'\n  | '3:2'\n  | '4:3'\n  | '16:9'\n  | '3:1'\n  | '1:2'\n  | '2:3'\n  | '3:4'\n  | '9:16'\n  | '1:3';",
@@ -6123,31 +7087,6 @@
       "docstring": "",
       "path": "src/components/image/image.types.ts"
     },
-    "src/components/section/section.types.ts::FlexDirection": {
-      "declaration": "export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';",
-      "docstring": "",
-      "path": "src/components/section/section.types.ts"
-    },
-    "src/components/section/section.types.ts::FlexWrap": {
-      "declaration": "export type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';",
-      "docstring": "",
-      "path": "src/components/section/section.types.ts"
-    },
-    "src/components/section/section.types.ts::Justify": {
-      "declaration": "export type Justify =\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around'\n  | 'space-evenly';",
-      "docstring": "",
-      "path": "src/components/section/section.types.ts"
-    },
-    "src/components/section/section.types.ts::AlignItems": {
-      "declaration": "export type AlignItems = 'stretch' | 'flex-start' | 'center' | 'flex-end' | 'baseline';",
-      "docstring": "",
-      "path": "src/components/section/section.types.ts"
-    },
-    "src/components/section/section.types.ts::HeightMode": {
-      "declaration": "export type HeightMode = 'auto' | 'dvh' | 'screen';",
-      "docstring": "",
-      "path": "src/components/section/section.types.ts"
-    },
     "src/components/typography/typography.types.ts::Variant": {
       "declaration": "export type Variant = 'h1' | 'h2' | 'h3' | 'p' | 'span';",
       "docstring": "",
@@ -6182,46 +7121,6 @@
       "declaration": "\"char\" | \"word\"",
       "docstring": "",
       "path": "src/components/typography/typography.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::FlexDirection": {
-      "declaration": "export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::FlexWrap": {
-      "declaration": "export type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::Justify": {
-      "declaration": "export type Justify =\n  | 'flex-start'\n  | 'center'\n  | 'flex-end'\n  | 'space-between'\n  | 'space-around'\n  | 'space-evenly';",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::AlignItems": {
-      "declaration": "export type AlignItems = 'stretch' | 'flex-start' | 'center' | 'flex-end' | 'baseline';",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::BgSize": {
-      "declaration": "string",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::BgRepeat": {
-      "declaration": "string",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::BgAttachment": {
-      "declaration": "string",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
-    },
-    "src/components/wrapper/wrapper.types.ts::BgBlend": {
-      "declaration": "string",
-      "docstring": "",
-      "path": "src/components/wrapper/wrapper.types.ts"
     }
   }
 }

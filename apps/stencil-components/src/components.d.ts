@@ -22,7 +22,7 @@ import {
   SnapAlign,
   TextAlign,
   TextTransform,
-} from './components/app-route/app-route.types';
+} from './types/common.types';
 import {
   ButtonClickDetail,
   ButtonNativeType,
@@ -33,6 +33,17 @@ import {
   ButtonToggleDetail,
   ButtonVariant,
 } from './components/button/button.types';
+import {
+  IndicatorPosition,
+  IndicatorType,
+  NavigationDisplay,
+  NavigationPosition,
+  NavigationStyle,
+  TintoCarouselSlideChangeDetail,
+  TintoCarouselSlideEndDetail,
+  TintoCarouselSlideStartDetail,
+  TransitionType,
+} from './components/carousel/carousel.types';
 import {
   AnimationRotate,
   AsKind,
@@ -47,13 +58,6 @@ import {
   TintoImagePressDetail,
 } from './components/image/image.types';
 import {
-  AlignItems as AlignItems1,
-  FlexDirection as FlexDirection1,
-  FlexWrap as FlexWrap1,
-  HeightMode as HeightMode1,
-  Justify as Justify1,
-} from './components/section/section.types';
-import {
   Align,
   Color,
   FontFamily,
@@ -62,16 +66,6 @@ import {
   TypingUnit,
   Variant,
 } from './components/typography/typography.types';
-import {
-  AlignItems as AlignItems2,
-  BgAttachment as BgAttachment1,
-  BgBlend as BgBlend1,
-  BgRepeat as BgRepeat1,
-  BgSize as BgSize1,
-  FlexDirection as FlexDirection2,
-  FlexWrap as FlexWrap2,
-  Justify as Justify2,
-} from './components/wrapper/wrapper.types';
 export {
   AlignContent,
   AlignItems,
@@ -89,7 +83,7 @@ export {
   SnapAlign,
   TextAlign,
   TextTransform,
-} from './components/app-route/app-route.types';
+} from './types/common.types';
 export {
   ButtonClickDetail,
   ButtonNativeType,
@@ -100,6 +94,17 @@ export {
   ButtonToggleDetail,
   ButtonVariant,
 } from './components/button/button.types';
+export {
+  IndicatorPosition,
+  IndicatorType,
+  NavigationDisplay,
+  NavigationPosition,
+  NavigationStyle,
+  TintoCarouselSlideChangeDetail,
+  TintoCarouselSlideEndDetail,
+  TintoCarouselSlideStartDetail,
+  TransitionType,
+} from './components/carousel/carousel.types';
 export {
   AnimationRotate,
   AsKind,
@@ -114,13 +119,6 @@ export {
   TintoImagePressDetail,
 } from './components/image/image.types';
 export {
-  AlignItems as AlignItems1,
-  FlexDirection as FlexDirection1,
-  FlexWrap as FlexWrap1,
-  HeightMode as HeightMode1,
-  Justify as Justify1,
-} from './components/section/section.types';
-export {
   Align,
   Color,
   FontFamily,
@@ -129,16 +127,6 @@ export {
   TypingUnit,
   Variant,
 } from './components/typography/typography.types';
-export {
-  AlignItems as AlignItems2,
-  BgAttachment as BgAttachment1,
-  BgBlend as BgBlend1,
-  BgRepeat as BgRepeat1,
-  BgSize as BgSize1,
-  FlexDirection as FlexDirection2,
-  FlexWrap as FlexWrap2,
-  Justify as Justify2,
-} from './components/wrapper/wrapper.types';
 export namespace Components {
   interface TintoAppRoute {
     /**
@@ -361,6 +349,117 @@ export namespace Components {
     variant: ButtonVariant;
   }
   /**
+   * <tinto-carousel>
+   * - 터치/스와이프 슬라이드 지원
+   * - 네비게이션 버튼 (옵션)
+   * - 인디케이터 (옵션)
+   * - 자동 재생 (옵션)
+   * - 키보드 네비게이션 지원
+   */
+  interface TintoCarousel {
+    /**
+     * 자동 재생
+     * @default false
+     */
+    autoplay: boolean;
+    /**
+     * 자동 재생 간격 (ms)
+     * @default 3000
+     */
+    autoplayInterval: number;
+    /**
+     * 현재 슬라이드 인덱스 (0부터 시작)
+     * @default 0
+     */
+    current: number;
+    /**
+     * 특정 슬라이드로 이동
+     */
+    goToSlide: (index: number, emitEvent?: boolean) => Promise<void>;
+    /**
+     * 인디케이터 위치
+     * @default 'bottom'
+     */
+    indicatorPosition: IndicatorPosition;
+    /**
+     * 인디케이터 타입
+     * @default 'dot'
+     */
+    indicatorType: IndicatorType;
+    /**
+     * 무한 루프
+     * @default false
+     */
+    loop: boolean;
+    /**
+     * 네비게이션 버튼 표시 조건
+     * @default 'hover'
+     */
+    navigationDisplay: NavigationDisplay;
+    /**
+     * 네비게이션 버튼 위치
+     * @default 'overlay'
+     */
+    navigationPosition: NavigationPosition;
+    /**
+     * 네비게이션 버튼 스타일
+     * @default 'circle'
+     */
+    navigationStyle: NavigationStyle;
+    /**
+     * 다음 슬라이드
+     */
+    next: () => Promise<void>;
+    /**
+     * 이전 슬라이드
+     */
+    prev: () => Promise<void>;
+    /**
+     * 인디케이터 표시
+     * @default true
+     */
+    showIndicator: boolean;
+    /**
+     * 네비게이션 버튼 표시
+     * @default true
+     */
+    showNavigation: boolean;
+    /**
+     * 슬라이드 개수 (자동 감지 또는 수동 지정)
+     */
+    slideCount?: number;
+    /**
+     * 한 번에 표시할 슬라이드 개수
+     * @default 1
+     */
+    slidesPerView: number;
+    /**
+     * 슬라이드 간격
+     * @default '16px'
+     */
+    spaceBetween: string;
+    /**
+     * 스와이프 임계값 (px)
+     * @default 50
+     */
+    swipeThreshold: number;
+    /**
+     * 터치 활성화
+     * @default true
+     */
+    touchEnabled: boolean;
+    /**
+     * 전환 효과
+     * @default 'slide'
+     */
+    transition: TransitionType;
+    /**
+     * 전환 시간 (ms)
+     * @default 300
+     */
+    transitionDuration: number;
+  }
+  /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
    * - If placeholder exists, main image loads eagerly by default (fast swap)
@@ -373,9 +472,21 @@ export namespace Components {
      */
     animation?: ImageAnimation;
     /**
+     * optional scale multiplier applied during animation (esp. spin)
+     */
+    animationScale?: number;
+    /**
      * as="button" support
      */
     as?: AsKind;
+    /**
+     * auto scale threshold (host width / parent width) for spin
+     */
+    autoScaleThreshold?: number;
+    /**
+     * auto scale value applied when threshold exceeded
+     */
+    autoScaleValue?: number;
     background?: string;
     border?: string;
     crossorigin?: string;
@@ -393,6 +504,10 @@ export namespace Components {
      * @default 20
      */
     duration?: number;
+    /**
+     * 에러 발생 시 대체 이미지 URL
+     */
+    errorFallback?: string;
     /**
      * @default 'cover'
      */
@@ -449,6 +564,10 @@ export namespace Components {
      */
     rotate?: AnimationRotate;
     rounded?: RoundedPreset;
+    /**
+     * Base transform scale (1 = original size)
+     */
+    scale?: number;
     shadow?: string;
     sizes?: string;
     src?: string;
@@ -471,7 +590,7 @@ export namespace Components {
     /**
      * @default 'stretch'
      */
-    align: AlignItems1;
+    align: AlignItems;
     background?: string;
     /**
      * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
@@ -483,17 +602,17 @@ export namespace Components {
      * Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용)
      * @default 'column'
      */
-    direction: FlexDirection1;
+    direction: FlexDirection;
     gap?: string;
     /**
      * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
      * @default 'auto'
      */
-    heightMode: HeightMode1;
+    heightMode: HeightMode;
     /**
      * @default 'flex-start'
      */
-    justify: Justify1;
+    justify: Justify;
     margin?: string;
     /**
      * 크기/여백/배경 등 토큰
@@ -510,7 +629,7 @@ export namespace Components {
     /**
      * @default 'nowrap'
      */
-    wrap: FlexWrap1;
+    wrap: FlexWrap;
   }
   interface TintoTypography {
     /**
@@ -644,8 +763,8 @@ export namespace Components {
     /**
      * @default 'stretch'
      */
-    align: AlignItems2;
-    alignDesktop?: AlignItems2;
+    align: AlignItems;
+    alignDesktop?: AlignItems;
     /**
      * 배경(색/그라디언트) + 배경 이미지
      */
@@ -653,11 +772,11 @@ export namespace Components {
     /**
      * @default 'scroll'
      */
-    bgAttachment?: BgAttachment1;
+    bgAttachment?: BgAttachment;
     /**
      * @default 'normal'
      */
-    bgBlend?: BgBlend1;
+    bgBlend?: BgBlend;
     /**
      * @default '50% 50%'
      */
@@ -665,22 +784,27 @@ export namespace Components {
     /**
      * @default 'no-repeat'
      */
-    bgRepeat?: BgRepeat1;
+    bgRepeat?: BgRepeat;
     /**
      * @default 'cover'
      */
-    bgSize?: BgSize1;
+    bgSize?: BgSize;
     border?: string;
+    /**
+     * 데스크탑 브레이크포인트 (기본: '1920px')
+     * @default '1920px'
+     */
+    breakpoint: string;
     color?: string;
     /**
      * Flex (모바일 기본)
      * @default 'row'
      */
-    direction: FlexDirection2;
+    direction: FlexDirection;
     /**
-     * Flex (데스크탑 오버라이드, >=1920px)
+     * Flex (데스크탑 오버라이드)
      */
-    directionDesktop?: FlexDirection2;
+    directionDesktop?: FlexDirection;
     /**
      * 부모를 덮는 모드 (absolute; inset:0)
      * @default false
@@ -691,8 +815,8 @@ export namespace Components {
     /**
      * @default 'flex-start'
      */
-    justify: Justify2;
-    justifyDesktop?: Justify2;
+    justify: Justify;
+    justifyDesktop?: Justify;
     margin?: string;
     /**
      * 오버레이
@@ -709,13 +833,17 @@ export namespace Components {
     /**
      * @default 'nowrap'
      */
-    wrap: FlexWrap2;
-    wrapDesktop?: FlexWrap2;
+    wrap: FlexWrap;
+    wrapDesktop?: FlexWrap;
   }
 }
 export interface TintoButtonCustomEvent<T> extends CustomEvent<T> {
   detail: T;
   target: HTMLTintoButtonElement;
+}
+export interface TintoCarouselCustomEvent<T> extends CustomEvent<T> {
+  detail: T;
+  target: HTMLTintoCarouselElement;
 }
 export interface TintoImageCustomEvent<T> extends CustomEvent<T> {
   detail: T;
@@ -782,6 +910,71 @@ declare global {
   var HTMLTintoButtonElement: {
     prototype: HTMLTintoButtonElement;
     new (): HTMLTintoButtonElement;
+  };
+  interface HTMLTintoCarouselElementEventMap {
+    tintoSlideChange: TintoCarouselSlideChangeDetail;
+    tintoSlideStart: TintoCarouselSlideStartDetail;
+    tintoSlideEnd: TintoCarouselSlideEndDetail;
+  }
+  /**
+   * <tinto-carousel>
+   * - 터치/스와이프 슬라이드 지원
+   * - 네비게이션 버튼 (옵션)
+   * - 인디케이터 (옵션)
+   * - 자동 재생 (옵션)
+   * - 키보드 네비게이션 지원
+   */
+  interface HTMLTintoCarouselElement extends Components.TintoCarousel, HTMLStencilElement {
+    addEventListener<K extends keyof HTMLTintoCarouselElementEventMap>(
+      type: K,
+      listener: (
+        this: HTMLTintoCarouselElement,
+        ev: TintoCarouselCustomEvent<HTMLTintoCarouselElementEventMap[K]>,
+      ) => any,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener<K extends keyof DocumentEventMap>(
+      type: K,
+      listener: (this: Document, ev: DocumentEventMap[K]) => any,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener<K extends keyof HTMLElementEventMap>(
+      type: K,
+      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener(
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    removeEventListener<K extends keyof HTMLTintoCarouselElementEventMap>(
+      type: K,
+      listener: (
+        this: HTMLTintoCarouselElement,
+        ev: TintoCarouselCustomEvent<HTMLTintoCarouselElementEventMap[K]>,
+      ) => any,
+      options?: boolean | EventListenerOptions,
+    ): void;
+    removeEventListener<K extends keyof DocumentEventMap>(
+      type: K,
+      listener: (this: Document, ev: DocumentEventMap[K]) => any,
+      options?: boolean | EventListenerOptions,
+    ): void;
+    removeEventListener<K extends keyof HTMLElementEventMap>(
+      type: K,
+      listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+      options?: boolean | EventListenerOptions,
+    ): void;
+    removeEventListener(
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | EventListenerOptions,
+    ): void;
+  }
+  var HTMLTintoCarouselElement: {
+    prototype: HTMLTintoCarouselElement;
+    new (): HTMLTintoCarouselElement;
   };
   interface HTMLTintoImageElementEventMap {
     'tinto:loaded': TintoImageLoadedDetail;
@@ -864,6 +1057,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'tinto-app-route': HTMLTintoAppRouteElement;
     'tinto-button': HTMLTintoButtonElement;
+    'tinto-carousel': HTMLTintoCarouselElement;
     'tinto-image': HTMLTintoImageElement;
     'tinto-section': HTMLTintoSectionElement;
     'tinto-typography': HTMLTintoTypographyElement;
@@ -1100,6 +1294,117 @@ declare namespace LocalJSX {
     variant?: ButtonVariant;
   }
   /**
+   * <tinto-carousel>
+   * - 터치/스와이프 슬라이드 지원
+   * - 네비게이션 버튼 (옵션)
+   * - 인디케이터 (옵션)
+   * - 자동 재생 (옵션)
+   * - 키보드 네비게이션 지원
+   */
+  interface TintoCarousel {
+    /**
+     * 자동 재생
+     * @default false
+     */
+    autoplay?: boolean;
+    /**
+     * 자동 재생 간격 (ms)
+     * @default 3000
+     */
+    autoplayInterval?: number;
+    /**
+     * 현재 슬라이드 인덱스 (0부터 시작)
+     * @default 0
+     */
+    current?: number;
+    /**
+     * 인디케이터 위치
+     * @default 'bottom'
+     */
+    indicatorPosition?: IndicatorPosition;
+    /**
+     * 인디케이터 타입
+     * @default 'dot'
+     */
+    indicatorType?: IndicatorType;
+    /**
+     * 무한 루프
+     * @default false
+     */
+    loop?: boolean;
+    /**
+     * 네비게이션 버튼 표시 조건
+     * @default 'hover'
+     */
+    navigationDisplay?: NavigationDisplay;
+    /**
+     * 네비게이션 버튼 위치
+     * @default 'overlay'
+     */
+    navigationPosition?: NavigationPosition;
+    /**
+     * 네비게이션 버튼 스타일
+     * @default 'circle'
+     */
+    navigationStyle?: NavigationStyle;
+    /**
+     * 슬라이드 변경 이벤트
+     */
+    onTintoSlideChange?: (event: TintoCarouselCustomEvent<TintoCarouselSlideChangeDetail>) => void;
+    /**
+     * 슬라이드 종료 이벤트
+     */
+    onTintoSlideEnd?: (event: TintoCarouselCustomEvent<TintoCarouselSlideEndDetail>) => void;
+    /**
+     * 슬라이드 시작 이벤트
+     */
+    onTintoSlideStart?: (event: TintoCarouselCustomEvent<TintoCarouselSlideStartDetail>) => void;
+    /**
+     * 인디케이터 표시
+     * @default true
+     */
+    showIndicator?: boolean;
+    /**
+     * 네비게이션 버튼 표시
+     * @default true
+     */
+    showNavigation?: boolean;
+    /**
+     * 슬라이드 개수 (자동 감지 또는 수동 지정)
+     */
+    slideCount?: number;
+    /**
+     * 한 번에 표시할 슬라이드 개수
+     * @default 1
+     */
+    slidesPerView?: number;
+    /**
+     * 슬라이드 간격
+     * @default '16px'
+     */
+    spaceBetween?: string;
+    /**
+     * 스와이프 임계값 (px)
+     * @default 50
+     */
+    swipeThreshold?: number;
+    /**
+     * 터치 활성화
+     * @default true
+     */
+    touchEnabled?: boolean;
+    /**
+     * 전환 효과
+     * @default 'slide'
+     */
+    transition?: TransitionType;
+    /**
+     * 전환 시간 (ms)
+     * @default 300
+     */
+    transitionDuration?: number;
+  }
+  /**
    * <tinto-image>
    * - Image/media props + simple animations (spin/float/wobble/pulse)
    * - If placeholder exists, main image loads eagerly by default (fast swap)
@@ -1112,9 +1417,21 @@ declare namespace LocalJSX {
      */
     animation?: ImageAnimation;
     /**
+     * optional scale multiplier applied during animation (esp. spin)
+     */
+    animationScale?: number;
+    /**
      * as="button" support
      */
     as?: AsKind;
+    /**
+     * auto scale threshold (host width / parent width) for spin
+     */
+    autoScaleThreshold?: number;
+    /**
+     * auto scale value applied when threshold exceeded
+     */
+    autoScaleValue?: number;
     background?: string;
     border?: string;
     crossorigin?: string;
@@ -1132,6 +1449,10 @@ declare namespace LocalJSX {
      * @default 20
      */
     duration?: number;
+    /**
+     * 에러 발생 시 대체 이미지 URL
+     */
+    errorFallback?: string;
     /**
      * @default 'cover'
      */
@@ -1191,6 +1512,10 @@ declare namespace LocalJSX {
      */
     rotate?: AnimationRotate;
     rounded?: RoundedPreset;
+    /**
+     * Base transform scale (1 = original size)
+     */
+    scale?: number;
     shadow?: string;
     sizes?: string;
     src?: string;
@@ -1213,7 +1538,7 @@ declare namespace LocalJSX {
     /**
      * @default 'stretch'
      */
-    align?: AlignItems1;
+    align?: AlignItems;
     background?: string;
     /**
      * 가운데 정렬 (maxWidth 사용 시 margin-inline:auto)
@@ -1225,17 +1550,17 @@ declare namespace LocalJSX {
      * Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용)
      * @default 'column'
      */
-    direction?: FlexDirection1;
+    direction?: FlexDirection;
     gap?: string;
     /**
      * 높이 제어 - auto: 내용 높이(기본) - dvh: 동적 뷰포트 기준 최소/정확 높이 - screen: 정확히 100dvh
      * @default 'auto'
      */
-    heightMode?: HeightMode1;
+    heightMode?: HeightMode;
     /**
      * @default 'flex-start'
      */
-    justify?: Justify1;
+    justify?: Justify;
     margin?: string;
     /**
      * 크기/여백/배경 등 토큰
@@ -1252,7 +1577,7 @@ declare namespace LocalJSX {
     /**
      * @default 'nowrap'
      */
-    wrap?: FlexWrap1;
+    wrap?: FlexWrap;
   }
   interface TintoTypography {
     /**
@@ -1386,8 +1711,8 @@ declare namespace LocalJSX {
     /**
      * @default 'stretch'
      */
-    align?: AlignItems2;
-    alignDesktop?: AlignItems2;
+    align?: AlignItems;
+    alignDesktop?: AlignItems;
     /**
      * 배경(색/그라디언트) + 배경 이미지
      */
@@ -1395,11 +1720,11 @@ declare namespace LocalJSX {
     /**
      * @default 'scroll'
      */
-    bgAttachment?: BgAttachment1;
+    bgAttachment?: BgAttachment;
     /**
      * @default 'normal'
      */
-    bgBlend?: BgBlend1;
+    bgBlend?: BgBlend;
     /**
      * @default '50% 50%'
      */
@@ -1407,22 +1732,27 @@ declare namespace LocalJSX {
     /**
      * @default 'no-repeat'
      */
-    bgRepeat?: BgRepeat1;
+    bgRepeat?: BgRepeat;
     /**
      * @default 'cover'
      */
-    bgSize?: BgSize1;
+    bgSize?: BgSize;
     border?: string;
+    /**
+     * 데스크탑 브레이크포인트 (기본: '1920px')
+     * @default '1920px'
+     */
+    breakpoint?: string;
     color?: string;
     /**
      * Flex (모바일 기본)
      * @default 'row'
      */
-    direction?: FlexDirection2;
+    direction?: FlexDirection;
     /**
-     * Flex (데스크탑 오버라이드, >=1920px)
+     * Flex (데스크탑 오버라이드)
      */
-    directionDesktop?: FlexDirection2;
+    directionDesktop?: FlexDirection;
     /**
      * 부모를 덮는 모드 (absolute; inset:0)
      * @default false
@@ -1433,8 +1763,8 @@ declare namespace LocalJSX {
     /**
      * @default 'flex-start'
      */
-    justify?: Justify2;
-    justifyDesktop?: Justify2;
+    justify?: Justify;
+    justifyDesktop?: Justify;
     margin?: string;
     /**
      * 오버레이
@@ -1451,12 +1781,13 @@ declare namespace LocalJSX {
     /**
      * @default 'nowrap'
      */
-    wrap?: FlexWrap2;
-    wrapDesktop?: FlexWrap2;
+    wrap?: FlexWrap;
+    wrapDesktop?: FlexWrap;
   }
   interface IntrinsicElements {
     'tinto-app-route': TintoAppRoute;
     'tinto-button': TintoButton;
+    'tinto-carousel': TintoCarousel;
     'tinto-image': TintoImage;
     'tinto-section': TintoSection;
     'tinto-typography': TintoTypography;
@@ -1469,6 +1800,15 @@ declare module '@stencil/core' {
     interface IntrinsicElements {
       'tinto-app-route': LocalJSX.TintoAppRoute & JSXBase.HTMLAttributes<HTMLTintoAppRouteElement>;
       'tinto-button': LocalJSX.TintoButton & JSXBase.HTMLAttributes<HTMLTintoButtonElement>;
+      /**
+       * <tinto-carousel>
+       * - 터치/스와이프 슬라이드 지원
+       * - 네비게이션 버튼 (옵션)
+       * - 인디케이터 (옵션)
+       * - 자동 재생 (옵션)
+       * - 키보드 네비게이션 지원
+       */
+      'tinto-carousel': LocalJSX.TintoCarousel & JSXBase.HTMLAttributes<HTMLTintoCarouselElement>;
       /**
        * <tinto-image>
        * - Image/media props + simple animations (spin/float/wobble/pulse)
