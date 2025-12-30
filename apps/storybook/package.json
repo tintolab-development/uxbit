@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006 --no-open",
     "build": "storybook build --output-dir storybook-static",
+    "postbuild": "node scripts/prepare-storybook-gh-pages.cjs",
     "build:gh-pages": "pnpm run build && node scripts/prepare-storybook-gh-pages.cjs",
     "preview": "serve storybook-static -s -l 6007",
     "lint": "eslint \".storybook/**/*.{ts,tsx}\"",
