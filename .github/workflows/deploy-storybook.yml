@@ -2,10 +2,8 @@ name: Deploy Storybook to GitHub Pages
 
 on:
   push:
-    # branches:
-    #   - master
-    #   - main
-    #   - storybook-button
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -39,7 +37,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Stencil components
-        run: pnpm run build
+        run: pnpm --filter @uxbit/stencil-components run build
 
       - name: Build Storybook (with GitHub Pages fallbacks)
         run: pnpm run storybook:build:gh-pages
