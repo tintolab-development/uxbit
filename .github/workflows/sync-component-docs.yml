@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/stencil-components/docs/components/*.md' # 이 경로의 md가 바뀌면 동작
       - 'apps/stencil-components/src/components/**/*.tsx' # 컴포넌트 코드 변경 시에도 동작
+  workflow_dispatch: # 수동 실행 가능 (기존 문서들을 한 번에 Issue로 생성할 때 사용)
 
 permissions:
   contents: read
@@ -42,23 +43,34 @@ jobs:
           gh label create "area:components" --color "0E8A16" --repo "$REPO" --description "Components area" || true
           gh label create "priority:normal" --color "FBCA04" --repo "$REPO" --description "Normal priority" || true
 
-      # 변경된 파일 목록 뽑기
+      # 변경된 파일 목록 뽑기 (push 이벤트) 또는 모든 파일 (workflow_dispatch)
       - name: Get changed files
         id: changed
         uses: tj-actions/changed-files@v45
+        if: github.event_name == 'push'
         with:
           files: |
             apps/stencil-components/docs/components/*.md
 
+      # workflow_dispatch일 때 모든 문서 파일 찾기
+      - name: Get all component docs
+        id: all_docs
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          FILES=$(find apps/stencil-components/docs/components -name "*.md" -type f | tr '\n' ' ')
+          echo "all_changed_files=$FILES" >> $GITHUB_OUTPUT
+          echo "any_changed=true" >> $GITHUB_OUTPUT
+          echo "Found files: $FILES"
+
       # 컴포넌트 빌드 (custom-elements.json 생성)
       - name: Build components
-        if: steps.changed.outputs.any_changed == 'true'
+        if: steps.changed.outputs.any_changed == 'true' || steps.all_docs.outputs.any_changed == 'true'
         run: |
           pnpm --filter @uxbit/stencil-components run build
 
       # 컴포넌트 품질 평가 실행 (선택적)
       - name: Evaluate component quality
-        if: steps.changed.outputs.any_changed == 'true'
+        if: steps.changed.outputs.any_changed == 'true' || steps.all_docs.outputs.any_changed == 'true'
         id: quality
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -72,11 +84,20 @@ jobs:
           echo "Component quality evaluation should be done manually using MCP server"
           echo "Use: evaluate_component_quality tool in Cursor"
 
-      - name: Create or update issues for changed files
-        if: steps.changed.outputs.all_changed_files != ''
+      - name: Create or update issues for changed files (push)
+        if: github.event_name == 'push' && steps.changed.outputs.all_changed_files != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           chmod +x .github/scripts/sync-component-issues.sh
           .github/scripts/sync-component-issues.sh ${{ steps.changed.outputs.all_changed_files }}
+
+      - name: Create or update issues for all files (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch' && steps.all_docs.outputs.all_changed_files != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          chmod +x .github/scripts/sync-component-issues.sh
+          .github/scripts/sync-component-issues.sh ${{ steps.all_docs.outputs.all_changed_files }}
