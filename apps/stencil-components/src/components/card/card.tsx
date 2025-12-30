@@ -1,6 +1,6 @@
 // card.tsx
 import { Component, h, Element, Prop, Event, EventEmitter } from '@stencil/core';
-import type { CardVariant, CardClickDetail } from './card.types';
+import type { CardVariant, CardSize, CardClickDetail } from './card.types';
 import type { AspectRatio } from '../image/image.types';
 
 @Component({
@@ -36,6 +36,9 @@ export class TintoCard {
 
   /** 카드 variant */
   @Prop({ reflect: true }) variant: CardVariant = 'default';
+
+  /** 카드 크기 */
+  @Prop({ reflect: true }) size: CardSize = 'md';
 
   /** 카드 방향 (이미지 위치) */
   @Prop({ reflect: true }) direction: 'vertical' | 'horizontal' = 'vertical';
@@ -123,7 +126,7 @@ export class TintoCard {
 
     return (
       <article
-        class={`card ${this.variant} ${this.direction} ${this.loading ? 'loading' : ''} ${!this.clickable ? 'not-clickable' : ''}`}
+        class={`card ${this.variant} ${this.size} ${this.direction} ${this.loading ? 'loading' : ''} ${!this.clickable ? 'not-clickable' : ''}`}
         part="card"
         role="article"
         aria-label={this.cardTitle || 'Card'}

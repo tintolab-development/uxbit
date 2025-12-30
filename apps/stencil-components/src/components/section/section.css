@@ -5,6 +5,9 @@
   width: 100%;
   /* 반응형 기본 설정 */
   min-width: 0;
+  /* section 컴포넌트: 기본적으로 전체 뷰포트 차지 (100vw, 100vh) */
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* ===== Root Flex Box ===== */

@@ -3,6 +3,9 @@
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  /* body 하위 최상단 래퍼: 기본적으로 전체 뷰포트 차지 */
+  min-height: 100vh;
+  min-height: 100dvh;
 
   --ta-safe-top: 0px;
   --ta-safe-bottom: 0px;

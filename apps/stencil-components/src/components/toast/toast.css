@@ -66,6 +66,48 @@
   right: 20px;
 }
 
+/* Toast Sizes */
+.toast.sm {
+  min-width: 250px;
+  max-width: 400px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.toast.sm .toast-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+}
+
+.toast.sm .toast-message {
+  font-size: 12px;
+}
+
+.toast.md {
+  min-width: 300px;
+  max-width: 500px;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.toast.lg {
+  min-width: 350px;
+  max-width: 600px;
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+.toast.lg .toast-icon {
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+}
+
+.toast.lg .toast-message {
+  font-size: 16px;
+}
+
 /* Toast Variants */
 .toast.success {
   background: var(--t-toast-success-bg, #d4edda);
