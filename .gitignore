@@ -12,6 +12,7 @@ apps/stencil-components/www/index.html
 apps/stencil-components/www/host.config.json
 apps/templates/dist/
 
+
 # 임시/에디터/환경 파일
 *~
 *.sw[mnpcod]
