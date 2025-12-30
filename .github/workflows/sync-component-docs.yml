@@ -1,0 +1,82 @@
+name: Sync Component Docs to Issues
+
+on:
+  push:
+    paths:
+      - 'apps/stencil-components/docs/components/*.md' # 이 경로의 md가 바뀌면 동작
+      - 'apps/stencil-components/src/components/**/*.tsx' # 컴포넌트 코드 변경 시에도 동작
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  writing-component-guidelines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 🔥 필요한 라벨이 없으면 자동 생성
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Ensuring labels exist..."
+          gh label create "type:docs" --color "1D76DB" --repo "$REPO" --description "Documentation" || true
+          gh label create "area:components" --color "0E8A16" --repo "$REPO" --description "Components area" || true
+          gh label create "priority:normal" --color "FBCA04" --repo "$REPO" --description "Normal priority" || true
+
+      # 변경된 파일 목록 뽑기
+      - name: Get changed files
+        id: changed
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            apps/stencil-components/docs/components/*.md
+
+      # 컴포넌트 빌드 (custom-elements.json 생성)
+      - name: Build components
+        if: steps.changed.outputs.any_changed == 'true'
+        run: |
+          pnpm --filter @uxbit/stencil-components run build
+
+      # 컴포넌트 품질 평가 실행 (선택적)
+      - name: Evaluate component quality
+        if: steps.changed.outputs.any_changed == 'true'
+        id: quality
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # MCP 서버를 통한 평가는 로컬 환경에서 수동 실행 권장
+          # 여기서는 문서 파일에서 품질 평가 섹션을 추출하거나
+          # 기본 정보만 포함
+          echo "Component quality evaluation should be done manually using MCP server"
+          echo "Use: evaluate_component_quality tool in Cursor"
+
+      - name: Create or update issues for changed files
+        if: steps.changed.outputs.all_changed_files != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          chmod +x .github/scripts/sync-component-issues.sh
+          .github/scripts/sync-component-issues.sh ${{ steps.changed.outputs.all_changed_files }}
