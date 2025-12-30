@@ -62,3 +62,17 @@
 ::slotted(*) {
   margin: 0;
 }
+
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  [part='root'] {
+    padding: var(--t-pad-mobile, var(--t-pad, 0));
+    gap: var(--t-gap-mobile, var(--t-gap, 0));
+  }
+}
+
+@media (min-width: 768px) {
+  [part='root'] {
+    gap: var(--t-gap-tablet, var(--t-gap, 0));
+  }
+}

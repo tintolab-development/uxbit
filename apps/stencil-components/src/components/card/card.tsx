@@ -213,12 +213,7 @@ export class TintoCard {
           </div>
         </CardWrapper>
 
-        {/* 로딩 오버레이 */}
-        {this.loading && (
-          <div class="loading-overlay" part="loading">
-            <tinto-loading />
-          </div>
-        )}
+        {/* 로딩 오버레이 (스켈레톤 UI 사용으로 비활성화) */}
       </article>
     );
   }

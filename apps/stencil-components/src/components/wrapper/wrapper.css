@@ -60,9 +60,25 @@
   gap: var(--tw-gap, 0);
 }
 
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .tw-root {
+    padding: var(--tw-pad-mobile, var(--tw-pad, 0));
+  }
+
+  [part='inner'] {
+    gap: var(--tw-gap-mobile, var(--tw-gap, 0));
+  }
+}
+
+@media (min-width: 768px) {
+  [part='inner'] {
+    flex-direction: var(--tw-dir-tablet, var(--tw-dir, row));
+    gap: var(--tw-gap-tablet, var(--tw-gap, 0));
+  }
+}
+
 /* 데스크탑 오버라이드 (기본: >=1920px) */
-/* breakpoint prop으로 커스터마이징 가능하지만, CSS 미디어 쿼리는 정적이므로 */
-/* 기본값 1920px 기준으로 작동하며, 다른 브레이크포인트가 필요하면 CSS를 직접 오버라이드 */
 @media (min-width: 1920px) {
   [part='inner'] {
     flex-direction: var(--tw-dir-desktop, var(--tw-dir, row));

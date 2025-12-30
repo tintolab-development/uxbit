@@ -137,3 +137,19 @@
   margin: 0;
   scroll-snap-align: var(--ta-snap-align, unset);
 }
+
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  [part='root'] {
+    padding-inline-start: calc(var(--ta-pad-inline-start-base, 0) + var(--ta-safe-left, 0));
+    padding-inline-end: calc(var(--ta-pad-inline-end-base, 0) + var(--ta-safe-right, 0));
+    padding-block-start: calc(var(--ta-pad-block-start-base, 0) + var(--ta-safe-top, 0));
+    padding-block-end: calc(var(--ta-pad-block-end-base, 0) + var(--ta-safe-bottom, 0));
+  }
+}
+
+@media (min-width: 768px) {
+  [part='root'] {
+    gap: var(--ta-gap-tablet, var(--ta-gap, 0));
+  }
+}

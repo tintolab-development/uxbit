@@ -47,11 +47,21 @@
   outline: none;
 }
 
+/* 접근성: 포커스 가시화 */
+.modal-close:focus-visible {
+  outline: 2px solid var(--t-modal-focus-color, #005fcc);
+  outline-offset: 2px;
+}
+
 /* Reduced motion 지원 */
 @media (prefers-reduced-motion: reduce) {
   .modal-backdrop,
   .modal-container {
     animation: none;
+  }
+
+  .modal-close {
+    transition: none;
   }
 }
 
@@ -145,6 +155,86 @@
   display: flex;
   gap: 12px;
   justify-content: flex-end;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .modal-container {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .modal-container.sm,
+  .modal-container.md,
+  .modal-container.lg {
+    width: 100%;
+  }
+
+  .modal-header {
+    padding: 16px;
+  }
+
+  .modal-header h2 {
+    font-size: 18px;
+  }
+
+  .modal-body {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .modal-footer {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  .modal-close {
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 767px) {
+  .modal-backdrop {
+    padding: 16px;
+  }
+
+  .modal-container {
+    max-width: 95vw;
+  }
+
+  .modal-container.sm {
+    width: 90vw;
+  }
+
+  .modal-container.md {
+    width: 95vw;
+  }
+
+  .modal-container.lg {
+    width: 95vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-container.sm {
+    width: 400px;
+  }
+
+  .modal-container.md {
+    width: 600px;
+  }
+
+  .modal-container.lg {
+    width: 800px;
+  }
 }
 
 /* Desktop 오버라이드 (>=1920px) */

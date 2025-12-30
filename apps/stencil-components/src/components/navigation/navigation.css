@@ -126,6 +126,37 @@
   line-height: 1;
 }
 
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .navigation-button {
+    padding: 6px 8px;
+    min-height: 48px;
+  }
+
+  .navigation-icon {
+    font-size: 20px;
+  }
+
+  .navigation-label {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navigation-button {
+    padding: 10px 16px;
+    min-height: 56px;
+  }
+
+  .navigation-icon {
+    font-size: 26px;
+  }
+
+  .navigation-label {
+    font-size: 13px;
+  }
+}
+
 /* Desktop 오버라이드 (>=1920px) */
 @media (min-width: 1920px) {
   .navigation {

@@ -1,0 +1,30 @@
+{
+  "name": "@uxbit/mcp-server",
+  "version": "0.0.1",
+  "description": "MCP server for UXBIT Stencil components",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "uxbit-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "typescript": "^5.9.3"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "uxbit",
+    "stencil",
+    "web-components"
+  ],
+  "license": "MIT"
+}

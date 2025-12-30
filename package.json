@@ -16,6 +16,9 @@
     "storybook:build": "turbo run build --filter=storybook",
     "storybook:build:gh-pages": "pnpm --filter storybook run build:gh-pages",
     "templates": "pnpm --filter @uxbit/stencil-components run build && turbo run dev --parallel --filter=@uxbit/stencil-components --filter=templates",
+    "mcp:build": "pnpm --filter @uxbit/stencil-components run build && pnpm --filter @uxbit/mcp-server run build",
+    "mcp:start": "pnpm --filter @uxbit/mcp-server run start",
+    "mcp:dev": "pnpm --filter @uxbit/stencil-components run build && pnpm --filter @uxbit/mcp-server run dev",
     "lint-staged": "lint-staged",
     "clean": "turbo run clean",
     "prepare": "husky install"
