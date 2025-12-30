@@ -4,13 +4,14 @@ apps/stencil-components/www/build/
 apps/stencil-components/loader/
 apps/stencil-components/asset-output/
 apps/stencil-components/output/
-apps/storybook/storybook-static/
+# apps/storybook/storybook-static/
 apps/stencil-components/custom-elements.d.ts
 apps/stencil-components/custom-elements.json
 apps/stencil-components/src/components.d.ts
 apps/stencil-components/www/index.html
 apps/stencil-components/www/host.config.json
 apps/templates/dist/
+
 
 # 임시/에디터/환경 파일
 *~
