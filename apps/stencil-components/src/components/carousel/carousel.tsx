@@ -53,6 +53,8 @@ export class TintoCarousel {
   private slideElements: HTMLElement[] = [];
   private touchStartX = 0;
   private touchCurrentX = 0;
+  private isJumping = false; // 무한 루프 점프 중인지 확인
+  private realIndex = 0; // 실제 슬라이드 인덱스 (loop 모드용)
 
   /* ============================ Props ============================ */
 
@@ -102,7 +104,7 @@ export class TintoCarousel {
   /** 자동 재생 간격 (ms) */
   @Prop({ reflect: true, attribute: 'autoplay-interval' }) autoplayInterval: number = 3000;
 
-  /** 무한 루프 */
+  /** 무한 루프 (부드러운 무한 스크롤 효과) */
   @Prop({ reflect: true }) loop: boolean = false;
 
   /** 한 번에 표시할 슬라이드 개수 */
@@ -115,7 +117,7 @@ export class TintoCarousel {
   @Prop({ reflect: true }) transition: TransitionType = 'slide';
 
   /** 전환 시간 (ms) */
-  @Prop({ reflect: true, attribute: 'transition-duration' }) transitionDuration: number = 300;
+  @Prop({ reflect: true, attribute: 'transition-duration' }) transitionDuration: number = 500;
 
   /** 터치 활성화 */
   @Prop({ reflect: true, attribute: 'touch-enabled' }) touchEnabled: boolean = true;
@@ -164,6 +166,13 @@ export class TintoCarousel {
     }
     // 리사이즈 이벤트 리스너 추가 (슬라이드 정렬 유지)
     window.addEventListener('resize', this.handleResize);
+    // loop 모드일 때 초기 위치 설정 (updateSlides 후에 실행되므로 totalSlides가 설정됨)
+    if (this.loop && this.totalSlides > 1) {
+      this.realIndex = this.currentIndex;
+    } else {
+      // loop가 아니거나 슬라이드가 1개 이하면 realIndex를 currentIndex와 동일하게
+      this.realIndex = this.currentIndex;
+    }
   }
 
   disconnectedCallback() {
@@ -182,21 +191,35 @@ export class TintoCarousel {
   @Method()
   async goToSlide(index: number, emitEvent = true) {
     if (this.disabled) return;
-    if (index < 0 || index >= this.totalSlides) {
-      if (this.loop) {
-        index = index < 0 ? this.totalSlides - 1 : 0;
-      } else {
-        return;
+
+    let targetIndex = index;
+    const previous = this.currentIndex;
+
+    if (this.loop && this.totalSlides > 1) {
+      // 무한 루프 모드: 인덱스를 래핑
+      if (index < 0) {
+        targetIndex = this.totalSlides - 1;
+      } else if (index >= this.totalSlides) {
+        targetIndex = 0;
+      }
+      this.realIndex = targetIndex;
+    } else {
+      // 일반 모드
+      if (index < 0 || index >= this.totalSlides) {
+        if (this.loop) {
+          targetIndex = index < 0 ? this.totalSlides - 1 : 0;
+        } else {
+          return;
+        }
       }
     }
 
-    const previous = this.currentIndex;
-    this.currentIndex = index;
-    this.current = index;
+    this.currentIndex = targetIndex;
+    this.current = targetIndex;
 
     if (emitEvent) {
       this.tintoSlideChange.emit({
-        current: index,
+        current: targetIndex,
         previous,
         total: this.totalSlides,
       });
@@ -208,21 +231,33 @@ export class TintoCarousel {
   /** 다음 슬라이드 */
   @Method()
   async next() {
-    const nextIndex = this.currentIndex + 1;
-    if (nextIndex >= this.totalSlides && !this.loop) {
-      return;
+    if (this.loop && this.totalSlides > 1) {
+      // 무한 루프 모드: 항상 다음으로 이동
+      const nextIndex = this.currentIndex + 1;
+      this.goToSlide(nextIndex);
+    } else {
+      const nextIndex = this.currentIndex + 1;
+      if (nextIndex >= this.totalSlides && !this.loop) {
+        return;
+      }
+      this.goToSlide(nextIndex >= this.totalSlides ? 0 : nextIndex);
     }
-    this.goToSlide(nextIndex >= this.totalSlides ? 0 : nextIndex);
   }
 
   /** 이전 슬라이드 */
   @Method()
   async prev() {
-    const prevIndex = this.currentIndex - 1;
-    if (prevIndex < 0 && !this.loop) {
-      return;
+    if (this.loop && this.totalSlides > 1) {
+      // 무한 루프 모드: 항상 이전으로 이동
+      const prevIndex = this.currentIndex - 1;
+      this.goToSlide(prevIndex);
+    } else {
+      const prevIndex = this.currentIndex - 1;
+      if (prevIndex < 0 && !this.loop) {
+        return;
+      }
+      this.goToSlide(prevIndex < 0 ? this.totalSlides - 1 : prevIndex);
     }
-    this.goToSlide(prevIndex < 0 ? this.totalSlides - 1 : prevIndex);
   }
 
   /* ============================ Private Methods ============================ */
@@ -247,32 +282,75 @@ export class TintoCarousel {
       this.current = 0;
     }
 
+    // loop 모드일 때 realIndex 초기화
+    if (this.loop && this.totalSlides > 1) {
+      this.realIndex = this.currentIndex;
+    } else {
+      // loop가 아니거나 슬라이드가 1개 이하면 realIndex를 currentIndex와 동일하게
+      this.realIndex = this.currentIndex;
+    }
+
     this.updateContainerTransform();
   }
 
   private updateContainerTransform() {
     if (!this.containerEl) return;
 
+    // totalSlides가 0이면 아무것도 하지 않음
+    if (this.totalSlides === 0) {
+      this.containerEl.style.transform = 'translate3d(0, 0, 0)';
+      return;
+    }
+
+    // 점프 중이 아닐 때만 transition 활성화
+    // 드래그 중이 아니고 점프 중이 아닐 때만 transition 적용
+    if (!this.isDragging && !this.isJumping) {
+      this.containerEl.style.transition = `transform ${this.transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+    } else {
+      this.containerEl.style.transition = 'none';
+    }
+
     if (this.transition === 'fade') {
-      this.containerEl.style.transform = 'none';
+      this.containerEl.style.transform = 'translate3d(0, 0, 0)';
       this.slideElements.forEach((slide, index) => {
-        (slide as HTMLElement).style.opacity = index === this.currentIndex ? '1' : '0';
+        const slideEl = slide as HTMLElement;
+        const displayIndex = this.loop && this.totalSlides > 1 ? this.realIndex : this.currentIndex;
+        if (index === displayIndex) {
+          slideEl.style.opacity = '1';
+          slideEl.style.pointerEvents = 'auto';
+        } else {
+          slideEl.style.opacity = '0';
+          slideEl.style.pointerEvents = 'none';
+        }
       });
     } else {
       // slides-per-view가 1일 때는 간격 없이 정확한 계산
       if (this.slidesPerView === 1) {
-        // 컨테이너 너비를 기준으로 정확한 픽셀 계산
         const containerWidth = this.containerEl.offsetWidth;
-        const offset = -(this.currentIndex * containerWidth);
-        this.containerEl.style.transform = `translateX(${offset}px)`;
+        // loop 모드일 때는 realIndex 사용 (totalSlides > 1일 때만)
+        const displayIndex = this.loop && this.totalSlides > 1 ? this.realIndex : this.currentIndex;
+        // 인덱스가 범위를 벗어나지 않도록 보장
+        const safeIndex = Math.max(0, Math.min(displayIndex, Math.max(0, this.totalSlides - 1)));
+        const offset = -(safeIndex * containerWidth);
+        this.containerEl.style.transform = `translate3d(${offset}px, 0, 0)`;
       } else {
         const containerWidth = this.containerEl.offsetWidth;
         const slideWidthPx = containerWidth / this.slidesPerView;
         const gap = this.parseSpaceBetween();
-        const totalGap = gap * this.currentIndex;
-        const offset = -(this.currentIndex * slideWidthPx + totalGap);
-        this.containerEl.style.transform = `translateX(${offset}px)`;
+        const displayIndex = this.loop && this.totalSlides > 1 ? this.realIndex : this.currentIndex;
+        // 인덱스가 범위를 벗어나지 않도록 보장
+        const safeIndex = Math.max(0, Math.min(displayIndex, Math.max(0, this.totalSlides - 1)));
+        const totalGap = gap * safeIndex;
+        const offset = -(safeIndex * slideWidthPx + totalGap);
+        this.containerEl.style.transform = `translate3d(${offset}px, 0, 0)`;
       }
+    }
+
+    // 점프 완료 후 플래그 리셋
+    if (this.isJumping) {
+      setTimeout(() => {
+        this.isJumping = false;
+      }, 50);
     }
   }
 
@@ -345,15 +423,42 @@ export class TintoCarousel {
     this.isDragging = false;
 
     const diff = this.touchCurrentX - this.touchStartX;
+
+    // loop가 false일 때 경계 체크
+    if (!this.loop) {
+      // 첫 번째 슬라이드에서 오른쪽으로 스와이프 시도
+      if (this.currentIndex === 0 && diff > 0) {
+        // 현재 위치로 부드럽게 복귀
+        this.updateContainerTransform();
+        this.tintoSlideEnd.emit({ index: this.currentIndex });
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+        return;
+      }
+      // 마지막 슬라이드에서 왼쪽으로 스와이프 시도
+      if (this.currentIndex === this.totalSlides - 1 && diff < 0) {
+        // 현재 위치로 부드럽게 복귀
+        this.updateContainerTransform();
+        this.tintoSlideEnd.emit({ index: this.currentIndex });
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+        return;
+      }
+    }
+
     if (Math.abs(diff) > this.swipeThreshold) {
       if (diff > 0) {
         this.prev();
       } else {
         this.next();
       }
+    } else {
+      // 임계값 미만이면 현재 위치로 부드럽게 복귀
+      this.updateContainerTransform();
     }
 
-    this.updateContainerTransform();
     this.tintoSlideEnd.emit({ index: this.currentIndex });
 
     if (this.autoplay) {
@@ -362,18 +467,36 @@ export class TintoCarousel {
   };
 
   private updateDragTransform(offset: number) {
-    if (!this.containerEl) return;
+    if (!this.containerEl || this.totalSlides === 0) return;
+
+    const displayIndex = this.loop && this.totalSlides > 1 ? this.realIndex : this.currentIndex;
+    let dragOffset = offset;
+
+    // loop가 false일 때 경계에서 드래그 제한
+    if (!this.loop && this.totalSlides > 0) {
+      // 첫 번째 슬라이드에서 오른쪽으로 드래그 제한
+      if (this.currentIndex === 0 && offset > 0) {
+        // 저항 효과: 드래그 거리의 30%만 적용
+        dragOffset = offset * 0.3;
+      }
+      // 마지막 슬라이드에서 왼쪽으로 드래그 제한
+      else if (this.currentIndex === this.totalSlides - 1 && offset < 0) {
+        // 저항 효과: 드래그 거리의 30%만 적용
+        dragOffset = offset * 0.3;
+      }
+    }
 
     if (this.slidesPerView === 1) {
       const slideWidth = this.containerEl.offsetWidth;
-      const baseOffset = -(this.currentIndex * slideWidth);
-      this.containerEl.style.transform = `translateX(${baseOffset + offset}px)`;
+      const baseOffset = -(displayIndex * slideWidth);
+      this.containerEl.style.transform = `translate3d(${baseOffset + dragOffset}px, 0, 0)`;
     } else {
       const slideWidth = this.containerEl.offsetWidth / this.slidesPerView;
       const gap = this.parseSpaceBetween();
-      const baseOffset = -(this.currentIndex * (slideWidth + gap));
-      this.containerEl.style.transform = `translateX(${baseOffset + offset}px)`;
+      const baseOffset = -(displayIndex * (slideWidth + gap));
+      this.containerEl.style.transform = `translate3d(${baseOffset + dragOffset}px, 0, 0)`;
     }
+    // 드래그 중에는 transition 비활성화
     this.containerEl.style.transition = 'none';
   }
 
@@ -404,15 +527,48 @@ export class TintoCarousel {
     this.isDragging = false;
 
     const diff = this.currentX - this.startX;
+
+    // loop가 false일 때 경계 체크
+    if (!this.loop) {
+      // 첫 번째 슬라이드에서 오른쪽으로 드래그 시도
+      if (this.currentIndex === 0 && diff > 0) {
+        // 현재 위치로 부드럽게 복귀
+        this.updateContainerTransform();
+        this.tintoSlideEnd.emit({ index: this.currentIndex });
+        this.el.removeEventListener('mousemove', this.handleMouseMove);
+        this.el.removeEventListener('mouseup', this.handleMouseUp);
+        this.el.removeEventListener('mouseleave', this.handleMouseUp);
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+        return;
+      }
+      // 마지막 슬라이드에서 왼쪽으로 드래그 시도
+      if (this.currentIndex === this.totalSlides - 1 && diff < 0) {
+        // 현재 위치로 부드럽게 복귀
+        this.updateContainerTransform();
+        this.tintoSlideEnd.emit({ index: this.currentIndex });
+        this.el.removeEventListener('mousemove', this.handleMouseMove);
+        this.el.removeEventListener('mouseup', this.handleMouseUp);
+        this.el.removeEventListener('mouseleave', this.handleMouseUp);
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+        return;
+      }
+    }
+
     if (Math.abs(diff) > this.swipeThreshold) {
       if (diff > 0) {
         this.prev();
       } else {
         this.next();
       }
+    } else {
+      // 임계값 미만이면 현재 위치로 부드럽게 복귀
+      this.updateContainerTransform();
     }
 
-    this.updateContainerTransform();
     this.tintoSlideEnd.emit({ index: this.currentIndex });
 
     this.el.removeEventListener('mousemove', this.handleMouseMove);

@@ -43,6 +43,16 @@
         max-width: 100vw;
       }
 
+      #header .header-content {
+        padding: 16px;
+      }
+
+      @media (min-width: 768px) {
+        #header .header-content {
+          padding: 16px 20px;
+        }
+      }
+
       /* 메인 컨텐츠 영역 */
       #main-content {
         width: 100%;
@@ -163,23 +173,44 @@
         flex-shrink: 0;
         display: flex;
         align-items: center;
+        order: 1;
       }
 
       .header-search {
         flex: 1;
         min-width: 0;
         display: flex;
+        order: 2;
       }
 
       .header-cart {
         flex-shrink: 0;
         display: flex;
         align-items: center;
+        order: 3;
+        width: 100%;
+      }
+
+      @media (min-width: 768px) {
+        .header-cart {
+          width: auto;
+        }
       }
 
       /* 검색바 전체 너비 사용 */
       .header-search tinto-search-bar {
         width: 100%;
+      }
+
+      /* 모바일에서 장바구니 버튼 전체 너비 */
+      .header-cart tinto-button {
+        width: 100%;
+      }
+
+      @media (min-width: 768px) {
+        .header-cart tinto-button {
+          width: auto;
+        }
       }
 
       /* 섹션 헤더 */
@@ -199,12 +230,12 @@
   </head>
   <body>
     <!-- tinto-app-route는 body 하위 최상단 래퍼 -->
-    <tinto-app-route direction="column" safe-area="true" min-height="100vh">
+    <tinto-app-route direction="column" safe-area="true" min-height="100vh" padding="20px">
       <div id="app">
         <!-- 헤더 영역 -->
         <tinto-section
           id="header"
-          padding="16px"
+          padding="0"
           background="#FFFFFF"
           style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)"
         >
@@ -218,11 +249,11 @@
               <tinto-search-bar
                 id="home-search-bar"
                 placeholder="상품을 검색하세요"
-                size="md"
+                size="sm"
               ></tinto-search-bar>
             </div>
             <div class="header-cart">
-              <tinto-button variant="text" size="md">장바구니</tinto-button>
+              <tinto-button variant="filled" size="sm" style="width: 100%">장바구니</tinto-button>
             </div>
           </div>
         </tinto-section>
