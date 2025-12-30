@@ -33,6 +33,9 @@ export class TintoBadge {
   /** 점 형태만 표시 (텍스트 없음) */
   @Prop({ reflect: true }) dot: boolean = false;
 
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled: boolean = false;
+
   /* ============================ Render ============================ */
 
   private formatCount = (count?: number, max?: number): string => {
@@ -50,10 +53,11 @@ export class TintoBadge {
     if (showDot) {
       return (
         <span
-          class={`badge dot ${this.variant} ${this.size}`}
+          class={`badge dot ${this.variant} ${this.size} ${this.disabled ? 'disabled' : ''}`}
           part="badge"
           role="status"
           aria-label={this.label || displayCount || 'Badge'}
+          aria-disabled={this.disabled}
         >
           <slot />
         </span>
@@ -67,10 +71,11 @@ export class TintoBadge {
 
     return (
       <span
-        class={`badge ${this.variant} ${this.size} ${this.shape}`}
+        class={`badge ${this.variant} ${this.size} ${this.shape} ${this.disabled ? 'disabled' : ''}`}
         part="badge"
         role="status"
         aria-label={this.label || displayCount || 'Badge'}
+        aria-disabled={this.disabled}
       >
         <slot>{displayCount !== null ? displayCount : this.label}</slot>
       </span>

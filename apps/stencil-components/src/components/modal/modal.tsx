@@ -10,7 +10,7 @@ import {
   Watch,
   State,
 } from '@stencil/core';
-import type { ModalSize, ModalCloseDetail } from './modal.types';
+import type { ModalSize, ModalVariant, ModalCloseDetail } from './modal.types';
 
 @Component({
   tag: 'tinto-modal',
@@ -27,6 +27,9 @@ export class TintoModal {
 
   /** 모달 크기 */
   @Prop({ reflect: true }) size: ModalSize = 'md';
+
+  /** 모달 variant */
+  @Prop({ reflect: true }) variant: ModalVariant = 'default';
 
   /** 닫기 버튼 표시 여부 */
   @Prop({ reflect: true }) showClose: boolean = true;
@@ -45,6 +48,12 @@ export class TintoModal {
 
   /** 모달 설명 ID (aria-describedby용) */
   @Prop({ reflect: true }) describedBy?: string;
+
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled: boolean = false;
+
+  /** 로딩 상태 */
+  @Prop({ reflect: true }) loading: boolean = false;
 
   /* ============================ Events ============================ */
 

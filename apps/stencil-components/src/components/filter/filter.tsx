@@ -10,7 +10,13 @@ import {
   Watch,
   Listen,
 } from '@stencil/core';
-import type { FilterOption, FilterType, FilterVariant, FilterChangeDetail } from './filter.types';
+import type {
+  FilterOption,
+  FilterType,
+  FilterVariant,
+  FilterSize,
+  FilterChangeDetail,
+} from './filter.types';
 
 @Component({
   tag: 'tinto-filter',
@@ -33,6 +39,9 @@ export class TintoFilter {
 
   /** 필터 variant */
   @Prop({ reflect: true }) variant: FilterVariant = 'default';
+
+  /** 필터 크기 */
+  @Prop({ reflect: true }) size: FilterSize = 'md';
 
   /** 필터 옵션들 (JSON 문자열 또는 객체) */
   @Prop({ mutable: true }) options: FilterOption[] | string = [];
@@ -192,7 +201,7 @@ export class TintoFilter {
     const selectedCount = selectedValues.length;
 
     return (
-      <div class="filter-button-group" part="button-group">
+      <div class={`filter-button-group ${this.size}`} part="button-group">
         {this.parsedOptions.map((option) => {
           const isSelected = this.isOptionSelected(option.value);
           return (
@@ -232,12 +241,15 @@ export class TintoFilter {
     const displayLabel = this.label || '필터';
 
     return (
-      <div class="filter-container">
+      <div class={`filter-container ${this.size}`}>
         <button
           type="button"
-          class={`filter-trigger ${this.isOpen ? 'open' : ''} ${this.disabled ? 'disabled' : ''}`}
+          class={`filter-trigger ${this.size} ${this.isOpen ? 'open' : ''} ${this.disabled ? 'disabled' : ''}`}
           part="trigger"
           disabled={this.disabled}
+          aria-expanded={this.isOpen}
+          aria-haspopup="listbox"
+          aria-label={displayLabel}
           onClick={() => (this.isOpen = !this.isOpen)}
         >
           <span class="filter-label">{displayLabel}</span>
@@ -246,7 +258,7 @@ export class TintoFilter {
         </button>
 
         {this.isOpen && (
-          <div class="filter-dropdown" part="dropdown">
+          <div class="filter-dropdown" part="dropdown" role="listbox" aria-label="Filter options">
             {this.searchable && (
               <div class="filter-search" part="search">
                 <input

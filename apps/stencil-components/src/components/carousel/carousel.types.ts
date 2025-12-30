@@ -41,3 +41,9 @@ export interface TintoCarouselSlideEndDetail {
   /** 슬라이드 인덱스 */
   index: number;
 }
+
+/** 캐러셀 variant */
+export type CarouselVariant = 'default' | 'minimal' | 'bordered';
+
+/** 캐러셀 크기 */
+export type CarouselSize = 'sm' | 'md' | 'lg';

@@ -10,7 +10,7 @@ import {
   Watch,
   Listen,
 } from '@stencil/core';
-import type { SortOption, SortVariant, SortChangeDetail } from './sort.types';
+import type { SortOption, SortVariant, SortSize, SortChangeDetail } from './sort.types';
 
 @Component({
   tag: 'tinto-sort',
@@ -27,6 +27,9 @@ export class TintoSort {
 
   /** 정렬 variant */
   @Prop({ reflect: true }) variant: SortVariant = 'default';
+
+  /** 정렬 크기 */
+  @Prop({ reflect: true }) size: SortSize = 'md';
 
   /** 정렬 옵션들 (JSON 문자열 또는 객체) */
   @Prop({ mutable: true }) options: SortOption[] | string = [];
@@ -141,9 +144,10 @@ export class TintoSort {
   private renderSelectVariant() {
     return (
       <select
-        class="sort-select"
+        class={`sort-select ${this.size}`}
         part="select"
         disabled={this.disabled}
+        aria-label={this.label || 'Sort'}
         onChange={(e) => {
           const target = e.target as HTMLSelectElement;
           this.value = target.value;
@@ -173,7 +177,12 @@ export class TintoSort {
 
   private renderButtonVariant() {
     return (
-      <div class="sort-button-group" part="button-group">
+      <div
+        class={`sort-button-group ${this.size}`}
+        part="button-group"
+        role="group"
+        aria-label={this.label || 'Sort'}
+      >
         {this.parsedOptions.map((option) => {
           const isSelected = this.value === option.value;
           return (
@@ -202,12 +211,15 @@ export class TintoSort {
     const displayLabel = this.label || '정렬';
 
     return (
-      <div class="sort-container">
+      <div class={`sort-container ${this.size}`}>
         <button
           type="button"
-          class={`sort-trigger ${this.isOpen ? 'open' : ''} ${this.disabled ? 'disabled' : ''}`}
+          class={`sort-trigger ${this.size} ${this.isOpen ? 'open' : ''} ${this.disabled ? 'disabled' : ''}`}
           part="trigger"
           disabled={this.disabled}
+          aria-expanded={this.isOpen}
+          aria-haspopup="listbox"
+          aria-label={displayLabel}
           onClick={() => (this.isOpen = !this.isOpen)}
         >
           <span class="sort-label">{displayLabel}</span>
@@ -223,7 +235,7 @@ export class TintoSort {
         </button>
 
         {this.isOpen && (
-          <div class="sort-dropdown" part="dropdown">
+          <div class="sort-dropdown" part="dropdown" role="listbox" aria-label="Sort options">
             <div class="sort-options" part="options">
               {this.parsedOptions.map((option) => {
                 const isSelected = this.value === option.value;

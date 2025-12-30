@@ -42,6 +42,9 @@ export const FONT_SIZE_KEYS = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 
 export type FontSize = (typeof FONT_SIZE_KEYS)[number];
 
+/** 타이포그래피 크기 (일관성을 위한 별도 타입) */
+export type TypographySize = 'sm' | 'md' | 'lg';
+
 export const FONT_SIZE: Record<FontSize, string> = {
   xs: '0.75rem',
   sm: '0.875rem',

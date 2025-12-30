@@ -101,7 +101,7 @@ export class TintoSection {
     const ariaLabel = this.el.getAttribute('aria-label') ?? undefined;
     const ariaLabelledby = this.el.getAttribute('aria-labelledby') ?? undefined;
     const ariaDescribedby = this.el.getAttribute('aria-describedby') ?? undefined;
-    const role = this.el.getAttribute('role') ?? undefined;
+    const role = (this.el.getAttribute('role') ?? 'region') as any;
 
     // 내부 스크롤 허용 시 키보드 스크롤 가능하게 tabIndex 부여
     const tabIndex = this.scrollable ? 0 : undefined;
@@ -111,7 +111,7 @@ export class TintoSection {
         part="root"
         class="tinto-section"
         style={styleVars as any}
-        role={role as any}
+        role={role}
         aria-label={ariaLabel as any}
         aria-labelledby={ariaLabelledby as any}
         aria-describedby={ariaDescribedby as any}

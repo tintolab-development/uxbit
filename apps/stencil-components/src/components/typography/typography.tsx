@@ -6,6 +6,7 @@ import {
   FontSize,
   Variant,
   HighlightColor,
+  TypographySize,
   FAMILY_MAP,
   FONT_SIZE,
   TypingUnit,
@@ -270,6 +271,15 @@ export class TintoTypography {
   /** 문자 단위 / 단어 단위 */
   @Prop({ reflect: true }) typingUnit: TypingUnit = 'char';
 
+  /** 타이포그래피 크기 (일관성을 위한 별도 prop) */
+  @Prop({ reflect: true }) size?: TypographySize;
+
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled: boolean = false;
+
+  /** 로딩 상태 */
+  @Prop({ reflect: true }) loading: boolean = false;
+
   /** 내부에서 렌더링할 태그 결정 */
   private resolveTag(): keyof HTMLElementTagNameMap {
     if (this.as) return this.as;
@@ -514,12 +524,18 @@ export class TintoTypography {
       typedSpan
     );
 
+    const sizeClass = this.size ? `size-${this.size}` : '';
+    const disabledClass = this.disabled ? 'disabled' : '';
+    const loadingClass = this.loading ? 'loading' : '';
+
     return (
       <Tag
         part="root"
-        class={`tinto-typography ${this.variant} ${this.rolling ? 'has-typing' : ''}`}
+        class={`tinto-typography ${this.variant} ${sizeClass} ${disabledClass} ${loadingClass} ${this.rolling ? 'has-typing' : ''}`}
         style={style}
         aria-hidden={ariaHidden as any}
+        aria-disabled={this.disabled}
+        aria-busy={this.loading}
       >
         {staticTextForSR}
         {content}

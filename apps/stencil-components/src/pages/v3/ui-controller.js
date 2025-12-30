@@ -16,14 +16,12 @@ class UIController {
       homeSearchBar: document.getElementById('home-search-bar'),
       homeCarousel: document.getElementById('home-carousel'),
       homeLoading: document.getElementById('home-loading'),
-      homeNavigation: document.getElementById('home-navigation'),
 
       // 검색 화면
       searchInput: document.getElementById('search-input'),
       searchLoading: document.getElementById('search-loading'),
       searchResults: document.getElementById('search-results'),
       searchEmpty: document.getElementById('search-empty'),
-      searchNavigation: document.getElementById('search-navigation'),
 
       // 배너 상세
       bannerBackBtn: document.getElementById('banner-back-btn'),
@@ -169,24 +167,6 @@ class UIController {
         this.elements.homeCarousel.appendChild(slide);
       });
     }
-
-    // 내비게이션 설정
-    if (this.elements.homeNavigation) {
-      this.elements.homeNavigation.items = [
-        { id: 'home', label: '홈', icon: 'home' },
-        { id: 'search', label: '검색', icon: 'search' },
-        { id: 'profile', label: '프로필', icon: 'user' },
-        { id: 'settings', label: '설정', icon: 'settings' },
-      ];
-
-      this.elements.homeNavigation.addEventListener('tintoItemClick', (e) => {
-        document.dispatchEvent(
-          new CustomEvent('navigationClick', {
-            detail: { item: e.detail.item },
-          }),
-        );
-      });
-    }
   }
 
   updateSearchScreen(state) {
@@ -252,24 +232,6 @@ class UIController {
           this.elements.searchEmpty.style.display = 'block';
         }
       }
-    }
-
-    // 내비게이션 설정
-    if (this.elements.searchNavigation) {
-      this.elements.searchNavigation.items = [
-        { id: 'home', label: '홈', icon: 'home' },
-        { id: 'search', label: '검색', icon: 'search' },
-        { id: 'profile', label: '프로필', icon: 'user' },
-        { id: 'settings', label: '설정', icon: 'settings' },
-      ];
-
-      this.elements.searchNavigation.addEventListener('tintoItemClick', (e) => {
-        document.dispatchEvent(
-          new CustomEvent('navigationClick', {
-            detail: { item: e.detail.item },
-          }),
-        );
-      });
     }
   }
 

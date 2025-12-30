@@ -256,7 +256,11 @@ export class TintoFormInput {
       >
         {/* 라벨 */}
         {hasLabel && (
-          <label class="form-input-label" part="label" htmlFor={this.name}>
+          <label
+            class="form-input-label"
+            part="label"
+            htmlFor={this.name || `input-${this.el.id || 'default'}`}
+          >
             <slot name="label">{this.label}</slot>
             {this.required && (
               <span class="required-mark" aria-label="required">
@@ -281,7 +285,7 @@ export class TintoFormInput {
             type={this.getInputType()}
             class={`form-input ${this.size}`}
             part="input"
-            id={this.name}
+            id={this.name || `input-${this.el.id || 'default'}`}
             name={this.name}
             value={this.value}
             placeholder={this.placeholder}
@@ -300,7 +304,11 @@ export class TintoFormInput {
             onBlur={this.handleBlur}
             onKeyDown={this.handleKeyDown}
             aria-invalid={this.state === 'error' ? 'true' : 'false'}
-            aria-describedby={hasMessage ? `${this.name}-message` : undefined}
+            aria-required={this.required}
+            aria-describedby={
+              hasMessage ? `${this.name || `input-${this.el.id || 'default'}`}-message` : undefined
+            }
+            aria-label={!hasLabel && this.label ? this.label : undefined}
           />
 
           {/* 오른쪽 아이콘 */}
@@ -328,7 +336,9 @@ export class TintoFormInput {
           <div
             class={`form-input-message ${this.getMessageState()}`}
             part="message"
-            id={`${this.name}-message`}
+            id={`${this.name || `input-${this.el.id || 'default'}`}-message`}
+            role={this.state === 'error' ? 'alert' : 'status'}
+            aria-live={this.state === 'error' ? 'assertive' : 'polite'}
           >
             {this.getMessage()}
           </div>

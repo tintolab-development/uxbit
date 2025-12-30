@@ -33,6 +33,9 @@ export class TintoToast {
   /** 닫기 버튼 표시 여부 */
   @Prop({ reflect: true }) showClose: boolean = true;
 
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled: boolean = false;
+
   /* ============================ Events ============================ */
 
   /** 토스트 닫기 이벤트 */
@@ -85,6 +88,7 @@ export class TintoToast {
   /* ============================ Handlers ============================ */
 
   private handleClose = () => {
+    if (this.disabled) return;
     this.hide();
   };
 
@@ -107,7 +111,12 @@ export class TintoToast {
     if (!this.open) return null;
 
     return (
-      <div class={`toast ${this.variant} ${this.size} ${this.position}`} part="toast" role="alert">
+      <div
+        class={`toast ${this.variant} ${this.size} ${this.position} ${this.disabled ? 'disabled' : ''}`}
+        part="toast"
+        role="alert"
+        aria-disabled={this.disabled}
+      >
         <span class="toast-icon" part="icon">
           {this.getIcon()}
         </span>
