@@ -4,7 +4,7 @@ apps/stencil-components/www/build/
 apps/stencil-components/loader/
 apps/stencil-components/asset-output/
 apps/stencil-components/output/
-apps/storybook/storybook-static/
+# apps/storybook/storybook-static/
 apps/stencil-components/custom-elements.d.ts
 apps/stencil-components/custom-elements.json
 apps/stencil-components/src/components.d.ts
