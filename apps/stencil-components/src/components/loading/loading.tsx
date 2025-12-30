@@ -22,15 +22,19 @@ export class TintoLoading {
   /** 로딩 텍스트 */
   @Prop({ reflect: true }) text?: string;
 
+  /** 비활성화 여부 (시각적으로 비활성화 표시) */
+  @Prop({ reflect: true }) disabled: boolean = false;
+
   /* ============================ Render ============================ */
 
   render() {
     return (
       <div
-        class={`loading ${this.overlay ? 'overlay' : ''}`}
+        class={`loading ${this.overlay ? 'overlay' : ''} ${this.disabled ? 'disabled' : ''}`}
         part="loading"
         role="status"
         aria-live="polite"
+        aria-disabled={this.disabled}
       >
         {this.variant === 'spinner' && (
           <div class="spinner" part="spinner">

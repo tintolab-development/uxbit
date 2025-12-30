@@ -22,6 +22,9 @@ export type FilterType = 'single' | 'multiple' | 'range' | 'search';
 /** 필터 variant */
 export type FilterVariant = 'default' | 'button' | 'checkbox' | 'radio';
 
+/** 필터 크기 */
+export type FilterSize = 'sm' | 'md' | 'lg';
+
 /** 필터 변경 이벤트 상세 */
 export interface FilterChangeDetail {
   /** 필터 ID */

@@ -42,7 +42,8 @@ export class TintoAppRoute {
   @Prop({ reflect: true, attribute: 'min-height' }) minHeight?: string;
   @Prop({ reflect: true }) height?: string;
   @Prop({ reflect: true }) center: boolean = false;
-  @Prop({ reflect: true, attribute: 'height-mode' }) heightMode: HeightMode = 'auto';
+  /** 높이 제어 (기본값: screen - body 하위 최상단 래퍼이므로 전체 화면 차지) */
+  @Prop({ reflect: true, attribute: 'height-mode' }) heightMode: HeightMode = 'screen';
 
   /** 패딩 토큰 */
   @Prop({ reflect: true }) padding?: string;

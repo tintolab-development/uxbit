@@ -724,7 +724,8 @@ export class TintoImage {
             part="img"
             ref={(el) => (this.imgEl = el as HTMLImageElement)}
             draggable={false}
-            alt=""
+            alt={this.alt || ''}
+            role={!this.alt ? 'presentation' : undefined}
             onDragStart={(e) => e.preventDefault()}
             onLoad={this.onImgLoad}
             onError={this.onImgError}

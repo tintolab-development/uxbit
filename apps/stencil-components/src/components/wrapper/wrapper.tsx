@@ -105,8 +105,22 @@ export class TintoWrapper {
       '--tw-breakpoint': this.breakpoint,
     };
 
+    // host의 role/aria-* 패스스루
+    const ariaLabel = this.el.getAttribute('aria-label') ?? undefined;
+    const ariaLabelledby = this.el.getAttribute('aria-labelledby') ?? undefined;
+    const ariaDescribedby = this.el.getAttribute('aria-describedby') ?? undefined;
+    const role = (this.el.getAttribute('role') ?? 'region') as any;
+
     return (
-      <div part="root" class={{ 'tw-root': true, 'tw-fill': this.fill }} style={styleVars as any}>
+      <div
+        part="root"
+        class={{ 'tw-root': true, 'tw-fill': this.fill }}
+        style={styleVars as any}
+        role={role}
+        aria-label={ariaLabel as any}
+        aria-labelledby={ariaLabelledby as any}
+        aria-describedby={ariaDescribedby as any}
+      >
         <div part="inner">
           <slot></slot>
         </div>

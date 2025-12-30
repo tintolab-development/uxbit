@@ -20,6 +20,8 @@ import type {
   TintoCarouselSlideChangeDetail,
   TintoCarouselSlideStartDetail,
   TintoCarouselSlideEndDetail,
+  CarouselVariant,
+  CarouselSize,
 } from './carousel.types';
 
 /**
@@ -53,6 +55,15 @@ export class TintoCarousel {
   private touchCurrentX = 0;
 
   /* ============================ Props ============================ */
+
+  /** 캐러셀 variant */
+  @Prop({ reflect: true }) variant: CarouselVariant = 'default';
+
+  /** 캐러셀 크기 */
+  @Prop({ reflect: true }) size: CarouselSize = 'md';
+
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled: boolean = false;
 
   /** 현재 슬라이드 인덱스 (0부터 시작) */
   @Prop({ reflect: true, mutable: true }) current: number = 0;
@@ -170,6 +181,7 @@ export class TintoCarousel {
   /** 특정 슬라이드로 이동 */
   @Method()
   async goToSlide(index: number, emitEvent = true) {
+    if (this.disabled) return;
     if (index < 0 || index >= this.totalSlides) {
       if (this.loop) {
         index = index < 0 ? this.totalSlides - 1 : 0;
@@ -292,6 +304,7 @@ export class TintoCarousel {
 
   private setupKeyboardNavigation() {
     this.el.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (this.disabled) return;
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         this.prev();
@@ -311,7 +324,7 @@ export class TintoCarousel {
   /* ============================ Touch Handlers ============================ */
 
   private handleTouchStart = (e: TouchEvent) => {
-    if (!this.touchEnabled) return;
+    if (!this.touchEnabled || this.disabled) return;
     this.touchStartX = e.touches[0].clientX;
     this.touchCurrentX = this.touchStartX;
     this.isDragging = true;
@@ -367,7 +380,7 @@ export class TintoCarousel {
   /* ============================ Mouse Handlers ============================ */
 
   private handleMouseDown = (e: MouseEvent) => {
-    if (!this.touchEnabled) return;
+    if (!this.touchEnabled || this.disabled) return;
     this.startX = e.clientX;
     this.currentX = this.startX;
     this.isDragging = true;
@@ -425,25 +438,29 @@ export class TintoCarousel {
 
     return (
       <div
-        class="tinto-carousel"
+        class={`tinto-carousel ${this.variant} ${this.size} ${this.disabled ? 'disabled' : ''}`}
         role="region"
         aria-label="Carousel"
-        tabindex="0"
+        aria-live="polite"
+        aria-atomic="true"
+        tabindex={this.disabled ? -1 : 0}
         onTouchStart={this.handleTouchStart}
         onTouchMove={this.handleTouchMove}
         onTouchEnd={this.handleTouchEnd}
         onMouseDown={this.handleMouseDown}
         onMouseEnter={() => {
-          if (this.autoplay) this.stopAutoplay();
+          if (this.autoplay && !this.disabled) this.stopAutoplay();
         }}
         onMouseLeave={() => {
-          if (this.autoplay) this.startAutoplay();
+          if (this.autoplay && !this.disabled) this.startAutoplay();
         }}
       >
         {/* 슬라이드 컨테이너 */}
         <div
           class="tc-container"
           ref={(el) => (this.containerEl = el)}
+          role="group"
+          aria-label={`Slide ${this.currentIndex + 1} of ${this.totalSlides}`}
           style={{
             '--tc-transition-duration': `${this.transitionDuration}ms`,
             '--tc-space-between': this.spaceBetween,
@@ -460,7 +477,8 @@ export class TintoCarousel {
               class="tc-nav-button tc-nav-prev"
               aria-label="Previous slide"
               onClick={() => this.prev()}
-              disabled={!this.loop && this.currentIndex === 0}
+              disabled={this.disabled || (!this.loop && this.currentIndex === 0)}
+              aria-disabled={this.disabled || (!this.loop && this.currentIndex === 0)}
             >
               {this.navigationStyle === 'text' ? '‹' : '←'}
             </button>
@@ -468,7 +486,10 @@ export class TintoCarousel {
               class="tc-nav-button tc-nav-next"
               aria-label="Next slide"
               onClick={() => this.next()}
-              disabled={!this.loop && this.currentIndex === this.totalSlides - 1}
+              disabled={this.disabled || (!this.loop && this.currentIndex === this.totalSlides - 1)}
+              aria-disabled={
+                this.disabled || (!this.loop && this.currentIndex === this.totalSlides - 1)
+              }
             >
               {this.navigationStyle === 'text' ? '›' : '→'}
             </button>
@@ -479,12 +500,20 @@ export class TintoCarousel {
         {this.showIndicator && this.totalSlides > 1 && (
           <div
             class={`tc-indicator tc-indicator-${this.indicatorType} tc-indicator-${this.indicatorPosition}`}
+            role="tablist"
+            aria-label="Slide indicators"
           >
             {Array.from({ length: this.totalSlides }).map((_, index) => (
               <button
                 class={`tc-indicator-item ${index === this.currentIndex ? 'active' : ''}`}
-                aria-label={`Go to slide ${index + 1}`}
+                role="tab"
+                aria-label={`Go to slide ${index + 1} of ${this.totalSlides}`}
+                aria-selected={index === this.currentIndex}
+                aria-controls={`slide-${index}`}
+                tabindex={index === this.currentIndex ? 0 : -1}
                 onClick={() => this.goToSlide(index)}
+                disabled={this.disabled}
+                aria-disabled={this.disabled}
               >
                 {this.indicatorType === 'number' ? index + 1 : ''}
               </button>

@@ -44,14 +44,12 @@ class App {
       homeLoading: document.getElementById('home-loading'),
       homeCarousel: document.getElementById('home-carousel'),
       popularProducts: document.getElementById('popular-products'),
-      homeNavigation: document.getElementById('home-navigation'),
 
       // 검색 화면
       searchInput: document.getElementById('search-input'),
       searchLoading: document.getElementById('search-loading'),
       searchResults: document.getElementById('search-results'),
       searchEmpty: document.getElementById('search-empty'),
-      searchNavigation: document.getElementById('search-navigation'),
 
       // 배너 상세
       bannerBackBtn: document.getElementById('banner-back-btn'),
@@ -75,27 +73,8 @@ class App {
   }
 
   init() {
-    this.setupNavigation();
     this.setupEventListeners();
     this.loadHomeScreen();
-  }
-
-  // 내비게이션 아이템 설정
-  setupNavigation() {
-    const navItems = [
-      { id: 'home', label: '홈', icon: 'home' },
-      { id: 'search', label: '검색', icon: 'search' },
-      { id: 'profile', label: '프로필', icon: 'user' },
-      { id: 'settings', label: '설정', icon: 'settings' },
-    ];
-
-    if (this.elements.homeNavigation) {
-      this.elements.homeNavigation.items = navItems;
-    }
-
-    if (this.elements.searchNavigation) {
-      this.elements.searchNavigation.items = navItems;
-    }
   }
 
   setupEventListeners() {
@@ -127,15 +106,6 @@ class App {
     // 모달 닫기
     this.elements.productModal?.addEventListener('tintoClose', () => {
       this.closeModal();
-    });
-
-    // 내비게이션 클릭
-    this.elements.homeNavigation?.addEventListener('tintoItemClick', (e) => {
-      this.handleNavigationClick(e.detail.item);
-    });
-
-    this.elements.searchNavigation?.addEventListener('tintoItemClick', (e) => {
-      this.handleNavigationClick(e.detail.item);
     });
   }
 
@@ -628,19 +598,6 @@ class App {
     } else {
       // 내부 링크 처리 (현재는 홈으로 이동)
       this.loadHomeScreen();
-    }
-  }
-
-  handleNavigationClick(item) {
-    trackEvent('navigation_click', { item_name: item.id });
-
-    if (item.id === 'home') {
-      this.loadHomeScreen();
-    } else if (item.id === 'search') {
-      this.navigateToSearch();
-    } else {
-      // 프로필, 설정 등은 추후 구현
-      console.log('Navigation to', item.id);
     }
   }
 

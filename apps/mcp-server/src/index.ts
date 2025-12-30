@@ -1155,6 +1155,13 @@ class UxbitMCPServer {
     };
   }
 
+  // 컴포넌트 유형 판별
+  private getComponentType(tagName: string): 'layout' | 'ui' {
+    const layoutComponents = ['tinto-app-route', 'tinto-section'];
+    // tinto-wrapper는 UI 컴포넌트로 분류 (variant가 필요할 수 있음)
+    return layoutComponents.includes(tagName) ? 'layout' : 'ui';
+  }
+
   // 일관성 점수 계산
   private calculateConsistencyScore(
     component: ComponentInfo,
@@ -1164,6 +1171,7 @@ class UxbitMCPServer {
   ): { score: number; details: any } {
     const componentProps = (component.props || []).map((p: any) => p.name?.toLowerCase() || '');
     const componentEvents = (component.events || []).map((e: any) => e.name?.toLowerCase() || '');
+    const componentType = this.getComponentType(component.tag);
 
     // Props 네이밍 일치율
     const commonPropsUsed = commonProps.filter((prop) =>
@@ -1183,12 +1191,26 @@ class UxbitMCPServer {
           ? 0.5
           : 0.3;
 
-    // 토큰 사용 일치율 (variant, size 등)
+    // 토큰 사용 일치율 (레이아웃 컴포넌트는 variant/size 평가 제외)
     const tokenProps = ['variant', 'size', 'disabled', 'loading'];
-    const tokenPropsUsed = tokenProps.filter((prop) =>
-      componentProps.includes(prop.toLowerCase()),
-    ).length;
-    const tokenUsageMatch = tokenProps.length > 0 ? tokenPropsUsed / tokenProps.length : 0.5;
+    let tokenPropsUsed = 0;
+    let tokenUsageMatch = 0.5;
+
+    if (componentType === 'layout') {
+      // 레이아웃 컴포넌트는 disabled, loading만 평가 (variant, size는 불필요)
+      const layoutTokenProps = ['disabled', 'loading'];
+      tokenPropsUsed = layoutTokenProps.filter((prop) =>
+        componentProps.includes(prop.toLowerCase()),
+      ).length;
+      tokenUsageMatch =
+        layoutTokenProps.length > 0 ? tokenPropsUsed / layoutTokenProps.length : 0.5;
+    } else {
+      // UI 컴포넌트는 모든 토큰 Props 평가
+      tokenPropsUsed = tokenProps.filter((prop) =>
+        componentProps.includes(prop.toLowerCase()),
+      ).length;
+      tokenUsageMatch = tokenProps.length > 0 ? tokenPropsUsed / tokenProps.length : 0.5;
+    }
 
     const score = (propsNamingMatch * 0.4 + eventsNamingMatch * 0.3 + tokenUsageMatch * 0.3) * 100;
 
@@ -1201,6 +1223,7 @@ class UxbitMCPServer {
         commonPropsUsed,
         eventsFollowingPattern,
         tokenPropsUsed,
+        componentType,
       },
     };
   }
@@ -1214,11 +1237,12 @@ class UxbitMCPServer {
     const requiredProps = props.filter((p: any) => !p.optional && !p.default).length;
     const optionalProps = props.filter((p: any) => p.optional || p.default).length;
     const totalProps = props.length;
+    const componentType = this.getComponentType(component.tag);
 
     const requiredPropsRatio = totalProps > 0 ? requiredProps / totalProps : 0;
     const optionalPropsRatio = totalProps > 0 ? optionalProps / totalProps : 0;
 
-    // variant/size 지원 여부
+    // variant/size 지원 여부 (레이아웃 컴포넌트는 평가 제외)
     const componentPropNames = props.map((p: any) => p.name?.toLowerCase() || '');
     const variantSupport = componentPropNames.includes('variant');
     const sizeSupport = componentPropNames.includes('size');
@@ -1230,21 +1254,31 @@ class UxbitMCPServer {
     let score = 0;
     score += (1 - requiredPropsRatio) * 30; // 필수 Props 비율이 낮을수록 좋음
     score += optionalPropsRatio * 20; // 선택 Props 비율이 높을수록 좋음
-    score += variantSupport ? 20 : 0;
-    score += sizeSupport ? 15 : 0;
-    score += hasSlots ? 15 : 0;
+
+    if (componentType === 'layout') {
+      // 레이아웃 컴포넌트는 variant/size 점수 없음, 대신 유연성 점수 추가
+      score += hasSlots ? 30 : 15; // slots 지원이 중요
+      // 레이아웃 컴포넌트는 많은 Props가 정상이므로 추가 점수
+      score += Math.min(totalProps / 10, 20); // Props가 많을수록 유연성 높음 (최대 20점)
+    } else {
+      // UI 컴포넌트는 variant/size 지원 평가
+      score += variantSupport ? 20 : 0;
+      score += sizeSupport ? 15 : 0;
+      score += hasSlots ? 15 : 0;
+    }
 
     return {
       score: Math.min(100, Math.round(score * 100) / 100),
       details: {
         requiredPropsRatio: Math.round(requiredPropsRatio * 100),
         optionalPropsRatio: Math.round(optionalPropsRatio * 100),
-        variantSupport,
-        sizeSupport,
+        variantSupport: componentType === 'layout' ? null : variantSupport, // 레이아웃은 null
+        sizeSupport: componentType === 'layout' ? null : sizeSupport, // 레이아웃은 null
         hasSlots,
         totalProps,
         requiredProps,
         optionalProps,
+        componentType,
       },
     };
   }
@@ -1311,6 +1345,7 @@ class UxbitMCPServer {
   private calculateUsabilityScore(component: ComponentInfo): { score: number; details: any } {
     const props = component.props || [];
     const events = component.events || [];
+    const componentType = this.getComponentType(component.tag);
 
     // API 직관성 (일반적인 prop 이름 사용)
     const intuitiveProps = ['variant', 'size', 'disabled', 'loading', 'href', 'target'];
@@ -1320,8 +1355,16 @@ class UxbitMCPServer {
     const apiIntuitiveness =
       props.length > 0 ? intuitivePropsUsed / Math.max(props.length, intuitiveProps.length) : 0.5;
 
-    // 학습 곡선 (Props 개수가 적을수록 좋음)
-    const learningCurve = props.length <= 10 ? 1 : props.length <= 20 ? 0.7 : 0.4;
+    // 학습 곡선 (레이아웃 컴포넌트는 Props가 많아도 정상)
+    let learningCurve = 1.0;
+    if (componentType === 'layout') {
+      // 레이아웃 컴포넌트는 Props가 많아도 정상 (완화된 평가)
+      learningCurve =
+        props.length <= 20 ? 1.0 : props.length <= 40 ? 0.9 : props.length <= 60 ? 0.8 : 0.7;
+    } else {
+      // UI 컴포넌트는 기존 평가 기준 유지
+      learningCurve = props.length <= 10 ? 1 : props.length <= 20 ? 0.7 : 0.4;
+    }
 
     // 개발자 경험 (문서, 예제, 타입 등)
     const hasDocs = !!component.docs && component.docs.length > 50;
@@ -1339,6 +1382,7 @@ class UxbitMCPServer {
         developerExperience: Math.round(developerExperience * 100),
         propsCount: props.length,
         eventsCount: events.length,
+        componentType,
       },
     };
   }
@@ -1389,10 +1433,18 @@ class UxbitMCPServer {
   ): string[] {
     const improvements: string[] = [];
 
-    // 일관성 개선 제안
+    const componentType = this.getComponentType(component.tag);
+
+    // 일관성 개선 제안 (레이아웃 컴포넌트는 variant/size 제외)
     if (consistency.score < 90) {
       if (consistency.details.propsNamingMatch < 80) {
-        const missingProps = commonProps.filter(
+        // 레이아웃 컴포넌트는 variant, size를 제외한 공통 Props만 체크
+        const propsToCheck =
+          componentType === 'layout'
+            ? commonProps.filter((p) => p !== 'variant' && p !== 'size')
+            : commonProps;
+
+        const missingProps = propsToCheck.filter(
           (prop) =>
             !(component.props || []).some((p: any) => p.name?.toLowerCase() === prop.toLowerCase()),
         );
@@ -1400,18 +1452,22 @@ class UxbitMCPServer {
           improvements.push(`일관성: 공통 Props 추가 고려 (${missingProps.join(', ')})`);
         }
       }
-      if (consistency.details.tokenUsageMatch < 80) {
+      if (consistency.details.tokenUsageMatch < 80 && componentType !== 'layout') {
+        // 레이아웃 컴포넌트는 variant/size 토큰 평가 제외
         improvements.push('일관성: 디자인 토큰 사용 패턴을 다른 컴포넌트와 일치시키기');
       }
     }
 
-    // 재사용성 개선 제안
+    // 재사용성 개선 제안 (레이아웃 컴포넌트는 variant/size 제안 제외)
     if (reusability.score < 85) {
-      if (!reusability.details.variantSupport) {
-        improvements.push('재사용성: variant prop 추가 고려');
-      }
-      if (!reusability.details.sizeSupport) {
-        improvements.push('재사용성: size prop 추가 고려');
+      if (componentType !== 'layout') {
+        // UI 컴포넌트만 variant/size 제안
+        if (reusability.details.variantSupport === false) {
+          improvements.push('재사용성: variant prop 추가 고려');
+        }
+        if (reusability.details.sizeSupport === false) {
+          improvements.push('재사용성: size prop 추가 고려');
+        }
       }
       if (reusability.details.requiredPropsRatio > 0.3) {
         improvements.push('재사용성: 필수 Props 비율을 낮추기 (기본값 제공)');
@@ -1431,9 +1487,10 @@ class UxbitMCPServer {
       }
     }
 
-    // 사용성 개선 제안
+    // 사용성 개선 제안 (레이아웃 컴포넌트는 Props 개수 제안 완화)
     if (usability.score < 85) {
-      if (usability.details.propsCount > 20) {
+      if (componentType !== 'layout' && usability.details.propsCount > 20) {
+        // 레이아웃 컴포넌트는 Props가 많아도 정상이므로 제안 제외
         improvements.push('사용성: Props 개수 줄이기 (20개 이하 권장)');
       }
       if (usability.details.apiIntuitiveness < 70) {

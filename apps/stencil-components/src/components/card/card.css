@@ -195,6 +195,48 @@
   -webkit-line-clamp: 2;
 }
 
+/* Size: Small */
+.card.sm .card-content {
+  padding: 8px;
+  gap: 4px;
+}
+
+.card.sm .card-title {
+  font-size: 14px;
+}
+
+.card.sm .card-description {
+  font-size: 12px;
+}
+
+/* Size: Medium (default) */
+.card.md .card-content {
+  padding: 12px;
+  gap: 8px;
+}
+
+.card.md .card-title {
+  font-size: 16px;
+}
+
+.card.md .card-description {
+  font-size: 14px;
+}
+
+/* Size: Large */
+.card.lg .card-content {
+  padding: 16px;
+  gap: 12px;
+}
+
+.card.lg .card-title {
+  font-size: 18px;
+}
+
+.card.lg .card-description {
+  font-size: 16px;
+}
+
 /* Loading Overlay */
 .loading-overlay {
   position: absolute;

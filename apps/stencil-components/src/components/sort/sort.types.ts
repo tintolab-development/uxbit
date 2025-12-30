@@ -15,6 +15,9 @@ export interface SortOption {
 /** 정렬 variant */
 export type SortVariant = 'default' | 'button' | 'select';
 
+/** 정렬 크기 */
+export type SortSize = 'sm' | 'md' | 'lg';
+
 /** 정렬 변경 이벤트 상세 */
 export interface SortChangeDetail {
   /** 선택된 정렬 값 */

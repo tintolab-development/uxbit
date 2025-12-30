@@ -1,5 +1,5 @@
 name: '📘 Component Doc / 가이드'
-description: '웹 컴포넌트 문서화/가이드'
+description: '웹 컴포넌트 문서화/가이드 및 품질 평가'
 title: '[Docs] <component>: <short summary>'
 labels: ['type:docs', 'area:components', 'priority:normal']
 assignees:
@@ -16,9 +16,29 @@ body:
     id: version
     attributes:
       label: Component Version
-      placeholder: e.g., 1.-.-
+      placeholder: e.g., 1.0.0
     validations:
       required: true
+  - type: textarea
+    id: quality_score
+    attributes:
+      label: 품질 평가 결과 (MCP 서버 평가 도구 사용)
+      description: 'MCP 서버의 evaluate_component_quality 도구로 평가한 결과를 붙여넣기'
+      placeholder: |
+        {
+          "component": "tinto-button",
+          "totalScore": 88.5,
+          "grade": "A",
+          "scores": {
+            "consistency": 92,
+            "reusability": 85,
+            "completeness": 88,
+            "performance": 85,
+            "usability": 87,
+            "standards": 100
+          },
+          "improvements": ["개선 제안 1", "개선 제안 2"]
+        }
   - type: textarea
     id: overview
     attributes:
@@ -59,6 +79,7 @@ body:
       label: Acceptance Criteria
       description: 완료 조건(체크리스트)
       placeholder: |
+        - [ ] MCP 서버 품질 평가 완료 (A 등급 이상)
         - [ ] README/Wiki에 문서 반영
         - [ ] 컴포넌트별 테스트 코드 검증
         - [ ] CI 링크/배포 링크 업데이트

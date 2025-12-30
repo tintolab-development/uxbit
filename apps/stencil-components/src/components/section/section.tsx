@@ -37,11 +37,11 @@ export class TintoSection {
 
   /**
    * 높이 제어
-   * - auto: 내용 높이(기본)
+   * - auto: 내용 높이
    * - dvh: 동적 뷰포트 기준 최소/정확 높이
-   * - screen: 정확히 100dvh
+   * - screen: 정확히 100dvh (기본값 - 한 섹션이 전체 뷰포트를 차지)
    */
-  @Prop({ reflect: true }) heightMode: HeightMode = 'auto';
+  @Prop({ reflect: true }) heightMode: HeightMode = 'screen';
 
   /** heightMode가 dvh/screen일 때 내부 스크롤 허용 */
   @Prop({ reflect: true }) scrollable: boolean = false;
@@ -101,7 +101,7 @@ export class TintoSection {
     const ariaLabel = this.el.getAttribute('aria-label') ?? undefined;
     const ariaLabelledby = this.el.getAttribute('aria-labelledby') ?? undefined;
     const ariaDescribedby = this.el.getAttribute('aria-describedby') ?? undefined;
-    const role = this.el.getAttribute('role') ?? undefined;
+    const role = (this.el.getAttribute('role') ?? 'region') as any;
 
     // 내부 스크롤 허용 시 키보드 스크롤 가능하게 tabIndex 부여
     const tabIndex = this.scrollable ? 0 : undefined;
@@ -111,7 +111,7 @@ export class TintoSection {
         part="root"
         class="tinto-section"
         style={styleVars as any}
-        role={role as any}
+        role={role}
         aria-label={ariaLabel as any}
         aria-labelledby={ariaLabelledby as any}
         aria-describedby={ariaDescribedby as any}

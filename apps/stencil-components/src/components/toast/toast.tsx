@@ -1,6 +1,6 @@
 // toast.tsx
 import { Component, h, Element, Prop, Event, EventEmitter, Method, State } from '@stencil/core';
-import type { ToastVariant, ToastPosition } from './toast.types';
+import type { ToastVariant, ToastSize, ToastPosition } from './toast.types';
 
 @Component({
   tag: 'tinto-toast',
@@ -18,6 +18,9 @@ export class TintoToast {
   /** 토스트 variant */
   @Prop({ reflect: true }) variant: ToastVariant = 'info';
 
+  /** 토스트 크기 */
+  @Prop({ reflect: true }) size: ToastSize = 'md';
+
   /** 표시 여부 */
   @Prop({ reflect: true, mutable: true }) open: boolean = false;
 
@@ -29,6 +32,9 @@ export class TintoToast {
 
   /** 닫기 버튼 표시 여부 */
   @Prop({ reflect: true }) showClose: boolean = true;
+
+  /** 비활성화 여부 */
+  @Prop({ reflect: true }) disabled: boolean = false;
 
   /* ============================ Events ============================ */
 
@@ -82,6 +88,7 @@ export class TintoToast {
   /* ============================ Handlers ============================ */
 
   private handleClose = () => {
+    if (this.disabled) return;
     this.hide();
   };
 
@@ -104,7 +111,12 @@ export class TintoToast {
     if (!this.open) return null;
 
     return (
-      <div class={`toast ${this.variant} ${this.position}`} part="toast" role="alert">
+      <div
+        class={`toast ${this.variant} ${this.size} ${this.position} ${this.disabled ? 'disabled' : ''}`}
+        part="toast"
+        role="alert"
+        aria-disabled={this.disabled}
+      >
         <span class="toast-icon" part="icon">
           {this.getIcon()}
         </span>
