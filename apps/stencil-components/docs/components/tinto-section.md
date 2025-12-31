@@ -1,6 +1,12 @@
 # tinto-section
 
-Flex 레이아웃 기반 섹션 컴포넌트. 높이 모드, 중앙 정렬, 스크롤 가능한 섹션을 지원합니다.
+Responsive한 섹션 컴포넌트. 페이지 내에서 구분되는 독립적인 콘텐츠 영역을 담당하며, 한 화면에 보이는 섹션을 위한 최적화된 컴포넌트입니다.
+
+> ✅ **업데이트**: 이제 완전한 responsive 지원을 제공합니다!
+>
+> - Breakpoint별 값 지원 (xs, sm, md, lg, xl, 2xl)
+> - 모든 props가 responsive
+> - Ant Design 스타일의 명확한 역할 분리
 
 ---
 
@@ -27,6 +33,21 @@ Flex 레이아웃 기반 섹션 컴포넌트. 높이 모드, 중앙 정렬, 스�
 ---
 
 ## Props
+
+### Responsive 지원
+
+모든 props는 문자열 또는 `BreakpointValue` 객체를 지원합니다:
+
+```typescript
+type BreakpointValue = {
+  xs?: string; // < 640px
+  sm?: string; // >= 640px
+  md?: string; // >= 768px
+  lg?: string; // >= 1024px
+  xl?: string; // >= 1280px
+  '2xl'?: string; // >= 1536px
+};
+```
 
 ### Flex 레이아웃
 

@@ -179,20 +179,71 @@
 
 ---
 
-## CSS Parts
+## Semantic Parts (컴포넌트 구조)
 
-외부에서 `::part()` 선택자로 스타일 오버라이드 가능:
+이 컴포넌트는 다음과 같은 semantic parts를 제공합니다. 각 part는 `::part()` 선택자를 통해 스타일링할 수 있습니다.
 
-- `part="button"`: 버튼 요소
-- `part="spinner"`: 로딩 스피너
-- `part="prefix"`: 접두사 슬롯
-- `part="label"`: 라벨 텍스트
-- `part="suffix"`: 접미사 슬롯
+### `button` (루트 요소)
+
+- **요소 타입**: `<button>`
+- **설명**: 루트 요소, 버튼의 최상위 컨테이너로 배경색, 테두리, 패딩, 둥근 모서리, 그림자 효과, 전환 애니메이션, 커서 스타일, 텍스트 정렬 등 버튼의 전체적인 외관 스타일을 포함
+- **주요 스타일 속성**: `display`, `position`, `width`, `height`, `background`, `border`, `padding`, `margin`, `border-radius`, `box-shadow`, `transition`, `cursor`
+
+### `label` (라벨 요소)
+
+- **요소 타입**: `<span>`
+- **설명**: 라벨 요소, 버튼 텍스트 내용을 감싸는 요소로 텍스트의 줄바꿈 방지, 중앙 정렬, 중문자 간격 최적화 등 텍스트 레이아웃 스타일을 제어
+- **주요 스타일 속성**: `font-size`, `font-weight`, `color`, `line-height`, `text-align`, `white-space`
+
+### `icon` (아이콘 요소)
+
+- **요소 타입**: `<span>`
+- **설명**: 아이콘 요소, 아이콘의 폰트 크기, 색상 상속, SVG 스타일 리셋 등 아이콘 표시 관련 스타일을 포함
+- **주요 스타일 속성**: `width`, `height`, `color`, `font-size`, `margin`
+
+### `prefix` (접두사 요소)
+
+- **요소 타입**: `<span>`
+- **설명**: 접두사 요소, 버튼 앞쪽에 배치되는 아이콘이나 콘텐츠 영역
+- **주요 스타일 속성**: `display`, `padding`, `margin`
+
+### `suffix` (접미사 요소)
+
+- **요소 타입**: `<span>`
+- **설명**: 접미사 요소, 버튼 뒤쪽에 배치되는 아이콘이나 콘텐츠 영역
+- **주요 스타일 속성**: `display`, `padding`, `margin`
+
+### `spinner` (로딩 스피너 요소)
+
+- **요소 타입**: `<span>`
+- **설명**: 로딩 스피너 요소, 로딩 상태일 때 표시되는 회전 애니메이션 스피너
+- **주요 스타일 속성**: `width`, `height`, `border`, `border-radius`, `animation`, `position`
+
+## CSS Parts 사용 예제
 
 ```css
+/* 버튼 루트 요소 스타일링 */
 tinto-button::part(button) {
   background: #0ea5e9;
   color: white;
+  border-radius: 8px;
+}
+
+/* 라벨 텍스트 스타일링 */
+tinto-button::part(label) {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* 접두사 아이콘 스타일링 */
+tinto-button::part(prefix) {
+  margin-right: 8px;
+}
+
+/* 로딩 스피너 커스터마이징 */
+tinto-button::part(spinner) {
+  border-color: currentColor;
+  border-right-color: transparent;
 }
 ```
 

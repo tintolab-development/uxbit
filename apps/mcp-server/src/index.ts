@@ -22,6 +22,7 @@ const STENCIL_DIR = join(PROJECT_ROOT, 'apps/stencil-components');
 const CUSTOM_ELEMENTS_JSON = join(STENCIL_DIR, 'custom-elements.json');
 const DOCS_DIR = join(STENCIL_DIR, 'docs');
 const OVERVIEW_PATH = join(DOCS_DIR, 'COMPONENTS_OVERVIEW.md');
+const COMPONENTS_DIR = join(STENCIL_DIR, 'src/components');
 
 interface ComponentInfo {
   tag: string;
@@ -29,6 +30,15 @@ interface ComponentInfo {
   events?: any[];
   methods?: any[];
   docs?: string;
+  semantics?: SemanticPart[];
+  cssVariables?: string[];
+}
+
+interface SemanticPart {
+  name: string;
+  description: string;
+  element?: string; // HTML element type (div, span, button, etc.)
+  styles?: string[]; // 주요 스타일 속성들
 }
 
 interface CacheEntry<T> {
@@ -337,6 +347,36 @@ class UxbitMCPServer {
                 tagName: {
                   type: 'string',
                   description: 'Component tag name to evaluate (e.g., tinto-button)',
+                },
+              },
+              required: ['tagName'],
+            },
+          },
+          {
+            name: 'get_component_semantics',
+            description:
+              'Get semantic part information for a UXBIT component. Returns structured information about component parts (root, header, body, etc.) similar to Ant Design semantic descriptions. Useful for understanding component structure and styling capabilities.',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                tagName: {
+                  type: 'string',
+                  description: 'Component tag name (e.g., tinto-button)',
+                },
+              },
+              required: ['tagName'],
+            },
+          },
+          {
+            name: 'get_component_styling',
+            description:
+              'Get CSS variables and styling information for a UXBIT component. Returns all CSS custom properties (CSS variables) that can be used to customize the component appearance.',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                tagName: {
+                  type: 'string',
+                  description: 'Component tag name (e.g., tinto-button)',
                 },
               },
               required: ['tagName'],
@@ -685,6 +725,118 @@ class UxbitMCPServer {
                 {
                   type: 'text',
                   text: JSON.stringify(evaluation, null, 2),
+                },
+              ],
+            };
+          }
+
+          case 'get_component_semantics': {
+            const tagName = (args as any).tagName;
+            if (!tagName) {
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: JSON.stringify({ error: 'tagName parameter is required' }, null, 2),
+                  },
+                ],
+                isError: true,
+              };
+            }
+
+            const component = components.find((c) => c.tag === tagName);
+            if (!component) {
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: JSON.stringify({ error: `Component not found: ${tagName}` }, null, 2),
+                  },
+                ],
+                isError: true,
+              };
+            }
+
+            // Semantic parts 추출
+            const semantics = await this.extractSemanticParts(tagName);
+
+            // Ant Design 스타일의 구조화된 설명 생성
+            const semanticDescription = this.formatSemanticDescription(tagName, semantics);
+
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(
+                    {
+                      component: tagName,
+                      semantics,
+                      description: semanticDescription,
+                    },
+                    null,
+                    2,
+                  ),
+                },
+              ],
+            };
+          }
+
+          case 'get_component_styling': {
+            const tagName = (args as any).tagName;
+            if (!tagName) {
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: JSON.stringify({ error: 'tagName parameter is required' }, null, 2),
+                  },
+                ],
+                isError: true,
+              };
+            }
+
+            const component = components.find((c) => c.tag === tagName);
+            if (!component) {
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: JSON.stringify({ error: `Component not found: ${tagName}` }, null, 2),
+                  },
+                ],
+                isError: true,
+              };
+            }
+
+            // CSS 변수 추출
+            const cssVariables = await this.extractCSSVariables(tagName);
+            const semantics = await this.extractSemanticParts(tagName);
+
+            // Part별 CSS 변수 매핑
+            const partVariables: Record<string, string[]> = {};
+            for (const part of semantics) {
+              const partVars = cssVariables.filter((v) =>
+                v.toLowerCase().includes(part.name.toLowerCase()),
+              );
+              if (partVars.length > 0) {
+                partVariables[part.name] = partVars;
+              }
+            }
+
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(
+                    {
+                      component: tagName,
+                      cssVariables,
+                      partVariables,
+                      stylingGuide: this.generateStylingGuide(tagName, cssVariables, semantics),
+                    },
+                    null,
+                    2,
+                  ),
                 },
               ],
             };
@@ -1506,6 +1658,270 @@ class UxbitMCPServer {
     }
 
     return improvements.length > 0 ? improvements : ['모든 기준을 충족합니다! 🎉'];
+  }
+
+  // 컴포넌트 소스에서 part 속성 추출
+  private async extractSemanticParts(tagName: string): Promise<SemanticPart[]> {
+    const componentName = tagName.replace('tinto-', '');
+    const componentPath = join(COMPONENTS_DIR, componentName, `${componentName}.tsx`);
+
+    try {
+      const content = await this.readFileWithTimeout(componentPath, 'utf-8');
+      const parts: SemanticPart[] = [];
+
+      // part="..." 패턴 찾기
+      const partRegex = /part=["']([^"']+)["']/g;
+      const elementRegex = /<(\w+)[^>]*part=["']([^"']+)["']/g;
+
+      const partMatches = new Set<string>();
+      let match;
+
+      // 모든 part 속성 찾기
+      while ((match = partRegex.exec(content)) !== null) {
+        partMatches.add(match[1]);
+      }
+
+      // 각 part에 대한 요소 타입 찾기
+      const partElements: Record<string, string> = {};
+      while ((match = elementRegex.exec(content)) !== null) {
+        partElements[match[2]] = match[1];
+      }
+
+      // root part는 항상 추가 (없으면 생성)
+      if (!partMatches.has('root')) {
+        parts.push({
+          name: 'root',
+          description: '루트 요소, 컴포넌트의 최상위 컨테이너',
+          element: 'div',
+          styles: ['display', 'position', 'width', 'height'],
+        });
+      }
+
+      // 각 part에 대한 설명 생성
+      for (const partName of partMatches) {
+        const element = partElements[partName] || 'div';
+        const description = this.generatePartDescription(tagName, partName, element);
+        const styles = this.inferPartStyles(partName, element);
+
+        parts.push({
+          name: partName,
+          description,
+          element,
+          styles,
+        });
+      }
+
+      return parts;
+    } catch (error: any) {
+      this.logWarning('Semantic parts 추출 실패', { tagName, error: error.message });
+      return [];
+    }
+  }
+
+  // Part 설명 생성 (Ant Design 스타일)
+  private generatePartDescription(tagName: string, partName: string, element: string): string {
+    const componentName = tagName.replace('tinto-', '');
+    const descriptions: Record<string, Record<string, string>> = {
+      button: {
+        root: '루트 요소, 버튼의 최상위 컨테이너로 배경색, 테두리, 패딩, 둥근 모서리, 그림자 효과, 전환 애니메이션, 커서 스타일, 텍스트 정렬 등 버튼의 전체적인 외관 스타일을 포함',
+        label:
+          '라벨 요소, 버튼 텍스트 내용을 감싸는 요소로 텍스트의 줄바꿈 방지, 중앙 정렬, 중문자 간격 최적화 등 텍스트 레이아웃 스타일을 제어',
+        icon: '아이콘 요소, 아이콘의 폰트 크기, 색상 상속, SVG 스타일 리셋 등 아이콘 표시 관련 스타일을 포함',
+        prefix: '접두사 요소, 버튼 앞쪽에 배치되는 아이콘이나 콘텐츠 영역',
+        suffix: '접미사 요소, 버튼 뒤쪽에 배치되는 아이콘이나 콘텐츠 영역',
+        spinner: '로딩 스피너 요소, 로딩 상태일 때 표시되는 회전 애니메이션 스피너',
+      },
+      card: {
+        root: '카드 루트 요소, 위치 지정, 배경색, 테두리, 둥근 모서리, 그림자, 패딩 등 카드 컨테이너의 기본 스타일을 포함',
+        header:
+          '카드 헤더 영역, flex 레이아웃, 최소 높이, 패딩, 텍스트 색상, 폰트 두께, 폰트 크기, 배경색, 하단 테두리, 상단 둥근 모서리 등 스타일을 포함',
+        body: '카드 본문 영역, 패딩, 폰트 크기 등 콘텐츠 표시의 기본 스타일을 포함',
+        title: '카드 제목, 인라인 블록 레이아웃, flex 비율, 텍스트 생략 등 제목 표시 스타일을 포함',
+        description: '카드 설명, 설명 텍스트의 폰트 크기, 줄 높이 등 레이아웃 스타일을 포함',
+        image: '카드 이미지, 이미지의 표시 및 레이아웃 스타일을 포함',
+        badge: '배지 요소, 할인율이나 특별 표시를 위한 배지 스타일',
+        price: '가격 요소, 가격 정보 표시 스타일',
+      },
+      'form-input': {
+        root: '폼 입력 루트 요소, 전체 입력 필드의 컨테이너',
+        wrapper: '래퍼 요소, 라벨과 입력 필드를 감싸는 컨테이너',
+        label: '라벨 요소, 입력 필드의 라벨 텍스트 스타일',
+        container: '컨테이너 요소, 입력 필드와 아이콘을 포함하는 영역',
+        input: '입력 필드 요소, 실제 텍스트 입력 영역의 스타일',
+        'icon-start': '시작 아이콘 요소, 입력 필드 왼쪽에 배치되는 아이콘',
+        'icon-end': '종료 아이콘 요소, 입력 필드 오른쪽에 배치되는 아이콘',
+        message: '메시지 요소, 에러나 힌트 메시지 표시 영역',
+      },
+      modal: {
+        root: '모달 루트 요소, 모달의 최상위 컨테이너',
+        backdrop: '배경 요소, 모달 뒤의 어두운 배경 레이어',
+        container: '컨테이너 요소, 모달 콘텐츠를 감싸는 컨테이너',
+        header: '헤더 요소, 모달 제목과 닫기 버튼을 포함하는 영역',
+        title: '제목 요소, 모달 제목 텍스트 스타일',
+        body: '본문 요소, 모달의 주요 콘텐츠 영역',
+        footer: '푸터 요소, 모달 하단의 버튼 영역',
+        close: '닫기 버튼 요소, 모달을 닫는 버튼',
+      },
+      toast: {
+        root: '토스트 루트 요소, 토스트 알림의 최상위 컨테이너',
+        toast: '토스트 요소, 알림 메시지의 컨테이너',
+        icon: '아이콘 요소, 토스트 타입에 따른 아이콘 표시',
+        message: '메시지 요소, 토스트 알림의 텍스트 내용',
+        close: '닫기 버튼 요소, 토스트를 닫는 버튼',
+      },
+      loading: {
+        root: '로딩 루트 요소, 로딩 인디케이터의 최상위 컨테이너',
+        loading: '로딩 요소, 로딩 애니메이션의 컨테이너',
+        spinner: '스피너 요소, 회전하는 원형 로딩 애니메이션',
+        dots: '점 요소, 점들이 순차적으로 나타나는 로딩 애니메이션',
+        pulse: '펄스 요소, 펄스 효과를 가진 로딩 애니메이션',
+        text: '텍스트 요소, 로딩 메시지 텍스트',
+      },
+    };
+
+    if (descriptions[componentName] && descriptions[componentName][partName]) {
+      return descriptions[componentName][partName];
+    }
+
+    // 기본 설명 생성
+    const partNameMap: Record<string, string> = {
+      root: '루트 요소',
+      header: '헤더 요소',
+      body: '본문 요소',
+      footer: '푸터 요소',
+      title: '제목 요소',
+      content: '콘텐츠 요소',
+      icon: '아이콘 요소',
+      label: '라벨 요소',
+      button: '버튼 요소',
+      input: '입력 요소',
+      image: '이미지 요소',
+      description: '설명 요소',
+      message: '메시지 요소',
+      close: '닫기 버튼 요소',
+      wrapper: '래퍼 요소',
+      container: '컨테이너 요소',
+    };
+
+    const baseDesc = partNameMap[partName] || `${partName} 요소`;
+    return `${baseDesc}, ${element} 태그를 사용하여 ${partName} 영역의 스타일을 제어할 수 있습니다`;
+  }
+
+  // Part의 주요 스타일 추론
+  private inferPartStyles(partName: string, element: string): string[] {
+    const commonStyles: Record<string, string[]> = {
+      root: ['display', 'position', 'width', 'height', 'background', 'border', 'padding', 'margin'],
+      header: ['display', 'padding', 'background', 'border-bottom', 'font-weight', 'font-size'],
+      body: ['padding', 'background', 'color', 'font-size'],
+      footer: ['display', 'padding', 'background', 'border-top'],
+      title: ['font-size', 'font-weight', 'color', 'line-height', 'text-align'],
+      content: ['padding', 'color', 'font-size', 'line-height'],
+      icon: ['width', 'height', 'color', 'font-size', 'margin'],
+      label: ['font-size', 'font-weight', 'color', 'padding', 'margin'],
+      button: ['background', 'border', 'padding', 'border-radius', 'cursor', 'transition'],
+      input: ['width', 'height', 'padding', 'border', 'background', 'color', 'font-size'],
+      image: ['width', 'height', 'object-fit', 'border-radius'],
+      message: ['color', 'font-size', 'margin', 'padding'],
+    };
+
+    return commonStyles[partName] || ['display', 'padding', 'margin'];
+  }
+
+  // CSS 파일에서 CSS 변수 추출
+  private async extractCSSVariables(tagName: string): Promise<string[]> {
+    const componentName = tagName.replace('tinto-', '');
+    const cssPath = join(COMPONENTS_DIR, componentName, `${componentName}.css`);
+
+    try {
+      const content = await this.readFileWithTimeout(cssPath, 'utf-8');
+      const variables = new Set<string>();
+
+      // --variable-name 패턴 찾기
+      const varRegex = /--[a-zA-Z0-9-]+/g;
+      let match;
+
+      while ((match = varRegex.exec(content)) !== null) {
+        variables.add(match[0]);
+      }
+
+      return Array.from(variables).sort();
+    } catch (error: any) {
+      this.logWarning('CSS 변수 추출 실패', { tagName, error: error.message });
+      return [];
+    }
+  }
+
+  // Ant Design 스타일의 semantic 설명 포맷팅
+  private formatSemanticDescription(tagName: string, semantics: SemanticPart[]): string {
+    const componentName = tagName.replace('tinto-', '');
+    let description = `# ${tagName} 컴포넌트 Semantic 구조\n\n`;
+    description += `이 컴포넌트는 다음과 같은 semantic parts를 제공합니다:\n\n`;
+
+    for (const part of semantics) {
+      description += `### ${part.name}\n\n`;
+      description += `- \`${part.name}\`: ${part.description}\n`;
+      if (part.element) {
+        description += `- 요소 타입: \`<${part.element}>\`\n`;
+      }
+      if (part.styles && part.styles.length > 0) {
+        description += `- 주요 스타일 속성: ${part.styles.join(', ')}\n`;
+      }
+      description += `\n`;
+    }
+
+    description += `## 사용 예제\n\n`;
+    description += `각 part는 CSS의 \`::part()\` 선택자를 통해 스타일링할 수 있습니다:\n\n`;
+    description += `\`\`\`css\n`;
+    for (const part of semantics) {
+      description += `${tagName}::part(${part.name}) {\n`;
+      description += `  /* ${part.description} 스타일링 */\n`;
+      if (part.styles && part.styles.length > 0) {
+        description += `  ${part.styles[0]}: /* 값 */;\n`;
+      }
+      description += `}\n\n`;
+    }
+    description += `\`\`\`\n`;
+
+    return description;
+  }
+
+  // 스타일링 가이드 생성
+  private generateStylingGuide(
+    tagName: string,
+    cssVariables: string[],
+    semantics: SemanticPart[],
+  ): string {
+    let guide = `# ${tagName} 스타일링 가이드\n\n`;
+
+    guide += `## CSS 변수 사용\n\n`;
+    guide += `이 컴포넌트는 다음 CSS 변수를 제공합니다:\n\n`;
+    for (const variable of cssVariables) {
+      guide += `- \`${variable}\`: 컴포넌트 스타일 커스터마이징용 변수\n`;
+    }
+
+    guide += `\n## Part 선택자 사용\n\n`;
+    guide += `각 semantic part는 \`::part()\` 선택자를 통해 스타일링할 수 있습니다:\n\n`;
+    for (const part of semantics) {
+      guide += `### ${part.name}\n\n`;
+      guide += `\`\`\`css\n`;
+      guide += `${tagName}::part(${part.name}) {\n`;
+      if (part.styles && part.styles.length > 0) {
+        guide += `  ${part.styles[0]}: /* 값 */;\n`;
+      }
+      guide += `}\n`;
+      guide += `\`\`\`\n\n`;
+    }
+
+    guide += `## CSS 변수 오버라이드 예제\n\n`;
+    guide += `\`\`\`css\n`;
+    guide += `${tagName} {\n`;
+    if (cssVariables.length > 0) {
+      guide += `  ${cssVariables[0]}: /* 커스텀 값 */;\n`;
+    }
+    guide += `}\n`;
+    guide += `\`\`\`\n`;
+
+    return guide;
   }
 
   async run() {

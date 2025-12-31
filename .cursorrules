@@ -89,3 +89,117 @@
 - 모든 공개 Props, Events, Methods는 문서화 필수
 - JSDoc 주석을 활용하여 타입 정보 제공
 
+---
+
+## Layout 컴포넌트 계층 구조 규칙
+
+### 필수 계층 구조
+
+Layout 컴포넌트는 다음 계층 구조를 **반드시** 준수해야 합니다:
+
+```
+body
+  └─ tinto-layout (최상위 래퍼, 하나만 존재)
+      ├─ tinto-section (복수 개 가능)
+      │   ├─ tinto-content (복수 개 가능)
+      │   └─ tinto-content
+      └─ tinto-section
+          └─ tinto-content
+```
+
+### 규칙 상세
+
+#### 1. tinto-layout
+- **위치**: `body` 태그 하위 최상위 래퍼
+- **개수**: **하나만** 존재 가능
+- **역할**: 페이지 레벨 컨테이너
+- **하위 요소**: `tinto-section`만 직접 자식으로 가질 수 있음
+
+```html
+<!-- ✅ 올바른 사용 -->
+<body>
+  <tinto-layout>
+    <tinto-section>...</tinto-section>
+    <tinto-section>...</tinto-section>
+  </tinto-layout>
+</body>
+
+<!-- ❌ 잘못된 사용 -->
+<body>
+  <tinto-layout>...</tinto-layout>
+  <tinto-layout>...</tinto-layout> <!-- 중복 불가 -->
+</body>
+```
+
+#### 2. tinto-section
+- **위치**: `tinto-layout` 하위 최상위 컴포넌트
+- **개수**: **복수 개** 존재 가능
+- **역할**: 페이지 내에서 구분되는 독립적인 콘텐츠 영역
+- **하위 요소**: `tinto-content`만 직접 자식으로 가질 수 있음
+- **특징**: Responsive하며, 한 화면에 보이는 섹션을 위한 최적화
+
+```html
+<!-- ✅ 올바른 사용 -->
+<tinto-layout>
+  <tinto-section>
+    <tinto-content>...</tinto-content>
+    <tinto-content>...</tinto-content>
+  </tinto-section>
+  <tinto-section>
+    <tinto-content>...</tinto-content>
+  </tinto-section>
+</tinto-layout>
+
+<!-- ❌ 잘못된 사용 -->
+<tinto-layout>
+  <tinto-section>
+    <tinto-layout>...</tinto-layout> <!-- tinto-section 하위에 tinto-layout 불가 -->
+  </tinto-section>
+</tinto-layout>
+```
+
+#### 3. tinto-content
+- **위치**: `tinto-section` 하위
+- **개수**: **복수 개** 존재 가능
+- **역할**: 섹션 내 콘텐츠 영역
+- **하위 요소**: 일반 콘텐츠 (다른 컴포넌트, 텍스트 등)
+
+```html
+<!-- ✅ 올바른 사용 -->
+<tinto-section>
+  <tinto-content>Content 1</tinto-content>
+  <tinto-content>Content 2</tinto-content>
+  <tinto-content>Content 3</tinto-content>
+</tinto-section>
+
+<!-- ❌ 잘못된 사용 -->
+<tinto-layout>
+  <tinto-content>...</tinto-content> <!-- tinto-layout 하위에 직접 tinto-content 불가 -->
+</tinto-layout>
+```
+
+### 계층 구조 검증 체크리스트
+
+코드를 작성하거나 수정할 때 다음을 확인하세요:
+
+- [ ] `tinto-layout`이 `body` 하위에 하나만 존재하는가?
+- [ ] `tinto-section`이 `tinto-layout` 하위에 있는가?
+- [ ] `tinto-content`가 `tinto-section` 하위에 있는가?
+- [ ] `tinto-section` 하위에 `tinto-layout`이 없는가?
+- [ ] `tinto-layout` 하위에 직접 `tinto-content`가 없는가?
+
+### 예외 사항
+
+다음의 경우는 예외로 허용됩니다:
+- `tinto-header`, `tinto-footer`, `tinto-sider`는 `tinto-layout` 하위에 직접 사용 가능 (Ant Design 스타일)
+- 내부 구현을 위한 임시 레이아웃 구조 (최종적으로는 규칙 준수)
+
+### 마이그레이션 가이드
+
+기존 코드를 마이그레이션할 때:
+
+1. **app-route → layout**: `tinto-app-route`를 `tinto-layout`으로 변경
+2. **section → section**: `tinto-section`은 그대로 유지하되, 하위 구조 확인
+3. **section 하위 layout 제거**: `tinto-section` 하위의 `tinto-layout`을 `tinto-content`로 변경
+
+

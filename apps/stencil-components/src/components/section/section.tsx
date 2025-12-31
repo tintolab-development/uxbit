@@ -6,7 +6,26 @@ import type {
   Justify,
   HeightMode,
 } from '../../types/common.types';
+import type { BreakpointValue } from '../layout/layout.types';
 
+/**
+ * Layout Section 컴포넌트
+ *
+ * 페이지 내에서 구분되는 독립적인 콘텐츠 영역을 담당합니다.
+ * Responsive하며, 한 화면에 보이는 섹션을 위한 최적화된 컴포넌트입니다.
+ *
+ * @example
+ * ```html
+ * <tinto-layout direction="column">
+ *   <tinto-section padding={{ xs: '16px', md: '24px' }} max-width="1200px" center>
+ *     Section 1
+ *   </tinto-section>
+ *   <tinto-section padding={{ xs: '16px', md: '24px' }} max-width="1200px" center>
+ *     Section 2
+ *   </tinto-section>
+ * </tinto-layout>
+ * ```
+ */
 @Component({
   tag: 'tinto-section',
   styleUrl: 'section.css',
@@ -15,25 +34,25 @@ import type {
 export class TintoSection {
   @Element() el!: HTMLElement;
 
-  /** Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용) */
-  @Prop({ reflect: true }) direction: FlexDirection = 'column';
-  @Prop({ reflect: true }) wrap: FlexWrap = 'nowrap';
-  @Prop({ reflect: true }) justify: Justify = 'flex-start';
-  @Prop({ reflect: true }) align: AlignItems = 'stretch';
-  @Prop({ reflect: true }) gap?: string; // e.g. "12px", "1rem"
+  /** Flex 레이아웃 (responsive 지원) */
+  @Prop({ reflect: true }) direction: FlexDirection | BreakpointValue = 'column';
+  @Prop({ reflect: true }) wrap: FlexWrap | BreakpointValue = 'nowrap';
+  @Prop({ reflect: true }) justify: Justify | BreakpointValue = 'flex-start';
+  @Prop({ reflect: true }) align: AlignItems | BreakpointValue = 'stretch';
+  @Prop({ reflect: true }) gap?: string | BreakpointValue; // e.g. "12px", "1rem" or { xs: "8px", md: "16px" }
 
-  /** 크기/여백/배경 등 토큰 */
-  @Prop({ reflect: true }) maxWidth?: string; // "1200px", "100%", "80ch"...
-  @Prop({ reflect: true }) padding?: string; // "16px", "24px 12px"...
-  @Prop({ reflect: true }) margin?: string; // "0 auto"...
+  /** 크기/여백/배경 등 토큰 (responsive 지원) */
+  @Prop({ reflect: true, attribute: 'max-width' }) maxWidth?: string | BreakpointValue; // "1200px", "100%", "80ch"...
+  @Prop({ reflect: true }) padding?: string | BreakpointValue; // "16px", "24px 12px"...
+  @Prop({ reflect: true }) margin?: string | BreakpointValue; // "0 auto"...
 
   @Prop({ reflect: true }) background?: string; // color/gradient
   @Prop({ reflect: true }) color?: string;
-  @Prop({ reflect: true }) radius?: string; // border-radius
+  @Prop({ reflect: true }) radius?: string | BreakpointValue; // border-radius
   @Prop({ reflect: true }) shadow?: string; // box-shadow
 
   /** 가운데 정렬 (maxWidth 사용 시 margin-inline:auto) */
-  @Prop({ reflect: true }) center: boolean = false;
+  @Prop({ reflect: true }) center?: boolean | BreakpointValue;
 
   /**
    * 높이 제어
@@ -65,32 +84,62 @@ export class TintoSection {
     window.removeEventListener('resize', this.updateVhVar);
   }
 
-  /** undefined/null/빈 문자열은 style에 넣지 않도록 클린업 */
-  private buildStyleVars(): Record<string, string> {
-    const entries: Array<[string, string | undefined]> = [
-      ['--t-max-w', this.maxWidth],
-      ['--t-pad', this.padding],
-      ['--t-mar', this.margin],
+  /**
+   * Breakpoint별 값을 CSS 변수로 변환
+   */
+  private buildResponsiveVars(
+    prop: string | BreakpointValue | undefined,
+    prefix: string,
+  ): Record<string, string> {
+    if (!prop) return {};
 
-      ['--t-bg', this.background],
-      ['--t-color', this.color],
-      ['--t-radius', this.radius],
-      ['--t-shadow', this.shadow],
-
-      // Flex (모든 해상도 동일)
-      ['--t-dir', this.direction],
-      ['--t-wrap', this.wrap],
-      ['--t-justify', this.justify],
-      ['--t-align', this.align],
-      ['--t-gap', this.gap],
-    ];
+    if (typeof prop === 'string') {
+      return { [`--t-section-${prefix}`]: prop };
+    }
 
     const vars: Record<string, string> = {};
-    for (const [k, v] of entries) {
+    const breakpoints: Array<keyof BreakpointValue> = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+
+    breakpoints.forEach((bp) => {
+      if (prop && typeof prop === 'object' && prop[bp]) {
+        vars[`--t-section-${prefix}-${bp}`] = prop[bp]!;
+      }
+    });
+
+    return vars;
+  }
+
+  /** undefined/null/빈 문자열은 style에 넣지 않도록 클린업 */
+  private buildStyleVars(): Record<string, string> {
+    const maxWidthVars = this.buildResponsiveVars(this.maxWidth, 'max-width');
+    const paddingVars = this.buildResponsiveVars(this.padding, 'padding');
+    const marginVars = this.buildResponsiveVars(this.margin, 'margin');
+    const radiusVars = this.buildResponsiveVars(this.radius, 'radius');
+    const directionVars = this.buildResponsiveVars(this.direction as any, 'direction');
+    const wrapVars = this.buildResponsiveVars(this.wrap as any, 'wrap');
+    const justifyVars = this.buildResponsiveVars(this.justify as any, 'justify');
+    const alignVars = this.buildResponsiveVars(this.align as any, 'align');
+    const gapVars = this.buildResponsiveVars(this.gap, 'gap');
+
+    const staticVars: Record<string, string | undefined> = {
+      '--t-section-bg': this.background,
+      '--t-section-color': this.color,
+      '--t-section-shadow': this.shadow,
+    };
+
+    const vars: Record<string, string> = {};
+
+    // Static vars
+    for (const [k, v] of Object.entries(staticVars)) {
       if (v !== undefined && v !== null && String(v).trim() !== '') {
         vars[k] = String(v);
       }
     }
+
+    // Responsive vars
+    Object.assign(vars, maxWidthVars, paddingVars, marginVars, radiusVars);
+    Object.assign(vars, directionVars, wrapVars, justifyVars, alignVars, gapVars);
+
     return vars;
   }
 

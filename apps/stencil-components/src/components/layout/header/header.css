@@ -1,0 +1,169 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+/* ===== Header Root ===== */
+
+.tinto-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--t-header-bg, #fff);
+  padding: var(--t-header-padding, 0 24px);
+  height: var(--t-header-height, 64px);
+  box-sizing: border-box;
+  z-index: var(--t-header-z-index, 1000);
+}
+
+/* ===== Responsive Height ===== */
+
+:host {
+  --t-header-height: var(--t-header-height-xs, 64px);
+}
+
+@media (min-width: 640px) {
+  :host {
+    --t-header-height: var(--t-header-height-sm, var(--t-header-height-xs, 64px));
+  }
+}
+
+@media (min-width: 768px) {
+  :host {
+    --t-header-height: var(
+      --t-header-height-md,
+      var(--t-header-height-sm, var(--t-header-height-xs, 64px))
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  :host {
+    --t-header-height: var(
+      --t-header-height-lg,
+      var(--t-header-height-md, var(--t-header-height-sm, var(--t-header-height-xs, 64px)))
+    );
+  }
+}
+
+@media (min-width: 1280px) {
+  :host {
+    --t-header-height: var(
+      --t-header-height-xl,
+      var(
+        --t-header-height-lg,
+        var(--t-header-height-md, var(--t-header-height-sm, var(--t-header-height-xs, 64px)))
+      )
+    );
+  }
+}
+
+@media (min-width: 1536px) {
+  :host {
+    --t-header-height: var(
+      --t-header-height-2xl,
+      var(
+        --t-header-height-xl,
+        var(
+          --t-header-height-lg,
+          var(--t-header-height-md, var(--t-header-height-sm, var(--t-header-height-xs, 64px)))
+        )
+      )
+    );
+  }
+}
+
+/* ===== Responsive Padding ===== */
+
+:host {
+  --t-header-padding: var(--t-header-padding-xs, 0 16px);
+}
+
+@media (min-width: 640px) {
+  :host {
+    --t-header-padding: var(--t-header-padding-sm, var(--t-header-padding-xs, 0 16px));
+  }
+}
+
+@media (min-width: 768px) {
+  :host {
+    --t-header-padding: var(
+      --t-header-padding-md,
+      var(--t-header-padding-sm, var(--t-header-padding-xs, 0 16px))
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  :host {
+    --t-header-padding: var(
+      --t-header-padding-lg,
+      var(--t-header-padding-md, var(--t-header-padding-sm, var(--t-header-padding-xs, 0 16px)))
+    );
+  }
+}
+
+@media (min-width: 1280px) {
+  :host {
+    --t-header-padding: var(
+      --t-header-padding-xl,
+      var(
+        --t-header-padding-lg,
+        var(--t-header-padding-md, var(--t-header-padding-sm, var(--t-header-padding-xs, 0 16px)))
+      )
+    );
+  }
+}
+
+@media (min-width: 1536px) {
+  :host {
+    --t-header-padding: var(
+      --t-header-padding-2xl,
+      var(
+        --t-header-padding-xl,
+        var(
+          --t-header-padding-lg,
+          var(--t-header-padding-md, var(--t-header-padding-sm, var(--t-header-padding-xs, 0 16px)))
+        )
+      )
+    );
+  }
+}
+
+/* ===== Fixed Header ===== */
+
+.tinto-header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+:host([fixed]) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--t-header-z-index, 1000);
+}
+
+/* Fixed header일 때 body에 padding-top 추가 (JavaScript로 처리) */
+
+/* ===== Accessibility ===== */
+
+.tinto-header:focus-visible {
+  outline: 2px solid var(--t-header-focus, #6366f1);
+  outline-offset: 2px;
+}
+
+/* ===== High Contrast Mode ===== */
+
+@media (forced-colors: active) {
+  .tinto-header {
+    border-bottom: 1px solid CanvasText;
+  }
+}

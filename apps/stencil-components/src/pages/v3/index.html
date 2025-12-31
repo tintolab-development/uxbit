@@ -53,12 +53,9 @@
         }
       }
 
-      /* 메인 컨텐츠 영역 */
+      /* 메인 컨텐츠 영역 - tinto-content가 처리 */
       #main-content {
         width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 16px;
       }
 
       /* 섹션 공통 스타일 */
@@ -229,11 +226,20 @@
     </style>
   </head>
   <body>
-    <!-- tinto-app-route는 body 하위 최상단 래퍼 -->
-    <tinto-app-route direction="column" safe-area="true" min-height="100vh" padding="20px">
+    <!-- tinto-layout는 body 하위 최상단 래퍼 -->
+    <tinto-layout
+      direction="column"
+      height="100dvh"
+      style="
+        padding: 20px;
+        padding-inline: calc(20px + env(safe-area-inset-left))
+          calc(20px + env(safe-area-inset-right));
+        min-height: 100vh;
+      "
+    >
       <div id="app">
         <!-- 헤더 영역 -->
-        <tinto-section
+        <tinto-header
           id="header"
           padding="0"
           background="#FFFFFF"
@@ -256,10 +262,10 @@
               <tinto-button variant="filled" size="sm" style="width: 100%">장바구니</tinto-button>
             </div>
           </div>
-        </tinto-section>
+        </tinto-header>
 
         <!-- 메인 배너 캐러셀 -->
-        <tinto-section id="main-banner" padding="0" style="position: relative; min-height: 300px">
+        <tinto-content id="main-banner" padding="0" style="position: relative; min-height: 300px">
           <tinto-loading
             id="home-loading"
             hidden
@@ -272,22 +278,22 @@
             "
           ></tinto-loading>
           <tinto-carousel id="home-carousel" autoplay="true" interval="5000"></tinto-carousel>
-        </tinto-section>
+        </tinto-content>
 
         <!-- 메인 컨텐츠 영역 -->
-        <div id="main-content">
+        <tinto-content id="main-content" max-width="1200px" center style="padding: 0 16px">
           <!-- 카테고리 섹션 -->
-          <tinto-section class="home-section" direction="column" gap="16px" padding="24px 0">
+          <tinto-layout class="home-section" direction="column" gap="16px" style="padding: 24px 0">
             <div class="section-header">
               <tinto-typography variant="h2" font-size="lg" font-weight="700">
                 카테고리
               </tinto-typography>
             </div>
             <div id="categories-grid"></div>
-          </tinto-section>
+          </tinto-layout>
 
           <!-- 인기 상품 섹션 -->
-          <tinto-section class="home-section" direction="column" gap="16px" padding="24px 0">
+          <tinto-layout class="home-section" direction="column" gap="16px" style="padding: 24px 0">
             <div class="section-header">
               <tinto-typography variant="h2" font-size="lg" font-weight="700">
                 인기 상품
@@ -295,10 +301,10 @@
               <tinto-button variant="text" size="sm">더보기</tinto-button>
             </div>
             <div id="popular-products" class="products-grid"></div>
-          </tinto-section>
+          </tinto-layout>
 
           <!-- 특가 상품 섹션 -->
-          <tinto-section class="home-section" direction="column" gap="16px" padding="24px 0">
+          <tinto-layout class="home-section" direction="column" gap="16px" style="padding: 24px 0">
             <div class="section-header">
               <tinto-typography variant="h2" font-size="lg" font-weight="700">
                 특가 상품
@@ -306,10 +312,10 @@
               <tinto-button variant="text" size="sm">더보기</tinto-button>
             </div>
             <div id="sale-products" class="products-grid"></div>
-          </tinto-section>
+          </tinto-layout>
 
           <!-- 신상품 섹션 -->
-          <tinto-section class="home-section" direction="column" gap="16px" padding="24px 0">
+          <tinto-layout class="home-section" direction="column" gap="16px" style="padding: 24px 0">
             <div class="section-header">
               <tinto-typography variant="h2" font-size="lg" font-weight="700">
                 신상품
@@ -317,19 +323,23 @@
               <tinto-button variant="text" size="sm">더보기</tinto-button>
             </div>
             <div id="new-products" class="products-grid"></div>
-          </tinto-section>
-        </div>
+          </tinto-layout>
+        </tinto-content>
 
         <!-- 푸터 영역 -->
-        <tinto-section id="footer" direction="column" gap="16px" padding="32px 16px">
-          <tinto-typography variant="p" font-size="md" font-weight="700"> Berlin </tinto-typography>
-          <tinto-typography variant="p" font-size="sm" color="#666">
-            반응형 웹 이커머스 플랫폼
-          </tinto-typography>
-          <tinto-typography variant="span" font-size="xs" color="#999" style="margin-top: 16px">
-            © 2025 Berlin. All rights reserved.
-          </tinto-typography>
-        </tinto-section>
+        <tinto-footer id="footer" padding="32px 16px" background="#f5f5f5" style="margin-top: 64px">
+          <tinto-layout direction="column" gap="16px">
+            <tinto-typography variant="p" font-size="md" font-weight="700">
+              Berlin
+            </tinto-typography>
+            <tinto-typography variant="p" font-size="sm" color="#666">
+              반응형 웹 이커머스 플랫폼
+            </tinto-typography>
+            <tinto-typography variant="span" font-size="xs" color="#999" style="margin-top: 16px">
+              © 2025 Berlin. All rights reserved.
+            </tinto-typography>
+          </tinto-layout>
+        </tinto-footer>
       </div>
 
       <!-- 상품 상세 모달 -->
@@ -339,7 +349,7 @@
 
       <!-- 토스트 메시지 -->
       <tinto-toast id="toast"></tinto-toast>
-    </tinto-app-route>
+    </tinto-layout>
 
     <!-- 앱 로직 스크립트 -->
     <script type="module" src="/pages/v3/app.js"></script>
