@@ -18,14 +18,12 @@
 
 export { TintoLayout } from './layout';
 export { TintoHeader } from './header/header';
-export { TintoContent } from './content/content';
 export { TintoFooter } from './footer/footer';
 export { TintoSider } from './sider/sider';
 
 export type {
   LayoutProps,
   HeaderProps,
-  ContentProps,
   FooterProps,
   SiderProps,
   Breakpoint,

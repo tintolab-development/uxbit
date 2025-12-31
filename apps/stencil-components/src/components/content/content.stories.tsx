@@ -9,7 +9,7 @@ type ContentArgs = {
 };
 
 const meta: Meta<ContentArgs> = {
-  title: 'Uxbit/Layout/Content',
+  title: 'Uxbit/Content',
   component: 'tinto-content',
   parameters: {
     layout: 'padded',
