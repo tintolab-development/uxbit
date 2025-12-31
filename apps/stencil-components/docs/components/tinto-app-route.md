@@ -1,5 +1,20 @@
 # tinto-app-route
 
+> ⚠️ **Deprecated 및 제거됨**: 이 컴포넌트는 더 이상 사용할 수 없습니다.
+>
+> **컴포넌트가 삭제되었습니다.** 대신 **`tinto-layout`** 컴포넌트를 사용하세요.
+>
+> - ✅ 더 명확한 역할 분리
+> - ✅ 최소한의 Props (60개 → 5개)
+> - ✅ 완전한 responsive 지원
+> - ✅ 더 나은 사용성과 유지보수성
+>
+> **마이그레이션 가이드**: [LAYOUT_MIGRATION.md](./LAYOUT_MIGRATION.md)
+
+---
+
+# tinto-app-route (삭제됨)
+
 고급 레이아웃 컴포넌트. Flex 레이아웃, Safe area, Scroll snap, 세밀한 패딩/마진 제어를 지원합니다.
 
 ---

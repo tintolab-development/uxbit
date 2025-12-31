@@ -10,6 +10,7 @@
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css,scss,html}\"",
     "test": "turbo run test",
+    "stencil:build": "pnpm --filter @uxbit/stencil-components run build",
     "stencil:component": "pnpm --filter stencil-components run serve",
     "storybook:local": "pnpm --filter storybook run dev",
     "storybook": "pnpm --filter @uxbit/stencil-components run build && turbo run dev --parallel --filter=@uxbit/stencil-components --filter=storybook",

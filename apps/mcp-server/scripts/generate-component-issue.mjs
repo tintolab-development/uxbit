@@ -61,3 +61,4 @@ generateIssueBody(componentName)
     process.exit(1);
   });
 
+

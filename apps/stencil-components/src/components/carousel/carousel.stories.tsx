@@ -289,3 +289,101 @@ export const NavigationAlways: Story = {
     </tinto-carousel>
   ),
 };
+
+export const InfiniteLoop: Story = {
+  args: {
+    ...Default.args,
+    loop: true,
+    showNavigation: true,
+    navigationDisplay: 'always',
+    showIndicator: true,
+    indicatorType: 'dot',
+  },
+  render: (args) => (
+    <tinto-carousel
+      loop={args.loop}
+      show-navigation={args.showNavigation}
+      navigation-display={args.navigationDisplay}
+      show-indicator={args.showIndicator}
+      indicator-type={args.indicatorType}
+      transition-duration={500}
+    >
+      {createSlides(5)}
+    </tinto-carousel>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '무한 루프 모드. 마지막 슬라이드에서 다음으로 가면 첫 번째 슬라이드로, 첫 번째 슬라이드에서 이전으로 가면 마지막 슬라이드로 부드럽게 전환됩니다.',
+      },
+    },
+  },
+};
+
+export const InfiniteLoopWithAutoplay: Story = {
+  args: {
+    ...Default.args,
+    loop: true,
+    autoplay: true,
+    autoplayInterval: 3000,
+    showNavigation: true,
+    navigationDisplay: 'hover',
+    showIndicator: true,
+    indicatorType: 'bar',
+    transitionDuration: 500,
+  },
+  render: (args) => (
+    <tinto-carousel
+      loop={args.loop}
+      autoplay={args.autoplay}
+      autoplay-interval={args.autoplayInterval}
+      show-navigation={args.showNavigation}
+      navigation-display={args.navigationDisplay}
+      show-indicator={args.showIndicator}
+      indicator-type={args.indicatorType}
+      transition-duration={args.transitionDuration}
+    >
+      {createSlides(5)}
+    </tinto-carousel>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '무한 루프와 자동 재생이 함께 작동하는 예제. 자동으로 슬라이드가 전환되며, 마지막 슬라이드에서 첫 번째 슬라이드로 부드럽게 순환합니다.',
+      },
+    },
+  },
+};
+
+export const InfiniteLoopImages: Story = {
+  args: {
+    ...Default.args,
+    loop: true,
+    showNavigation: true,
+    navigationDisplay: 'hover',
+    showIndicator: true,
+    indicatorType: 'dot',
+    transitionDuration: 500,
+  },
+  render: (args) => (
+    <tinto-carousel
+      loop={args.loop}
+      show-navigation={args.showNavigation}
+      navigation-display={args.navigationDisplay}
+      show-indicator={args.showIndicator}
+      indicator-type={args.indicatorType}
+      transition-duration={args.transitionDuration}
+    >
+      {createImageSlides()}
+    </tinto-carousel>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '이미지 슬라이드에서 무한 루프를 적용한 예제입니다.',
+      },
+    },
+  },
+};

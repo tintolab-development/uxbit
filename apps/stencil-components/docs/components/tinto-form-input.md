@@ -119,6 +119,101 @@
 
 ---
 
+## Semantic Parts (컴포넌트 구조)
+
+이 컴포넌트는 다음과 같은 semantic parts를 제공합니다. 각 part는 `::part()` 선택자를 통해 스타일링할 수 있습니다.
+
+### `wrapper` (래퍼 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 래퍼 요소, 라벨과 입력 필드를 감싸는 컨테이너로 전체 입력 필드의 레이아웃을 제어
+- **주요 스타일 속성**: `display`, `width`, `margin`, `position`
+
+### `label` (라벨 요소)
+
+- **요소 타입**: `<label>`
+- **설명**: 라벨 요소, 입력 필드의 라벨 텍스트 스타일로 폰트 크기, 폰트 두께, 색상, 여백 등을 포함
+- **주요 스타일 속성**: `font-size`, `font-weight`, `color`, `margin`, `display`
+
+### `container` (컨테이너 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 컨테이너 요소, 입력 필드와 아이콘을 포함하는 영역으로 배경색, 테두리, 둥근 모서리, 패딩 등을 포함
+- **주요 스타일 속성**: `display`, `background`, `border`, `border-radius`, `padding`, `position`
+
+### `input` (입력 필드 요소)
+
+- **요소 타입**: `<input>`
+- **설명**: 입력 필드 요소, 실제 텍스트 입력 영역의 스타일로 너비, 높이, 패딩, 테두리, 배경색, 색상, 폰트 크기 등을 포함
+- **주요 스타일 속성**: `width`, `height`, `padding`, `border`, `background`, `color`, `font-size`, `outline`
+
+### `icon-start` (시작 아이콘 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 시작 아이콘 요소, 입력 필드 왼쪽에 배치되는 아이콘 영역
+- **주요 스타일 속성**: `display`, `padding`, `margin`, `color`, `font-size`
+
+### `icon-end` (종료 아이콘 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 종료 아이콘 요소, 입력 필드 오른쪽에 배치되는 아이콘 영역
+- **주요 스타일 속성**: `display`, `padding`, `margin`, `color`, `font-size`
+
+### `message` (메시지 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 메시지 요소, 에러나 힌트 메시지 표시 영역으로 색상, 폰트 크기, 여백, 패딩 등을 포함
+- **주요 스타일 속성**: `color`, `font-size`, `margin`, `padding`, `line-height`
+
+## CSS Parts 사용 예제
+
+```css
+/* 래퍼 스타일링 */
+tinto-form-input::part(wrapper) {
+  margin-bottom: 16px;
+}
+
+/* 라벨 스타일링 */
+tinto-form-input::part(label) {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* 컨테이너 스타일링 */
+tinto-form-input::part(container) {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+/* 입력 필드 스타일링 */
+tinto-form-input::part(input) {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+}
+
+/* 아이콘 스타일링 */
+tinto-form-input::part(icon-start),
+tinto-form-input::part(icon-end) {
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+}
+
+/* 메시지 스타일링 */
+tinto-form-input::part(message) {
+  font-size: 14px;
+  margin-top: 4px;
+}
+```
+
+---
+
 ## A11y
 
 - ✅ `aria-invalid` 자동 설정 (에러 상태일 때)

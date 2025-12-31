@@ -1,0 +1,176 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0; /* Flexbox에서 overflow 처리 */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+/* ===== Content Root ===== */
+
+.tinto-content {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--t-content-padding, 0); /* 기본값 0으로 변경 - 하위 요소 크기에 맞춤 */
+  background: var(--t-content-bg, transparent);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0; /* Flexbox에서 overflow 방지 */
+  min-height: 0; /* Flexbox에서 overflow 방지 */
+}
+
+/* ===== Responsive Padding ===== */
+
+:host {
+  --t-content-padding: var(--t-content-padding-xs, 0); /* 기본값 0으로 변경 */
+}
+
+@media (min-width: 640px) {
+  :host {
+    --t-content-padding: var(--t-content-padding-sm, var(--t-content-padding-xs, 0));
+  }
+}
+
+@media (min-width: 768px) {
+  :host {
+    --t-content-padding: var(
+      --t-content-padding-md,
+      var(--t-content-padding-sm, var(--t-content-padding-xs, 0))
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  :host {
+    --t-content-padding: var(
+      --t-content-padding-lg,
+      var(--t-content-padding-md, var(--t-content-padding-sm, var(--t-content-padding-xs, 0)))
+    );
+  }
+}
+
+@media (min-width: 1280px) {
+  :host {
+    --t-content-padding: var(
+      --t-content-padding-xl,
+      var(
+        --t-content-padding-lg,
+        var(--t-content-padding-md, var(--t-content-padding-sm, var(--t-content-padding-xs, 0)))
+      )
+    );
+  }
+}
+
+@media (min-width: 1536px) {
+  :host {
+    --t-content-padding: var(
+      --t-content-padding-2xl,
+      var(
+        --t-content-padding-xl,
+        var(
+          --t-content-padding-lg,
+          var(--t-content-padding-md, var(--t-content-padding-sm, var(--t-content-padding-xs, 0)))
+        )
+      )
+    );
+  }
+}
+
+/* ===== Responsive Max Width ===== */
+
+:host {
+  --t-content-max-width: var(--t-content-max-width-xs, none);
+}
+
+@media (min-width: 640px) {
+  :host {
+    --t-content-max-width: var(--t-content-max-width-sm, var(--t-content-max-width-xs, none));
+  }
+}
+
+@media (min-width: 768px) {
+  :host {
+    --t-content-max-width: var(
+      --t-content-max-width-md,
+      var(--t-content-max-width-sm, var(--t-content-max-width-xs, none))
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  :host {
+    --t-content-max-width: var(
+      --t-content-max-width-lg,
+      var(
+        --t-content-max-width-md,
+        var(--t-content-max-width-sm, var(--t-content-max-width-xs, none))
+      )
+    );
+  }
+}
+
+@media (min-width: 1280px) {
+  :host {
+    --t-content-max-width: var(
+      --t-content-max-width-xl,
+      var(
+        --t-content-max-width-lg,
+        var(
+          --t-content-max-width-md,
+          var(--t-content-max-width-sm, var(--t-content-max-width-xs, none))
+        )
+      )
+    );
+  }
+}
+
+@media (min-width: 1536px) {
+  :host {
+    --t-content-max-width: var(
+      --t-content-max-width-2xl,
+      var(
+        --t-content-max-width-xl,
+        var(
+          --t-content-max-width-lg,
+          var(
+            --t-content-max-width-md,
+            var(--t-content-max-width-sm, var(--t-content-max-width-xs, none))
+          )
+        )
+      )
+    );
+  }
+}
+
+.tinto-content {
+  max-width: var(--t-content-max-width, none);
+}
+
+/* ===== Center Alignment ===== */
+
+.tinto-content-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Accessibility ===== */
+
+.tinto-content:focus-visible {
+  outline: 2px solid var(--t-content-focus, #6366f1);
+  outline-offset: 2px;
+}
+
+/* ===== High Contrast Mode ===== */
+
+@media (forced-colors: active) {
+  .tinto-content {
+    border: 1px solid CanvasText;
+  }
+}

@@ -121,6 +121,103 @@
 
 ---
 
+## Semantic Parts (컴포넌트 구조)
+
+이 컴포넌트는 다음과 같은 semantic parts를 제공합니다. 각 part는 `::part()` 선택자를 통해 스타일링할 수 있습니다.
+
+### `card` (루트 요소)
+
+- **요소 타입**: `<article>`
+- **설명**: 카드 루트 요소, 위치 지정, 배경색, 테두리, 둥근 모서리, 그림자, 패딩 등 카드 컨테이너의 기본 스타일을 포함
+- **주요 스타일 속성**: `display`, `position`, `width`, `height`, `background`, `border`, `border-radius`, `box-shadow`, `padding`
+
+### `button` (래퍼 요소)
+
+- **요소 타입**: `<div>` 또는 `<a>`
+- **설명**: 클릭 가능한 카드의 래퍼 요소, 전체 카드를 클릭 가능하게 만드는 컨테이너
+- **주요 스타일 속성**: `display`, `width`, `height`, `cursor`, `text-decoration`
+
+### `image-wrapper` (이미지 래퍼)
+
+- **요소 타입**: `<div>`
+- **설명**: 이미지 영역을 감싸는 래퍼 요소, 이미지와 배지의 위치를 제어
+- **주요 스타일 속성**: `position`, `width`, `height`, `overflow`
+
+### `image` (이미지 요소)
+
+- **요소 타입**: `<tinto-image>`
+- **설명**: 카드 이미지, 이미지의 표시 및 레이아웃 스타일을 포함
+- **주요 스타일 속성**: `width`, `height`, `object-fit`, `border-radius`
+
+### `image-placeholder` (이미지 플레이스홀더)
+
+- **요소 타입**: `<div>`
+- **설명**: 이미지가 없을 때 표시되는 플레이스홀더 영역
+- **주요 스타일 속성**: `background`, `display`, `width`, `height`
+
+### `badge` (배지 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 배지 요소, 할인율이나 특별 표시를 위한 배지 스타일
+- **주요 스타일 속성**: `position`, `background`, `color`, `padding`, `border-radius`, `font-size`, `font-weight`
+
+### `content` (콘텐츠 영역)
+
+- **요소 타입**: `<div>`
+- **설명**: 카드 본문 영역, 패딩, 폰트 크기 등 콘텐츠 표시의 기본 스타일을 포함
+- **주요 스타일 속성**: `padding`, `background`, `color`, `font-size`
+
+### `title` (제목 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 카드 제목, 인라인 블록 레이아웃, flex 비율, 텍스트 생략 등 제목 표시 스타일을 포함
+- **주요 스타일 속성**: `font-size`, `font-weight`, `color`, `line-height`, `margin`
+
+### `description` (설명 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 카드 설명, 설명 텍스트의 폰트 크기, 줄 높이 등 레이아웃 스타일을 포함
+- **주요 스타일 속성**: `font-size`, `line-height`, `color`, `margin`
+
+### `price` (가격 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 가격 요소, 가격 정보 표시 스타일
+- **주요 스타일 속성**: `font-size`, `font-weight`, `color`, `margin`
+
+## CSS Parts 사용 예제
+
+```css
+/* 카드 루트 요소 스타일링 */
+tinto-card::part(card) {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 이미지 영역 스타일링 */
+tinto-card::part(image-wrapper) {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+/* 제목 스타일링 */
+tinto-card::part(title) {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 배지 스타일링 */
+tinto-card::part(badge) {
+  background: #ef4444;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+```
+
+---
+
 ## A11y
 
 - 클릭 가능한 카드는 적절한 키보드 접근성 제공

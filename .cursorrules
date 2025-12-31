@@ -1,0 +1,205 @@
+# UXBIT 프로젝트 Cursor Rules
+
+## 컴포넌트 업데이트 시 문서 동기화 규칙
+
+### 필수 규칙
+컴포넌트를 수정하거나 업데이트할 때는 **반드시** 해당 컴포넌트의 문서 파일도 함께 업데이트해야 합니다.
+
+### 문서 위치
+- 컴포넌트 문서 경로: `apps/stencil-components/docs/components/{component-name}.md`
+- 예: `tinto-carousel` 컴포넌트 → `apps/stencil-components/docs/components/tinto-carousel.md`
+
+### 업데이트가 필요한 경우
+
+1. **Props 추가/수정/삭제**
+   - 컴포넌트의 Props를 변경한 경우
+   - 문서의 "Props" 섹션을 업데이트
+   - 타입, 기본값, 설명을 정확히 반영
+
+2. **Events 추가/수정/삭제**
+   - 새로운 이벤트를 추가하거나 기존 이벤트를 수정한 경우
+   - 문서의 "Events" 섹션을 업데이트
+   - 이벤트 이름, payload 타입, 설명을 반영
+
+3. **Methods 추가/수정/삭제**
+   - 공개 메서드를 추가하거나 수정한 경우
+   - 문서의 "Methods" 섹션을 업데이트
+   - 메서드 시그니처, 파라미터, 반환값을 반영
+
+4. **기능 추가/변경**
+   - 새로운 기능을 추가하거나 기존 기능을 변경한 경우
+   - 문서의 "주요 기능" 섹션을 업데이트
+   - 사용 예제를 추가하거나 수정
+
+5. **스타일 변경**
+   - CSS 변수, variant, size 옵션을 변경한 경우
+   - 문서의 "스타일링" 섹션을 업데이트
+
+6. **버그 수정**
+   - 중요한 버그를 수정한 경우
+   - 문서의 "알려진 이슈" 또는 "변경 이력" 섹션에 기록
+
+### 문서 업데이트 체크리스트
+
+컴포넌트를 수정한 후 다음을 확인하세요:
+
+- [ ] Props 테이블이 최신 상태인가?
+- [ ] Events 섹션이 정확한가?
+- [ ] Methods 섹션이 완전한가?
+- [ ] 사용 예제가 올바른가?
+- [ ] 주요 기능 목록이 업데이트되었는가?
+- [ ] 버전 정보가 업데이트되었는가?
+- [ ] 변경 이력이 기록되었는가?
+
+### 문서 작성 가이드
+
+1. **명확한 설명**: 각 Props, Events, Methods에 대해 명확하고 간결한 설명 제공
+2. **예제 코드**: 실제 사용 예제를 포함하여 개발자가 쉽게 이해할 수 있도록 함
+3. **타입 정보**: TypeScript 타입 정보를 정확히 반영
+4. **접근성**: 접근성 관련 기능이 있다면 명시
+5. **반응형**: 반응형 동작이 있다면 설명
+
+### 자동화
+
+- 컴포넌트 파일(`*.tsx`)을 수정하면 해당 문서 파일(`*.md`)도 함께 검토
+- Props, Events, Methods 변경 시 문서의 해당 섹션을 자동으로 업데이트 제안
+- 문서와 실제 구현 간 불일치가 발견되면 경고
+
+### 예외 사항
+
+다음의 경우는 문서 업데이트가 선택적입니다:
+- 내부 구현 세부사항만 변경 (공개 API 변경 없음)
+- 주석이나 코드 스타일만 변경
+- 테스트 코드만 변경
+
+---
+
+## 일반 개발 규칙
+
+### 코드 스타일
+- TypeScript 사용
+- Stencil 컴포넌트는 Shadow DOM 사용
+- CSS는 CSS Variables를 활용한 테마 시스템 사용
+
+### 컴포넌트 네이밍
+- 모든 컴포넌트는 `tinto-` 접두사 사용
+- kebab-case 사용 (예: `tinto-search-bar`)
+
+### 문서화
+- 모든 공개 Props, Events, Methods는 문서화 필수
+- JSDoc 주석을 활용하여 타입 정보 제공
+
+---
+
+## Layout 컴포넌트 계층 구조 규칙
+
+### 필수 계층 구조
+
+Layout 컴포넌트는 다음 계층 구조를 **반드시** 준수해야 합니다:
+
+```
+body
+  └─ tinto-layout (최상위 래퍼, 하나만 존재)
+      ├─ tinto-section (복수 개 가능)
+      │   ├─ tinto-content (복수 개 가능)
+      │   └─ tinto-content
+      └─ tinto-section
+          └─ tinto-content
+```
+
+### 규칙 상세
+
+#### 1. tinto-layout
+- **위치**: `body` 태그 하위 최상위 래퍼
+- **개수**: **하나만** 존재 가능
+- **역할**: 페이지 레벨 컨테이너
+- **하위 요소**: `tinto-section`만 직접 자식으로 가질 수 있음
+
+```html
+<!-- ✅ 올바른 사용 -->
+<body>
+  <tinto-layout>
+    <tinto-section>...</tinto-section>
+    <tinto-section>...</tinto-section>
+  </tinto-layout>
+</body>
+
+<!-- ❌ 잘못된 사용 -->
+<body>
+  <tinto-layout>...</tinto-layout>
+  <tinto-layout>...</tinto-layout> <!-- 중복 불가 -->
+</body>
+```
+
+#### 2. tinto-section
+- **위치**: `tinto-layout` 하위 최상위 컴포넌트
+- **개수**: **복수 개** 존재 가능
+- **역할**: 페이지 내에서 구분되는 독립적인 콘텐츠 영역
+- **하위 요소**: `tinto-content`만 직접 자식으로 가질 수 있음
+- **특징**: Responsive하며, 한 화면에 보이는 섹션을 위한 최적화
+
+```html
+<!-- ✅ 올바른 사용 -->
+<tinto-layout>
+  <tinto-section>
+    <tinto-content>...</tinto-content>
+    <tinto-content>...</tinto-content>
+  </tinto-section>
+  <tinto-section>
+    <tinto-content>...</tinto-content>
+  </tinto-section>
+</tinto-layout>
+
+<!-- ❌ 잘못된 사용 -->
+<tinto-layout>
+  <tinto-section>
+    <tinto-layout>...</tinto-layout> <!-- tinto-section 하위에 tinto-layout 불가 -->
+  </tinto-section>
+</tinto-layout>
+```
+
+#### 3. tinto-content
+- **위치**: `tinto-section` 하위
+- **개수**: **복수 개** 존재 가능
+- **역할**: 섹션 내 콘텐츠 영역
+- **하위 요소**: 일반 콘텐츠 (다른 컴포넌트, 텍스트 등)
+
+```html
+<!-- ✅ 올바른 사용 -->
+<tinto-section>
+  <tinto-content>Content 1</tinto-content>
+  <tinto-content>Content 2</tinto-content>
+  <tinto-content>Content 3</tinto-content>
+</tinto-section>
+
+<!-- ❌ 잘못된 사용 -->
+<tinto-layout>
+  <tinto-content>...</tinto-content> <!-- tinto-layout 하위에 직접 tinto-content 불가 -->
+</tinto-layout>
+```
+
+### 계층 구조 검증 체크리스트
+
+코드를 작성하거나 수정할 때 다음을 확인하세요:
+
+- [ ] `tinto-layout`이 `body` 하위에 하나만 존재하는가?
+- [ ] `tinto-section`이 `tinto-layout` 하위에 있는가?
+- [ ] `tinto-content`가 `tinto-section` 하위에 있는가?
+- [ ] `tinto-section` 하위에 `tinto-layout`이 없는가?
+- [ ] `tinto-layout` 하위에 직접 `tinto-content`가 없는가?
+
+### 예외 사항
+
+다음의 경우는 예외로 허용됩니다:
+- `tinto-header`, `tinto-footer`, `tinto-sider`는 `tinto-layout` 하위에 직접 사용 가능 (Ant Design 스타일)
+- 내부 구현을 위한 임시 레이아웃 구조 (최종적으로는 규칙 준수)
+
+### 마이그레이션 가이드
+
+기존 코드를 마이그레이션할 때:
+
+1. **app-route → layout**: `tinto-app-route`를 `tinto-layout`으로 변경
+2. **section → section**: `tinto-section`은 그대로 유지하되, 하위 구조 확인
+3. **section 하위 layout 제거**: `tinto-section` 하위의 `tinto-layout`을 `tinto-content`로 변경
+
+

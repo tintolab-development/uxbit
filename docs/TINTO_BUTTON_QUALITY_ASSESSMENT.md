@@ -277,6 +277,7 @@
    - `requestSubmit`은 validation을 트리거하지만 `submit`은 그렇지 않음
 
 3. **토큰 해석 로직**
+
    ```typescript
    // 현재 코드 (line 218-238)
    private resolveFamily(token: ButtonTextFamilyToken | string): string {

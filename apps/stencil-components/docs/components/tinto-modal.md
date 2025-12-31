@@ -138,6 +138,108 @@
 
 ---
 
+## Semantic Parts (컴포넌트 구조)
+
+이 컴포넌트는 다음과 같은 semantic parts를 제공합니다. 각 part는 `::part()` 선택자를 통해 스타일링할 수 있습니다.
+
+### `backdrop` (배경 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 배경 요소, 모달 뒤의 어두운 배경 레이어로 포지셔닝, z-index, 배경색, 포인터 이벤트 등을 제어
+- **주요 스타일 속성**: `position`, `z-index`, `background`, `pointer-events`, `inset`
+
+### `container` (컨테이너 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 컨테이너 요소, 모달 콘텐츠를 감싸는 컨테이너로 배경색, 패딩, 둥근 모서리, 그림자, 테두리 등을 포함
+- **주요 스타일 속성**: `background`, `padding`, `border-radius`, `box-shadow`, `border`, `max-width`, `max-height`
+
+### `header` (헤더 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 헤더 요소, 모달 제목과 닫기 버튼을 포함하는 영역으로 flex 레이아웃, 정렬, 패딩, 폰트 크기, 줄 높이, 하단 테두리 등을 포함
+- **주요 스타일 속성**: `display`, `padding`, `background`, `border-bottom`, `font-weight`, `font-size`, `line-height`
+
+### `title` (제목 요소)
+
+- **요소 타입**: `<h2>`
+- **설명**: 제목 요소, 모달 제목 텍스트 스타일
+- **주요 스타일 속성**: `font-size`, `font-weight`, `color`, `line-height`, `margin`
+
+### `body` (본문 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 본문 요소, 모달의 주요 콘텐츠 영역으로 flex 비율, 최소 크기, 패딩, 오버플로우 스크롤 등을 포함
+- **주요 스타일 속성**: `flex`, `min-height`, `padding`, `overflow`, `color`, `font-size`
+
+### `footer` (푸터 요소)
+
+- **요소 타입**: `<div>`
+- **설명**: 푸터 요소, 모달 하단의 버튼 영역으로 flex 레이아웃, 리스트 스타일 리셋, 배경색, 상단 테두리, 하단 둥근 모서리 등을 포함
+- **주요 스타일 속성**: `display`, `padding`, `background`, `border-top`, `border-radius`
+
+### `close` (닫기 버튼 요소)
+
+- **요소 타입**: `<button>`
+- **설명**: 닫기 버튼 요소, 모달을 닫는 버튼으로 배경, 테두리, 패딩, 둥근 모서리, 커서, 전환 애니메이션 등을 포함
+- **주요 스타일 속성**: `background`, `border`, `padding`, `border-radius`, `cursor`, `transition`
+
+## CSS Parts 사용 예제
+
+```css
+/* 배경 스타일링 */
+tinto-modal::part(backdrop) {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* 컨테이너 스타일링 */
+tinto-modal::part(container) {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+/* 헤더 스타일링 */
+tinto-modal::part(header) {
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 제목 스타일링 */
+tinto-modal::part(title) {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 본문 스타일링 */
+tinto-modal::part(body) {
+  padding: 24px;
+  color: #374151;
+}
+
+/* 푸터 스타일링 */
+tinto-modal::part(footer) {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* 닫기 버튼 스타일링 */
+tinto-modal::part(close) {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+}
+```
+
+---
+
 ## A11y
 
 - 포커스 트랩 자동 활성화
