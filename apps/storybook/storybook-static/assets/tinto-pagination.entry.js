@@ -312,7 +312,7 @@ const TintoPagination = class {
             h(
               'option',
               {
-                key: 'b47eeadf6a994f0790a0dc0c7fba4785fdbcbd3c',
+                key: '96bb36a25b5fb86aa0df56d0374016b85f43537b',
                 value: '20',
                 selected: this.pageSize === 20,
               },
@@ -321,7 +321,7 @@ const TintoPagination = class {
             h(
               'option',
               {
-                key: '0c391f59f924be4d2190b2313e2ad09fa0dbd6fa',
+                key: 'e34a62585f114cc7579a4ba04508ea3ce6ad3be6',
                 value: '50',
                 selected: this.pageSize === 50,
               },
@@ -330,7 +330,7 @@ const TintoPagination = class {
             h(
               'option',
               {
-                key: '2fc7208982a2ceb1a429e9839e4111e14b10f2d1',
+                key: '0da58ab48c18ad7efbbb4bbfe2b8529d82c534e1',
                 value: '100',
                 selected: this.pageSize === 100,
               },
@@ -342,13 +342,13 @@ const TintoPagination = class {
         h(
           'div',
           {
-            key: 'b2fa963a131fb7335863d45f18e95e7bf2192212',
+            key: 'd6ee208be994633e778266cc5fbb3e923db42226',
             class: 'pagination-quick-jumper',
             part: 'quick-jumper',
           },
-          h('span', { key: 'd53c698d2095315ae862cf965b2d20d6c225bc10' }, '\uC774\uB3D9'),
+          h('span', { key: 'd0e1a7b27eaf218cde684a4f914013a29149a5b2' }, '\uC774\uB3D9'),
           h('input', {
-            key: '333a1308496081385784102a0c17858751ac05c6',
+            key: 'bada630a37f99fc6248505cda84eea94812a4893',
             class: 'pagination-input',
             part: 'input',
             type: 'number',
@@ -366,7 +366,7 @@ const TintoPagination = class {
           h(
             'button',
             {
-              key: '2da21ee696c3703ec967e4cad469fdb092fd07b9',
+              key: 'ba698fd58fdb7ad6607a564c7b68a447db95e898',
               class: 'pagination-button pagination-button-jump',
               part: 'button-jump',
               disabled: this.disabled,

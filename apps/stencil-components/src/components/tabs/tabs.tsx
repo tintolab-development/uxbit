@@ -79,7 +79,7 @@ export class TintoTabs {
     this.tabPanels = Array.from(this.el.querySelectorAll('tinto-tab-panel'));
 
     // 기본 활성 탭 설정
-    if (!this.activeTabId) {
+    if (!this.activeTabId && this.tabPanels.length > 0) {
       const defaultPanel = this.defaultTab
         ? this.tabPanels.find((p) => p.tabId === this.defaultTab)
         : this.tabPanels[0];
@@ -88,6 +88,11 @@ export class TintoTabs {
         this.activeTabId = defaultPanel.tabId;
       }
     }
+
+    // 활성 탭 상태 업데이트
+    this.tabPanels.forEach((panel) => {
+      panel.active = panel.tabId === this.activeTabId;
+    });
   }
 
   /** 탭 활성화 */
@@ -180,16 +185,31 @@ export class TintoTabs {
   /* ============================ Lifecycle ============================ */
 
   componentDidLoad() {
+    // 탭 패널 수집 및 초기 활성 탭 설정
     this.collectTabPanels();
   }
 
   componentDidUpdate() {
-    this.collectTabPanels();
+    // 업데이트 시 탭 패널 재수집 (무한 루프 방지를 위해 조건부)
+    const currentPanels = Array.from(
+      this.el.querySelectorAll('tinto-tab-panel'),
+    ) as HTMLTintoTabPanelElement[];
+    if (currentPanels.length !== this.tabPanels.length) {
+      this.collectTabPanels();
+    } else {
+      // 패널 개수가 같으면 활성 상태만 업데이트
+      this.tabPanels.forEach((panel) => {
+        panel.active = panel.tabId === this.activeTabId;
+      });
+    }
   }
 
   /* ============================ Render ============================ */
 
   render() {
+    // render 시점에는 this.tabPanels 사용 (componentDidLoad에서 수집됨)
+    const panels = this.tabPanels;
+
     const tabListClass = {
       'tabs-list': true,
       [`variant-${this.variant}`]: true,
@@ -209,34 +229,36 @@ export class TintoTabs {
           aria-orientation={this.orientation}
           onKeyDown={this.handleKeyDown}
         >
-          {this.tabPanels.map((panel, index) => {
-            const isActive = panel.tabId === this.activeTabId;
-            const isDisabled = this.disabled || panel.disabled;
+          {panels.length > 0
+            ? panels.map((panel, index) => {
+                const isActive = panel.tabId === this.activeTabId;
+                const isDisabled = this.disabled || panel.disabled;
 
-            return (
-              <button
-                ref={(el) => {
-                  if (el) this.tabButtons[index] = el;
-                }}
-                key={panel.tabId}
-                class={{
-                  'tab-button': true,
-                  active: isActive,
-                  disabled: isDisabled,
-                }}
-                part={`tab tab-${panel.tabId}`}
-                role="tab"
-                aria-selected={isActive ? 'true' : 'false'}
-                aria-controls={`tabpanel-${panel.tabId}`}
-                id={`tab-${panel.tabId}`}
-                tabindex={isActive ? 0 : -1}
-                disabled={isDisabled}
-                onClick={(e) => this.handleTabClick(e, panel.tabId)}
-              >
-                {panel.label || `Tab ${index + 1}`}
-              </button>
-            );
-          })}
+                return (
+                  <button
+                    ref={(el) => {
+                      if (el) this.tabButtons[index] = el;
+                    }}
+                    key={panel.tabId}
+                    class={{
+                      'tab-button': true,
+                      active: isActive,
+                      disabled: isDisabled,
+                    }}
+                    part={`tab tab-${panel.tabId}`}
+                    role="tab"
+                    aria-selected={isActive ? 'true' : 'false'}
+                    aria-controls={`tabpanel-${panel.tabId}`}
+                    id={`tab-${panel.tabId}`}
+                    tabindex={isActive ? 0 : -1}
+                    disabled={isDisabled}
+                    onClick={(e) => this.handleTabClick(e, panel.tabId)}
+                  >
+                    {panel.label || `Tab ${index + 1}`}
+                  </button>
+                );
+              })
+            : null}
         </div>
 
         <div class="tabs-content" part="content">

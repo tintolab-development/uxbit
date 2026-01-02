@@ -105,6 +105,9 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
 - ❌ 전역 스타일 의존 (Shadow DOM 내부에서만 스타일)
 - ❌ 프레임워크 특정 코드 (React, Vue 등)
 - ❌ 하드코딩된 값 (토큰/변수 사용)
+- ❌ **`render()` 메서드에서 prop/state 변경** (무한 루프 발생)
+- ❌ **`componentDidUpdate()`에서 무조건 업데이트** (조건부 업데이트 필수)
+- ❌ **Shadow DOM 사용 시 `render()`에서 자식 요소 직접 접근** (`componentDidLoad()`에서 수집)
 
 ### 컴포넌트별 주요 특징
 
@@ -151,6 +154,41 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
    - 문서 동기화 필수 (`docs/components/{component-name}.md`)
    - Props 변경 시 타입 검증 추가
    - Breaking change 시 마이그레이션 가이드 작성
+
+3. **Lifecycle 메서드 사용 규칙 (무한 루프 방지)**
+   ```typescript
+   // ✅ 올바른 패턴
+   componentWillLoad() {
+     // 초기화만 수행
+     if (!this.activeTabId) {
+       this.activeTabId = 'default';
+     }
+   }
+   
+   componentDidLoad() {
+     // DOM 접근 및 자식 요소 수집
+     this.tabPanels = Array.from(this.el.querySelectorAll('tinto-tab-panel'));
+   }
+   
+   componentDidUpdate() {
+     // 조건부 업데이트 필수 (무한 루프 방지)
+     const currentPanels = Array.from(this.el.querySelectorAll('tinto-tab-panel'));
+     if (currentPanels.length !== this.tabPanels.length) {
+       this.collectTabPanels();
+     }
+   }
+   
+   render() {
+     // ❌ 절대 prop/state 변경하지 않음
+     // ✅ 읽기만 수행
+     return <div>{this.tabPanels.map(...)}</div>;
+   }
+   ```
+
+4. **Shadow DOM 자식 요소 접근 규칙**
+   - Shadow DOM 사용 시 자식 요소는 `componentDidLoad()`에서 수집
+   - `render()`에서는 수집된 데이터만 사용
+   - Slot 내부 요소는 부모에서 `querySelectorAll`로 접근 가능
 
 ### 개선 우선순위
 
