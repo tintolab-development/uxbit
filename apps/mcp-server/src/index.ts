@@ -1510,7 +1510,7 @@ class UxbitMCPServer {
     const usabilityScore = this.calculateUsabilityScore(component);
 
     // 6. 표준 준수 점수
-    const standardsScore = this.calculateStandardsScore(component);
+    const standardsScore = await this.calculateStandardsScore(component);
 
     // 가중치
     const weights = {
@@ -1812,7 +1812,9 @@ class UxbitMCPServer {
   }
 
   // 표준 준수 점수 계산
-  private calculateStandardsScore(component: ComponentInfo): { score: number; details: any } {
+  private async calculateStandardsScore(
+    component: ComponentInfo,
+  ): Promise<{ score: number; details: any }> {
     // Web Components 표준 준수 (tag 이름이 올바른 형식인지)
     const webComponentsCompliant =
       component.tag.includes('-') && component.tag.startsWith('tinto-');
@@ -1828,11 +1830,16 @@ class UxbitMCPServer {
     const hasAriaProps = props.some((p: any) => p.name?.toLowerCase().includes('aria'));
     const ariaCompliant = hasAriaProps || component.docs?.toLowerCase().includes('aria');
 
+    // 무한 루프 패턴 감지
+    const lifecycleIssues = await this.detectLifecycleIssues(component.tag);
+
+    // 점수 계산 (무한 루프 패턴이 있으면 감점)
     const score =
-      (webComponentsCompliant ? 0.3 : 0) +
-      (shadowDOM ? 0.3 : 0) +
-      (semanticHTML ? 0.2 : 0) +
-      (ariaCompliant ? 0.2 : 0);
+      (webComponentsCompliant ? 0.25 : 0) +
+      (shadowDOM ? 0.25 : 0) +
+      (semanticHTML ? 0.15 : 0) +
+      (ariaCompliant ? 0.15 : 0) +
+      (lifecycleIssues.hasIssues ? 0 : 0.2); // 무한 루프 패턴이 없으면 20점
 
     return {
       score: Math.round(score * 100),
@@ -1841,7 +1848,82 @@ class UxbitMCPServer {
         shadowDOM,
         semanticHTML,
         ariaCompliant,
+        lifecycleIssues,
       },
+    };
+  }
+
+  // Lifecycle 메서드 문제 감지 (무한 루프 패턴 등)
+  private async detectLifecycleIssues(tagName: string): Promise<{
+    hasIssues: boolean;
+    issues: string[];
+    warnings: string[];
+  }> {
+    const componentName = tagName.replace('tinto-', '');
+    const componentPath = join(COMPONENTS_DIR, componentName, `${componentName}.tsx`);
+
+    const issues: string[] = [];
+    const warnings: string[] = [];
+
+    try {
+      const content = await this.readFileWithTimeout(componentPath, 'utf-8');
+
+      // 1. render() 메서드에서 prop/state 변경 감지
+      const renderMethodRegex = /render\s*\([^)]*\)\s*\{([^}]+(?:\{[^}]*\}[^}]*)*)\}/gs;
+      const renderMatch = renderMethodRegex.exec(content);
+      if (renderMatch) {
+        const renderBody = renderMatch[1];
+        // this.prop = 또는 this.state = 패턴 감지
+        const propStateAssignmentRegex = /this\.(?:props?|state)\s*=/g;
+        if (propStateAssignmentRegex.test(renderBody)) {
+          issues.push('CRITICAL: render() 메서드에서 prop/state 변경 감지 - 무한 루프 위험');
+        }
+        // panel.active = 같은 패턴도 감지
+        const childPropAssignmentRegex = /\.(?:active|disabled|visible)\s*=\s*[^;]+/g;
+        if (childPropAssignmentRegex.test(renderBody)) {
+          issues.push(
+            'CRITICAL: render() 메서드에서 자식 컴포넌트 prop 변경 감지 - 무한 루프 위험',
+          );
+        }
+      }
+
+      // 2. componentDidUpdate()에서 무조건 업데이트 감지
+      const componentDidUpdateRegex =
+        /componentDidUpdate\s*\([^)]*\)\s*\{([^}]+(?:\{[^}]*\}[^}]*)*)\}/gs;
+      const updateMatch = componentDidUpdateRegex.exec(content);
+      if (updateMatch) {
+        const updateBody = updateMatch[1];
+        // 조건문 없이 바로 메서드 호출하는 패턴 감지
+        const unconditionalUpdateRegex = /(?:this\.\w+\(\)|collectTabPanels\(\)|update\w+\(\))/;
+        const hasConditional =
+          /if\s*\(/.test(updateBody) || /currentPanels\.length/.test(updateBody);
+        if (unconditionalUpdateRegex.test(updateBody) && !hasConditional) {
+          warnings.push(
+            'WARNING: componentDidUpdate()에서 조건부 업데이트 로직이 없음 - 무한 루프 위험',
+          );
+        }
+      }
+
+      // 3. Shadow DOM 사용 시 render()에서 querySelectorAll 직접 사용 감지
+      const hasShadowDOM = /shadow:\s*true/.test(content);
+      if (hasShadowDOM && renderMatch) {
+        const renderBody = renderMatch[1];
+        const querySelectorInRender = /querySelectorAll\s*\(/.test(renderBody);
+        if (querySelectorInRender) {
+          warnings.push(
+            'WARNING: Shadow DOM 사용 시 render()에서 querySelectorAll 직접 사용 - componentDidLoad()에서 수집 권장',
+          );
+        }
+      }
+    } catch (error) {
+      // 파일을 읽을 수 없는 경우 (예: 컴포넌트가 아직 생성되지 않음)
+      // 에러는 무시하고 빈 결과 반환
+    }
+
+    return {
+      hasIssues: issues.length > 0,
+      issues,
+      warnings,
     };
   }
 
@@ -1926,6 +2008,17 @@ class UxbitMCPServer {
     if (standards.score < 100) {
       if (!standards.details.ariaCompliant) {
         improvements.push('표준 준수: ARIA 가이드라인 준수 필요');
+      }
+      // 무한 루프 패턴 개선 제안
+      if (standards.details.lifecycleIssues?.hasIssues) {
+        standards.details.lifecycleIssues.issues.forEach((issue: string) => {
+          improvements.push(`🚨 ${issue}`);
+        });
+      }
+      if (standards.details.lifecycleIssues?.warnings?.length > 0) {
+        standards.details.lifecycleIssues.warnings.forEach((warning: string) => {
+          improvements.push(`⚠️ ${warning}`);
+        });
       }
     }
 
