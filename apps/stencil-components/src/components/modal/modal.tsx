@@ -243,7 +243,7 @@ export class TintoModal {
       >
         <div
           ref={(el) => (this.modalContainer = el)}
-          class={`modal-container ${this.size}`}
+          class={`modal-container ${this.size} ${this.variant}`}
           part="container"
           tabindex="-1"
         >

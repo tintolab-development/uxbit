@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+.tab-panel {
+  display: none;
+  width: 100%;
+  padding: var(--t-tab-panel-padding, clamp(16px, 3vw, 24px));
+  background: var(--t-tab-panel-bg, transparent);
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.tab-panel.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

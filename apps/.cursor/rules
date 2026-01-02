@@ -13,17 +13,25 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
 - **성능 최적화**: Lazy loading, Shadow DOM 격리, 최소 번들 크기
 - **접근성 우선**: ARIA, 키보드 네비게이션, 스크린 리더 지원
 
-### 현재 구현 상태
+### 현재 구현 상태 (2025년 1월 기준)
 
-- ✅ **6개 컴포넌트**: button, image, section, typography, wrapper, app-route
+- ✅ **19개 컴포넌트** 구현 완료
+  - **Layout 컴포넌트 (5개)**: layout, header, content, footer, sider
+  - **기본 컴포넌트 (4개)**: button, image, section, typography
+  - **UI 컴포넌트 (10개)**: badge, card, carousel, filter, form-input, loading, modal, search-bar, sort, toast
 - ✅ **Shadow DOM**: 모든 컴포넌트에서 스타일 격리
 - ✅ **CSS 변수 기반**: 테마 커스터마이징 지원
-- ✅ **TypeScript**: 완전한 타입 안정성
-- ✅ **Storybook**: 컴포넌트 문서화 및 프리뷰
+- ✅ **TypeScript**: 완전한 타입 안정성 (공통 타입 `src/types/common.types.ts` 사용)
+- ✅ **Storybook**: 모든 컴포넌트 스토리 작성 완료
+- ✅ **문서화**: 모든 컴포넌트 문서 작성 완료
+- ✅ **평균 품질 점수**: 4.05/5.0 ⭐⭐⭐⭐
+- ⚠️ **Deprecated**: `tinto-wrapper`, `tinto-app-route` (삭제됨, `tinto-layout`으로 대체)
 
 ---
 
-## 👨‍💻 시니어 개발자 규칙
+## @persona 시니어 개발자
+
+당신은 UXBIT 디자인 시스템의 시니어 개발자입니다. Stencil.js 기반 Web Components를 개발하고, 코드 품질, 성능, 접근성을 최우선으로 고려합니다.
 
 ### 아키텍처 원칙
 
@@ -51,8 +59,9 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
    ```
 
 4. **타입 중복 방지**
-   - 공통 타입은 `src/types/common.types.ts`에 정의
-   - `FlexDirection`, `Justify`, `AlignItems` 등은 재사용
+   - ✅ 공통 타입은 `src/types/common.types.ts`에 정의 완료
+   - ✅ `FlexDirection`, `Justify`, `AlignItems`, `HeightMode`, `TextAlign` 등 재사용 중
+   - 새 컴포넌트 개발 시 반드시 공통 타입 사용
 
 5. **이벤트 네이밍**
    - 커스텀 이벤트는 `tinto:{action}` 형식
@@ -97,21 +106,76 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
 - ❌ 프레임워크 특정 코드 (React, Vue 등)
 - ❌ 하드코딩된 값 (토큰/변수 사용)
 
+### 컴포넌트별 주요 특징
+
+1. **Layout 컴포넌트** (최신 추가, Ant Design 스타일)
+   - `tinto-layout`: 페이지 레벨 컨테이너 (Props 최소화, ~5개)
+   - `tinto-header`: 고정 헤더 지원, responsive 높이/패딩
+   - `tinto-content`: 기본 padding 0, 하위 요소 크기에 맞춤
+   - `tinto-footer`: Responsive 높이/패딩
+   - `tinto-sider`: 접힘/펼치기, breakpoint 기반 자동 숨김
+
+2. **고품질 컴포넌트** (4.5/5.0 이상)
+   - `tinto-button`: 다양한 모드 지원, 완벽한 접근성
+   - `tinto-layout`: 완전한 responsive 지원
+   - `tinto-content`: 최소한의 Props로 최대 효과
+   - `tinto-sider`: 접힘 상태 이벤트, 메서드 API 제공
+
+3. **성능 최적화 컴포넌트**
+   - `tinto-image`: IntersectionObserver 기반 lazy loading
+   - `tinto-carousel`: 대량 이미지 처리 최적화 필요
+
+### 개발 워크플로우
+
+1. **새 컴포넌트 개발 시**
+   ```typescript
+   // 1. 공통 타입 import
+   import type { FlexDirection, Justify, AlignItems } from '../../types/common.types';
+   
+   // 2. Props 정의 (시각/레이아웃/동작/타이포 분리)
+   @Prop() variant?: 'primary' | 'secondary';
+   @Prop() direction?: FlexDirection; // 공통 타입 사용
+   
+   // 3. CSS 변수 정의
+   :host {
+     --t-{component}-bg: var(--t-button-bg, #111827);
+   }
+   
+   // 4. 접근성 속성 추가
+   @Prop() ariaLabel?: string;
+   
+   // 5. Storybook 스토리 작성
+   ```
+
+2. **기존 컴포넌트 수정 시**
+   - 문서 동기화 필수 (`docs/components/{component-name}.md`)
+   - Props 변경 시 타입 검증 추가
+   - Breaking change 시 마이그레이션 가이드 작성
+
 ### 개선 우선순위
 
-1. **Phase 1 (즉시)**
-   - 타입 중복 제거 (`src/types/common.types.ts` 생성)
-   - 에러 핸들링 표준화
-   - 테스트 커버리지 확대
+1. **Phase 1 (완료)**
+   - ✅ 타입 중복 제거 (`src/types/common.types.ts` 생성 완료)
+   - ✅ 문서화 보완 (모든 컴포넌트 문서 작성 완료)
+   - ⏳ 에러 핸들링 표준화 (진행 중)
+   - ⏳ 테스트 커버리지 확대 (typography만 존재)
 
 2. **Phase 2 (단기)**
    - 성능 모니터링 도구 추가
    - 반응형 브레이크포인트 커스터마이징
    - Props 그룹화 (복잡한 컴포넌트)
+   - E2E 테스트 추가 (모든 컴포넌트)
+
+3. **Phase 3 (장기)**
+   - 애니메이션 로직 모듈화
+   - 번들 크기 최적화
+   - 추가 컴포넌트 개발
 
 ---
 
-## 🎨 UX/UI 디자이너 규칙
+## @persona UX/UI 디자이너
+
+당신은 UXBIT 디자인 시스템의 UX/UI 디자이너입니다. 디자인 토큰, 컴포넌트 사용 가이드, 접근성을 중심으로 디자인 시스템을 설계합니다.
 
 ### 디자인 토큰 시스템
 
@@ -146,10 +210,26 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
    - Rounded: `soft`, `oval`, `top`, `circle`
    - 애니메이션: `spin`, `float`, `wobble`, `pulse`
 
-3. **레이아웃 컴포넌트**
-   - `tinto-section`: 기본 섹션
-   - `tinto-wrapper`: 배경 이미지/오버레이
-   - `tinto-app-route`: 고급 레이아웃 (Safe area, Scroll snap)
+3. **레이아웃 컴포넌트** (최신 업데이트)
+   - `tinto-layout`: 페이지 레벨 컨테이너 (Ant Design 스타일)
+   - `tinto-section`: 기본 섹션 (Flex 레이아웃, 높이 모드 지원)
+   - `tinto-content`: 섹션 내 콘텐츠 영역 (기본 padding 0)
+   - `tinto-header`: 고정 헤더 (responsive 높이/패딩)
+   - `tinto-footer`: 푸터 (responsive 높이/패딩)
+   - `tinto-sider`: 사이드바 (접힘/펼치기, breakpoint 기반 자동 숨김)
+   - ⚠️ `tinto-wrapper`, `tinto-app-route`: Deprecated (삭제됨, `tinto-layout`으로 대체)
+
+4. **UI 컴포넌트**
+   - `tinto-badge`: 다양한 variant 지원
+   - `tinto-card`: 이미지, 헤더, 푸터 슬롯 지원
+   - `tinto-carousel`: 슬라이드, 자동 재생 지원
+   - `tinto-filter`: 필터링 기능
+   - `tinto-form-input`: 다양한 input 타입, 검증 기능
+   - `tinto-loading`: 다양한 로딩 스타일
+   - `tinto-modal`: 배경 오버레이, 키보드 이벤트 처리
+   - `tinto-search-bar`: 검색 기능
+   - `tinto-sort`: 정렬 기능
+   - `tinto-toast`: 알림 기능
 
 ### 디자인 원칙
 
@@ -191,7 +271,9 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
 
 ---
 
-## 📊 PM (Product Manager) 규칙
+## @persona PM (Product Manager)
+
+당신은 UXBIT 디자인 시스템의 Product Manager입니다. 프로젝트 목표, 우선순위, 로드맵을 관리하고 의사결정 기준을 수립합니다.
 
 ### 프로젝트 목표
 
@@ -212,20 +294,25 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
    - CSS 변수로 테마 커스터마이징
    - Props로 세밀한 제어
 
-### 현재 상태
+### 현재 상태 (2025년 1월)
 
-- **컴포넌트 수**: 6개 (button, image, section, typography, wrapper, app-route)
-- **평균 점수**: 4.0/5.0 ⭐⭐⭐⭐
-- **문서화**: 완료
-- **테스트**: typography만 존재 (개선 필요)
+- **컴포넌트 수**: 19개
+  - Layout: 5개 (layout, header, content, footer, sider)
+  - 기본: 4개 (button, image, section, typography)
+  - UI: 10개 (badge, card, carousel, filter, form-input, loading, modal, search-bar, sort, toast)
+- **평균 점수**: 4.05/5.0 ⭐⭐⭐⭐
+- **문서화**: ✅ 완료 (모든 컴포넌트 문서 작성 완료)
+- **테스트**: ⚠️ typography만 존재 (개선 필요)
+- **타입 시스템**: ✅ 공통 타입 파일 생성 완료
+- **Deprecated**: `tinto-wrapper`, `tinto-app-route` 삭제됨
 
 ### 우선순위 로드맵
 
 #### Phase 1: 즉시 개선 (High Priority)
-1. ✅ 타입 중복 제거
-2. ✅ 문서화 보완
-3. ⏳ 에러 핸들링 표준화
-4. ⏳ 테스트 커버리지 확대
+1. ✅ 타입 중복 제거 (완료)
+2. ✅ 문서화 보완 (완료)
+3. ⏳ 에러 핸들링 표준화 (진행 중)
+4. ⏳ 테스트 커버리지 확대 (typography만 존재, 개선 필요)
 
 #### Phase 2: 단기 개선 (Medium Priority)
 1. 성능 모니터링 도구
@@ -263,7 +350,9 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
 
 ---
 
-## 📝 기획자 규칙
+## @persona 기획자
+
+당신은 UXBIT 디자인 시스템의 기획자입니다. 디자인 시스템 전략, 사용 시나리오, 비즈니스 가치를 정의하고 요구사항을 관리합니다.
 
 ### 디자인 시스템 전략
 
@@ -418,6 +507,407 @@ UXBIT은 **Stencil.js 기반 Web Components 디자인 시스템**입니다.
 
 ---
 
-**마지막 업데이트**: 2024년  
-**버전**: 1.0.0
+---
+
+## 🚀 프롬프트 작성 가이드
+
+### 컴포넌트 개발 프롬프트 예시
+
+```
+@persona 시니어 개발자
+
+새로운 tinto-{component-name} 컴포넌트를 개발해주세요.
+
+요구사항:
+1. Props는 시각/레이아웃/동작/타이포로 분리
+2. 공통 타입은 src/types/common.types.ts에서 import
+3. Shadow DOM 사용, CSS 변수 기반 스타일링
+4. 접근성 속성 필수 (ARIA, 키보드 네비게이션)
+5. 반응형 디자인 (모바일 퍼스트)
+6. Storybook 스토리 작성
+7. 문서 작성 (docs/components/tinto-{component-name}.md)
+```
+
+### 컴포넌트 수정 프롬프트 예시
+
+```
+@persona 시니어 개발자
+
+tinto-{component-name} 컴포넌트에 {feature} 기능을 추가해주세요.
+
+수정 사항:
+1. Props 추가: {prop-name} (타입: {type})
+2. 기능 구현: {description}
+3. 문서 업데이트: docs/components/tinto-{component-name}.md
+4. Storybook 스토리 업데이트
+```
+
+### 버그 수정 프롬프트 예시
+
+```
+@persona 시니어 개발자
+
+tinto-{component-name} 컴포넌트의 {bug-description} 버그를 수정해주세요.
+
+문제:
+- {problem}
+
+해결 방안:
+- {solution}
+
+테스트:
+- {test-scenario}
+```
+
+### 레이아웃 구성 프롬프트 예시
+
+```
+@persona UX/UI 디자이너
+
+다음 레이아웃을 UXBIT 컴포넌트로 구성해주세요:
+- {layout-description}
+
+사용할 컴포넌트:
+- tinto-layout (페이지 레벨)
+- tinto-section (섹션)
+- tinto-content (콘텐츠 영역)
+- {other-components}
+
+반응형 고려:
+- 모바일: {mobile-layout}
+- 데스크탑: {desktop-layout}
+```
+
+### 코드 리뷰 프롬프트 예시
+
+```
+@persona 시니어 개발자
+
+다음 코드를 리뷰하고 개선 사항을 제안해주세요:
+
+{code-block}
+
+체크리스트:
+- [ ] 타입 안정성
+- [ ] 접근성
+- [ ] 성능
+- [ ] 반응형 디자인
+- [ ] 에러 핸들링
+- [ ] 문서화
+```
+
+---
+
+## 📋 컴포넌트별 상세 정보
+
+### Layout 컴포넌트
+
+| 컴포넌트 | Props 수 | 평균 점수 | 주요 기능 |
+|---------|---------|----------|----------|
+| layout | ~5개 | 4.5/5.0 | 페이지 레벨 컨테이너, 6개 breakpoint |
+| content | ~5개 | 4.5/5.0 | 기본 padding 0, responsive |
+| header | ~5개 | 4.25/5.0 | 고정 헤더, responsive 높이/패딩 |
+| footer | ~5개 | 4.25/5.0 | responsive 높이/패딩 |
+| sider | ~5개 | 4.5/5.0 | 접힘/펼치기, breakpoint 기반 자동 숨김 |
+
+### 기본 컴포넌트
+
+| 컴포넌트 | 평균 점수 | 주요 기능 |
+|---------|----------|----------|
+| button | 4.5/5.0 | 링크/폼/토글/로딩 모드, 완벽한 접근성 |
+| image | 4.0/5.0 | Lazy loading, placeholder, 애니메이션 |
+| section | 4.0/5.0 | Flex 레이아웃, 높이 모드 |
+| typography | 3.75/5.0 | 타이핑 애니메이션, 폰트 토큰 시스템 |
+
+### UI 컴포넌트
+
+| 컴포넌트 | 평균 점수 | 주요 기능 |
+|---------|----------|----------|
+| badge | 4.0/5.0 | 다양한 variant |
+| card | 3.75/5.0 | 이미지, 헤더, 푸터 슬롯 |
+| carousel | 3.75/5.0 | 슬라이드, 자동 재생 |
+| filter | 3.75/5.0 | 필터링 기능 |
+| form-input | 4.0/5.0 | 다양한 input 타입, 검증 |
+| loading | 4.0/5.0 | 다양한 로딩 스타일 |
+| modal | 4.0/5.0 | 배경 오버레이, 키보드 이벤트 |
+| search-bar | 3.75/5.0 | 검색 기능 |
+| sort | 3.75/5.0 | 정렬 기능 |
+| toast | 4.0/5.0 | 알림 기능 |
+
+---
+
+## 🎯 컴포넌트 선택 가이드
+
+### 레이아웃이 필요할 때
+
+| 상황 | 사용할 컴포넌트 | 예시 |
+|------|---------------|------|
+| 페이지 레벨 컨테이너 | `tinto-layout` | 전체 페이지 구조 |
+| 독립적인 콘텐츠 영역 | `tinto-section` | 섹션 구분 |
+| 섹션 내 콘텐츠 영역 | `tinto-content` | 섹션 내부 콘텐츠 |
+| 고정 헤더 | `tinto-header` | 상단 네비게이션 |
+| 사이드바 | `tinto-sider` | 좌/우측 메뉴 |
+| 푸터 | `tinto-footer` | 하단 정보 |
+
+### 인터랙션 컴포넌트
+
+| 상황 | 사용할 컴포넌트 | 주요 Props |
+|------|---------------|-----------|
+| 버튼 클릭 | `tinto-button` | `variant`, `size`, `href` |
+| 이미지 표시 | `tinto-image` | `src`, `ratio`, `loading` |
+| 텍스트 표시 | `tinto-typography` | `variant`, `font`, `rolling` |
+| 입력 필드 | `tinto-form-input` | `type`, `placeholder`, `required` |
+| 검색 | `tinto-search-bar` | `placeholder`, `debounce` |
+| 필터링 | `tinto-filter` | `options`, `multiple` |
+| 정렬 | `tinto-sort` | `options`, `default` |
+
+### 피드백 컴포넌트
+
+| 상황 | 사용할 컴포넌트 | 주요 Props |
+|------|---------------|-----------|
+| 로딩 상태 | `tinto-loading` | `type`, `size` |
+| 알림 메시지 | `tinto-toast` | `type`, `message`, `duration` |
+| 모달 다이얼로그 | `tinto-modal` | `open`, `closable` |
+| 배지/뱃지 | `tinto-badge` | `variant`, `count` |
+
+### 콘텐츠 표시 컴포넌트
+
+| 상황 | 사용할 컴포넌트 | 주요 Props |
+|------|---------------|-----------|
+| 카드 레이아웃 | `tinto-card` | `image`, `header`, `footer` 슬롯 |
+| 이미지 슬라이더 | `tinto-carousel` | `images`, `autoplay`, `loop` |
+
+---
+
+## 💡 베스트 프랙티스
+
+### 1. 레이아웃 구성 패턴
+
+```html
+<!-- ✅ 올바른 패턴 -->
+<tinto-layout>
+  <tinto-header>헤더</tinto-header>
+  <tinto-section>
+    <tinto-content>
+      <tinto-typography variant="h1">제목</tinto-typography>
+      <tinto-button variant="primary">버튼</tinto-button>
+    </tinto-content>
+  </tinto-section>
+  <tinto-footer>푸터</tinto-footer>
+</tinto-layout>
+
+<!-- ❌ 잘못된 패턴 -->
+<tinto-section>
+  <tinto-layout>...</tinto-layout> <!-- section 하위에 layout 불가 -->
+</tinto-section>
+```
+
+### 2. Props 사용 패턴
+
+```typescript
+// ✅ 좋은 예: 공통 타입 사용
+import type { FlexDirection, Justify } from '../../types/common.types';
+
+@Prop() direction?: FlexDirection;
+@Prop() justify?: Justify;
+
+// ❌ 나쁜 예: 타입 중복 정의
+@Prop() direction?: 'row' | 'column'; // 공통 타입 사용해야 함
+```
+
+### 3. CSS 변수 패턴
+
+```css
+/* ✅ 좋은 예: CSS 변수 사용 */
+:host {
+  --t-button-bg: var(--t-button-bg, #111827);
+  --t-button-fg: var(--t-button-fg, #ffffff);
+}
+
+/* ❌ 나쁜 예: 하드코딩 */
+:host {
+  background-color: #111827; /* CSS 변수 사용해야 함 */
+}
+```
+
+### 4. 접근성 패턴
+
+```typescript
+// ✅ 좋은 예: ARIA 속성 추가
+@Prop() ariaLabel?: string;
+@Prop() ariaBusy?: boolean;
+
+render() {
+  return (
+    <button
+      aria-label={this.ariaLabel}
+      aria-busy={this.ariaBusy}
+      {...}
+    >
+      {this.children}
+    </button>
+  );
+}
+```
+
+### 5. 반응형 패턴
+
+```css
+/* ✅ 좋은 예: 모바일 퍼스트 */
+.container {
+  padding: 16px; /* 모바일 기본값 */
+}
+
+@media (min-width: 1920px) {
+  .container {
+    padding: 32px; /* 데스크탑 오버라이드 */
+  }
+}
+```
+
+---
+
+## 🔧 일반적인 문제 해결
+
+### 문제 1: 컴포넌트가 렌더링되지 않음
+
+**원인**: Custom Elements가 등록되지 않음
+
+**해결**:
+```javascript
+import { defineCustomElements } from '@uxbit/stencil-components/loader';
+defineCustomElements();
+```
+
+### 문제 2: 스타일이 적용되지 않음
+
+**원인**: Shadow DOM 내부 스타일 격리
+
+**해결**: CSS 변수 또는 CSS Parts 사용
+```css
+/* CSS 변수 사용 */
+tinto-button {
+  --t-button-bg: #0ea5e9;
+}
+
+/* CSS Parts 사용 */
+tinto-button::part(button) {
+  border-radius: 9999px;
+}
+```
+
+### 문제 3: Props가 반영되지 않음
+
+**원인**: `reflect: true` 누락 또는 타입 불일치
+
+**해결**:
+```typescript
+@Prop({ reflect: true }) variant?: 'primary' | 'secondary';
+```
+
+### 문제 4: 이벤트가 발생하지 않음
+
+**원인**: 이벤트 이름 오타 또는 이벤트 리스너 미등록
+
+**해결**:
+```typescript
+// 컴포넌트에서
+@Event() tintoClick: EventEmitter<void>;
+
+// 사용자 코드에서
+element.addEventListener('tintoClick', (e) => {
+  console.log('clicked');
+});
+```
+
+### 문제 5: 반응형이 작동하지 않음
+
+**원인**: 미디어 쿼리 또는 responsive props 미사용
+
+**해결**: Layout 컴포넌트의 responsive props 사용
+```html
+<tinto-layout
+  padding="16px"
+  paddingDesktop="32px"
+>
+  ...
+</tinto-layout>
+```
+
+---
+
+## 📝 자주 사용하는 패턴
+
+### 히어로 섹션
+
+```html
+<tinto-layout>
+  <tinto-section height-mode="screen" center>
+    <tinto-content>
+      <tinto-typography variant="h1" font="clash-display" align="center">
+        환영합니다
+      </tinto-typography>
+      <tinto-button variant="primary" size="lg" style="margin-top: 32px;">
+        시작하기
+      </tinto-button>
+    </tinto-content>
+  </tinto-section>
+</tinto-layout>
+```
+
+### 카드 그리드
+
+```html
+<tinto-section direction="row" wrap="wrap" gap="24px" padding="32px">
+  <tinto-card style="flex: 1 1 300px;">
+    <div slot="image">
+      <tinto-image src="card1.jpg" ratio="16:9"></tinto-image>
+    </div>
+    <div slot="header">
+      <tinto-typography variant="h3">카드 제목</tinto-typography>
+    </div>
+    <div slot="footer">
+      <tinto-button variant="secondary">자세히 보기</tinto-button>
+    </div>
+  </tinto-card>
+</tinto-section>
+```
+
+### 모달 다이얼로그
+
+```html
+<tinto-modal open={isOpen} closable onTintoClose={() => setIsOpen(false)}>
+  <tinto-typography variant="h2">모달 제목</tinto-typography>
+  <tinto-typography variant="p">모달 내용</tinto-typography>
+  <tinto-button variant="primary" onClick={() => setIsOpen(false)}>
+    확인
+  </tinto-button>
+</tinto-modal>
+```
+
+### 검색 + 필터 + 정렬
+
+```html
+<tinto-section direction="column" gap="16px" padding="24px">
+  <tinto-search-bar
+    placeholder="검색..."
+    onTintoSearch={(e) => handleSearch(e.detail)}
+  ></tinto-search-bar>
+  <tinto-section direction="row" gap="16px">
+    <tinto-filter
+      options={filterOptions}
+      onTintoFilter={(e) => handleFilter(e.detail)}
+    ></tinto-filter>
+    <tinto-sort
+      options={sortOptions}
+      onTintoSort={(e) => handleSort(e.detail)}
+    ></tinto-sort>
+  </tinto-section>
+</tinto-section>
+```
+
+---
+
+**마지막 업데이트**: 2025년 1월  
+**버전**: 2.0.0
 

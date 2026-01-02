@@ -1,0 +1,294 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host([hidden]) {
+  display: none !important;
+}
+
+/* ============================ Pagination Container ============================ */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  gap: var(--t-pagination-gap, clamp(4px, 1vw, 8px));
+  width: 100%;
+  background: var(--t-pagination-bg, transparent);
+}
+
+.pagination-container.align-center {
+  justify-content: center;
+}
+
+.pagination-container.align-end {
+  justify-content: flex-end;
+}
+
+.pagination-container.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============================ Total Text ============================ */
+
+.pagination-total {
+  color: var(--t-pagination-total-color, #666666);
+  font-size: var(--t-pagination-total-font-size, clamp(14px, 2.5vw, 16px));
+  margin: var(--t-pagination-total-margin, 0 clamp(12px, 2.5vw, 16px) 0 0);
+  white-space: nowrap;
+}
+
+/* ============================ Navigation ============================ */
+
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--t-pagination-gap, clamp(4px, 1vw, 8px));
+}
+
+/* ============================ Page Buttons ============================ */
+
+.pagination-button {
+  all: unset;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: var(--t-pagination-button-min-size, 44px);
+  min-height: var(--t-pagination-button-min-size, 44px);
+  padding: var(--t-pagination-button-padding, clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 16px));
+
+  background: var(--t-pagination-button-bg, #ffffff);
+  color: var(--t-pagination-button-color, #333333);
+  border: var(--t-pagination-button-border, 1px solid #e0e0e0);
+  border-radius: var(--t-pagination-button-radius, clamp(6px, 1.5vw, 8px));
+
+  font-size: var(--t-pagination-button-font-size, clamp(14px, 2.5vw, 16px));
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+
+  outline: none;
+}
+
+.pagination-button:focus-visible {
+  outline: 2px solid var(--t-pagination-button-color-active, #111827);
+  outline-offset: 2px;
+}
+
+.pagination-button:hover:not(:disabled):not(:active) {
+  background: var(--t-pagination-button-bg-hover, #f5f5f5);
+  color: var(--t-pagination-button-color-hover, #111827);
+  border-color: var(--t-pagination-button-color-hover, #111827);
+}
+
+.pagination-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination-button.active {
+  background: var(--t-pagination-button-bg-active, #111827);
+  color: var(--t-pagination-button-color-active, #ffffff);
+  border-color: var(--t-pagination-button-border-active, #111827);
+  font-weight: 600;
+}
+
+/* ============================ Navigation Icons ============================ */
+
+.pagination-button-first,
+.pagination-button-prev,
+.pagination-button-next,
+.pagination-button-last {
+  font-size: var(--t-pagination-nav-icon-size, clamp(16px, 3vw, 20px));
+  line-height: 1;
+}
+
+/* ============================ Page Numbers ============================ */
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: var(--t-pagination-gap, clamp(4px, 1vw, 8px));
+}
+
+.pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--t-pagination-button-min-size, 44px);
+  min-height: var(--t-pagination-button-min-size, 44px);
+  padding: var(--t-pagination-ellipsis-padding, clamp(8px, 2vw, 12px));
+  color: var(--t-pagination-ellipsis-color, #999999);
+  font-size: var(--t-pagination-button-font-size, clamp(14px, 2.5vw, 16px));
+}
+
+/* ============================ Simple Variant ============================ */
+
+.pagination-container.variant-simple .pagination-nav {
+  gap: clamp(8px, 2vw, 12px);
+}
+
+.pagination-info {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--t-pagination-button-min-size, 44px);
+  padding: 0 clamp(12px, 2.5vw, 16px);
+  color: var(--t-pagination-button-color, #333333);
+  font-size: var(--t-pagination-button-font-size, clamp(14px, 2.5vw, 16px));
+  font-weight: 500;
+}
+
+/* ============================ Size Variants ============================ */
+
+.pagination-container.size-sm .pagination-button {
+  min-width: 36px;
+  min-height: 36px;
+  padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 12px);
+  font-size: clamp(12px, 2vw, 14px);
+}
+
+.pagination-container.size-lg .pagination-button {
+  min-width: 52px;
+  min-height: 52px;
+  padding: clamp(10px, 2.5vw, 14px) clamp(14px, 3vw, 20px);
+  font-size: clamp(16px, 3vw, 18px);
+}
+
+/* ============================ Size Changer ============================ */
+
+.pagination-size-changer {
+  display: flex;
+  align-items: center;
+  margin-left: clamp(8px, 2vw, 12px);
+}
+
+.pagination-select {
+  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
+  min-height: var(--t-pagination-button-min-size, 44px);
+  border: var(--t-pagination-button-border, 1px solid #e0e0e0);
+  border-radius: var(--t-pagination-button-radius, clamp(6px, 1.5vw, 8px));
+  background: var(--t-pagination-button-bg, #ffffff);
+  color: var(--t-pagination-button-color, #333333);
+  font-size: var(--t-pagination-button-font-size, clamp(14px, 2.5vw, 16px));
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.pagination-select:focus {
+  border-color: var(--t-pagination-button-color-active, #111827);
+}
+
+.pagination-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================ Quick Jumper ============================ */
+
+.pagination-quick-jumper {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1vw, 8px);
+  margin-left: clamp(8px, 2vw, 12px);
+}
+
+.pagination-quick-jumper > span {
+  color: var(--t-pagination-button-color, #333333);
+  font-size: var(--t-pagination-button-font-size, clamp(14px, 2.5vw, 16px));
+  white-space: nowrap;
+}
+
+.pagination-input {
+  width: clamp(60px, 12vw, 80px);
+  min-height: var(--t-pagination-button-min-size, 44px);
+  padding: clamp(6px, 1.5vw, 8px) clamp(8px, 1.5vw, 12px);
+  border: var(--t-pagination-button-border, 1px solid #e0e0e0);
+  border-radius: var(--t-pagination-button-radius, clamp(6px, 1.5vw, 8px));
+  background: var(--t-pagination-button-bg, #ffffff);
+  color: var(--t-pagination-button-color, #333333);
+  font-size: var(--t-pagination-button-font-size, clamp(14px, 2.5vw, 16px));
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.pagination-input:focus {
+  border-color: var(--t-pagination-button-color-active, #111827);
+}
+
+.pagination-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-button-jump {
+  min-width: auto;
+  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
+}
+
+/* ============================ Responsive ============================ */
+
+@media (max-width: 767px) {
+  .pagination-container {
+    flex-wrap: wrap;
+    gap: clamp(4px, 1vw, 6px);
+  }
+
+  .pagination-nav {
+    gap: clamp(4px, 1vw, 6px);
+  }
+
+  .pagination-total {
+    width: 100%;
+    margin-bottom: clamp(8px, 2vw, 12px);
+  }
+
+  .pagination-size-changer,
+  .pagination-quick-jumper {
+    width: 100%;
+    margin-left: 0;
+    margin-top: clamp(8px, 2vw, 12px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .pagination-container {
+    gap: 8px;
+  }
+
+  .pagination-button {
+    padding: 12px 16px;
+    font-size: clamp(16px, 1.5vw, 18px);
+  }
+}
+
+/* ============================ Reduced Motion ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .pagination-button,
+  .pagination-select,
+  .pagination-input {
+    transition: none;
+  }
+}

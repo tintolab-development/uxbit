@@ -1144,7 +1144,7 @@ const TintoSection = class {
     return h(
       'section',
       {
-        key: 'c38c72b647df8aedd1af75ba8e7e2869dc52c7d3',
+        key: 'f7a4fd07a2d0a3809dbca2eaba08f55fa860440a',
         part: 'root',
         class: 'tinto-section',
         style: styleVars,
@@ -1154,7 +1154,7 @@ const TintoSection = class {
         'aria-describedby': ariaDescribedby,
         tabIndex: tabIndex,
       },
-      h('slot', { key: '98ba6a9c52b8614c8e1e2caf87da90b565afc734' }),
+      h('slot', { key: 'dc483b9a6e850873f9aefbd5da4ec70e683b3caa' }),
     );
   }
 };
@@ -1557,7 +1557,7 @@ const TintoTypography = class {
     const ariaHidden = this.visible ? null : 'true';
     const rel = this.computeRel();
     // 슬롯 + fallback 텍스트
-    const slotNode = h('slot', { key: '3c27b1eefc24a3446c67709c6f5a7965b22e362c' });
+    const slotNode = h('slot', { key: '9862bb7de5b395123d1bb28ef8f5a35c8074e71c' });
     // rolling=true 이면 슬롯 텍스트를 .typing-effect span으로 감싼다
     let typedSpan;
     let staticTextForSR = null; // 스크린 리더용 정적 텍스트
@@ -1569,7 +1569,7 @@ const TintoTypography = class {
         staticTextForSR = h(
           'span',
           {
-            key: '4af7390f62401eac0b4a85153a3bd1aff191592a',
+            key: '29ec9599c3bbbcb498d74e8b34f3e0b533467378',
             class: 'sr-only',
             'aria-live': 'polite',
           },
@@ -1579,7 +1579,7 @@ const TintoTypography = class {
       typedSpan = h(
         'span',
         {
-          key: '95046edb3fcb2c3be4c93b102b629ea70cbe05a1',
+          key: 'cf22e7b4482c2e4e0ca016be5eb8f6826d2e04ef',
           class: 'typing-effect',
           ref: (el) => (this.typingEl = el),
           'aria-live': 'polite',
@@ -1610,7 +1610,7 @@ const TintoTypography = class {
     return h(
       Tag,
       {
-        key: 'b6314e7c8fbd6eb330c60f3dce5c73283dd9eab3',
+        key: '4c757a0350e2cd4a75ad2128a7d0b6e67ca9b278',
         part: 'root',
         class: `tinto-typography ${this.variant} ${sizeClass} ${disabledClass} ${loadingClass} ${this.rolling ? 'has-typing' : ''}`,
         style: style,
