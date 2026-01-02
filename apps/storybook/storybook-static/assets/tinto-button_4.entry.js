@@ -241,7 +241,7 @@ const TintoButton = class {
     return h(
       'button',
       {
-        key: 'fc6a263c6cf8e5eaf9a751180f165e0fefdeb1a9',
+        key: '8b7b917f6d5aa935baf6092fea82e4e622748cfd',
         class: 'tinto-button',
         part: 'button',
         type: 'button', // 실제 form 동작은 handleClick 내부에서 처리
@@ -253,29 +253,29 @@ const TintoButton = class {
         ...a11yProps,
       },
       h('span', {
-        key: '9376c7dddf38ec76f6c7a7b38344078628486587',
+        key: 'd939437f4cb8eea841080a467a7f9da41fabd608',
         class: 'spinner',
         part: 'spinner',
         'aria-hidden': this.loading ? 'false' : 'true',
       }),
       h(
         'span',
-        { key: '45890b1a37c43c77743f1d62697ac58dc7889337', class: 'prefix', part: 'prefix' },
-        h('slot', { key: '422fc551beef43d447c5676e5e6ce1e7c6fb0a22', name: 'prefix' }),
+        { key: 'd2a9124ead7b3e662ff6e04ea663c405f98f7768', class: 'prefix', part: 'prefix' },
+        h('slot', { key: 'a357d616823a9ec857421ec14b87c35e93a4ad90', name: 'prefix' }),
       ),
       h(
         'span',
-        { key: '71a585361c3480f35696340b61562feacacdca68', class: 'content', part: 'label' },
+        { key: 'cd8db204e75d73ff4f200c354c48fd1b02cabf1e', class: 'content', part: 'label' },
         h(
           'span',
-          { key: '04d44236353c36421f11e91e5581266345945695', class: 'label' },
-          labelText || h('slot', { key: '8bb5e2b9e1080fdec53aae3951f212a6f3b5c51b' }),
+          { key: '2459d46348b1b0e9a4885d66d446181d4070406c', class: 'label' },
+          labelText || h('slot', { key: 'ebf6be8d9f5f2cdb643c3dc1f23ae5c3cc2fd934' }),
         ),
       ),
       h(
         'span',
-        { key: '2a96d32a7988702a48d1702da57538b163c498dc', class: 'suffix', part: 'suffix' },
-        h('slot', { key: 'f747e989cf523431b074fe2ac8457e43101e84d3', name: 'suffix' }),
+        { key: 'c2c725cfc98f3841c5e72324e501bb393eddc647', class: 'suffix', part: 'suffix' },
+        h('slot', { key: '76e13adf36549827d5003f3a7afd60483d133cea', name: 'suffix' }),
       ),
     );
   }
@@ -1037,7 +1037,7 @@ const TintoImage = class {
 TintoImage.style = imageCss;
 
 const sectionCss =
-  ":host{display:block;box-sizing:border-box;max-width:100%;width:100%;min-width:0;min-height:100vh;min-height:100dvh}[part='root']{width:100%;max-width:var(--t-max-w, none);padding:var(--t-pad, 0);margin:var(--t-mar, 0);background:var(--t-bg, transparent);color:var(--t-color, inherit);border-radius:var(--t-radius, 0);box-shadow:var(--t-shadow, none);display:flex;flex-direction:var(--t-dir, column);flex-wrap:var(--t-wrap, nowrap);justify-content:var(--t-justify, flex-start);align-items:var(--t-align, stretch);gap:var(--t-gap, 0);box-sizing:border-box}:host([center]) [part='root']{margin-inline:auto}:host([height-mode='dvh']) [part='root']{min-height:calc(var(--t-vh, 1vh) * 100);min-height:100dvh}:host([height-mode='screen']) [part='root']{height:calc(var(--t-vh, 1vh) * 100);height:100dvh}:host([scrollable]) [part='root']{overflow:auto;-webkit-overflow-scrolling:touch}::slotted(*){margin:0}@media (max-width: 375px){[part='root']{padding:var(--t-pad-mobile, var(--t-pad, 0));gap:var(--t-gap-mobile, var(--t-gap, 0))}}@media (min-width: 768px){[part='root']{gap:var(--t-gap-tablet, var(--t-gap, 0))}}";
+  ":host{display:block;box-sizing:border-box;max-width:100%;width:100%;min-width:0;overflow-x:hidden;min-height:100vh;min-height:100dvh}[part='root']{width:100%;max-width:100%;padding:var(--t-section-padding, 0);margin:var(--t-section-margin, 0);background:var(--t-section-bg, transparent);color:var(--t-section-color, inherit);border-radius:var(--t-section-radius, 0);box-shadow:var(--t-section-shadow, none);display:flex;flex-direction:var(--t-section-direction, column);flex-wrap:var(--t-section-wrap, nowrap);justify-content:var(--t-section-justify, flex-start);align-items:var(--t-section-align, stretch);gap:var(--t-section-gap, 0);box-sizing:border-box;overflow-x:hidden;min-width:0}:host([center]) [part='root'],:host([center='true']) [part='root'],:host([data-center='true']) [part='root']{margin-inline:auto}:host{--t-section-padding:var(--t-section-padding-xs, 0)}@media (min-width: 640px){:host{--t-section-padding:var(--t-section-padding-sm, var(--t-section-padding-xs, 0))}}@media (min-width: 768px){:host{--t-section-padding:var(\n      --t-section-padding-md,\n      var(--t-section-padding-sm, var(--t-section-padding-xs, 0))\n    )}}@media (min-width: 1024px){:host{--t-section-padding:var(\n      --t-section-padding-lg,\n      var(--t-section-padding-md, var(--t-section-padding-sm, var(--t-section-padding-xs, 0)))\n    )}}@media (min-width: 1280px){:host{--t-section-padding:var(\n      --t-section-padding-xl,\n      var(\n        --t-section-padding-lg,\n        var(--t-section-padding-md, var(--t-section-padding-sm, var(--t-section-padding-xs, 0)))\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-padding:var(\n      --t-section-padding-2xl,\n      var(\n        --t-section-padding-xl,\n        var(\n          --t-section-padding-lg,\n          var(--t-section-padding-md, var(--t-section-padding-sm, var(--t-section-padding-xs, 0)))\n        )\n      )\n    )}}:host{--t-section-max-width:var(--t-section-max-width-xs, none)}@media (min-width: 640px){:host{--t-section-max-width:var(--t-section-max-width-sm, var(--t-section-max-width-xs, none))}}@media (min-width: 768px){:host{--t-section-max-width:var(\n      --t-section-max-width-md,\n      var(--t-section-max-width-sm, var(--t-section-max-width-xs, none))\n    )}}@media (min-width: 1024px){:host{--t-section-max-width:var(\n      --t-section-max-width-lg,\n      var(\n        --t-section-max-width-md,\n        var(--t-section-max-width-sm, var(--t-section-max-width-xs, none))\n      )\n    )}}@media (min-width: 1280px){:host{--t-section-max-width:var(\n      --t-section-max-width-xl,\n      var(\n        --t-section-max-width-lg,\n        var(\n          --t-section-max-width-md,\n          var(--t-section-max-width-sm, var(--t-section-max-width-xs, none))\n        )\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-max-width:var(\n      --t-section-max-width-2xl,\n      var(\n        --t-section-max-width-xl,\n        var(\n          --t-section-max-width-lg,\n          var(\n            --t-section-max-width-md,\n            var(--t-section-max-width-sm, var(--t-section-max-width-xs, none))\n          )\n        )\n      )\n    )}}:host{--t-section-margin:var(--t-section-margin-xs, 0)}@media (min-width: 640px){:host{--t-section-margin:var(--t-section-margin-sm, var(--t-section-margin-xs, 0))}}@media (min-width: 768px){:host{--t-section-margin:var(\n      --t-section-margin-md,\n      var(--t-section-margin-sm, var(--t-section-margin-xs, 0))\n    )}}@media (min-width: 1024px){:host{--t-section-margin:var(\n      --t-section-margin-lg,\n      var(--t-section-margin-md, var(--t-section-margin-sm, var(--t-section-margin-xs, 0)))\n    )}}@media (min-width: 1280px){:host{--t-section-margin:var(\n      --t-section-margin-xl,\n      var(\n        --t-section-margin-lg,\n        var(--t-section-margin-md, var(--t-section-margin-sm, var(--t-section-margin-xs, 0)))\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-margin:var(\n      --t-section-margin-2xl,\n      var(\n        --t-section-margin-xl,\n        var(\n          --t-section-margin-lg,\n          var(--t-section-margin-md, var(--t-section-margin-sm, var(--t-section-margin-xs, 0)))\n        )\n      )\n    )}}:host{--t-section-gap:var(--t-section-gap-xs, 0)}@media (min-width: 640px){:host{--t-section-gap:var(--t-section-gap-sm, var(--t-section-gap-xs, 0))}}@media (min-width: 768px){:host{--t-section-gap:var(--t-section-gap-md, var(--t-section-gap-sm, var(--t-section-gap-xs, 0)))}}@media (min-width: 1024px){:host{--t-section-gap:var(\n      --t-section-gap-lg,\n      var(--t-section-gap-md, var(--t-section-gap-sm, var(--t-section-gap-xs, 0)))\n    )}}@media (min-width: 1280px){:host{--t-section-gap:var(\n      --t-section-gap-xl,\n      var(\n        --t-section-gap-lg,\n        var(--t-section-gap-md, var(--t-section-gap-sm, var(--t-section-gap-xs, 0)))\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-gap:var(\n      --t-section-gap-2xl,\n      var(\n        --t-section-gap-xl,\n        var(\n          --t-section-gap-lg,\n          var(--t-section-gap-md, var(--t-section-gap-sm, var(--t-section-gap-xs, 0)))\n        )\n      )\n    )}}:host{--t-section-direction:var(--t-section-direction-xs, column)}@media (min-width: 640px){:host{--t-section-direction:var(--t-section-direction-sm, var(--t-section-direction-xs, column))}}@media (min-width: 768px){:host{--t-section-direction:var(\n      --t-section-direction-md,\n      var(--t-section-direction-sm, var(--t-section-direction-xs, column))\n    )}}@media (min-width: 1024px){:host{--t-section-direction:var(\n      --t-section-direction-lg,\n      var(\n        --t-section-direction-md,\n        var(--t-section-direction-sm, var(--t-section-direction-xs, column))\n      )\n    )}}@media (min-width: 1280px){:host{--t-section-direction:var(\n      --t-section-direction-xl,\n      var(\n        --t-section-direction-lg,\n        var(\n          --t-section-direction-md,\n          var(--t-section-direction-sm, var(--t-section-direction-xs, column))\n        )\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-direction:var(\n      --t-section-direction-2xl,\n      var(\n        --t-section-direction-xl,\n        var(\n          --t-section-direction-lg,\n          var(\n            --t-section-direction-md,\n            var(--t-section-direction-sm, var(--t-section-direction-xs, column))\n          )\n        )\n      )\n    )}}[part='root']{flex-direction:var(--t-section-direction)}:host{--t-section-justify:var(--t-section-justify-xs, flex-start)}@media (min-width: 640px){:host{--t-section-justify:var(--t-section-justify-sm, var(--t-section-justify-xs, flex-start))}}@media (min-width: 768px){:host{--t-section-justify:var(\n      --t-section-justify-md,\n      var(--t-section-justify-sm, var(--t-section-justify-xs, flex-start))\n    )}}@media (min-width: 1024px){:host{--t-section-justify:var(\n      --t-section-justify-lg,\n      var(\n        --t-section-justify-md,\n        var(--t-section-justify-sm, var(--t-section-justify-xs, flex-start))\n      )\n    )}}@media (min-width: 1280px){:host{--t-section-justify:var(\n      --t-section-justify-xl,\n      var(\n        --t-section-justify-lg,\n        var(\n          --t-section-justify-md,\n          var(--t-section-justify-sm, var(--t-section-justify-xs, flex-start))\n        )\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-justify:var(\n      --t-section-justify-2xl,\n      var(\n        --t-section-justify-xl,\n        var(\n          --t-section-justify-lg,\n          var(\n            --t-section-justify-md,\n            var(--t-section-justify-sm, var(--t-section-justify-xs, flex-start))\n          )\n        )\n      )\n    )}}[part='root']{justify-content:var(--t-section-justify)}:host{--t-section-align:var(--t-section-align-xs, stretch)}@media (min-width: 640px){:host{--t-section-align:var(--t-section-align-sm, var(--t-section-align-xs, stretch))}}@media (min-width: 768px){:host{--t-section-align:var(\n      --t-section-align-md,\n      var(--t-section-align-sm, var(--t-section-align-xs, stretch))\n    )}}@media (min-width: 1024px){:host{--t-section-align:var(\n      --t-section-align-lg,\n      var(--t-section-align-md, var(--t-section-align-sm, var(--t-section-align-xs, stretch)))\n    )}}@media (min-width: 1280px){:host{--t-section-align:var(\n      --t-section-align-xl,\n      var(\n        --t-section-align-lg,\n        var(--t-section-align-md, var(--t-section-align-sm, var(--t-section-align-xs, stretch)))\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-align:var(\n      --t-section-align-2xl,\n      var(\n        --t-section-align-xl,\n        var(\n          --t-section-align-lg,\n          var(--t-section-align-md, var(--t-section-align-sm, var(--t-section-align-xs, stretch)))\n        )\n      )\n    )}}[part='root']{align-items:var(--t-section-align)}:host{--t-section-wrap:var(--t-section-wrap-xs, nowrap)}@media (min-width: 640px){:host{--t-section-wrap:var(--t-section-wrap-sm, var(--t-section-wrap-xs, nowrap))}}@media (min-width: 768px){:host{--t-section-wrap:var(\n      --t-section-wrap-md,\n      var(--t-section-wrap-sm, var(--t-section-wrap-xs, nowrap))\n    )}}@media (min-width: 1024px){:host{--t-section-wrap:var(\n      --t-section-wrap-lg,\n      var(--t-section-wrap-md, var(--t-section-wrap-sm, var(--t-section-wrap-xs, nowrap)))\n    )}}@media (min-width: 1280px){:host{--t-section-wrap:var(\n      --t-section-wrap-xl,\n      var(\n        --t-section-wrap-lg,\n        var(--t-section-wrap-md, var(--t-section-wrap-sm, var(--t-section-wrap-xs, nowrap)))\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-wrap:var(\n      --t-section-wrap-2xl,\n      var(\n        --t-section-wrap-xl,\n        var(\n          --t-section-wrap-lg,\n          var(--t-section-wrap-md, var(--t-section-wrap-sm, var(--t-section-wrap-xs, nowrap)))\n        )\n      )\n    )}}[part='root']{flex-wrap:var(--t-section-wrap)}:host{--t-section-radius:var(--t-section-radius-xs, 0)}@media (min-width: 640px){:host{--t-section-radius:var(--t-section-radius-sm, var(--t-section-radius-xs, 0))}}@media (min-width: 768px){:host{--t-section-radius:var(\n      --t-section-radius-md,\n      var(--t-section-radius-sm, var(--t-section-radius-xs, 0))\n    )}}@media (min-width: 1024px){:host{--t-section-radius:var(\n      --t-section-radius-lg,\n      var(--t-section-radius-md, var(--t-section-radius-sm, var(--t-section-radius-xs, 0)))\n    )}}@media (min-width: 1280px){:host{--t-section-radius:var(\n      --t-section-radius-xl,\n      var(\n        --t-section-radius-lg,\n        var(--t-section-radius-md, var(--t-section-radius-sm, var(--t-section-radius-xs, 0)))\n      )\n    )}}@media (min-width: 1536px){:host{--t-section-radius:var(\n      --t-section-radius-2xl,\n      var(\n        --t-section-radius-xl,\n        var(\n          --t-section-radius-lg,\n          var(--t-section-radius-md, var(--t-section-radius-sm, var(--t-section-radius-xs, 0)))\n        )\n      )\n    )}}[part='root']{border-radius:var(--t-section-radius)}:host([height-mode='dvh']) [part='root']{min-height:calc(var(--t-vh, 1vh) * 100);min-height:100dvh}:host([height-mode='screen']) [part='root']{height:calc(var(--t-vh, 1vh) * 100);height:100dvh}:host([scrollable]) [part='root']{overflow:auto;-webkit-overflow-scrolling:touch}::slotted(*){margin:0}[part='root']:focus-visible{outline:2px solid var(--t-section-focus, #6366f1);outline-offset:2px}@media (forced-colors: active){[part='root']{border:1px solid CanvasText}}";
 
 const TintoSection = class {
   constructor(hostRef) {
@@ -1046,13 +1046,13 @@ const TintoSection = class {
   get el() {
     return getElement(this);
   }
-  /** Flex 레이아웃 기본값(모바일 우선, 모든 해상도에 동일 적용) */
+  /** Flex 레이아웃 (responsive 지원) */
   direction = 'column';
   wrap = 'nowrap';
   justify = 'flex-start';
   align = 'stretch';
-  gap; // e.g. "12px", "1rem"
-  /** 크기/여백/배경 등 토큰 */
+  gap; // e.g. "12px", "1rem" or { xs: "8px", md: "16px" }
+  /** 크기/여백/배경 등 토큰 (responsive 지원) */
   maxWidth; // "1200px", "100%", "80ch"...
   padding; // "16px", "24px 12px"...
   margin; // "0 auto"...
@@ -1061,7 +1061,7 @@ const TintoSection = class {
   radius; // border-radius
   shadow; // box-shadow
   /** 가운데 정렬 (maxWidth 사용 시 margin-inline:auto) */
-  center = false;
+  center;
   /**
    * 높이 제어
    * - auto: 내용 높이
@@ -1087,29 +1087,49 @@ const TintoSection = class {
   disconnectedCallback() {
     window.removeEventListener('resize', this.updateVhVar);
   }
+  /**
+   * Breakpoint별 값을 CSS 변수로 변환
+   */
+  buildResponsiveVars(prop, prefix) {
+    if (!prop) return {};
+    if (typeof prop === 'string') {
+      return { [`--t-section-${prefix}`]: prop };
+    }
+    const vars = {};
+    const breakpoints = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+    breakpoints.forEach((bp) => {
+      if (prop && typeof prop === 'object' && prop[bp]) {
+        vars[`--t-section-${prefix}-${bp}`] = prop[bp];
+      }
+    });
+    return vars;
+  }
   /** undefined/null/빈 문자열은 style에 넣지 않도록 클린업 */
   buildStyleVars() {
-    const entries = [
-      ['--t-max-w', this.maxWidth],
-      ['--t-pad', this.padding],
-      ['--t-mar', this.margin],
-      ['--t-bg', this.background],
-      ['--t-color', this.color],
-      ['--t-radius', this.radius],
-      ['--t-shadow', this.shadow],
-      // Flex (모든 해상도 동일)
-      ['--t-dir', this.direction],
-      ['--t-wrap', this.wrap],
-      ['--t-justify', this.justify],
-      ['--t-align', this.align],
-      ['--t-gap', this.gap],
-    ];
+    const maxWidthVars = this.buildResponsiveVars(this.maxWidth, 'max-width');
+    const paddingVars = this.buildResponsiveVars(this.padding, 'padding');
+    const marginVars = this.buildResponsiveVars(this.margin, 'margin');
+    const radiusVars = this.buildResponsiveVars(this.radius, 'radius');
+    const directionVars = this.buildResponsiveVars(this.direction, 'direction');
+    const wrapVars = this.buildResponsiveVars(this.wrap, 'wrap');
+    const justifyVars = this.buildResponsiveVars(this.justify, 'justify');
+    const alignVars = this.buildResponsiveVars(this.align, 'align');
+    const gapVars = this.buildResponsiveVars(this.gap, 'gap');
+    const staticVars = {
+      '--t-section-bg': this.background,
+      '--t-section-color': this.color,
+      '--t-section-shadow': this.shadow,
+    };
     const vars = {};
-    for (const [k, v] of entries) {
+    // Static vars
+    for (const [k, v] of Object.entries(staticVars)) {
       if (v !== undefined && v !== null && String(v).trim() !== '') {
         vars[k] = String(v);
       }
     }
+    // Responsive vars
+    Object.assign(vars, maxWidthVars, paddingVars, marginVars, radiusVars);
+    Object.assign(vars, directionVars, wrapVars, justifyVars, alignVars, gapVars);
     return vars;
   }
   render() {
@@ -1124,7 +1144,7 @@ const TintoSection = class {
     return h(
       'section',
       {
-        key: 'b6379a1062ba0bad2a6dc9931e6ce9df3c5c8380',
+        key: 'c38c72b647df8aedd1af75ba8e7e2869dc52c7d3',
         part: 'root',
         class: 'tinto-section',
         style: styleVars,
@@ -1134,7 +1154,7 @@ const TintoSection = class {
         'aria-describedby': ariaDescribedby,
         tabIndex: tabIndex,
       },
-      h('slot', { key: '6c755fe14e1a4982c53e37f416417879fd1cc85a' }),
+      h('slot', { key: '98ba6a9c52b8614c8e1e2caf87da90b565afc734' }),
     );
   }
 };
@@ -1537,7 +1557,7 @@ const TintoTypography = class {
     const ariaHidden = this.visible ? null : 'true';
     const rel = this.computeRel();
     // 슬롯 + fallback 텍스트
-    const slotNode = h('slot', { key: '3034a46fdf75cfebacc387c8faa7acf3b9cfc13c' });
+    const slotNode = h('slot', { key: '3c27b1eefc24a3446c67709c6f5a7965b22e362c' });
     // rolling=true 이면 슬롯 텍스트를 .typing-effect span으로 감싼다
     let typedSpan;
     let staticTextForSR = null; // 스크린 리더용 정적 텍스트
@@ -1549,7 +1569,7 @@ const TintoTypography = class {
         staticTextForSR = h(
           'span',
           {
-            key: 'a14bd8923a5958bf6ed7c8f28f099e9e7a998b15',
+            key: '4af7390f62401eac0b4a85153a3bd1aff191592a',
             class: 'sr-only',
             'aria-live': 'polite',
           },
@@ -1559,7 +1579,7 @@ const TintoTypography = class {
       typedSpan = h(
         'span',
         {
-          key: '52f8edaa83b620251d8374dcc97dc32d75e1082f',
+          key: '95046edb3fcb2c3be4c93b102b629ea70cbe05a1',
           class: 'typing-effect',
           ref: (el) => (this.typingEl = el),
           'aria-live': 'polite',
@@ -1590,7 +1610,7 @@ const TintoTypography = class {
     return h(
       Tag,
       {
-        key: '77cfb8d037df7dc5c11039450da640c750bf1637',
+        key: 'b6314e7c8fbd6eb330c60f3dce5c73283dd9eab3',
         part: 'root',
         class: `tinto-typography ${this.variant} ${sizeClass} ${disabledClass} ${loadingClass} ${this.rolling ? 'has-typing' : ''}`,
         style: style,
@@ -1610,121 +1630,10 @@ const TintoTypography = class {
 };
 TintoTypography.style = typographyCss;
 
-const wrapperCss =
-  ":host{display:block}.tw-root{position:relative;box-sizing:border-box;width:100%;min-width:0;padding:var(--tw-pad, 0);margin:var(--tw-mar, 0);color:var(--tw-color, inherit);border-radius:var(--tw-radius, 0);box-shadow:var(--tw-shadow, none);border:var(--tw-border, none);background-color:var(--tw-bg, transparent);background-image:var(--tw-bg-img, none);background-size:var(--tw-bg-size, cover);background-position:var(--tw-bg-pos, 50% 50%);background-repeat:var(--tw-bg-repeat, no-repeat);background-attachment:var(--tw-bg-attach, scroll);background-blend-mode:var(--tw-bg-blend, normal)}.tw-root::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:var(--tw-overlay, transparent);opacity:var(--tw-overlay-opacity, 0)}.tw-root.tw-fill{position:absolute;inset:0}[part='inner']{position:relative;z-index:1;display:flex;flex-direction:var(--tw-dir, row);flex-wrap:var(--tw-wrap, nowrap);justify-content:var(--tw-justify, flex-start);align-items:var(--tw-align, stretch);gap:var(--tw-gap, 0)}@media (max-width: 375px){.tw-root{padding:var(--tw-pad-mobile, var(--tw-pad, 0))}[part='inner']{gap:var(--tw-gap-mobile, var(--tw-gap, 0))}}@media (min-width: 768px){[part='inner']{flex-direction:var(--tw-dir-tablet, var(--tw-dir, row));gap:var(--tw-gap-tablet, var(--tw-gap, 0))}}@media (min-width: 1920px){[part='inner']{flex-direction:var(--tw-dir-desktop, var(--tw-dir, row));flex-wrap:var(--tw-wrap-desktop, var(--tw-wrap, nowrap));justify-content:var(--tw-justify-desktop, var(--tw-justify, flex-start));align-items:var(--tw-align-desktop, var(--tw-align, stretch));gap:var(--tw-gap-desktop, var(--tw-gap, 0))}}:host{--tw-breakpoint:var(--tw-breakpoint, 1920px)}";
-
-const TintoWrapper = class {
-  constructor(hostRef) {
-    registerInstance(this, hostRef);
-  }
-  get el() {
-    return getElement(this);
-  }
-  /** Flex (모바일 기본) */
-  direction = 'row';
-  wrap = 'nowrap';
-  justify = 'flex-start';
-  align = 'stretch';
-  gap; // ex) "24px", "1rem"
-  /** Flex (데스크탑 오버라이드) */
-  directionDesktop;
-  wrapDesktop;
-  justifyDesktop;
-  alignDesktop;
-  gapDesktop;
-  /** 데스크탑 브레이크포인트 (기본: '1920px') */
-  breakpoint = '1920px';
-  /** Box / Visual */
-  padding;
-  margin;
-  radius;
-  shadow;
-  border;
-  color;
-  /** 배경(색/그라디언트) + 배경 이미지 */
-  background; // color/gradient → background-color 로 매핑
-  src; // background-image url
-  bgSize = 'cover';
-  bgPosition = '50% 50%';
-  bgRepeat = 'no-repeat';
-  bgAttachment = 'scroll';
-  bgBlend = 'normal';
-  /** 오버레이 */
-  overlay; // rgba/hex-with-alpha 권장
-  overlayOpacity;
-  /** 부모를 덮는 모드 (absolute; inset:0) */
-  fill = false;
-  render() {
-    // CSS var 값 준비: url("…") 형태로 넣을 때 따옴표/괄호 안전화
-    const safeUrl = this.src ? this.src.replace(/"/g, '%22').replace(/\)/g, '%29') : undefined;
-    const bgImg = safeUrl ? `url("${safeUrl}")` : undefined;
-    const ovOpacity = this.overlay ? String(this.overlayOpacity ?? 1) : '0';
-    const styleVars = {
-      // Flex (mobile)
-      '--tw-dir': this.direction,
-      '--tw-wrap': this.wrap,
-      '--tw-justify': this.justify,
-      '--tw-align': this.align,
-      '--tw-gap': this.gap,
-      // Flex (desktop overrides, 1920+)
-      '--tw-dir-desktop': this.directionDesktop,
-      '--tw-wrap-desktop': this.wrapDesktop,
-      '--tw-justify-desktop': this.justifyDesktop,
-      '--tw-align-desktop': this.alignDesktop,
-      '--tw-gap-desktop': this.gapDesktop,
-      // Box
-      '--tw-pad': this.padding,
-      '--tw-mar': this.margin,
-      '--tw-radius': this.radius,
-      '--tw-shadow': this.shadow,
-      '--tw-border': this.border,
-      '--tw-color': this.color,
-      // Background
-      '--tw-bg': this.background,
-      '--tw-bg-img': bgImg,
-      '--tw-bg-size': this.bgSize,
-      '--tw-bg-pos': this.bgPosition,
-      '--tw-bg-repeat': this.bgRepeat,
-      '--tw-bg-attach': this.bgAttachment,
-      '--tw-bg-blend': this.bgBlend,
-      // Overlay
-      '--tw-overlay': this.overlay,
-      '--tw-overlay-opacity': ovOpacity,
-      // Breakpoint (CSS 변수로 전달, CSS에서 사용)
-      '--tw-breakpoint': this.breakpoint,
-    };
-    // host의 role/aria-* 패스스루
-    const ariaLabel = this.el.getAttribute('aria-label') ?? undefined;
-    const ariaLabelledby = this.el.getAttribute('aria-labelledby') ?? undefined;
-    const ariaDescribedby = this.el.getAttribute('aria-describedby') ?? undefined;
-    const role = this.el.getAttribute('role') ?? 'region';
-    return h(
-      'div',
-      {
-        key: '6330674b1fe40ce5fac24586ce08f76fbe0e7152',
-        part: 'root',
-        class: { 'tw-root': true, 'tw-fill': this.fill },
-        style: styleVars,
-        role: role,
-        'aria-label': ariaLabel,
-        'aria-labelledby': ariaLabelledby,
-        'aria-describedby': ariaDescribedby,
-      },
-      h(
-        'div',
-        { key: '33886889effd3b58137d6287c7217a4fb46179ad', part: 'inner' },
-        h('slot', { key: '73b38a325e4cad5738418e993e5269e1b505178e' }),
-      ),
-    );
-  }
-};
-TintoWrapper.style = wrapperCss;
-
 export {
   TintoButton as tinto_button,
   TintoImage as tinto_image,
   TintoSection as tinto_section,
   TintoTypography as tinto_typography,
-  TintoWrapper as tinto_wrapper,
 };
-//# sourceMappingURL=tinto-button.tinto-image.tinto-section.tinto-typography.tinto-wrapper.entry.js.map
+//# sourceMappingURL=tinto-button.tinto-image.tinto-section.tinto-typography.entry.js.map

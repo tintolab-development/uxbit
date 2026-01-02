@@ -242,15 +242,71 @@ Cursor에서 AI에게 요청:
 - 캐시 히트율 확인
 - 타임아웃 설정 조정
 
+## 토큰 사용 최적화 (완료)
+
+### 구현된 기능
+
+1. **설정 기반 최적화**
+   - JSON 직렬화 포맷 선택 (`compact`, `pretty`, `minimal`)
+   - 응답 크기 자동 체크 및 최적화
+   - 기본 설정으로 토큰 사용량 최소화
+
+2. **캐시된 요약 정보 제공**
+   - 컴포넌트 요약 정보 별도 캐싱
+   - `summary` 옵션으로 요약 모드 지원
+   - 문서 파일 읽기 없이 빠른 응답
+
+3. **페이지네이션 및 조건부 로딩**
+   - 페이지네이션 지원 (`page`, `pageSize`)
+   - 조건부 상세 정보 로딩 (`includeDocs`, `includeSemantics`)
+   - 필요한 정보만 선택적으로 로드
+
+### 설정 옵션
+
+```typescript
+{
+  defaultFormat: 'compact',        // JSON 포맷
+  defaultSummaryMode: false,       // 기본 요약 모드
+  defaultPageSize: 20,            // 기본 페이지 크기
+  defaultIncludeDocs: true,       // 기본 문서 포함
+  enableSummaryCache: true,       // 요약 캐시 활성화
+  maxResponseSize: 100,           // 최대 응답 크기 (KB)
+}
+```
+
+### 사용 예시
+
+```typescript
+// 토큰 최소화 모드
+const server = new UxbitMCPServer({
+  defaultFormat: 'compact',
+  defaultSummaryMode: true,
+  defaultPageSize: 10,
+  defaultIncludeDocs: false,
+  maxResponseSize: 50,
+});
+
+// 도구 사용
+list_all_components({ summary: true, page: 1, pageSize: 10 });
+get_component_info({ tagName: 'tinto-button', includeDocs: false });
+```
+
+### 예상 효과
+
+- **토큰 사용량**: 30-70% 감소 (사용 패턴에 따라 다름)
+- **응답 속도**: 요약 캐시 사용 시 향상
+- **메모리 효율**: 요약 캐시로 메모리 사용 최적화
+
 ## 다음 단계
 
 프로덕션 최적화가 완료되었습니다. 다음으로 고려할 수 있는 사항:
 
-1. **컴포넌트 품질 평가 도구**: `evaluate_component_quality` 도구 구현
+1. **컴포넌트 품질 평가 도구**: `evaluate_component_quality` 도구 구현 (완료)
 2. **고급 검색 기능**: 유사도 검색, 자동완성 등
 3. **통계 고도화**: 장기 통계 저장 및 분석
+4. **성능 모니터링**: 실제 토큰 사용량 측정 및 분석
 
 ---
 
 **작성일:** 2025년 12월 30일 (KST)  
-**버전:** 프로덕션 최적화 완료
+**버전:** 프로덕션 최적화 + 토큰 최적화 완료

@@ -1,4 +1,4 @@
-import { h as c } from './iframe-DeVSbkJr.js';
+import { h as c } from './vendor-stencil-dp4AnqGI.js';
 const p = {
     title: 'Uxbit/Image',
     component: 'tinto-image',

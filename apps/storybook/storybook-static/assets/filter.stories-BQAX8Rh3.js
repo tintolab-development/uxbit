@@ -1,4 +1,4 @@
-import { h as e } from './iframe-DeVSbkJr.js';
+import { h as e } from './vendor-stencil-dp4AnqGI.js';
 const n = [
     { value: 'option1', label: 'Option 1', count: 10 },
     { value: 'option2', label: 'Option 2', count: 5 },

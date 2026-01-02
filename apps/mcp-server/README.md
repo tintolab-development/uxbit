@@ -141,6 +141,54 @@ MCP 클라이언트(예: Claude Desktop, Cursor)에서 다음과 같이 설정:
 - **사용 빈도 분석**: 가장 많이 사용되는 Props 목록
 - **성능 통계**: 요청 수, 캐시 히트율, 평균 응답 시간
 
+## 토큰 사용 최적화 (Phase 4)
+
+### 설정 기반 최적화
+
+- **JSON 포맷 선택**: `compact` (기본), `pretty`, `minimal` 모드 지원
+- **응답 크기 자동 체크**: 설정된 크기 초과 시 자동 요약 모드 전환
+- **설정 가능한 기본값**: 모든 최적화 옵션을 기본값으로 설정 가능
+
+### 캐시된 요약 정보
+
+- **요약 캐시**: 컴포넌트 요약 정보를 별도로 캐싱하여 빠른 응답
+- **요약 모드**: `summary: true` 옵션으로 요약 정보만 반환
+- **문서 파일 읽기 제거**: 요약 모드에서는 문서 파일을 읽지 않아 속도 향상
+
+### 페이지네이션 및 조건부 로딩
+
+- **페이지네이션**: `page`, `pageSize` 파라미터로 결과 분할
+- **조건부 상세 정보**: `includeDocs`, `includeSemantics`로 필요한 정보만 로드
+- **선택적 데이터 로딩**: 문서나 semantic parts는 필요할 때만 로드
+
+### 사용 예시
+
+```typescript
+// 토큰 최소화 모드로 서버 시작
+const server = new UxbitMCPServer({
+  defaultFormat: 'compact',
+  defaultSummaryMode: true,
+  defaultPageSize: 10,
+  defaultIncludeDocs: false,
+  enableSummaryCache: true,
+  maxResponseSize: 50,
+});
+
+// 요약 모드로 컴포넌트 목록 조회
+list_all_components({ summary: true, page: 1, pageSize: 10 });
+
+// 문서 없이 컴포넌트 정보만 조회
+get_component_info({ tagName: 'tinto-button', includeDocs: false });
+```
+
+### 예상 효과
+
+- **토큰 사용량**: 30-70% 감소 (사용 패턴에 따라 다름)
+- **응답 속도**: 요약 캐시 사용 시 향상
+- **메모리 효율**: 요약 캐시로 메모리 사용 최적화
+
+자세한 내용은 [프로덕션 최적화 문서](./PRODUCTION_OPTIMIZATION.md)를 참고하세요.
+
 ## 개발
 
 ```bash
@@ -232,8 +280,10 @@ pnpm start
 ## 진행 단계
 
 1. ✅ 현재 상태 테스트 (준비 완료)
-2. ⏳ 컴포넌트 품질 평가 도구 구현
-3. ⏳ 평가 도구 테스트
-4. ⏳ 기존 컴포넌트 Strict 검사 및 마이그레이션
+2. ✅ 컴포넌트 품질 평가 도구 구현
+3. ✅ 토큰 사용 최적화 구현
+4. ⏳ 평가 도구 테스트
+5. ⏳ 기존 컴포넌트 Strict 검사 및 마이그레이션
+6. ⏳ 실제 토큰 사용량 측정 및 분석
 
 자세한 내용은 [마이그레이션 계획](./docs/migration/MIGRATION_PLAN.md)을 참고하세요.

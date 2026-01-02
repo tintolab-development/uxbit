@@ -1,16 +1,6 @@
 {
   "v": 5,
   "entries": {
-    "uxbit-approute--playground": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-approute--playground",
-      "name": "Playground",
-      "title": "Uxbit/AppRoute",
-      "importPath": "../stencil-components/src/components/app-route/app-route.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "Playground"
-    },
     "uxbit-badge--default": {
       "type": "story",
       "subtype": "story",
@@ -271,6 +261,36 @@
       "tags": ["dev", "test"],
       "exportName": "NavigationAlways"
     },
+    "uxbit-carousel--infinite-loop": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-carousel--infinite-loop",
+      "name": "Infinite Loop",
+      "title": "Uxbit/Carousel",
+      "importPath": "../stencil-components/src/components/carousel/carousel.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "InfiniteLoop"
+    },
+    "uxbit-carousel--infinite-loop-with-autoplay": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-carousel--infinite-loop-with-autoplay",
+      "name": "Infinite Loop With Autoplay",
+      "title": "Uxbit/Carousel",
+      "importPath": "../stencil-components/src/components/carousel/carousel.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "InfiniteLoopWithAutoplay"
+    },
+    "uxbit-carousel--infinite-loop-images": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-carousel--infinite-loop-images",
+      "name": "Infinite Loop Images",
+      "title": "Uxbit/Carousel",
+      "importPath": "../stencil-components/src/components/carousel/carousel.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "InfiniteLoopImages"
+    },
     "uxbit-filter--default": {
       "type": "story",
       "subtype": "story",
@@ -470,6 +490,106 @@
       "importPath": "../stencil-components/src/components/image/image.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "WithOverlaySlot"
+    },
+    "uxbit-layout-content--basic": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout-content--basic",
+      "name": "Basic Content",
+      "title": "Uxbit/Layout/Content",
+      "importPath": "../stencil-components/src/components/layout/content/content.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Basic"
+    },
+    "uxbit-layout-content--with-padding": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout-content--with-padding",
+      "name": "Content with Padding",
+      "title": "Uxbit/Layout/Content",
+      "importPath": "../stencil-components/src/components/layout/content/content.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "WithPadding"
+    },
+    "uxbit-layout-content--centered": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout-content--centered",
+      "name": "Centered Content",
+      "title": "Uxbit/Layout/Content",
+      "importPath": "../stencil-components/src/components/layout/content/content.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Centered"
+    },
+    "uxbit-layout-content--responsive": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout-content--responsive",
+      "name": "Responsive Content",
+      "title": "Uxbit/Layout/Content",
+      "importPath": "../stencil-components/src/components/layout/content/content.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Responsive"
+    },
+    "uxbit-layout-content--multiple-contents": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout-content--multiple-contents",
+      "name": "Multiple Contents in Section",
+      "title": "Uxbit/Layout/Content",
+      "importPath": "../stencil-components/src/components/layout/content/content.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "MultipleContents"
+    },
+    "uxbit-layout-content--playground": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout-content--playground",
+      "name": "Playground",
+      "title": "Uxbit/Layout/Content",
+      "importPath": "../stencil-components/src/components/layout/content/content.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Playground"
+    },
+    "uxbit-layout--basic": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout--basic",
+      "name": "Basic Layout",
+      "title": "Uxbit/Layout",
+      "importPath": "../stencil-components/src/components/layout/layout.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Basic"
+    },
+    "uxbit-layout--with-sider": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout--with-sider",
+      "name": "Layout with Sider",
+      "title": "Uxbit/Layout",
+      "importPath": "../stencil-components/src/components/layout/layout.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "WithSider"
+    },
+    "uxbit-layout--responsive": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout--responsive",
+      "name": "Responsive Layout",
+      "title": "Uxbit/Layout",
+      "importPath": "../stencil-components/src/components/layout/layout.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "Responsive"
+    },
+    "uxbit-layout--fixed-header": {
+      "type": "story",
+      "subtype": "story",
+      "id": "uxbit-layout--fixed-header",
+      "name": "Fixed Header",
+      "title": "Uxbit/Layout",
+      "importPath": "../stencil-components/src/components/layout/layout.stories.tsx",
+      "tags": ["dev", "test"],
+      "exportName": "FixedHeader"
     },
     "uxbit-loading--default": {
       "type": "story",
@@ -700,16 +820,6 @@
       "importPath": "../stencil-components/src/components/typography/typography.stories.tsx",
       "tags": ["dev", "test"],
       "exportName": "Rolling"
-    },
-    "uxbit-wrapper--primary": {
-      "type": "story",
-      "subtype": "story",
-      "id": "uxbit-wrapper--primary",
-      "name": "Primary",
-      "title": "Uxbit/Wrapper",
-      "importPath": "../stencil-components/src/components/wrapper/wrapper.stories.tsx",
-      "tags": ["dev", "test"],
-      "exportName": "Primary"
     }
   }
 }
