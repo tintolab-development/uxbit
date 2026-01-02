@@ -23,7 +23,7 @@ const TintoLoading = class {
     return h(
       'div',
       {
-        key: 'e8e6058ffcb0bacb85e294fdca84e1cf5faaf6c0',
+        key: '1e907a8790e94da3d5c48a51ae590c96c2205662',
         class: `loading ${this.overlay ? 'overlay' : ''} ${this.disabled ? 'disabled' : ''}`,
         part: 'loading',
         role: 'status',
@@ -33,11 +33,11 @@ const TintoLoading = class {
       this.variant === 'spinner' &&
         h(
           'div',
-          { key: '9baab821c7f96c82bc8f8f4ff1e2002b5cd4e93d', class: 'spinner', part: 'spinner' },
+          { key: 'fb7c6cca4e8cd72b984157a7118c423678b23a05', class: 'spinner', part: 'spinner' },
           h(
             'svg',
             {
-              key: 'ca49a0f232074e7ddaf0c05c62e62c30ebde6911',
+              key: 'fbb6641730737040caeda7a44faab3ce15c69940',
               viewBox: '0 0 24 24',
               fill: 'none',
               xmlns: 'http://www.w3.org/2000/svg',
@@ -45,7 +45,7 @@ const TintoLoading = class {
             h(
               'circle',
               {
-                key: '8143847dfe9d92f15b1459bb5dcac30351a9824a',
+                key: 'c0744104e9359f54248187e8aab2c20eaae39fc1',
                 cx: '12',
                 cy: '12',
                 r: '10',
@@ -56,7 +56,7 @@ const TintoLoading = class {
                 'stroke-dashoffset': '15.71',
               },
               h('animateTransform', {
-                key: '994c6ab58b037362ab794b1e2cd6b5e7bf4b0578',
+                key: 'b16a6366fe8eb071d427df7f0b37eb44681a013b',
                 attributeName: 'transform',
                 type: 'rotate',
                 values: '0 12 12;360 12 12',
@@ -69,21 +69,21 @@ const TintoLoading = class {
       this.variant === 'dots' &&
         h(
           'div',
-          { key: '3b673120dba2351e9238ed84b634b378b32e4702', class: 'dots', part: 'dots' },
-          h('span', { key: '15188d1f14e87325816ad80fe8971ea8158ca9af' }),
-          h('span', { key: 'f715814de951bd9f1df8837d45eab6dce1e59a69' }),
-          h('span', { key: '399328f7a7801ed9a150b195f6285563d9a166ef' }),
+          { key: '35af95f2da53b65f01cee8d321de19186c03612a', class: 'dots', part: 'dots' },
+          h('span', { key: 'b3614c5361334922af8e899ec22d1436deadf160' }),
+          h('span', { key: '2408e3c8fc8ecc3af7f5c459dd514416eae8a665' }),
+          h('span', { key: 'feb71814e153ec88968aba33d90baf4fe6eb0134' }),
         ),
       this.variant === 'pulse' &&
         h(
           'div',
-          { key: '55ea7fd568e8493de25def48d8172683b5444f6b', class: 'pulse', part: 'pulse' },
-          h('span', { key: '759cb74441beaffc1980532fcf81ab00f870bc02' }),
+          { key: '3a43720d70af4d3a479629069d7289ed3adee22c', class: 'pulse', part: 'pulse' },
+          h('span', { key: '9a6ebfa8277b5e5231451e5aaaf67efa7157f88d' }),
         ),
       this.text &&
         h(
           'div',
-          { key: '4a57e0936fa00309863afcc7938fab9e634e8858', class: 'loading-text', part: 'text' },
+          { key: '2db6d3a6554f909a8280f40c9d299afa4cf75de2', class: 'loading-text', part: 'text' },
           this.text,
         ),
     );

@@ -1,4 +1,4 @@
-import { h as o } from './iframe-DeVSbkJr.js';
+import { h as o } from './vendor-stencil-dp4AnqGI.js';
 const i = {
     title: 'Uxbit/Modal',
     component: 'tinto-modal',

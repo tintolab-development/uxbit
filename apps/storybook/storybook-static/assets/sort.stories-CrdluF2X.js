@@ -1,4 +1,4 @@
-import { h as e } from './iframe-DeVSbkJr.js';
+import { h as e } from './vendor-stencil-dp4AnqGI.js';
 const n = [
     { value: 'popular', label: '인기순', direction: 'desc' },
     { value: 'price-asc', label: '가격 낮은순', direction: 'asc' },

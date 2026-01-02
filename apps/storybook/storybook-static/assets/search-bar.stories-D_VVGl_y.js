@@ -1,4 +1,4 @@
-import { h as r } from './iframe-DeVSbkJr.js';
+import { h as r } from './vendor-stencil-dp4AnqGI.js';
 const d = {
     title: 'Uxbit/SearchBar',
     component: 'tinto-search-bar',

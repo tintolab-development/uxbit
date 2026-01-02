@@ -1,4 +1,4 @@
-import { h as e } from './iframe-DeVSbkJr.js';
+import { h as e } from './vendor-stencil-dp4AnqGI.js';
 const d = {
     title: 'Uxbit/FormInput',
     component: 'tinto-form-input',

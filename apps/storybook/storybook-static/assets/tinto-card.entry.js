@@ -93,7 +93,7 @@ const TintoCard = class {
     return h(
       'article',
       {
-        key: '8ed3ccfef759206a455124dc92fd1f7c195eccba',
+        key: '21bea614123771f19e26b28949a54c17235fcaf6',
         class: `card ${this.variant} ${this.size} ${this.direction} ${this.loading ? 'loading' : ''} ${!this.clickable ? 'not-clickable' : ''}`,
         part: 'card',
         role: 'article',
@@ -101,12 +101,12 @@ const TintoCard = class {
       },
       h(
         CardWrapper,
-        { key: 'd3df2c0233f056de4872368dea0fc53f9dd5b071', ...wrapperProps, part: 'button' },
+        { key: '7db984c2df84a412c86ec132e018172f4be7483c', ...wrapperProps, part: 'button' },
         hasImage &&
           h(
             'div',
             {
-              key: 'b129bf36d24ad0def45b35b0bc4925785850462c',
+              key: 'ef9362f6c8a58fb12d8080f334fffbba7c1770e6',
               class: 'card-image-wrapper',
               part: 'image-wrapper',
             },
@@ -127,13 +127,13 @@ const TintoCard = class {
               h(
                 'div',
                 {
-                  key: '67b05432fbdbeaf7946a2b2a3355f6c2d04f5c87',
+                  key: '17c98c8ae0bca67ab92ebc485635204072684561',
                   class: 'card-badge',
                   part: 'badge',
                 },
                 h(
                   'slot',
-                  { key: '4f2d186fa4d8d9a12f3aecc57f9c41c84db5bf46', name: 'badge' },
+                  { key: '01d4c6d23754f0ec9412593f734b18c927d85482', name: 'badge' },
                   this.badge || (this.discountRate ? `${this.discountRate}%` : ''),
                 ),
               ),
@@ -141,7 +141,7 @@ const TintoCard = class {
         h(
           'div',
           {
-            key: 'fa64200ee5a87fd70d6e4ffb51f6858eb982f06d',
+            key: '643ab2137f7c91947758e0b99c546d1ff108b999',
             class: 'card-content',
             part: 'content',
           },
@@ -149,18 +149,18 @@ const TintoCard = class {
             h(
               'div',
               {
-                key: '052fc25f45e8e8ba93e313ed715261fc3e684426',
+                key: 'ad5964b893a41bc140ade9e236a4724726bf8ca7',
                 class: 'card-title',
                 part: 'title',
               },
               h(
                 'slot',
-                { key: '784d3fb825bfdb962939502b3c7fcb358e37d5f7', name: 'title' },
+                { key: '6ce42f67a48d7ea3d804e17e301381911b73ab9c', name: 'title' },
                 this.cardTitle &&
                   h(
                     'tinto-typography',
                     {
-                      key: '332ea2f8697e6121c83456fda3061b1ec205b777',
+                      key: 'bbc774b5010b24c1289503256a5af70811ccd466',
                       variant: 'h3',
                       fontSize: 'md',
                       weight: '600',
@@ -173,18 +173,18 @@ const TintoCard = class {
             h(
               'div',
               {
-                key: '0452fac42462ad7b4ffb00c55033d4b86c58b15f',
+                key: '18d048f5f4590f537b07aab01d7005c5130e161a',
                 class: 'card-description',
                 part: 'description',
               },
               h(
                 'slot',
-                { key: 'eaecca673bd4cc25a6f237adf8b09c1ce2a84173', name: 'description' },
+                { key: 'd1e2fd82f7f35706e2c0a9da227903256fcd3c24', name: 'description' },
                 this.description &&
                   h(
                     'tinto-typography',
                     {
-                      key: '650a912b5e3dba2e14ae302e1a3e1a8cf85145ae',
+                      key: '1023bde2b35f4a0622aac8d27467769acb02357b',
                       variant: 'p',
                       fontSize: 'sm',
                       color: '#666',
@@ -197,19 +197,19 @@ const TintoCard = class {
             h(
               'div',
               {
-                key: '7e90199785e18f55c7e750d28866fa7a43dd59ac',
+                key: '1b61c919bdaacdb8666efca35c3922878426ceda',
                 class: 'card-price',
                 part: 'price',
               },
               h(
                 'slot',
-                { key: '1decfc92e351ebce87aa98e89da835950b97d037', name: 'price' },
+                { key: '11e5c8ec73ecc375583f775ffb9446cc817df0cf', name: 'price' },
                 hasDiscount &&
                   this.originalPrice &&
                   h(
                     'tinto-typography',
                     {
-                      key: 'cf732ffad0a22ad1021ea01d125e8c1dd3fc116e',
+                      key: '6503888a4e19bd7e984521dd23e0270acfb92cd3',
                       variant: 'span',
                       fontSize: 'sm',
                       color: '#999',
@@ -221,7 +221,7 @@ const TintoCard = class {
                   h(
                     'tinto-typography',
                     {
-                      key: 'e39c39e1d28f840ee7918026e2a27a8ee0dfb4e4',
+                      key: '3618b75d03733a570cdedd5bc8bacf1739986a40',
                       variant: 'span',
                       fontSize: 'lg',
                       weight: '700',
@@ -231,7 +231,7 @@ const TintoCard = class {
                   ),
               ),
             ),
-          h('slot', { key: 'e85789e385436071bf66f31eface6ddc2f4f4d8c', name: 'content' }),
+          h('slot', { key: 'a4e68cfedc5c6556099b7cbed190d224bed2a7fa', name: 'content' }),
         ),
       ),
     );

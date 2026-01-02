@@ -1,5 +1,5 @@
-import { h as t } from './iframe-DeVSbkJr.js';
-const h = {
+import { h as t } from './vendor-stencil-dp4AnqGI.js';
+const b = {
     title: 'Uxbit/Carousel',
     component: 'tinto-carousel',
     parameters: {
@@ -94,15 +94,15 @@ const h = {
   },
   i = (o = 3) => {
     const n = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7'];
-    return Array.from({ length: o }, (y, d) => {
-      const g = n[d % n.length];
+    return Array.from({ length: o }, (w, y) => {
+      const h = n[y % n.length];
       return t(
         'div',
         {
           style: {
             width: '100%',
             height: '400px',
-            background: g,
+            background: h,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -112,11 +112,11 @@ const h = {
           },
         },
         'Slide ',
-        d + 1,
+        y + 1,
       );
     });
   },
-  u = () =>
+  v = () =>
     [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
       'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
@@ -163,7 +163,7 @@ const h = {
         i(3),
       ),
   },
-  e = {
+  r = {
     args: { ...a.args },
     render: (o) =>
       t(
@@ -176,10 +176,10 @@ const h = {
           autoplay: o.autoplay,
           loop: o.loop,
         },
-        u(),
+        v(),
       ),
   },
-  r = {
+  e = {
     args: { ...a.args, autoplay: !0, autoplayInterval: 3e3, loop: !0 },
     render: (o) =>
       t(
@@ -247,6 +247,100 @@ const h = {
         },
         i(3),
       ),
+  },
+  d = {
+    args: {
+      ...a.args,
+      loop: !0,
+      showNavigation: !0,
+      navigationDisplay: 'always',
+      showIndicator: !0,
+      indicatorType: 'dot',
+    },
+    render: (o) =>
+      t(
+        'tinto-carousel',
+        {
+          loop: o.loop,
+          'show-navigation': o.showNavigation,
+          'navigation-display': o.navigationDisplay,
+          'show-indicator': o.showIndicator,
+          'indicator-type': o.indicatorType,
+          'transition-duration': 500,
+        },
+        i(5),
+      ),
+    parameters: {
+      docs: {
+        description: {
+          story:
+            '무한 루프 모드. 마지막 슬라이드에서 다음으로 가면 첫 번째 슬라이드로, 첫 번째 슬라이드에서 이전으로 가면 마지막 슬라이드로 부드럽게 전환됩니다.',
+        },
+      },
+    },
+  },
+  u = {
+    args: {
+      ...a.args,
+      loop: !0,
+      autoplay: !0,
+      autoplayInterval: 3e3,
+      showNavigation: !0,
+      navigationDisplay: 'hover',
+      showIndicator: !0,
+      indicatorType: 'bar',
+      transitionDuration: 500,
+    },
+    render: (o) =>
+      t(
+        'tinto-carousel',
+        {
+          loop: o.loop,
+          autoplay: o.autoplay,
+          'autoplay-interval': o.autoplayInterval,
+          'show-navigation': o.showNavigation,
+          'navigation-display': o.navigationDisplay,
+          'show-indicator': o.showIndicator,
+          'indicator-type': o.indicatorType,
+          'transition-duration': o.transitionDuration,
+        },
+        i(5),
+      ),
+    parameters: {
+      docs: {
+        description: {
+          story:
+            '무한 루프와 자동 재생이 함께 작동하는 예제. 자동으로 슬라이드가 전환되며, 마지막 슬라이드에서 첫 번째 슬라이드로 부드럽게 순환합니다.',
+        },
+      },
+    },
+  },
+  g = {
+    args: {
+      ...a.args,
+      loop: !0,
+      showNavigation: !0,
+      navigationDisplay: 'hover',
+      showIndicator: !0,
+      indicatorType: 'dot',
+      transitionDuration: 500,
+    },
+    render: (o) =>
+      t(
+        'tinto-carousel',
+        {
+          loop: o.loop,
+          'show-navigation': o.showNavigation,
+          'navigation-display': o.navigationDisplay,
+          'show-indicator': o.showIndicator,
+          'indicator-type': o.indicatorType,
+          'transition-duration': o.transitionDuration,
+        },
+        v(),
+      ),
+    parameters: {
+      docs: { description: { story: '이미지 슬라이드에서 무한 루프를 적용한 예제입니다.' } },
+    },
   };
 a.parameters = {
   ...a.parameters,
@@ -278,10 +372,10 @@ a.parameters = {
     },
   },
 };
-e.parameters = {
-  ...e.parameters,
+r.parameters = {
+  ...r.parameters,
   docs: {
-    ...e.parameters?.docs,
+    ...r.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -291,14 +385,14 @@ e.parameters = {
       {createImageSlides()}
     </tinto-carousel>
 }`,
-      ...e.parameters?.docs?.source,
+      ...r.parameters?.docs?.source,
     },
   },
 };
-r.parameters = {
-  ...r.parameters,
+e.parameters = {
+  ...e.parameters,
   docs: {
-    ...r.parameters?.docs,
+    ...e.parameters?.docs,
     source: {
       originalSource: `{
   args: {
@@ -311,7 +405,7 @@ r.parameters = {
       {createSlides(5)}
     </tinto-carousel>
 }`,
-      ...r.parameters?.docs?.source,
+      ...e.parameters?.docs?.source,
     },
   },
 };
@@ -389,7 +483,98 @@ p.parameters = {
     },
   },
 };
-const v = [
+d.parameters = {
+  ...d.parameters,
+  docs: {
+    ...d.parameters?.docs,
+    source: {
+      originalSource: `{
+  args: {
+    ...Default.args,
+    loop: true,
+    showNavigation: true,
+    navigationDisplay: 'always',
+    showIndicator: true,
+    indicatorType: 'dot'
+  },
+  render: args => <tinto-carousel loop={args.loop} show-navigation={args.showNavigation} navigation-display={args.navigationDisplay} show-indicator={args.showIndicator} indicator-type={args.indicatorType} transition-duration={500}>
+      {createSlides(5)}
+    </tinto-carousel>,
+  parameters: {
+    docs: {
+      description: {
+        story: '무한 루프 모드. 마지막 슬라이드에서 다음으로 가면 첫 번째 슬라이드로, 첫 번째 슬라이드에서 이전으로 가면 마지막 슬라이드로 부드럽게 전환됩니다.'
+      }
+    }
+  }
+}`,
+      ...d.parameters?.docs?.source,
+    },
+  },
+};
+u.parameters = {
+  ...u.parameters,
+  docs: {
+    ...u.parameters?.docs,
+    source: {
+      originalSource: `{
+  args: {
+    ...Default.args,
+    loop: true,
+    autoplay: true,
+    autoplayInterval: 3000,
+    showNavigation: true,
+    navigationDisplay: 'hover',
+    showIndicator: true,
+    indicatorType: 'bar',
+    transitionDuration: 500
+  },
+  render: args => <tinto-carousel loop={args.loop} autoplay={args.autoplay} autoplay-interval={args.autoplayInterval} show-navigation={args.showNavigation} navigation-display={args.navigationDisplay} show-indicator={args.showIndicator} indicator-type={args.indicatorType} transition-duration={args.transitionDuration}>
+      {createSlides(5)}
+    </tinto-carousel>,
+  parameters: {
+    docs: {
+      description: {
+        story: '무한 루프와 자동 재생이 함께 작동하는 예제. 자동으로 슬라이드가 전환되며, 마지막 슬라이드에서 첫 번째 슬라이드로 부드럽게 순환합니다.'
+      }
+    }
+  }
+}`,
+      ...u.parameters?.docs?.source,
+    },
+  },
+};
+g.parameters = {
+  ...g.parameters,
+  docs: {
+    ...g.parameters?.docs,
+    source: {
+      originalSource: `{
+  args: {
+    ...Default.args,
+    loop: true,
+    showNavigation: true,
+    navigationDisplay: 'hover',
+    showIndicator: true,
+    indicatorType: 'dot',
+    transitionDuration: 500
+  },
+  render: args => <tinto-carousel loop={args.loop} show-navigation={args.showNavigation} navigation-display={args.navigationDisplay} show-indicator={args.showIndicator} indicator-type={args.indicatorType} transition-duration={args.transitionDuration}>
+      {createImageSlides()}
+    </tinto-carousel>,
+  parameters: {
+    docs: {
+      description: {
+        story: '이미지 슬라이드에서 무한 루프를 적용한 예제입니다.'
+      }
+    }
+  }
+}`,
+      ...g.parameters?.docs?.source,
+    },
+  },
+};
+const I = [
   'Default',
   'WithImages',
   'Autoplay',
@@ -397,15 +582,21 @@ const v = [
   'FadeTransition',
   'NumberIndicator',
   'NavigationAlways',
+  'InfiniteLoop',
+  'InfiniteLoopWithAutoplay',
+  'InfiniteLoopImages',
 ];
 export {
-  r as Autoplay,
+  e as Autoplay,
   a as Default,
   c as FadeTransition,
+  d as InfiniteLoop,
+  g as InfiniteLoopImages,
+  u as InfiniteLoopWithAutoplay,
   s as MultipleSlides,
   p as NavigationAlways,
   l as NumberIndicator,
-  e as WithImages,
-  v as __namedExportsOrder,
-  h as default,
+  r as WithImages,
+  I as __namedExportsOrder,
+  b as default,
 };

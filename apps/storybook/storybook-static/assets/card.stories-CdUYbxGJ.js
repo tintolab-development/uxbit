@@ -1,4 +1,4 @@
-import { h as t } from './iframe-DeVSbkJr.js';
+import { h as t } from './vendor-stencil-dp4AnqGI.js';
 const s = {
     title: 'Uxbit/Card',
     component: 'tinto-card',

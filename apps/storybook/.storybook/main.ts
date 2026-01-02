@@ -17,6 +17,58 @@ const config: StorybookConfig = {
   viteFinal: async (baseConfig) => {
     const finalConfig = { ...baseConfig };
 
+    // 코드 스플리팅 설정
+    finalConfig.build = {
+      ...(finalConfig.build ?? {}),
+      chunkSizeWarningLimit: 1000, // 1MB로 증가 (기본값 500KB)
+      rollupOptions: {
+        ...(finalConfig.build?.rollupOptions ?? {}),
+        output: {
+          ...(finalConfig.build?.rollupOptions?.output ?? {}),
+          manualChunks: (id) => {
+            // node_modules 의존성을 별도 청크로 분리
+            if (id.includes('node_modules')) {
+              // React 관련 라이브러리
+              if (id.includes('react') || id.includes('react-dom')) {
+                return 'vendor-react';
+              }
+              // Storybook 관련 라이브러리 (더 세분화)
+              if (id.includes('@storybook')) {
+                // Storybook 코어
+                if (id.includes('@storybook/core') || id.includes('@storybook/api')) {
+                  return 'vendor-storybook-core';
+                }
+                // Storybook UI
+                if (id.includes('@storybook/components') || id.includes('@storybook/theming')) {
+                  return 'vendor-storybook-ui';
+                }
+                // 기타 Storybook
+                return 'vendor-storybook';
+              }
+              // Stencil 관련 라이브러리
+              if (id.includes('@stencil') || id.includes('stencil')) {
+                return 'vendor-stencil';
+              }
+              // 기타 vendor
+              return 'vendor';
+            }
+            // Stencil 컴포넌트를 개별 청크로 분리
+            if (id.includes('stencil-components') && id.includes('.entry.js')) {
+              const match = id.match(/(tinto-\w+)\.entry\.js/);
+              if (match) {
+                return `component-${match[1]}`;
+              }
+            }
+            // 큰 파일들을 별도 청크로 분리
+            if (id.includes('stencil-components/dist/esm/index')) {
+              return 'stencil-index';
+            }
+            // vite-inject-mocker-entry는 별도 처리 (이미 분리되어 있음)
+          },
+        },
+      },
+    };
+
     // 1) Vitest mocker를 pre-bundle 대상에서 제외
     finalConfig.optimizeDeps = {
       ...(finalConfig.optimizeDeps ?? {}),

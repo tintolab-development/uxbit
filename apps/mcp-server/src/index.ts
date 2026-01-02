@@ -34,6 +34,15 @@ interface ComponentInfo {
   cssVariables?: string[];
 }
 
+interface ComponentSummary {
+  tag: string;
+  description: string; // 짧은 요약 (50자 이내)
+  propsCount: number;
+  eventsCount: number;
+  methodsCount: number;
+  hasDocumentation: boolean;
+}
+
 interface SemanticPart {
   name: string;
   description: string;
@@ -60,6 +69,13 @@ const DEFAULT_CONFIG = {
   requestTimeout: 30 * 1000, // 30초
   maxRetries: 3, // 최대 재시도 횟수
   retryDelay: 1000, // 재시도 지연 (ms)
+  // 응답 최적화 설정
+  defaultFormat: 'compact' as const, // 'compact' | 'pretty' | 'minimal'
+  defaultSummaryMode: false, // 기본 요약 모드
+  defaultPageSize: 20, // 기본 페이지 크기
+  defaultIncludeDocs: true, // 기본 문서 포함 여부
+  enableSummaryCache: true, // 요약 캐시 활성화
+  maxResponseSize: 100, // 최대 응답 크기 (KB)
 };
 
 interface ServerConfig {
@@ -70,6 +86,13 @@ interface ServerConfig {
   customElementsPath?: string;
   docsPath?: string;
   overviewPath?: string;
+  // 응답 최적화 설정
+  defaultFormat?: 'compact' | 'pretty' | 'minimal';
+  defaultSummaryMode?: boolean;
+  defaultPageSize?: number;
+  defaultIncludeDocs?: boolean;
+  enableSummaryCache?: boolean;
+  maxResponseSize?: number;
 }
 
 /**
@@ -88,6 +111,7 @@ class UxbitMCPServer {
   private config: Required<ServerConfig>;
   private componentsCache: CacheEntry<ComponentInfo[]> | null = null;
   private overviewCache: CacheEntry<string> | null = null;
+  private summaryCache: CacheEntry<ComponentSummary[]> | null = null;
   private performanceMetrics: PerformanceMetrics = {
     requestCount: 0,
     cacheHits: 0,
@@ -110,6 +134,13 @@ class UxbitMCPServer {
       customElementsPath: config.customElementsPath ?? CUSTOM_ELEMENTS_JSON,
       docsPath: config.docsPath ?? DOCS_DIR,
       overviewPath: config.overviewPath ?? OVERVIEW_PATH,
+      // 응답 최적화 설정
+      defaultFormat: config.defaultFormat ?? DEFAULT_CONFIG.defaultFormat,
+      defaultSummaryMode: config.defaultSummaryMode ?? DEFAULT_CONFIG.defaultSummaryMode,
+      defaultPageSize: config.defaultPageSize ?? DEFAULT_CONFIG.defaultPageSize,
+      defaultIncludeDocs: config.defaultIncludeDocs ?? DEFAULT_CONFIG.defaultIncludeDocs,
+      enableSummaryCache: config.enableSummaryCache ?? DEFAULT_CONFIG.enableSummaryCache,
+      maxResponseSize: config.maxResponseSize ?? DEFAULT_CONFIG.maxResponseSize,
     };
 
     this.customElementsPath = this.config.customElementsPath;
@@ -196,7 +227,7 @@ class UxbitMCPServer {
               {
                 uri,
                 mimeType: 'application/json',
-                text: JSON.stringify(components, null, 2),
+                text: this.serialize(this.optimizeResponse(components)),
               },
             ],
           };
@@ -246,6 +277,18 @@ class UxbitMCPServer {
                   type: 'string',
                   description: 'Search query (component name or keyword)',
                 },
+                summary: {
+                  type: 'boolean',
+                  description: 'Return summary only (default: false)',
+                },
+                page: {
+                  type: 'number',
+                  description: 'Page number (default: 1)',
+                },
+                pageSize: {
+                  type: 'number',
+                  description: 'Items per page (default: 20)',
+                },
               },
               required: ['query'],
             },
@@ -261,6 +304,14 @@ class UxbitMCPServer {
                   type: 'string',
                   description: 'Component tag name (e.g., tinto-button)',
                 },
+                includeDocs: {
+                  type: 'boolean',
+                  description: 'Include full documentation (default: true)',
+                },
+                includeSemantics: {
+                  type: 'boolean',
+                  description: 'Include semantic parts information (default: false)',
+                },
               },
               required: ['tagName'],
             },
@@ -271,7 +322,20 @@ class UxbitMCPServer {
               'List all available UXBIT components. UXBIT provides universal, framework-agnostic Web Components for building consistent UI across different projects.',
             inputSchema: {
               type: 'object',
-              properties: {},
+              properties: {
+                summary: {
+                  type: 'boolean',
+                  description: 'Return summary only (default: false)',
+                },
+                page: {
+                  type: 'number',
+                  description: 'Page number (default: 1)',
+                },
+                pageSize: {
+                  type: 'number',
+                  description: 'Items per page (default: 20)',
+                },
+              },
             },
           },
           {
@@ -397,30 +461,65 @@ class UxbitMCPServer {
         switch (name) {
           case 'search_components': {
             const query = (args as any).query?.toLowerCase() || '';
+            const summary = (args as any).summary ?? this.config.defaultSummaryMode;
+            const page = (args as any).page || 1;
+            const pageSize = (args as any).pageSize || this.config.defaultPageSize;
+
             if (!query) {
               return {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'Query parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'Query parameter is required' }),
                   },
                 ],
                 isError: true,
               };
             }
 
-            const results = components.filter((comp) => {
-              const searchText = `${comp.tag} ${comp.docs || ''}`.toLowerCase();
-              return searchText.includes(query);
+            let results: any[];
+            if (summary) {
+              // 요약 모드: 요약 정보만 사용
+              const summaries = await this.loadSummaries();
+              results = summaries.filter((comp) => {
+                const searchText = `${comp.tag} ${comp.description}`.toLowerCase();
+                return searchText.includes(query);
+              });
+            } else {
+              // 전체 모드: 전체 컴포넌트 정보 사용
+              results = components.filter((comp) => {
+                const searchText = `${comp.tag} ${comp.docs || ''}`.toLowerCase();
+                return searchText.includes(query);
+              });
+            }
+
+            // 페이지네이션 적용
+            const total = results.length;
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const paginatedResults = results.slice(start, end);
+
+            this.logInfo('컴포넌트 검색', {
+              query,
+              resultsCount: total,
+              page,
+              pageSize,
+              summary,
             });
 
-            this.logInfo('컴포넌트 검색', { query, resultsCount: results.length });
+            const response = {
+              total,
+              page,
+              pageSize,
+              hasMore: end < total,
+              results: paginatedResults,
+            };
 
             return {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(results, null, 2),
+                  text: this.serialize(this.optimizeResponse(response)),
                 },
               ],
             };
@@ -428,12 +527,15 @@ class UxbitMCPServer {
 
           case 'get_component_info': {
             const tagName = (args as any).tagName;
+            const includeDocs = (args as any).includeDocs ?? this.config.defaultIncludeDocs;
+            const includeSemantics = (args as any).includeSemantics === true;
+
             if (!tagName) {
               return {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'tagName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'tagName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -448,51 +550,93 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: `Component not found: ${tagName}` }, null, 2),
+                    text: this.serialize({ error: `Component not found: ${tagName}` }),
                   },
                 ],
                 isError: true,
               };
             }
 
-            // 문서 파일도 함께 읽기
-            const docPath = join(this.docsPath, 'components', `${tagName}.md`);
-            let docContent = null;
-            try {
-              docContent = await this.readFileWithTimeout(docPath, 'utf-8');
-            } catch (error: any) {
-              this.logWarning('문서를 읽을 수 없음', { tagName, error: error.message });
+            const info: any = {
+              tag: component.tag,
+              props: component.props,
+              events: component.events,
+              methods: component.methods,
+            };
+
+            // 문서는 필요할 때만 로드
+            if (includeDocs) {
+              const docPath = join(this.docsPath, 'components', `${tagName}.md`);
+              try {
+                info.documentation = await this.readFileWithTimeout(docPath, 'utf-8');
+              } catch (error: any) {
+                this.logWarning('문서를 읽을 수 없음', { tagName, error: error.message });
+                info.documentation = null;
+              }
             }
 
-            const info = {
-              ...component,
-              documentation: docContent || 'Documentation not available.',
-            };
+            // Semantic parts는 필요할 때만 추출
+            if (includeSemantics) {
+              info.semantics = await this.extractSemanticParts(tagName);
+            }
 
             return {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(info, null, 2),
+                  text: this.serialize(this.optimizeResponse(info)),
                 },
               ],
             };
           }
 
           case 'list_all_components': {
-            const list = components.map((comp) => ({
-              tagName: comp.tag,
-              description: comp.docs || '',
-              propertiesCount: comp.props?.length || 0,
-              eventsCount: comp.events?.length || 0,
-              methodsCount: comp.methods?.length || 0,
-            }));
+            const summary = (args as any).summary ?? this.config.defaultSummaryMode;
+            const page = (args as any).page || 1;
+            const pageSize = (args as any).pageSize || this.config.defaultPageSize;
+
+            let list: any[];
+            if (summary) {
+              // 요약 모드: 요약 정보만 사용
+              const summaries = await this.loadSummaries();
+              list = summaries.map((s) => ({
+                tagName: s.tag,
+                description: s.description,
+                propertiesCount: s.propsCount,
+                eventsCount: s.eventsCount,
+                methodsCount: s.methodsCount,
+                hasDocumentation: s.hasDocumentation,
+              }));
+            } else {
+              // 전체 모드: 전체 컴포넌트 정보 사용
+              list = components.map((comp) => ({
+                tagName: comp.tag,
+                description: comp.docs || '',
+                propertiesCount: comp.props?.length || 0,
+                eventsCount: comp.events?.length || 0,
+                methodsCount: comp.methods?.length || 0,
+              }));
+            }
+
+            // 페이지네이션 적용
+            const total = list.length;
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const paginatedList = list.slice(start, end);
+
+            const response = {
+              total,
+              page,
+              pageSize,
+              hasMore: end < total,
+              components: paginatedList,
+            };
 
             return {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(list, null, 2),
+                  text: this.serialize(this.optimizeResponse(response)),
                 },
               ],
             };
@@ -505,7 +649,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'propName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'propName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -535,7 +679,7 @@ class UxbitMCPServer {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(results, null, 2),
+                  text: this.serialize(this.optimizeResponse(results)),
                 },
               ],
             };
@@ -548,7 +692,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'eventName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'eventName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -578,7 +722,7 @@ class UxbitMCPServer {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(results, null, 2),
+                  text: this.serialize(this.optimizeResponse(results)),
                 },
               ],
             };
@@ -591,7 +735,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'methodName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'methodName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -621,7 +765,7 @@ class UxbitMCPServer {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(results, null, 2),
+                  text: this.serialize(this.optimizeResponse(results)),
                 },
               ],
             };
@@ -638,7 +782,7 @@ class UxbitMCPServer {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(healthWithMemory, null, 2),
+                  text: this.serialize(this.optimizeResponse(healthWithMemory)),
                 },
               ],
             };
@@ -699,7 +843,7 @@ class UxbitMCPServer {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(stats, null, 2),
+                  text: this.serialize(this.optimizeResponse(stats)),
                 },
               ],
             };
@@ -712,7 +856,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'tagName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'tagName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -724,7 +868,7 @@ class UxbitMCPServer {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(evaluation, null, 2),
+                  text: this.serialize(this.optimizeResponse(evaluation)),
                 },
               ],
             };
@@ -737,7 +881,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'tagName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'tagName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -750,7 +894,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: `Component not found: ${tagName}` }, null, 2),
+                    text: this.serialize({ error: `Component not found: ${tagName}` }),
                   },
                 ],
                 isError: true,
@@ -763,19 +907,17 @@ class UxbitMCPServer {
             // Ant Design 스타일의 구조화된 설명 생성
             const semanticDescription = this.formatSemanticDescription(tagName, semantics);
 
+            const result = {
+              component: tagName,
+              semantics,
+              description: semanticDescription,
+            };
+
             return {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(
-                    {
-                      component: tagName,
-                      semantics,
-                      description: semanticDescription,
-                    },
-                    null,
-                    2,
-                  ),
+                  text: this.serialize(this.optimizeResponse(result)),
                 },
               ],
             };
@@ -788,7 +930,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: 'tagName parameter is required' }, null, 2),
+                    text: this.serialize({ error: 'tagName parameter is required' }),
                   },
                 ],
                 isError: true,
@@ -801,7 +943,7 @@ class UxbitMCPServer {
                 content: [
                   {
                     type: 'text',
-                    text: JSON.stringify({ error: `Component not found: ${tagName}` }, null, 2),
+                    text: this.serialize({ error: `Component not found: ${tagName}` }),
                   },
                 ],
                 isError: true,
@@ -823,20 +965,18 @@ class UxbitMCPServer {
               }
             }
 
+            const result = {
+              component: tagName,
+              cssVariables,
+              partVariables,
+              stylingGuide: this.generateStylingGuide(tagName, cssVariables, semantics),
+            };
+
             return {
               content: [
                 {
                   type: 'text',
-                  text: JSON.stringify(
-                    {
-                      component: tagName,
-                      cssVariables,
-                      partVariables,
-                      stylingGuide: this.generateStylingGuide(tagName, cssVariables, semantics),
-                    },
-                    null,
-                    2,
-                  ),
+                  text: this.serialize(this.optimizeResponse(result)),
                 },
               ],
             };
@@ -936,6 +1076,51 @@ class UxbitMCPServer {
     );
   }
 
+  // 요약 정보 생성 및 캐싱
+  private async loadSummaries(): Promise<ComponentSummary[]> {
+    if (!this.config.enableSummaryCache) {
+      // 요약 캐시가 비활성화된 경우 즉시 생성
+      const components = await this.loadComponents();
+      return this.generateSummaries(components);
+    }
+
+    const now = Date.now();
+
+    // 요약 캐시 확인
+    if (this.summaryCache && now - this.summaryCache.timestamp < this.config.cacheTTL) {
+      this.performanceMetrics.cacheHits++;
+      return this.summaryCache.data;
+    }
+
+    this.performanceMetrics.cacheMisses++;
+
+    // 전체 컴포넌트 로드 (이미 캐시되어 있을 수 있음)
+    const components = await this.loadComponents();
+
+    // 요약 정보 생성 (문서 파일 읽지 않음 - 빠름)
+    const summaries = this.generateSummaries(components);
+
+    // 요약 캐시 저장
+    this.summaryCache = {
+      data: summaries,
+      timestamp: now,
+    };
+
+    return summaries;
+  }
+
+  // 요약 정보 생성
+  private generateSummaries(components: ComponentInfo[]): ComponentSummary[] {
+    return components.map((comp) => ({
+      tag: comp.tag,
+      description: this.extractShortDescription(comp.docs || ''),
+      propsCount: comp.props?.length || 0,
+      eventsCount: comp.events?.length || 0,
+      methodsCount: comp.methods?.length || 0,
+      hasDocumentation: !!comp.docs && comp.docs.length > 50,
+    }));
+  }
+
   // 로깅 유틸리티
   private logInfo(message: string, context?: Record<string, any>) {
     const logData = {
@@ -975,6 +1160,7 @@ class UxbitMCPServer {
         if (eventType === 'change') {
           this.logInfo('custom-elements.json 변경 감지, 캐시 무효화');
           this.componentsCache = null;
+          this.summaryCache = null; // 요약 캐시도 무효화
         }
       });
       this.fileWatchers.push({ close: () => customElementsWatcher.close() });
@@ -1128,6 +1314,90 @@ class UxbitMCPServer {
     };
   }
 
+  // JSON 직렬화 헬퍼 (설정에 따라 포맷 변경)
+  private serialize(data: any, format?: 'compact' | 'pretty' | 'minimal'): string {
+    const fmt = format || this.config.defaultFormat;
+
+    switch (fmt) {
+      case 'compact':
+        return JSON.stringify(data); // 압축 (토큰 최소)
+      case 'pretty':
+        return JSON.stringify(data, null, 2); // 읽기 쉬움
+      case 'minimal':
+        return this.minimalSerialize(data); // 최소한의 정보만
+      default:
+        return JSON.stringify(data);
+    }
+  }
+
+  // 최소한의 정보만 직렬화
+  private minimalSerialize(data: any): string {
+    if (Array.isArray(data)) {
+      return JSON.stringify(data.map((item) => this.minimalSerialize(item)));
+    }
+    if (typeof data === 'object' && data !== null) {
+      // 핵심 필드만 유지
+      const minimal: any = {};
+      if ('tag' in data) minimal.tag = data.tag;
+      if ('tagName' in data) minimal.tagName = data.tagName;
+      if ('description' in data) {
+        const desc = data.description || '';
+        minimal.desc = typeof desc === 'string' ? desc.substring(0, 50) : desc;
+      }
+      if ('docs' in data) {
+        const docs = data.docs || '';
+        minimal.desc = typeof docs === 'string' ? docs.substring(0, 50) : docs;
+      }
+      if ('props' in data) minimal.props = Array.isArray(data.props) ? data.props.length : 0;
+      if ('events' in data) minimal.events = Array.isArray(data.events) ? data.events.length : 0;
+      if ('methods' in data)
+        minimal.methods = Array.isArray(data.methods) ? data.methods.length : 0;
+      return JSON.stringify(minimal);
+    }
+    return JSON.stringify(data);
+  }
+
+  // 응답 크기 체크 및 자동 최적화
+  private optimizeResponse(data: any): any {
+    const serialized = this.serialize(data);
+    const sizeKB = Buffer.byteLength(serialized, 'utf8') / 1024;
+
+    if (sizeKB > this.config.maxResponseSize) {
+      // 응답이 너무 크면 자동으로 요약 모드로 전환
+      this.logWarning('응답 크기 초과, 요약 모드로 전환', {
+        sizeKB: Math.round(sizeKB * 100) / 100,
+        maxSize: this.config.maxResponseSize,
+      });
+
+      return this.summarizeResponse(data);
+    }
+
+    return data;
+  }
+
+  // 응답 요약
+  private summarizeResponse(data: any): any {
+    if (Array.isArray(data)) {
+      return {
+        total: data.length,
+        summary: data.slice(0, 10).map((item: any) => ({
+          tag: item.tag || item.tagName,
+          description: this.extractShortDescription(item.description || item.docs || ''),
+        })),
+        message: `총 ${data.length}개 결과 중 10개만 표시. 상세 정보는 개별 조회하세요.`,
+      };
+    }
+    return data;
+  }
+
+  // 짧은 설명 추출
+  private extractShortDescription(docs: string): string {
+    if (!docs) return '';
+    // 첫 문장 또는 50자 이내 추출
+    const firstSentence = docs.split(/[.!?]/)[0];
+    return firstSentence.length > 50 ? firstSentence.substring(0, 47) + '...' : firstSentence;
+  }
+
   // 정리 메서드
   private cleanup() {
     this.fileWatchers.forEach((watcher) => watcher.close());
@@ -1135,6 +1405,7 @@ class UxbitMCPServer {
     // 메모리 정리
     this.componentsCache = null;
     this.overviewCache = null;
+    this.summaryCache = null;
   }
 
   // 메모리 사용량 모니터링
@@ -1161,6 +1432,7 @@ class UxbitMCPServer {
       this.logWarning('메모리 사용량 높음, 캐시 정리', { memory });
       this.componentsCache = null;
       this.overviewCache = null;
+      this.summaryCache = null; // 요약 캐시도 정리
       // 가비지 컬렉션 힌트 (Node.js가 지원하는 경우)
       if (global.gc) {
         global.gc();
