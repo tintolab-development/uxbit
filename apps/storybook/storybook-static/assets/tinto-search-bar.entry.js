@@ -127,11 +127,11 @@ const TintoSearchBar = class {
   render() {
     return h(
       'div',
-      { key: 'c545dbc3c9a0f781e4c36be3c5f0649583dc94f1', class: 'search-bar-container' },
+      { key: '22e80b06a2f0d2a3e9c88c8c737b51eb9cf57bbd', class: 'search-bar-container' },
       h(
         'form',
         {
-          key: '23e41bb6741d115768d0e4d78a3dd481a701645a',
+          key: '8a6f6ebdec3e9fd5f1cea3b66648c2c4aa849b54',
           class: 'search-bar-form',
           onSubmit: this.handleSubmit,
           part: 'form',
@@ -139,25 +139,25 @@ const TintoSearchBar = class {
         h(
           'div',
           {
-            key: 'dad155a63ccc36cf6bbbe3954b125ed1b0806e33',
+            key: '4ad45f0042d8645f3ea8f9a6f7bb9b0f05209487',
             class: 'search-bar-input-wrapper',
             part: 'input-wrapper',
           },
           h(
             'span',
             {
-              key: '6ebdacd84a494c5fe0871bdd4d28861412844336',
+              key: '792320c1eb9c5d1416e8328beebe363e5c44cf37',
               class: 'search-icon',
               part: 'icon',
               'aria-hidden': 'true',
             },
             h(
               'slot',
-              { key: '4f688a7985242d13efa68df21ca51a08cc1ac911', name: 'icon' },
+              { key: '420382304182dd75ef83f44a21678b6d62edfab5', name: 'icon' },
               h(
                 'svg',
                 {
-                  key: '6d62a76cfc5bec9e041ac3f6878b87bab57be620',
+                  key: '99a42d39117a1af195841c8a4bd1dc02f4979482',
                   width: '20',
                   height: '20',
                   viewBox: '0 0 20 20',
@@ -165,7 +165,7 @@ const TintoSearchBar = class {
                   xmlns: 'http://www.w3.org/2000/svg',
                 },
                 h('path', {
-                  key: 'd51bded4eba0750a69d877fc9a30096983ba2be3',
+                  key: 'e4dfe3ece9e83d5ed33df526080cbeb6301f93be',
                   d: 'M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z',
                   stroke: 'currentColor',
                   'stroke-width': '2',
@@ -173,7 +173,7 @@ const TintoSearchBar = class {
                   'stroke-linejoin': 'round',
                 }),
                 h('path', {
-                  key: '71b62fc98b0bb3faf1cc014b1138046c780b6a64',
+                  key: '435d788239dac628fbfa52db54df228096538659',
                   d: 'M19 19L14.65 14.65',
                   stroke: 'currentColor',
                   'stroke-width': '2',
@@ -184,7 +184,7 @@ const TintoSearchBar = class {
             ),
           ),
           h('input', {
-            key: 'f3a14bcc75bb9e6791ce566a5cbf0c2029a0d953',
+            key: 'b689048ae79dcc940c4feef56784c903d222ca9f',
             ref: (el) => (this.inputElement = el),
             class: 'search-bar-input',
             part: 'input',
@@ -205,7 +205,7 @@ const TintoSearchBar = class {
             h(
               'span',
               {
-                key: '266f1c1159715fb6f81d6b386f20b7f035710b75',
+                key: '85b1b7393073de9295f0ce199f564dd9ed83a6a1',
                 class: 'loading-spinner',
                 part: 'loading',
                 'aria-hidden': 'true',
@@ -213,7 +213,7 @@ const TintoSearchBar = class {
               h(
                 'svg',
                 {
-                  key: 'cc1da26cf7f49322e61d628864a5ebf350aebd9d',
+                  key: '248f49d3b049f400cdbd5490c8c0e91d364287c7',
                   width: '16',
                   height: '16',
                   viewBox: '0 0 16 16',
@@ -223,7 +223,7 @@ const TintoSearchBar = class {
                 h(
                   'circle',
                   {
-                    key: 'fed9581f50c1e99e5dc6076302550306566fe7d7',
+                    key: '639126f2280fa2baa943e6d90e733ad278837111',
                     cx: '8',
                     cy: '8',
                     r: '7',
@@ -234,7 +234,7 @@ const TintoSearchBar = class {
                     'stroke-dashoffset': '10.99',
                   },
                   h('animateTransform', {
-                    key: 'fb8f1d7013d2a7d9de741284f0388c229b1436b6',
+                    key: '2cbf4ebb514f484c39946a83994c3a1e013e6aa8',
                     attributeName: 'transform',
                     type: 'rotate',
                     values: '0 8 8;360 8 8',
@@ -249,7 +249,7 @@ const TintoSearchBar = class {
             h(
               'button',
               {
-                key: '34447a5e4838c42ede0612223b65fedbf6385344',
+                key: 'e106bb43474879e4db7bb91c2c4081e53ab53d3c',
                 type: 'button',
                 class: 'clear-button',
                 part: 'clear',
@@ -259,7 +259,7 @@ const TintoSearchBar = class {
               h(
                 'svg',
                 {
-                  key: 'e713d6b542efe54d2e6e3ce1d99f455ed1fcffda',
+                  key: '8accc6b51e69e58b0122e45a86b5283dca724f48',
                   width: '16',
                   height: '16',
                   viewBox: '0 0 16 16',
@@ -267,7 +267,7 @@ const TintoSearchBar = class {
                   xmlns: 'http://www.w3.org/2000/svg',
                 },
                 h('path', {
-                  key: 'b8d1c9071fbee849d9703a42d202bc7a1249afe0',
+                  key: '575d6bd4e8e4b308723117b490733a052cf664a9',
                   d: 'M12 4L4 12M4 4L12 12',
                   stroke: 'currentColor',
                   'stroke-width': '2',
@@ -283,7 +283,7 @@ const TintoSearchBar = class {
         h(
           'div',
           {
-            key: '51d0ea649fcd13edff6cef95261ce50398e6742a',
+            key: '2b5d0f4ff6350afe24de1f0cc9b7b77ee55aa5e7',
             class: 'search-results',
             part: 'results',
             role: 'listbox',
