@@ -1,5 +1,5 @@
 import { Component, h, Prop, Element } from '@stencil/core';
-import type { BreakpointValue } from '../layout/layout.types';
+import type { BreakpointValue } from '../layout.types';
 
 /**
  * Layout Content 컴포넌트
